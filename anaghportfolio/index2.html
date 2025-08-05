@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Elegant Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+    body {
+      font-family: 'Raleway', sans-serif;
+    }
+    .heading-font {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="bg-[#f9f7f5] text-[#333] min-h-screen">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const ElegantPortfolio = () => {
+      const [menuOpen, setMenuOpen] = useState(false);
+      
+      return (
+        <div className="max-w-6xl mx-auto px-4 py-12">
+          <header className="flex justify-between items-center mb-16">
+            <h1 className="heading-font text-3xl md:text-4xl font-bold">Jane Doe</h1>
+            <button 
+              className="md:hidden"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            <nav className={`${menuOpen ? 'block' : 'hidden'} md:block absolute md:relative top-16 right-4 md:top-0 md:right-0 bg-white md:bg-transparent p-4 md:p-0 shadow-md md:shadow-none`}>
+              <ul className="flex flex-col md:flex-row gap-6 md:gap-8">
+                <li><a href="#" className="hover:text-[#8b5a2b] transition">Work</a></li>
+                <li><a href="#" className="hover:text-[#8b5a2b] transition">About</a></li>
+                <li><a href="#" className="hover:text-[#8b5a2b] transition">Journal</a></li>
+                <li><a href="#" className="hover:text-[#8b5a2b] transition">Contact</a></li>
+              </ul>
+            </nav>
+          </header>
+
+          <main className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+            <div>
+              <h2 className="heading-font text-4xl md:text-5xl font-bold mb-6">Digital designer & art director</h2>
+              <p className="text-lg leading-relaxed mb-8">
+                Creating meaningful digital experiences through thoughtful design and strategic thinking.
+              </p>
+              <a href="#" className="inline-block border-b border-[#8b5a2b] text-[#8b5a2b] pb-1 hover:opacity-80 transition">
+                View selected work
+              </a>
+            </div>
+            <div className="bg-[#e8e2db] h-64 md:h-auto"></div>
+          </main>
+
+          <section className="mb-20">
+            <h3 className="heading-font text-2xl font-bold mb-8">Selected Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[1, 2, 3].map(project => (
+                <div key={project} className="group">
+                  <div className="bg-[#e8e2db] h-48 mb-4"></div>
+                  <h4 className="font-bold group-hover:text-[#8b5a2b] transition">Project {project}</h4>
+                  <p className="text-sm text-gray-600">Branding, Design</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <footer className="pt-8 border-t border-[#e8e2db]">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <p className="text-sm">&copy; {new Date().getFullYear()} Jane Doe. All rights reserved.</p>
+              <div className="flex gap-4">
+                <a href="#" className="text-sm hover:text-[#8b5a2b] transition">Instagram</a>
+                <a href="#" className="text-sm hover:text-[#8b5a2b] transition">LinkedIn</a>
+                <a href="#" className="text-sm hover:text-[#8b5a2b] transition">Behance</a>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ElegantPortfolio />);
+  </script>
+</body>
+</html>
