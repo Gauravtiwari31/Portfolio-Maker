@@ -306,51 +306,51 @@
             useEffect(() => {
                 const portfolioData = [
                 
-                    { id: 1, title: "Dark Portfolio", author: "Creator 1", category: "Development", views: 8429, likes: 3421, image: "https://source.unsplash.com/random/400x300/?dark,portfolio", isFeatured: true, isLive: true, tags: ["Dark Theme", "Bootstrap", "Modern", "Professional"], link: "portfolio1.html" },
-                    { id: 2, title: "Professional Portfolio", author: "Creator 2", category: "Development", views: 6234, likes: 2876, image: "https://source.unsplash.com/random/400x300/?professional,business", isFeatured: false, isLive: true, tags: ["Light Theme", "Bootstrap", "Corporate", "Clean"], link: "portfolio2.html" },
-                    { id: 3, title: "Monochrome Portfolio", author: "Creator 3", category: "Design", views: 5123, likes: 2341, image: "https://source.unsplash.com/random/400x300/?minimal,monochrome", isFeatured: false, isLive: true, tags: ["Minimal", "Monochrome", "Clean", "Typography"], link: "portfolio3.html" },
-                    { id: 4, title: "Classic Portfolio", author: "Creator 4", category: "Development", views: 4567, likes: 1987, image: "https://source.unsplash.com/random/400x300/?classic,portfolio", isFeatured: false, isLive: true, tags: ["Classic", "Blue Theme", "Professional", "Simple"], link: "portfolio4.html" },
-                    { id: 5, title: "Neon Portfolio", author: "Creator 5", category: "Art", views: 9876, likes: 4321, image: "https://source.unsplash.com/random/400x300/?neon,futuristic", isFeatured: true, isLive: true, tags: ["Neon", "Dark", "Futuristic", "Creative"], link: "portfolio5.html" },
-                    { id: 6, title: "Minimalist Portfolio", author: "Creator 6", category: "Design", views: 3456, likes: 1654, image: "https://source.unsplash.com/random/400x300/?minimal,white", isFeatured: false, isLive: true, tags: ["Minimal", "White Space", "Clean", "Typography"], link: "portfolio6.html" },
-                    { id: 7, title: "Standard Portfolio", author: "Creator 7", category: "Development", views: 5432, likes: 2108, image: "https://source.unsplash.com/random/400x300/?standard,web", isFeatured: false, isLive: true, tags: ["Standard", "Web Dev", "Responsive", "Modern"], link: "portfolio7.html" },
-                    { id: 8, title: "Professional Business", author: "Creator 8", category: "Development", views: 6789, likes: 3210, image: "https://source.unsplash.com/random/400x300/?business,professional", isFeatured: false, isLive: true, tags: ["Professional", "Business", "Corporate", "Clean"], link: "portfolio8.html" },
-                    { id: 9, title: "Dynamic Portfolio", author: "Creator 9", category: "Development", views: 7654, likes: 3987, image: "https://source.unsplash.com/random/400x300/?dynamic,tech", isFeatured: true, isLive: true, tags: ["Dynamic", "Interactive", "Modern", "Animated"], link: "portfolio9.html" },
-                    { id: 10, title: "Timeline Portfolio", author: "Creator 10", category: "Design", views: 4321, likes: 2105, image: "https://source.unsplash.com/random/400x300/?timeline,journey", isFeatured: false, isLive: true, tags: ["Timeline", "Journey", "Story", "Interactive"], link: "portfolio10.html" },
-                    { id: 11, title: "Modern Portfolio", author: "Creator 11", category: "Development", views: 5678, likes: 2543, image: "https://source.unsplash.com/random/400x300/?modern,design", isFeatured: false, isLive: true, tags: ["Modern", "Responsive", "Clean", "Web Dev"], link: "portfolio11.html" },
-                    { id: 12, title: "Creative Showcase", author: "Creator 12", category: "Art", views: 6543, likes: 3876, image: "https://source.unsplash.com/random/400x300/?creative,art", isFeatured: false, isLive: true, tags: ["Creative", "Artistic", "Colorful", "Unique"], link: "portfolio12.html" },
-                    { id: 13, title: "Tech Portfolio", author: "Creator 13", category: "Development", views: 7890, likes: 4123, image: "https://source.unsplash.com/random/400x300/?technology,code", isFeatured: true, isLive: true, tags: ["Tech", "Coding", "Developer", "Modern"], link: "portfolio13.html" },
-                    { id: 14, title: "Designer Portfolio", author: "Creator 14", category: "Design", views: 4987, likes: 2765, image: "https://source.unsplash.com/random/400x300/?design,creative", isFeatured: false, isLive: true, tags: ["Design", "UI/UX", "Creative", "Visual"], link: "portfolio14.html" },
-                    { id: 15, title: "Corporate Portfolio", author: "Creator 15", category: "Development", views: 5432, likes: 2987, image: "https://source.unsplash.com/random/400x300/?corporate,office", isFeatured: false, isLive: true, tags: ["Corporate", "Professional", "Business", "Clean"], link: "portfolio15.html" },
-                    { id: 16, title: "Elegant Portfolio", author: "Creator 16", category: "Design", views: 6123, likes: 3456, image: "https://source.unsplash.com/random/400x300/?elegant,luxury", isFeatured: false, isLive: true, tags: ["Elegant", "Luxury", "Sophisticated", "Clean"], link: "portfolio16.html" },
-                    { id: 17, title: "Creative Hub", author: "Creator 17", category: "Art", views: 5876, likes: 3210, image: "https://source.unsplash.com/random/400x300/?creative,hub", isFeatured: false, isLive: true, tags: ["Creative", "Artistic", "Colorful", "Gallery"], link: "portfolio17.html" },
-                    { id: 18, title: "Web Developer", author: "Creator 18", category: "Development", views: 7234, likes: 4098, image: "https://source.unsplash.com/random/400x300/?developer,web", isFeatured: true, isLive: true, tags: ["Web Dev", "Coding", "Tech", "Responsive"], link: "portfolio18.html" },
-                    { id: 19, title: "Photography Portfolio", author: "Creator 19", category: "Photography", views: 4567, likes: 2876, image: "https://source.unsplash.com/random/400x300/?photography,camera", isFeatured: false, isLive: true, tags: ["Photography", "Visual", "Gallery", "Creative"], link: "portfolio19.html" },
-                    { id: 20, title: "Glass Morphism", author: "Creator 20", category: "Design", views: 8765, likes: 4532, image: "https://source.unsplash.com/random/400x300/?glass,modern", isFeatured: true, isLive: true, tags: ["Glass", "Modern", "Translucent", "Gradient"], link: "portfolio20.html" },
-                    { id: 21, title: "Portfolio Showcase", author: "Creator 21", category: "Development", views: 5432, likes: 2765, image: "https://source.unsplash.com/random/400x300/?showcase,portfolio", isFeatured: false, isLive: true, tags: ["Showcase", "Gallery", "Professional", "Clean"], link: "portfolio21.html" },
-                    { id: 22, title: "Digital Artist", author: "Creator 22", category: "Art", views: 6789, likes: 3987, image: "https://source.unsplash.com/random/400x300/?digital,art", isFeatured: false, isLive: true, tags: ["Digital Art", "Creative", "Artistic", "Modern"], link: "portfolio22.html" },
-                    { id: 23, title: "UX Designer", author: "Creator 23", category: "UX/UI", views: 7123, likes: 4321, image: "https://source.unsplash.com/random/400x300/?ux,design", isFeatured: false, isLive: true, tags: ["UX/UI", "Design", "User Experience", "Modern"], link: "portfolio23.html" },
-                    { id: 24, title: "Full Stack Developer", author: "Creator 24", category: "Development", views: 8456, likes: 4765, image: "https://source.unsplash.com/random/400x300/?fullstack,developer", isFeatured: true, isLive: true, tags: ["Full Stack", "Developer", "Tech", "Coding"], link: "portfolio24.html" },
-                    { id: 25, title: "Professional Showcase", author: "Creator 25", category: "Development", views: 5678, likes: 3210, image: "https://source.unsplash.com/random/400x300/?professional,showcase", isFeatured: false, isLive: true, tags: ["Professional", "Showcase", "Clean", "Modern"], link: "portfolio25.html" },
-                    { id: 26, title: "Creative Studio", author: "Creator 26", category: "Art", views: 4987, likes: 2876, image: "https://source.unsplash.com/random/400x300/?studio,creative", isFeatured: false, isLive: true, tags: ["Creative", "Studio", "Artistic", "Gallery"], link: "portfolio26.html" },
-                    { id: 27, title: "Modern Developer", author: "Creator 27", category: "Development", views: 6234, likes: 3654, image: "https://source.unsplash.com/random/400x300/?modern,developer", isFeatured: false, isLive: true, tags: ["Modern", "Developer", "Tech", "Clean"], link: "portfolio27.html" },
-                    { id: 28, title: "Design Portfolio", author: "Creator 28", category: "Design", views: 5432, likes: 2987, image: "https://source.unsplash.com/random/400x300/?design,portfolio", isFeatured: false, isLive: true, tags: ["Design", "Portfolio", "Creative", "Visual"], link: "portfolio28.html" },
-                    { id: 29, title: "Tech Showcase", author: "Creator 29", category: "Development", views: 7890, likes: 4321, image: "https://source.unsplash.com/random/400x300/?tech,showcase", isFeatured: true, isLive: true, tags: ["Tech", "Showcase", "Modern", "Innovation"], link: "portfolio29.html" },
-                    { id: 30, title: "Interactive Portfolio", author: "Creator 30", category: "Development", views: 6543, likes: 3876, image: "https://source.unsplash.com/random/400x300/?interactive,portfolio", isFeatured: false, isLive: true, tags: ["Interactive", "Dynamic", "Modern", "Engaging"], link: "portfolio30.html" },
-                    { id: 31, title: "Visual Designer", author: "Creator 31", category: "Design", views: 4678, likes: 2543, image: "https://source.unsplash.com/random/400x300/?visual,designer", isFeatured: false, isLive: true, tags: ["Visual Design", "Creative", "Artistic", "Modern"], link: "portfolio31.html" },
-                    { id: 32, title: "Professional Hub", author: "Creator 32", category: "Development", views: 5876, likes: 3210, image: "https://source.unsplash.com/random/400x300/?professional,hub", isFeatured: false, isLive: true, tags: ["Professional", "Hub", "Business", "Clean"], link: "portfolio32.html" },
-                    { id: 33, title: "Creative Developer", author: "Creator 33", category: "Development", views: 6789, likes: 3987, image: "https://source.unsplash.com/random/400x300/?creative,developer", isFeatured: false, isLive: true, tags: ["Creative", "Developer", "Innovative", "Modern"], link: "portfolio33.html" },
-                    { id: 34, title: "Portfolio Gallery", author: "Creator 34", category: "Design", views: 5234, likes: 2765, image: "https://source.unsplash.com/random/400x300/?gallery,portfolio", isFeatured: false, isLive: true, tags: ["Gallery", "Showcase", "Visual", "Clean"], link: "portfolio34.html" },
-                    { id: 35, title: "Infinite Explorer", author: "Creator 35", category: "Development", views: 7654, likes: 4123, image: "https://source.unsplash.com/random/400x300/?infinite,space", isFeatured: true, isLive: true, tags: ["3D", "Interactive", "Space", "Futuristic"], link: "portfolio35.html" },
-                    { id: 36, title: "AR Developer", author: "Creator 36", category: "3D", views: 8432, likes: 4876, image: "https://source.unsplash.com/random/400x300/?ar,virtual", isFeatured: true, isLive: true, tags: ["AR/VR", "3D", "Technology", "Innovation"], link: "portfolio36.html" },
-                    { id: 37, title: "Modern Showcase", author: "Creator 37", category: "Development", views: 5987, likes: 3456, image: "https://source.unsplash.com/random/400x300/?modern,showcase", isFeatured: false, isLive: true, tags: ["Modern", "Showcase", "Clean", "Professional"], link: "portfolio37.html" },
-                    { id: 38, title: "Professional Designer", author: "Creator 38", category: "Design", views: 6123, likes: 3678, image: "https://source.unsplash.com/random/400x300/?professional,designer", isFeatured: false, isLive: true, tags: ["Professional", "Design", "Corporate", "Clean"], link: "portfolio38.html" },
-                    { id: 39, title: "Neon Grid Portfolio", author: "Creator 39", category: "Art", views: 9234, likes: 5123, image: "https://source.unsplash.com/random/400x300/?neon,grid", isFeatured: true, isLive: true, tags: ["Neon", "Grid", "Futuristic", "Dark"], link: "portfolio39.html" },
-                    { id: 40, title: "Nature Portfolio", author: "Creator 40", category: "Photography", views: 4567, likes: 2987, image: "https://source.unsplash.com/random/400x300/?nature,earth", isFeatured: false, isLive: true, tags: ["Nature", "Organic", "Earth Tones", "Peaceful"], link: "portfolio40.html" },
-                    { id: 41, title: "Terminal Portfolio", author: "Creator 41", category: "Development", views: 7890, likes: 4321, image: "https://source.unsplash.com/random/400x300/?terminal,code", isFeatured: true, isLive: true, tags: ["Terminal", "Code", "Developer", "Retro"], link: "portfolio41.html" },
-                    { id: 42, title: "Neon Futuristic", author: "Creator 42", category: "Art", views: 8765, likes: 4654, image: "https://source.unsplash.com/random/400x300/?futuristic,neon", isFeatured: true, isLive: true, tags: ["Futuristic", "Neon", "Cyberpunk", "Dark"], link: "portfolio42.html" },
-                    { id: 43, title: "Cozy Portfolio", author: "Creator 43", category: "Design", views: 3456, likes: 1987, image: "https://source.unsplash.com/random/400x300/?cozy,warm", isFeatured: false, isLive: true, tags: ["Cozy", "Warm", "Friendly", "Inviting"], link: "portfolio43.html" },
-                    { id: 44, title: "Digital Showcase", author: "Creator 44", category: "Development", views: 6234, likes: 3543, image: "https://source.unsplash.com/random/400x300/?digital,showcase", isFeatured: false, isLive: true, tags: ["Digital", "Showcase", "Modern", "Tech"], link: "portfolio44.html" },
-                    { id: 45, title: "Creative Vision", author: "Creator 45", category: "Art", views: 5678, likes: 3210, image: "https://source.unsplash.com/random/400x300/?creative,vision", isFeatured: false, isLive: true, tags: ["Creative", "Vision", "Artistic", "Innovative"], link: "portfolio45.html" }
+                    { id: 1, title: "Dark Portfolio", author: "Creator 1", category: "Development", views: 8429, likes: 3421, image: "imgs/portfolio1.gif", isFeatured: true, isLive: true, tags: ["Dark Theme", "Bootstrap", "Modern", "Professional"], link: "portfolio1.html" },
+                    { id: 2, title: "Professional Portfolio", author: "Creator 2", category: "Development", views: 6234, likes: 2876, image: "imgs/portfolio2.gif", isFeatured: false, isLive: true, tags: ["Light Theme", "Bootstrap", "Corporate", "Clean"], link: "portfolio2.html" },
+                    { id: 3, title: "Monochrome Portfolio", author: "Creator 3", category: "Design", views: 5123, likes: 2341, image: "imgs/portfolio3.gif", isFeatured: false, isLive: true, tags: ["Minimal", "Monochrome", "Clean", "Typography"], link: "portfolio3.html" },
+                    { id: 4, title: "Classic Portfolio", author: "Creator 4", category: "Development", views: 4567, likes: 1987, image: "imgs/portfolio4.gif", isFeatured: false, isLive: true, tags: ["Classic", "Blue Theme", "Professional", "Simple"], link: "portfolio4.html" },
+                    { id: 5, title: "Neon Portfolio", author: "Creator 5", category: "Art", views: 9876, likes: 4321, image: "imgs/portfolio5.gif", isFeatured: true, isLive: true, tags: ["Neon", "Dark", "Futuristic", "Creative"], link: "portfolio5.html" },
+                    { id: 6, title: "Minimalist Portfolio", author: "Creator 6", category: "Design", views: 3456, likes: 1654, image: "imgs/portfolio6.gif", isFeatured: false, isLive: true, tags: ["Minimal", "White Space", "Clean", "Typography"], link: "portfolio6.html" },
+                    { id: 7, title: "Standard Portfolio", author: "Creator 7", category: "Development", views: 5432, likes: 2108, image: "imgs/portfolio7.gif", isFeatured: false, isLive: true, tags: ["Standard", "Web Dev", "Responsive", "Modern"], link: "portfolio7.html" },
+                    { id: 8, title: "Professional Business", author: "Creator 8", category: "Development", views: 6789, likes: 3210, image: "imgs/portfolio8.gif", isFeatured: false, isLive: true, tags: ["Professional", "Business", "Corporate", "Clean"], link: "portfolio8.html" },
+                    { id: 9, title: "Dynamic Portfolio", author: "Creator 9", category: "Development", views: 7654, likes: 3987, image: "imgs/portfolio9.gif", isFeatured: true, isLive: true, tags: ["Dynamic", "Interactive", "Modern", "Animated"], link: "portfolio9.html" },
+                    { id: 10, title: "Timeline Portfolio", author: "Creator 10", category: "Design", views: 4321, likes: 2105, image: "imgs/portfolio10.gif", isFeatured: false, isLive: true, tags: ["Timeline", "Journey", "Story", "Interactive"], link: "portfolio10.html" },
+                    { id: 11, title: "Modern Portfolio", author: "Creator 11", category: "Development", views: 5678, likes: 2543, image: "imgs/portfolio11.gif", isFeatured: false, isLive: true, tags: ["Modern", "Responsive", "Clean", "Web Dev"], link: "portfolio11.html" },
+                    { id: 12, title: "Creative Showcase", author: "Creator 12", category: "Art", views: 6543, likes: 3876, image: "imgs/portfolio12.gif", isFeatured: false, isLive: true, tags: ["Creative", "Artistic", "Colorful", "Unique"], link: "portfolio12.html" },
+                    { id: 13, title: "Tech Portfolio", author: "Creator 13", category: "Development", views: 7890, likes: 4123, image: "imgs/portfolio13.gif", isFeatured: true, isLive: true, tags: ["Tech", "Coding", "Developer", "Modern"], link: "portfolio13.html" },
+                    { id: 14, title: "Designer Portfolio", author: "Creator 14", category: "Design", views: 4987, likes: 2765, image: "imgs/portfolio14.gif", isFeatured: false, isLive: true, tags: ["Design", "UI/UX", "Creative", "Visual"], link: "portfolio14.html" },
+                    { id: 15, title: "Corporate Portfolio", author: "Creator 15", category: "Development", views: 5432, likes: 2987, image: "imgs/portfolio15.gif", isFeatured: false, isLive: true, tags: ["Corporate", "Professional", "Business", "Clean"], link: "portfolio15.html" },
+                    { id: 16, title: "Elegant Portfolio", author: "Creator 16", category: "Design", views: 6123, likes: 3456, image: "imgs/portfolio16.gif", isFeatured: false, isLive: true, tags: ["Elegant", "Luxury", "Sophisticated", "Clean"], link: "portfolio16.html" },
+                    { id: 17, title: "Creative Hub", author: "Creator 17", category: "Art", views: 5876, likes: 3210, image: "imgs/portfolio17.gif", isFeatured: false, isLive: true, tags: ["Creative", "Artistic", "Colorful", "Gallery"], link: "portfolio17.html" },
+                    { id: 18, title: "Web Developer", author: "Creator 18", category: "Development", views: 7234, likes: 4098, image: "imgs/portfolio18.gif", isFeatured: true, isLive: true, tags: ["Web Dev", "Coding", "Tech", "Responsive"], link: "portfolio18.html" },
+                    { id: 19, title: "Photography Portfolio", author: "Creator 19", category: "Photography", views: 4567, likes: 2876, image: "imgs/portfolio19.gif", isFeatured: false, isLive: true, tags: ["Photography", "Visual", "Gallery", "Creative"], link: "portfolio19.html" },
+                    { id: 20, title: "Glass Morphism", author: "Creator 20", category: "Design", views: 8765, likes: 4532, image: "imgs/portfolio20.gif", isFeatured: true, isLive: true, tags: ["Glass", "Modern", "Translucent", "Gradient"], link: "portfolio20.html" },
+                    { id: 21, title: "Portfolio Showcase", author: "Creator 21", category: "Development", views: 5432, likes: 2765, image: "imgs/portfolio21.gif", isFeatured: false, isLive: true, tags: ["Showcase", "Gallery", "Professional", "Clean"], link: "portfolio21.html" },
+                    { id: 22, title: "Digital Artist", author: "Creator 22", category: "Art", views: 6789, likes: 3987, image: "imgs/portfolio22.gif", isFeatured: false, isLive: true, tags: ["Digital Art", "Creative", "Artistic", "Modern"], link: "portfolio22.html" },
+                    { id: 23, title: "UX Designer", author: "Creator 23", category: "UX/UI", views: 7123, likes: 4321, image: "imgs/portfolio23.gif", isFeatured: false, isLive: true, tags: ["UX/UI", "Design", "User Experience", "Modern"], link: "portfolio23.html" },
+                    { id: 24, title: "Full Stack Developer", author: "Creator 24", category: "Development", views: 8456, likes: 4765, image: "imgs/portfolio24.gif", isFeatured: true, isLive: true, tags: ["Full Stack", "Developer", "Tech", "Coding"], link: "portfolio24.html" },
+                    { id: 25, title: "Professional Showcase", author: "Creator 25", category: "Development", views: 5678, likes: 3210, image: "imgs/portfolio25.gif", isFeatured: false, isLive: true, tags: ["Professional", "Showcase", "Clean", "Modern"], link: "portfolio25.html" },
+                    { id: 26, title: "Creative Studio", author: "Creator 26", category: "Art", views: 4987, likes: 2876, image: "imgs/portfolio26.gif", isFeatured: false, isLive: true, tags: ["Creative", "Studio", "Artistic", "Gallery"], link: "portfolio26.html" },
+                    { id: 27, title: "Modern Developer", author: "Creator 27", category: "Development", views: 6234, likes: 3654, image: "imgs/portfolio27.gif", isFeatured: false, isLive: true, tags: ["Modern", "Developer", "Tech", "Clean"], link: "portfolio27.html" },
+                    { id: 28, title: "Design Portfolio", author: "Creator 28", category: "Design", views: 5432, likes: 2987, image: "imgs/portfolio28.gif", isFeatured: false, isLive: true, tags: ["Design", "Portfolio", "Creative", "Visual"], link: "portfolio28.html" },
+                    { id: 29, title: "Tech Showcase", author: "Creator 29", category: "Development", views: 7890, likes: 4321, image: "imgs/portfolio29.gif", isFeatured: true, isLive: true, tags: ["Tech", "Showcase", "Modern", "Innovation"], link: "portfolio29.html" },
+                    { id: 30, title: "Interactive Portfolio", author: "Creator 30", category: "Development", views: 6543, likes: 3876, image: "imgs/portfolio30.gif", isFeatured: false, isLive: true, tags: ["Interactive", "Dynamic", "Modern", "Engaging"], link: "portfolio30.html" },
+                    { id: 31, title: "Visual Designer", author: "Creator 31", category: "Design", views: 4678, likes: 2543, image: "imgs/portfolio31.gif", isFeatured: false, isLive: true, tags: ["Visual Design", "Creative", "Artistic", "Modern"], link: "portfolio31.html" },
+                    { id: 32, title: "Professional Hub", author: "Creator 32", category: "Development", views: 5876, likes: 3210, image: "imgs/portfolio32.gif", isFeatured: false, isLive: true, tags: ["Professional", "Hub", "Business", "Clean"], link: "portfolio32.html" },
+                    { id: 33, title: "Creative Developer", author: "Creator 33", category: "Development", views: 6789, likes: 3987, image: "imgs/portfolio33.gif", isFeatured: false, isLive: true, tags: ["Creative", "Developer", "Innovative", "Modern"], link: "portfolio33.html" },
+                    { id: 34, title: "Portfolio Gallery", author: "Creator 34", category: "Design", views: 5234, likes: 2765, image: "imgs/portfolio34.gif", isFeatured: false, isLive: true, tags: ["Gallery", "Showcase", "Visual", "Clean"], link: "portfolio34.html" },
+                    { id: 35, title: "Infinite Explorer", author: "Creator 35", category: "Development", views: 7654, likes: 4123, image: "imgs/portfolio35.gif", isFeatured: true, isLive: true, tags: ["3D", "Interactive", "Space", "Futuristic"], link: "portfolio35.html" },
+                    { id: 36, title: "AR Developer", author: "Creator 36", category: "3D", views: 8432, likes: 4876, image: "imgs/portfolio36.gif", isFeatured: true, isLive: true, tags: ["AR/VR", "3D", "Technology", "Innovation"], link: "portfolio36.html" },
+                    { id: 37, title: "Modern Showcase", author: "Creator 37", category: "Development", views: 5987, likes: 3456, image: "imgs/portfolio37.gif", isFeatured: false, isLive: true, tags: ["Modern", "Showcase", "Clean", "Professional"], link: "portfolio37.html" },
+                    { id: 38, title: "Professional Designer", author: "Creator 38", category: "Design", views: 6123, likes: 3678, image: "imgs/portfolio38.gif", isFeatured: false, isLive: true, tags: ["Professional", "Design", "Corporate", "Clean"], link: "portfolio38.html" },
+                    { id: 39, title: "Neon Grid Portfolio", author: "Creator 39", category: "Art", views: 9234, likes: 5123, image: "imgs/portfolio39.gif", isFeatured: true, isLive: true, tags: ["Neon", "Grid", "Futuristic", "Dark"], link: "portfolio39.html" },
+                    { id: 40, title: "Nature Portfolio", author: "Creator 40", category: "Photography", views: 4567, likes: 2987, image: "imgs/portfolio40.gif", isFeatured: false, isLive: true, tags: ["Nature", "Organic", "Earth Tones", "Peaceful"], link: "portfolio40.html" },
+                    { id: 41, title: "Terminal Portfolio", author: "Creator 41", category: "Development", views: 7890, likes: 4321, image: "imgs/portfolio41.gif", isFeatured: true, isLive: true, tags: ["Terminal", "Code", "Developer", "Retro"], link: "portfolio41.html" },
+                    { id: 42, title: "Neon Futuristic", author: "Creator 42", category: "Art", views: 8765, likes: 4654, image: "imgs/portfolio42.gif", isFeatured: true, isLive: true, tags: ["Futuristic", "Neon", "Cyberpunk", "Dark"], link: "portfolio42.html" },
+                    { id: 43, title: "Cozy Portfolio", author: "Creator 43", category: "Design", views: 3456, likes: 1987, image: "imgs/portfolio43.gif", isFeatured: false, isLive: true, tags: ["Cozy", "Warm", "Friendly", "Inviting"], link: "portfolio43.html" },
+                    { id: 44, title: "Digital Showcase", author: "Creator 44", category: "Development", views: 6234, likes: 3543, image: "imgs/portfolio44.gif", isFeatured: false, isLive: true, tags: ["Digital", "Showcase", "Modern", "Tech"], link: "portfolio44.html" },
+                    { id: 45, title: "Creative Vision", author: "Creator 45", category: "Art", views: 5678, likes: 3210, image: "imgs/portfolio45.gif", isFeatured: false, isLive: true, tags: ["Creative", "Vision", "Artistic", "Innovative"], link: "portfolio45.html" }
                 ];
                 
                 setPortfolios(portfolioData);
@@ -1046,13 +1046,10 @@
             };
             
                             const handleDeploy = () => {
-                    if (!selectedTemplate) {
+                if (!selectedTemplate) {
                         alert('Please select a template first!');
-                        return;
-                    }
-                    
-                    // Create a new window for the deployed portfolio
-                    const newWindow = window.open('', '_blank');
+                    return;
+                }
                     
                     // Generate the complete HTML with user data
                     const name = formData.name || 'Your Name';
@@ -1117,33 +1114,147 @@
                                 </div>
                             `;
                             break;
-                        default:
-                            // Professional template as default
+                        case 2: // Professional Portfolio
                             portfolioContent = `
-                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; padding: 2rem; min-height: 100vh;">
-                                    <header style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem; color: #4f46e5;">${name}</h1>
-                                        <div style="color: #666; margin-bottom: 1rem;">
+                                <div style="background: #f8fafc; color: #333; padding: 2rem; min-height: 100vh;">
+                                    <header style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border-radius: 1rem;">
+                                        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">${name}</h1>
+                                        <div style="opacity: 0.9;">
                                             <span>${contact}</span> • <span>${github}</span> • <span>${linkedin}</span>
                                         </div>
                                     </header>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto;">
                                         <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                            <h2 style="font-size: 2rem; font-weight: bold; color: #4f46e5; margin-bottom: 2rem; border-bottom: 3px solid #e0e7ff; padding-bottom: 0.5rem;">Experience</h2>
+                                            <h2 style="font-size: 2rem; font-weight: bold; color: #1d4ed8; margin-bottom: 2rem;">Professional Experience</h2>
                                             ${experience.map(exp => `
-                                                <div style="margin-bottom: 2rem; padding: 1.5rem; background: #f8fafc; border-radius: 0.5rem; border-left: 4px solid #4f46e5;">
-                                                    <div style="font-weight: bold; font-size: 1.1rem; color: #4f46e5;">${exp.position}</div>
-                                                    <div style="color: #6366f1; font-weight: 600;">${exp.company}</div>
+                                                <div style="margin-bottom: 2rem; padding: 1.5rem; background: #dbeafe; border-radius: 0.5rem; border-left: 4px solid #3b82f6;">
+                                                    <div style="font-weight: bold; font-size: 1.1rem; color: #1d4ed8;">${exp.position}</div>
+                                                    <div style="color: #3b82f6; font-weight: 600;">${exp.company}</div>
                                                     <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">${exp.duration}</div>
                                                     <div style="color: #374151;">${exp.description}</div>
                                                 </div>
                                             `).join('')}
                                         </div>
                                         <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                            <h2 style="font-size: 2rem; font-weight: bold; color: #4f46e5; margin-bottom: 2rem; border-bottom: 3px solid #e0e7ff; padding-bottom: 0.5rem;">Technical Skills</h2>
+                                            <h2 style="font-size: 2rem; font-weight: bold; color: #1d4ed8; margin-bottom: 2rem;">Core Skills</h2>
                                             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
                                                 ${skills.map(skill => `
-                                                    <span style="background: #e0e7ff; color: #4f46e5; padding: 0.75rem 1rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 500; border: 1px solid #c7d2fe;">${skill}</span>
+                                                    <span style="background: #3b82f6; color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 500;">${skill}</span>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            break;
+                        case 3: // Monochrome Portfolio
+                            portfolioContent = `
+                                <div style="background: white; color: black; padding: 2rem; min-height: 100vh; font-family: Georgia, serif;">
+                                    <header style="text-align: center; margin-bottom: 4rem;">
+                                        <h1 style="font-size: 4rem; font-weight: bold; margin-bottom: 2rem; letter-spacing: 0.1em;">${name.toUpperCase()}</h1>
+                                        <div style="color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+                                            <span>${contact}</span> • <span>${github}</span> • <span>${linkedin}</span>
+                                        </div>
+                                        <div style="width: 6rem; height: 2px; background: black; margin: 0 auto;"></div>
+                                    </header>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto;">
+                                        <div>
+                                            <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem; text-align: center; letter-spacing: 0.2em;">EXPERIENCE</h2>
+                                            ${experience.map(exp => `
+                                                <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #ccc;">
+                                                    <div style="font-weight: bold; font-size: 1.3rem; margin-bottom: 0.5rem;">${exp.position}</div>
+                                                    <div style="color: #666; font-size: 1.1rem; margin-bottom: 0.5rem;">${exp.company}</div>
+                                                    <div style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">${exp.duration}</div>
+                                                    <div style="color: #333; line-height: 1.6;">${exp.description}</div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <div>
+                                            <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem; text-align: center; letter-spacing: 0.2em;">SKILLS</h2>
+                                            <div style="text-align: center;">
+                                                ${skills.map(skill => `
+                                                    <span style="display: inline-block; margin: 0.5rem 1rem; font-size: 1rem; border-bottom: 1px solid black; padding-bottom: 2px;">${skill}</span>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            break;
+                        default:
+                            // Dynamic color schemes for all other templates
+                            const templateColors = {
+                                4: { bg: '#f0f9ff', primary: '#0ea5e9', secondary: '#0369a1', accent: '#bae6fd' },
+                                5: { bg: 'black', primary: '#ff6ec7', secondary: '#00f3ff', accent: '#46ff33' },
+                                6: { bg: '#f8fafc', primary: '#059669', secondary: '#065f46', accent: '#a7f3d0' },
+                                7: { bg: '#fef3c7', primary: '#d97706', secondary: '#92400e', accent: '#fed7aa' },
+                                8: { bg: '#f3e8ff', primary: '#7c3aed', secondary: '#5b21b6', accent: '#ddd6fe' },
+                                9: { bg: '#fce7f3', primary: '#ec4899', secondary: '#be185d', accent: '#fbcfe8' },
+                                10: { bg: '#ecfdf5', primary: '#10b981', secondary: '#047857', accent: '#bbf7d0' },
+                                11: { bg: '#fff7ed', primary: '#ea580c', secondary: '#c2410c', accent: '#fed7aa' },
+                                12: { bg: '#f0f9ff', primary: '#0284c7', secondary: '#0369a1', accent: '#bae6fd' },
+                                13: { bg: '#fdf4ff', primary: '#a855f7', secondary: '#7c2d12', accent: '#e9d5ff' },
+                                14: { bg: '#f0fdf4', primary: '#22c55e', secondary: '#15803d', accent: '#bbf7d0' },
+                                15: { bg: '#fefce8', primary: '#eab308', secondary: '#a16207', accent: '#fde047' },
+                                16: { bg: '#f1f5f9', primary: '#475569', secondary: '#334155', accent: '#cbd5e1' },
+                                17: { bg: '#fef2f2', primary: '#dc2626', secondary: '#991b1b', accent: '#fecaca' },
+                                18: { bg: '#f0fdfa', primary: '#14b8a6', secondary: '#0f766e', accent: '#99f6e4' },
+                                19: { bg: '#fffbeb', primary: '#f59e0b', secondary: '#d97706', accent: '#fde68a' },
+                                20: { bg: '#f8fafc', primary: '#6366f1', secondary: '#4f46e5', accent: '#c7d2fe' },
+                                21: { bg: '#f9fafb', primary: '#6b7280', secondary: '#374151', accent: '#d1d5db' },
+                                22: { bg: '#fdf2f8', primary: '#db2777', secondary: '#9d174d', accent: '#f9a8d4' },
+                                23: { bg: '#f0f9ff', primary: '#0891b2', secondary: '#0e7490', accent: '#a5f3fc' },
+                                24: { bg: '#f7fee7', primary: '#65a30d', secondary: '#4d7c0f', accent: '#bef264' },
+                                25: { bg: '#fef7ff', primary: '#c026d3', secondary: '#a21caf', accent: '#f0abfc' },
+                                26: { bg: '#fffbeb', primary: '#d97706', secondary: '#92400e', accent: '#fcd34d' },
+                                27: { bg: '#f1f5f9', primary: '#64748b', secondary: '#475569', accent: '#cbd5e1' },
+                                28: { bg: '#fef2f2', primary: '#ef4444', secondary: '#dc2626', accent: '#fca5a5' },
+                                29: { bg: '#ecfdf5', primary: '#059669', secondary: '#047857', accent: '#6ee7b7' },
+                                30: { bg: '#fffbeb', primary: '#f59e0b', secondary: '#d97706', accent: '#fed7aa' },
+                                31: { bg: '#f0f9ff', primary: '#3b82f6', secondary: '#2563eb', accent: '#93c5fd' },
+                                32: { bg: '#f3e8ff', primary: '#8b5cf6', secondary: '#7c3aed', accent: '#c4b5fd' },
+                                33: { bg: '#fce7f3', primary: '#f472b6', secondary: '#ec4899', accent: '#f9a8d4' },
+                                34: { bg: '#f0fdf4', primary: '#4ade80', secondary: '#22c55e', accent: '#86efac' },
+                                35: { bg: '#fef3c7', primary: '#fbbf24', secondary: '#f59e0b', accent: '#fed7aa' },
+                                36: { bg: '#f1f5f9', primary: '#6b7280', secondary: '#4b5563', accent: '#9ca3af' },
+                                37: { bg: '#fef2f2', primary: '#f87171', secondary: '#ef4444', accent: '#fca5a5' },
+                                38: { bg: '#ecfdf5', primary: '#34d399', secondary: '#10b981', accent: '#6ee7b7' },
+                                39: { bg: 'black', primary: '#ff6ec7', secondary: '#00f3ff', accent: '#46ff33' },
+                                40: { bg: 'linear-gradient(135deg, #8B5A2B 0%, #556B2F 50%, #F5DEB3 100%)', primary: '#556B2F', secondary: '#2E4C2E', accent: '#F5DEB3' },
+                                41: { bg: '#f0fdfa', primary: '#0d9488', secondary: '#0f766e', accent: '#5eead4' },
+                                42: { bg: 'linear-gradient(45deg, #050533 0%, #01012b 100%)', primary: '#d1f7ff', secondary: '#87ceeb', accent: 'rgba(209, 247, 255, 0.2)' },
+                                43: { bg: '#f8fafc', primary: '#0f172a', secondary: '#334155', accent: '#e2e8f0' },
+                                44: { bg: '#fefce8', primary: '#ca8a04', secondary: '#a16207', accent: '#facc15' },
+                                45: { bg: '#f0f9ff', primary: '#0369a1', secondary: '#075985', accent: '#7dd3fc' }
+                            };
+                            
+                            const colors = templateColors[selectedTemplate.id] || { bg: '#f8fafc', primary: '#3b82f6', secondary: '#1d4ed8', accent: '#dbeafe' };
+                            
+                            portfolioContent = `
+                                <div style="background: ${colors.bg}; color: #1f2937; padding: 2rem; min-height: 100vh;">
+                                    <header style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, ${colors.primary}, ${colors.secondary}); color: white; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">${name}</h1>
+                                        <div style="opacity: 0.9; font-size: 1.1rem;">
+                                            <span>${contact}</span> • <span>${github}</span> • <span>${linkedin}</span>
+                                        </div>
+                                    </header>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                                        <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 4px solid ${colors.primary};">
+                                            <h2 style="font-size: 2rem; font-weight: bold; color: ${colors.secondary}; margin-bottom: 2rem; border-bottom: 2px solid ${colors.accent}; padding-bottom: 0.5rem;">Experience</h2>
+                                            ${experience.map(exp => `
+                                                <div style="margin-bottom: 2rem; padding: 1.5rem; background: ${colors.accent}; border-radius: 0.5rem; border-left: 4px solid ${colors.primary};">
+                                                    <div style="font-weight: bold; font-size: 1.1rem; color: ${colors.secondary};">${exp.position}</div>
+                                                    <div style="color: ${colors.primary}; font-weight: 600; margin-bottom: 0.5rem;">${exp.company}</div>
+                                                    <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">${exp.duration}</div>
+                                                    <div style="color: #374151;">${exp.description}</div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 4px solid ${colors.primary};">
+                                            <h2 style="font-size: 2rem; font-weight: bold; color: ${colors.secondary}; margin-bottom: 2rem; border-bottom: 2px solid ${colors.accent}; padding-bottom: 0.5rem;">Technical Skills</h2>
+                                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                                                ${skills.map(skill => `
+                                                    <span style="background: ${colors.primary}; color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">${skill}</span>
                                                 `).join('')}
                                             </div>
                                         </div>
@@ -1152,9 +1263,8 @@
                             `;
                     }
                     
-                    // Write the complete HTML document
-                    newWindow.document.write(`
-<!DOCTYPE html>
+                    // Create complete HTML document
+                    const htmlDocument = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1173,9 +1283,15 @@
 <body>
     ${portfolioContent}
 </body>
-</html>
-                    `);
-                    newWindow.document.close();
+</html>`;
+                    
+                    // Create blob and open in new window
+                    const blob = new Blob([htmlDocument], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                    
+                    // Clean up URL after 10 seconds
+                    setTimeout(() => URL.revokeObjectURL(url), 10000);
                 };
 
             const renderPortfolioTemplate = (templateId, formData) => {
@@ -1700,7 +1816,7 @@
                         
                         {!showPreview ? (
                             <div className="space-y-8">
-
+                                
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
@@ -2225,8 +2341,8 @@
                                     </div>
                                 ) : (
                                     <div>
-                                        <div className="flex justify-between items-center">
-                                            <h3 className="text-xl font-bold heading-font">Preview: {selectedTemplate.name}</h3>
+                                <div className="flex justify-between items-center">
+                                    <h3 className="text-xl font-bold heading-font">Preview: {selectedTemplate.name}</h3>
                                             <div className="flex space-x-4">
                                                 <button
                                                     onClick={() => setSelectedTemplate(null)}
@@ -2234,14 +2350,14 @@
                                                 >
                                                     Change Template
                                                 </button>
-                                                <button
-                                                    onClick={() => setShowPreview(false)}
-                                                    className="text-sm text-pink-500 hover:underline"
-                                                >
-                                                    ← Back to editing
-                                                </button>
+                                    <button
+                                        onClick={() => setShowPreview(false)}
+                                        className="text-sm text-pink-500 hover:underline"
+                                    >
+                                        ← Back to editing
+                                    </button>
                                             </div>
-                                        </div>
+                                </div>
                                 
                                 <div className="preview-container">
                                     <div>
@@ -2326,7 +2442,7 @@
                                     
                                     <div>
                                         <h4 className="text-lg font-medium mb-2 heading-font">Template Preview</h4>
-                                        <div className="preview-frame rounded-lg border overflow-hidden" style={{minHeight: '500px'}}>
+                                        <div className="preview-frame rounded-lg border overflow-y-auto" style={{minHeight: '500px', maxHeight: '600px'}}>
                                             {selectedTemplate ? renderPortfolioTemplate(selectedTemplate.id, formData) : (
                                                 <div className="bg-gray-100 p-8 text-center text-gray-500" style={{minHeight: '500px'}}>
                                                     <div className="mt-32">
