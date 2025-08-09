@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Holographic Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #ff00e4;
+            --bg: #0a0a1a;
+            --card-bg: rgba(10, 10, 26, 0.7);
+            --text: #ffffff;
+            --glow: 0 0 15px var(--primary);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .holographic-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary), transparent 70%);
+            opacity: 0.3;
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .holographic-effect:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .holographic-effect:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            background: radial-gradient(circle, var(--secondary), transparent 70%);
+            animation-delay: 2s;
+        }
+        
+        .holographic-effect:nth-child(3) {
+            bottom: 10%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+        
+        h1, h2, h3 {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--glow);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: var(--glow);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 10px 30px rgba(0, 247, 255, 0.2);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(0, 247, 255, 0.1);
+            border-radius: 50px;
+            border: 1px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 247, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: var(--glow);
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .icon-button:hover {
+            transform: scale(1.2);
+        }
+        
+        .info-tooltip {
+            display: none;
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+            z-index: 100;
+            box-shadow: var(--glow);
+        }
+        
+        .icon-button:hover + .info-tooltip {
+            display: block;
+        }
+        
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .project {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 200px;
+        }
+        
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .project:hover .project-content {
+            transform: translateY(0);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: var(--primary);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            background: var(--secondary);
+            box-shadow: var(--glow);
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-item {
+            padding: 8px 15px;
+            background: rgba(0, 247, 255, 0.1);
+            border-radius: 50px;
+            border: 1px solid var(--primary);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: var(--glow);
+        }
+        
+        .timeline-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="holographic-effect"></div>
+    <div class="holographic-effect"></div>
+    <div class="holographic-effect"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Ram Manohar</h1>
+            <p>Full Stack Developer | AI Enthusiast | Tech Innovator</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/rammanohar</span>
+                    <button class="icon-button" aria-label="How to create GitHub account">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <div class="info-tooltip">
+                        To create a GitHub account: 1) Go to github.com 2) Click 'Sign up' 3) Enter your details 4) Verify your email
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/rammanohar</span>
+                    <button class="icon-button" aria-label="How to create LinkedIn account">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <div class="info-tooltip">
+                        To create a LinkedIn account: 1) Go to linkedin.com 2) Click 'Join now' 3) Enter your details 4) Complete your profile
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section id="education">
+                <div class="card">
+                    <h2>Education</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2020 - 2024</div>
+                            <h3>Bachelor of Science in Computer Science</h3>
+                            <p>Massachusetts Institute of Technology (MIT)</p>
+                            <p>GPA: 3.9/4.0 | Specialization in Artificial Intelligence</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2016 - 2020</div>
+                            <h3>High School Diploma</h3>
+                            <p>St. Paul's Preparatory School</p>
+                            <p>Valedictorian | National Merit Scholar</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="experience">
+                <div class="card">
+                    <h2>Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023 - Present</div>
+                            <h3>Software Engineer Intern</h3>
+                            <p>Google | Mountain View, CA</p>
+                            <ul>
+                                <li>Developed new features for Google Cloud Platform using Python and Go</li>
+                                <li>Optimized database queries reducing response time by 40%</li>
+                                <li>Collaborated with AI team to implement machine learning models</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2021 - 2023</div>
+                            <h3>Web Developer</h3>
+                            <p>TechStart Inc. | Boston, MA</p>
+                            <ul>
+                                <li>Built responsive web applications using React and Node.js</li>
+                                <li>Implemented RESTful APIs serving 10,000+ daily requests</li>
+                                <li>Mentored junior developers in coding best practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="projects">
+                <div class="card">
+                    <h2>Projects</h2>
+                    <div class="section-grid">
+                        <div class="project card">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/00f7ff?text=AI+Chatbot" alt="AI Chatbot Project" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="project-content">
+                                <h3>AI Personal Assistant</h3>
+                                <p>An NLP-powered chatbot that schedules meetings, answers queries, and automates tasks.</p>
+                                <a href="#" class="project-link">Project Link</a>
+                            </div>
+                        </div>
+                        
+                        <div class="project card">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/ff00e4?text=E-Commerce+App" alt="E-Commerce App" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="project-content">
+                                <h3>E-Commerce Platform</h3>
+                                <p>Full-stack online store with payment integration and recommendation engine.</p>
+                                <a href="#" class="project-link">Project Link</a>
+                            </div>
+                        </div>
+                        
+                        <div class="project card">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/ffffff?text=Health+Tracker" alt="Health Tracker" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="project-content">
+                                <h3>Health & Fitness Tracker</h3>
+                                <p>Mobile app that tracks workouts, nutrition, and provides personalized plans.</p>
+                                <a href="#" class="project-link">Project Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="skills">
+                <div class="card">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-list">
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">TensorFlow</span>
+                        <span class="skill-item">Django</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">Linux</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="interests">
+                <div class="card">
+                    <h2>Area of Interest</h2>
+                    <ul>
+                        <li>Artificial Intelligence & Machine Learning</li>
+                        <li>Natural Language Processing</li>
+                        <li>Computer Vision</li>
+                        <li>Blockchain Technology</li>
+                        <li>Quantum Computing</li>
+                        <li>Human-Computer Interaction</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="honors">
+                <div class="card">
+                    <h2>Honors & Awards</h2>
+                    <ul>
+                        <li>Google Code-in Grand Prize Winner (2022)</li>
+                        <li>ACM International Collegiate Programming Contest Finalist (2023)</li>
+                        <li>National Science Foundation Scholarship Recipient</li>
+                        <li>MIT Dean's List (All Semesters)</li>
+                        <li>Best Paper Award at IEEE Conference on AI (2023)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="extracurriculars">
+                <div class="card">
+                    <h2>Extracurriculars</h2>
+                    <ul>
+                        <li>President, MIT Computer Science Club</li>
+                        <li>Volunteer Instructor at Code for All (Non-profit)</li>
+                        <li>Open Source Contributor (50+ repositories)</li>
+                        <li>Tech Blogger (200+ articles on Medium)</li>
+                        <li>Varsity Debate Team Captain</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Ram Manohar | 3D Holographic Portfolio</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> and cutting-edge web technologies</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Add 3D hover effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+        });
+        
+        // Reset card positions when mouse leaves
+        document.addEventListener('mouseout', function(e) {
+            if (!e.relatedTarget || !e.relatedTarget.classList.contains('card')) {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.style.transform = '';
+                });
+            }
+        });
+        
+        // Tooltip functionality
+        const infoButtons = document.querySelectorAll('.icon-button');
+        infoButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tooltip = this.nextElementSibling;
+                tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

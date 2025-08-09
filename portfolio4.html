@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --pastel-pink: #ffd6e0;
+            --pastel-blue: #c4e0f9;
+            --pastel-green: #d4edda;
+            --pastel-lavender: #e2d4f0;
+            --pastel-peach: #ffe8d6;
+            --pastel-mint: #d4f1f9;
+            --text-color: #5a5a5a;
+            --light-text: #888;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--pastel-blue);
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            margin: 0;
+            color: #4a6fa5;
+            font-size: 2.5rem;
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px 15px;
+            background-color: var(--pastel-pink);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: #ffb3c6;
+            transform: translateY(-2px);
+        }
+        
+        .info-button {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: var(--light-text);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 18px;
+            margin-left: 5px;
+            cursor: help;
+            position: relative;
+        }
+        
+        .info-button:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 25px;
+            top: 0;
+            min-width: 200px;
+            background-color: white;
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        section {
+            background-color: white;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: #6c757d;
+            border-bottom: 2px solid var(--pastel-mint);
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--pastel-mint);
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: #4a6fa5;
+            font-size: 1.1rem;
+        }
+        
+        .item-date {
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: var(--pastel-lavender);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .interest-card {
+            background-color: var(--pastel-peach);
+            padding: 15px;
+            border-radius: 10px;
+            flex: 1 1 200px;
+            text-align: center;
+        }
+        
+        .interest-card i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff9a76;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: var(--pastel-green);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background-color: #b1dfbb;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Your Name</h1>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <span class="info-button" data-tooltip="Go to github.com, sign up with your email, choose a username, and set up your profile.">i</span>
+                
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <span class="info-button" data-tooltip="Go to linkedin.com, create an account, fill in your professional details, and connect with others.">i</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <span class="item-title">University Name</span>
+                    <span class="item-date">2018 - 2022</span>
+                </div>
+                <p>Bachelor of Science in Computer Science</p>
+                <p>GPA: 3.8/4.0</p>
+                <p>Relevant Coursework: Data Structures, Algorithms, Web Development, Database Systems</p>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <span class="item-title">High School Name</span>
+                    <span class="item-date">2014 - 2018</span>
+                </div>
+                <p>High School Diploma</p>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="experience-item">
+                <div class="item-header">
+                    <span class="item-title">Software Developer Intern</span>
+                    <span class="item-date">Summer 2021</span>
+                </div>
+                <p>Tech Company Inc.</p>
+                <ul>
+                    <li>Developed and maintained web applications using React and Node.js</li>
+                    <li>Collaborated with team members using Agile methodologies</li>
+                    <li>Implemented new features that improved user engagement by 25%</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <div class="item-header">
+                    <span class="item-title">Teaching Assistant</span>
+                    <span class="item-date">2020 - 2021</span>
+                </div>
+                <p>University Computer Science Department</p>
+                <ul>
+                    <li>Assisted students with programming assignments in Java and Python</li>
+                    <li>Held weekly office hours to help students understand course material</li>
+                    <li>Graded assignments and provided constructive feedback</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            <div class="project-item">
+                <div class="item-header">
+                    <span class="item-title">E-Commerce Website</span>
+                    <span class="item-date">2022</span>
+                </div>
+                <p>A full-stack e-commerce platform with user authentication, product catalog, and payment processing.</p>
+                <p><strong>Technologies:</strong> React, Node.js, Express, MongoDB</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            <div class="project-item">
+                <div class="item-header">
+                    <span class="item-title">Task Management App</span>
+                    <span class="item-date">2021</span>
+                </div>
+                <p>A mobile application for managing personal tasks with reminders and progress tracking.</p>
+                <p><strong>Technologies:</strong> Flutter, Firebase</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2><i class="fas fa-code"></i> Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">AWS</span>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h2><i class="fas fa-heart"></i> Areas of Interest</h2>
+            <div class="interests-container">
+                <div class="interest-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Building responsive and accessible web applications</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Development</h3>
+                    <p>Creating cross-platform mobile experiences</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Machine Learning</h3>
+                    <p>Exploring AI and data science applications</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <h2><i class="fas fa-award"></i> Honors</h2>
+            <div class="honor-item">
+                <div class="item-header">
+                    <span class="item-title">Dean's List</span>
+                    <span class="item-date">2019 - 2022</span>
+                </div>
+                <p>Awarded for academic excellence each semester</p>
+            </div>
+            <div class="honor-item">
+                <div class="item-header">
+                    <span class="item-title">Best Capstone Project</span>
+                    <span class="item-date">2022</span>
+                </div>
+                <p>Recognized for outstanding senior project in Computer Science department</p>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2><i class="fas fa-users"></i> Extracurriculars</h2>
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <span class="item-title">Computer Science Club</span>
+                    <span class="item-date">2019 - 2022</span>
+                </div>
+                <p>Vice President</p>
+                <p>Organized hackathons and tech talks with industry professionals</p>
+            </div>
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <span class="item-title">Volunteer Tutor</span>
+                    <span class="item-date">2020 - 2021</span>
+                </div>
+                <p>Local Community Center</p>
+                <p>Taught basic computer skills to seniors and underprivileged youth</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>

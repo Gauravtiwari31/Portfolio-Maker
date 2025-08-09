@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketchfolio - Hand-Drawn Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&display=swap');
+        
+        :root {
+            --sketch-color: #333;
+            --paper-color: #f9f7f0;
+            --highlight-color: #ff6b6b;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--paper-color);
+            color: var(--sketch-color);
+            font-family: 'Patrick Hand', cursive;
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="none" stroke="%23ddd" stroke-width="0.5" stroke-dasharray="5,5"/></svg>');
+            padding-bottom: 3rem;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        header {
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--paper-color);
+            border-bottom: 2px dashed var(--sketch-color);
+            margin-bottom: 2rem;
+            animation: sketchIn 1s ease-out forwards;
+        }
+        
+        @keyframes sketchIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header-content {
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: var(--sketch-color);
+            text-shadow: 3px 3px 0 var(--shadow-color);
+            animation: wiggle 2s infinite alternate;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+        
+        .header-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header-content p::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--sketch-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: drawLine 1.5s 0.5s forwards;
+        }
+        
+        @keyframes drawLine {
+            to { transform: scaleX(1); }
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--sketch-color);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background-color: var(--paper-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--highlight-color);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .contact-item:hover {
+            color: white;
+            border-color: var(--highlight-color);
+        }
+        
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 0.3rem;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+        
+        .info-button:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+        
+        section {
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 3rem);
+            height: 100%;
+            border: 2px dashed var(--sketch-color);
+            border-radius: 15px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            display: inline-block;
+            color: var(--sketch-color);
+            padding: 0 1rem;
+            background-color: var(--paper-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--sketch-color);
+            z-index: 0;
+        }
+        
+        .card {
+            background-color: var(--paper-color);
+            border: 2px solid var(--sketch-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 5px 5px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            animation: cardAppear 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes cardAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; transform: translateY(10px); }
+        .card:nth-child(2) { animation-delay: 0.3s; transform: translateY(15px); }
+        .card:nth-child(3) { animation-delay: 0.5s; transform: translateY(20px); }
+        
+        .card:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 8px 8px 0 var(--shadow-color);
+        }
+        
+        .card h3 {
+            color: var(--sketch-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-family: 'Caveat', cursive;
+            border-bottom: 1px dashed var(--sketch-color);
+            padding-bottom: 0.3rem;
+        }
+        
+        .card .date {
+            color: var(--sketch-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .card ul {
+            padding-left: 1.5rem;
+        }
+        
+        .card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .card li::before {
+            content: '✏️';
+            position: absolute;
+            left: -1.5rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            border: 2px solid var(--sketch-color);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            background-color: var(--paper-color);
+            transition: all 0.3s ease;
+            animation: popIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .skill-tag:nth-child(1) { animation-delay: 0.1s; }
+        .skill-tag:nth-child(2) { animation-delay: 0.2s; }
+        .skill-tag:nth-child(3) { animation-delay: 0.3s; }
+        .skill-tag:nth-child(4) { animation-delay: 0.4s; }
+        .skill-tag:nth-child(5) { animation-delay: 0.5s; }
+        .skill-tag:nth-child(6) { animation-delay: 0.6s; }
+        .skill-tag:nth-child(7) { animation-delay: 0.7s; }
+        .skill-tag:nth-child(8) { animation-delay: 0.8s; }
+        .skill-tag:nth-child(9) { animation-delay: 0.9s; }
+        .skill-tag:nth-child(10) { animation-delay: 1.0s; }
+        
+        .skill-tag:hover {
+            background-color: var(--highlight-color);
+            color: white;
+            border-color: var(--highlight-color);
+            transform: rotate(5deg);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            border: 2px solid var(--sketch-color);
+            box-shadow: 5px 5px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            animation: sketchIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.3s; }
+        .project-card:nth-child(3) { animation-delay: 0.5s; }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(30%);
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1.5rem;
+            z-index: 2;
+            color: white;
+            width: 100%;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-family: 'Caveat', cursive;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+        
+        .project-link:hover {
+            background-color: white;
+            color: var(--highlight-color);
+        }
+        
+        footer {
+            background-color: var(--paper-color);
+            color: var(--sketch-color);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 2px dashed var(--sketch-color);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '✍️';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background-color: var(--paper-color);
+            padding: 0 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            color: var(--sketch-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-link:hover {
+            color: var(--highlight-color);
+            transform: translateY(-5px) rotate(10deg);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--paper-color);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 2px solid var(--sketch-color);
+            box-shadow: 5px 5px 0 var(--shadow-color);
+            animation: sketchIn 0.3s ease-out;
+        }
+        
+        .modal-content h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
+        }
+        
+        .modal-content ol {
+            padding-left: 1.5rem;
+        }
+        
+        .modal-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-content a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--highlight-color);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--sketch-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: var(--highlight-color);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section::before {
+                display: none;
+            }
+        }
+        
+        /* Hand-drawn elements */
+        .hand-drawn {
+            position: relative;
+        }
+        
+        .hand-drawn::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid var(--sketch-color);
+            border-radius: inherit;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        .rough-edge {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rough-edge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, 
+                transparent 0%, 
+                var(--shadow-color) 20%, 
+                transparent 40%, 
+                var(--shadow-color) 60%, 
+                transparent 80%, 
+                var(--shadow-color) 100%);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header class="rough-edge">
+        <div class="container">
+            <div class="header-content">
+                <h1>Alex Sketchwell</h1>
+                <p>Digital Artist & Creative Developer</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item hand-drawn">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item hand-drawn">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/sketchdev" target="_blank">github.com/sketchdev</a>
+                        <button class="info-button" onclick="openModal('github-modal')">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                    <div class="contact-item hand-drawn">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/sketchdev" target="_blank">linkedin.com/in/sketchdev</a>
+                        <button class="info-button" onclick="openModal('linkedin-modal')">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Bachelor of Fine Arts in Animation</h3>
+                <p class="date">2016 - 2020</p>
+                <p>School of Visual Arts, New York</p>
+                <ul>
+                    <li>Specialized in 2D animation and motion graphics</li>
+                    <li>Graduated with honors</li>
+                    <li>Thesis project: "Frame by Frame: A Digital Homage"</li>
+                </ul>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Digital Arts Certificate</h3>
+                <p class="date">2014 - 2016</p>
+                <p>Creative Arts Institute</p>
+                <ul>
+                    <li>Focus on traditional drawing techniques</li>
+                    <li>Storyboarding and character design</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experience</h2>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Lead Animator</h3>
+                <p class="date">2021 - Present</p>
+                <p>FrameCraft Studios</p>
+                <ul>
+                    <li>Created hand-drawn animation sequences for feature films</li>
+                    <li>Developed a hybrid digital/traditional animation pipeline</li>
+                    <li>Mentored junior animators in frame-by-frame techniques</li>
+                </ul>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Motion Graphics Designer</h3>
+                <p class="date">2018 - 2021</p>
+                <p>DoodleMotion Agency</p>
+                <ul>
+                    <li>Designed animated explainer videos</li>
+                    <li>Created hand-drawn style animations for commercial projects</li>
+                    <li>Collaborated with illustrators to maintain artistic consistency</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Animation Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card hand-drawn">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <div class="project-info">
+                        <h3>Celestial Dreams</h3>
+                        <p>Hand-drawn short film about space exploration</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-card hand-drawn">
+                    <img src="https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <div class="project-info">
+                        <h3>Ink & Motion</h3>
+                        <p>Experimental frame-by-frame animation series</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-card hand-drawn">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <div class="project-info">
+                        <h3>Sketchbook Tales</h3>
+                        <p>Interactive digital sketchbook with animations</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            
+            <div class="skills-container">
+                <span class="skill-tag hand-drawn">Adobe Animate</span>
+                <span class="skill-tag hand-drawn">Toon Boom Harmony</span>
+                <span class="skill-tag hand-drawn">Procreate</span>
+                <span class="skill-tag hand-drawn">After Effects</span>
+                <span class="skill-tag hand-drawn">Photoshop</span>
+                <span class="skill-tag hand-drawn">Illustrator</span>
+                <span class="skill-tag hand-drawn">Blender</span>
+                <span class="skill-tag hand-drawn">HTML/CSS</span>
+                <span class="skill-tag hand-drawn">JavaScript</span>
+                <span class="skill-tag hand-drawn">Storyboarding</span>
+                <span class="skill-tag hand-drawn">Character Design</span>
+                <span class="skill-tag hand-drawn">Frame-by-Frame</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="interests">
+        <div class="container">
+            <div class="section-title">
+                <h2>Areas of Interest</h2>
+            </div>
+            
+            <div class="card hand-drawn">
+                <ul>
+                    <li>Traditional animation techniques</li>
+                    <li>Experimental motion graphics</li>
+                    <li>Interactive storytelling</li>
+                    <li>Character animation</li>
+                    <li>Educational animation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="honors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Honors & Awards</h2>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Best Animated Short</h3>
+                <p class="date">2022</p>
+                <p>International Animation Festival</p>
+                <p>Awarded for "Celestial Dreams"</p>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Innovation in Animation</h3>
+                <p class="date">2021</p>
+                <p>Digital Arts Foundation</p>
+                <p>Recognized for hybrid animation techniques</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="extracurriculars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Extracurriculars</h2>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Animation Workshop Instructor</h3>
+                <p class="date">2020 - Present</p>
+                <p>Community Arts Center</p>
+                <ul>
+                    <li>Teach frame-by-frame animation to beginners</li>
+                    <li>Organize annual animation showcase</li>
+                </ul>
+            </div>
+            
+            <div class="card hand-drawn">
+                <h3>Sketch Club Founder</h3>
+                <p class="date">2018 - Present</p>
+                <p>Online Community</p>
+                <ul>
+                    <li>Weekly drawing challenges</li>
+                    <li>Collaborative animation projects</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="rough-edge">
+        <div class="container">
+            <p>&copy; 2023 Alex Sketchwell. All drawings are my own.</p>
+            <div class="social-links">
+                <a href="https://github.com/sketchdev" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/sketchdev" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/sketchdev" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fas fa-film"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="github-modal" class="modal">
+        <div class="modal-content hand-drawn">
+            <button class="close-modal" onclick="closeModal('github-modal')">&times;</button>
+            <h3>How to Create a GitHub Account</h3>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Complete the verification puzzle (it's fun!)</li>
+                <li>Choose the free plan (perfect for artists)</li>
+                <li>Upload your creative coding projects</li>
+                <li>Share your animation experiments with the world!</li>
+            </ol>
+            <p style="margin-top:1rem;text-align:center;">✨ GitHub is great for hosting creative coding projects ✨</p>
+        </div>
+    </div>
+
+    <div id="linkedin-modal" class="modal">
+        <div class="modal-content hand-drawn">
+            <button class="close-modal" onclick="closeModal('linkedin-modal')">&times;</button>
+            <h3>How to Create a LinkedIn Account</h3>
+            <ol>
+                <li>Visit <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click "Join now" to begin</li>
+                <li>Enter your email and create a password</li>
+                <li>Fill in your name (your artist name works too!)</li>
+                <li>Add your animation/art experience</li>
+                <li>Upload a professional profile picture (a sketch is fine!)</li>
+                <li>Connect with other animators and studios</li>
+            </ol>
+            <p style="margin-top:1rem;text-align:center;">🎨 LinkedIn helps you connect with creative professionals 🎨</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Add slight rotation to cards on load for hand-drawn effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const randomRotate = (Math.random() * 4) - 2; // -2 to 2 degrees
+                card.style.transform = `rotate(${randomRotate}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>

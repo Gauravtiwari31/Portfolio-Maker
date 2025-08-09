@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .moving-text {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: slideIn 1.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .typing-text {
+            font-size: 1.5rem;
+            display: inline-block;
+            border-right: 3px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .item-date {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .item-subtitle {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .skill-item {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .interest-item {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .interest-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .moving-text {
+                font-size: 2.5rem;
+            }
+            
+            .typing-text {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="moving-text">Hello, I'm Ram Manohar</h1>
+                <p class="typing-text">Web Developer & Designer</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/rammanohar</span>
+                        <div class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Create a GitHub account at github.com/signup to showcase your projects</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/rammanohar</span>
+                        <div class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Create a LinkedIn profile at linkedin.com/signup to build your professional network</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">Master of Computer Science</h3>
+                    <span class="item-date">2020 - 2022</span>
+                </div>
+                <p class="item-subtitle">Stanford University, California</p>
+                <p>Specialized in Artificial Intelligence and Human-Computer Interaction. Graduated with honors.</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">Bachelor of Science in Software Engineering</h3>
+                    <span class="item-date">2016 - 2020</span>
+                </div>
+                <p class="item-subtitle">Massachusetts Institute of Technology, Cambridge</p>
+                <p>Focus on Full Stack Development and Database Systems. GPA: 3.8/4.0</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experience</h2>
+            </div>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">Senior Frontend Developer</h3>
+                    <span class="item-date">2022 - Present</span>
+                </div>
+                <p class="item-subtitle">Google, Mountain View, CA</p>
+                <p>Lead developer for Google's search interface redesign. Implemented responsive design patterns and accessibility improvements that increased user engagement by 15%.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">Full Stack Developer</h3>
+                    <span class="item-date">2020 - 2022</span>
+                </div>
+                <p class="item-subtitle">Amazon Web Services, Seattle, WA</p>
+                <p>Developed and maintained AWS management console features. Worked with React, Node.js, and AWS Lambda to create scalable cloud solutions.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">AI-Powered Code Review Tool</h3>
+                    <span class="item-date">2023</span>
+                </div>
+                <p>Developed a machine learning tool that analyzes code submissions and provides automated feedback on code quality, style, and potential bugs. Integrated with GitHub for seamless workflow.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">Sustainable Energy Dashboard</h3>
+                    <span class="item-date">2022</span>
+                </div>
+                <p>Created an interactive data visualization platform for tracking renewable energy adoption worldwide. Features real-time data updates and predictive analytics.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">Accessible Web Components Library</h3>
+                    <span class="item-date">2021</span>
+                </div>
+                <p>Built a collection of fully accessible UI components with React and TypeScript. Each component meets WCAG 2.1 AA standards and includes comprehensive documentation.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">TypeScript</div>
+                <div class="skill-item">React</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">HTML5</div>
+                <div class="skill-item">CSS3/Sass</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">AWS</div>
+                <div class="skill-item">Docker</div>
+                <div class="skill-item">MongoDB</div>
+                <div class="skill-item">SQL</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="interests">
+        <div class="container">
+            <div class="section-title">
+                <h2>Areas of Interest</h2>
+            </div>
+            
+            <div style="text-align: center;">
+                <div class="interest-item">Artificial Intelligence</div>
+                <div class="interest-item">Human-Computer Interaction</div>
+                <div class="interest-item">Sustainable Technology</div>
+                <div class="interest-item">Web Accessibility</div>
+                <div class="interest-item">Data Visualization</div>
+                <div class="interest-item">UX/UI Design</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="honors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Honors & Awards</h2>
+            </div>
+            
+            <div class="honor-item">
+                <div class="item-header">
+                    <h3 class="item-title">Google Developer Expert</h3>
+                    <span class="item-date">2023</span>
+                </div>
+                <p>Recognized by Google for contributions to web development community through open source projects and technical talks.</p>
+            </div>
+            
+            <div class="honor-item">
+                <div class="item-header">
+                    <h3 class="item-title">Best Thesis Award</h3>
+                    <span class="item-date">2022</span>
+                </div>
+                <p>Awarded by Stanford Computer Science Department for research on "Explainable AI for Code Generation".</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="extracurriculars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Extracurricular Activities</h2>
+            </div>
+            
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <h3 class="item-title">Tech for Good Hackathon Organizer</h3>
+                    <span class="item-date">2021 - Present</span>
+                </div>
+                <p>Organize annual hackathons focused on developing technology solutions for social and environmental challenges.</p>
+            </div>
+            
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <h3 class="item-title">Coding Instructor</h3>
+                    <span class="item-date">2018 - 2020</span>
+                </div>
+                <p>Volunteered at local community centers teaching introductory programming to underrepresented youth.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Ram Manohar. All rights reserved.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

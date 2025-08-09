@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Parallax Layers */
+        .parallax {
+            perspective: 1px;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .parallax__layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .parallax__layer--base {
+            transform: translateZ(0);
+            z-index: 4;
+        }
+        
+        .parallax__layer--back {
+            transform: translateZ(-1px) scale(2);
+            z-index: 3;
+        }
+        
+        .parallax__layer--deep {
+            transform: translateZ(-2px) scale(3);
+            z-index: 2;
+        }
+        
+        .parallax__group {
+            position: relative;
+            height: 100vh;
+            transform-style: preserve-3d;
+        }
+        
+        /* Header Styles */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            margin: 2rem 0;
+        }
+        
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .social-link a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .social-link a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            width: 200px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .social-link:hover .info-tooltip {
+            opacity: 1;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+            background-color: white;
+            z-index: 5;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #444;
+        }
+        
+        .section-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Education Section */
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .item-date {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .item-subtitle {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: #444;
+            border-bottom: 2px solid #a777e3;
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .skill-list li:before {
+            content: "•";
+            color: #a777e3;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+        
+        /* Projects Section */
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #6e8efb;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: #5a7df4;
+        }
+        
+        /* Interests Section */
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .interest-item {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 200px;
+            transition: transform 0.3s;
+        }
+        
+        .interest-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .interest-item i {
+            font-size: 2rem;
+            color: #a777e3;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #333;
+            color: white;
+        }
+        
+        /* Background Elements */
+        .bg-element {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .bg-circle {
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax">
+        <!-- Header with Parallax Background -->
+        <div class="parallax__group">
+            <div class="parallax__layer parallax__layer--back">
+                <div class="bg-element bg-circle" style="width: 300px; height: 300px; top: 20%; left: 10%;"></div>
+                <div class="bg-element bg-circle" style="width: 200px; height: 200px; bottom: 15%; right: 15%;"></div>
+            </div>
+            <div class="parallax__layer parallax__layer--base">
+                <header>
+                    <div class="header-content">
+                        <h1>John Doe</h1>
+                        <p class="title">Web Developer & Designer</p>
+                        
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                            <p><i class="fas fa-envelope"></i> john.doe@example.com</p>
+                        </div>
+                        
+                        <div class="social-links">
+                            <div class="social-link">
+                                <a href="https://github.com/johndoe" target="_blank"><i class="fab fa-github"></i></a>
+                                <span class="info-tooltip">Visit my GitHub profile to see my code repositories</span>
+                            </div>
+                            <div class="social-link">
+                                <a href="#" id="github-info"><i class="fas fa-info-circle"></i></a>
+                                <span class="info-tooltip">How to create a GitHub account: Go to github.com, click Sign Up, fill in your details, and verify your email</span>
+                            </div>
+                            <div class="social-link">
+                                <a href="https://linkedin.com/in/johndoe" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <span class="info-tooltip">Connect with me on LinkedIn for professional networking</span>
+                            </div>
+                            <div class="social-link">
+                                <a href="#" id="linkedin-info"><i class="fas fa-info-circle"></i></a>
+                                <span class="info-tooltip">How to create a LinkedIn account: Visit linkedin.com, click Join Now, enter your information, and build your profile</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="parallax__group">
+            <div class="parallax__layer parallax__layer--base">
+                <!-- Education Section -->
+                <section id="education">
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-content">
+                        <div class="education-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Bachelor of Science in Computer Science</h3>
+                                <span class="item-date">2018 - 2022</span>
+                            </div>
+                            <p class="item-subtitle">University of Technology, Cityville</p>
+                            <p class="item-description">
+                                Graduated with honors. Specialized in Web Development and Artificial Intelligence. 
+                                Relevant coursework: Data Structures, Algorithms, Database Systems, Web Development, Machine Learning.
+                            </p>
+                        </div>
+                        
+                        <div class="education-item">
+                            <div class="item-header">
+                                <h3 class="item-title">High School Diploma</h3>
+                                <span class="item-date">2014 - 2018</span>
+                            </div>
+                            <p class="item-subtitle">Cityville High School</p>
+                            <p class="item-description">
+                                Graduated in top 5% of class. President of Computer Science Club. 
+                                Participated in multiple coding competitions.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Experience Section -->
+                <section id="experience" style="background-color: #f5f5f5;">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="section-content">
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Frontend Developer</h3>
+                                <span class="item-date">2022 - Present</span>
+                            </div>
+                            <p class="item-subtitle">Tech Solutions Inc., Cityville</p>
+                            <p class="item-description">
+                                - Developed responsive web applications using React.js and Vue.js<br>
+                                - Collaborated with UX designers to implement intuitive user interfaces<br>
+                                - Optimized application performance, reducing load times by 40%<br>
+                                - Mentored junior developers and conducted code reviews
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Web Development Intern</h3>
+                                <span class="item-date">Summer 2021</span>
+                            </div>
+                            <p class="item-subtitle">Digital Creations Agency, Townsville</p>
+                            <p class="item-description">
+                                - Assisted in building client websites using HTML, CSS, and JavaScript<br>
+                                - Implemented SEO best practices across multiple projects<br>
+                                - Created documentation for internal development processes<br>
+                                - Participated in client meetings and requirement gathering
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Projects Section -->
+                <section id="projects">
+                    <h2 class="section-title">Projects</h2>
+                    <div class="section-content">
+                        <div class="project-item">
+                            <div class="item-header">
+                                <h3 class="item-title">E-commerce Platform</h3>
+                                <span class="item-date">2023</span>
+                            </div>
+                            <p class="item-description">
+                                A full-stack e-commerce application with React frontend, Node.js backend, and MongoDB database. 
+                                Features include user authentication, product search, shopping cart, and payment processing.
+                            </p>
+                            <a href="https://github.com/johndoe/ecommerce-platform" class="project-link" target="_blank">Project Link</a>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Task Management App</h3>
+                                <span class="item-date">2022</span>
+                            </div>
+                            <p class="item-description">
+                                A productivity application built with Vue.js and Firebase. Allows users to create, organize, 
+                                and prioritize tasks with drag-and-drop functionality and real-time updates.
+                            </p>
+                            <a href="https://github.com/johndoe/task-manager" class="project-link" target="_blank">Project Link</a>
+                        </div>
+                        
+                        <div class="project-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Weather Dashboard</h3>
+                                <span class="item-date">2021</span>
+                            </div>
+                            <p class="item-description">
+                                A weather application that displays current conditions and forecasts using data from 
+                                the OpenWeatherMap API. Features geolocation and city search functionality.
+                            </p>
+                            <a href="https://github.com/johndoe/weather-dashboard" class="project-link" target="_blank">Project Link</a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Technical Skills Section -->
+                <section id="skills" style="background-color: #f5f5f5;">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="section-content">
+                        <div class="skills-container">
+                            <div class="skill-category">
+                                <h3>Frontend</h3>
+                                <ul class="skill-list">
+                                    <li>HTML5 & CSS3</li>
+                                    <li>JavaScript (ES6+)</li>
+                                    <li>React.js</li>
+                                    <li>Vue.js</li>
+                                    <li>Responsive Design</li>
+                                    <li>Bootstrap</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h3>Backend</h3>
+                                <ul class="skill-list">
+                                    <li>Node.js</li>
+                                    <li>Express.js</li>
+                                    <li>Python</li>
+                                    <li>Django</li>
+                                    <li>RESTful APIs</li>
+                                    <li>GraphQL</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h3>Database</h3>
+                                <ul class="skill-list">
+                                    <li>MongoDB</li>
+                                    <li>MySQL</li>
+                                    <li>PostgreSQL</li>
+                                    <li>Firebase</li>
+                                    <li>Database Design</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h3>Tools & Other</h3>
+                                <ul class="skill-list">
+                                    <li>Git & GitHub</li>
+                                    <li>Docker</li>
+                                    <li>CI/CD</li>
+                                    <li>Agile Methodologies</li>
+                                    <li>Figma</li>
+                                    <li>Adobe Creative Suite</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Area of Interest Section -->
+                <section id="interests">
+                    <h2 class="section-title">Area of Interest</h2>
+                    <div class="section-content">
+                        <div class="interests-container">
+                            <div class="interest-item">
+                                <i class="fas fa-code"></i>
+                                <h3>Web Development</h3>
+                                <p>Building responsive and accessible web applications</p>
+                            </div>
+                            
+                            <div class="interest-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h3>Mobile Development</h3>
+                                <p>Creating cross-platform mobile experiences</p>
+                            </div>
+                            
+                            <div class="interest-item">
+                                <i class="fas fa-brain"></i>
+                                <h3>AI & ML</h3>
+                                <p>Exploring machine learning applications</p>
+                            </div>
+                            
+                            <div class="interest-item">
+                                <i class="fas fa-paint-brush"></i>
+                                <h3>UI/UX Design</h3>
+                                <p>Crafting intuitive user experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Honors Section -->
+                <section id="honors" style="background-color: #f5f5f5;">
+                    <h2 class="section-title">Honors & Awards</h2>
+                    <div class="section-content">
+                        <div class="honor-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Dean's List</h3>
+                                <span class="item-date">2019 - 2022</span>
+                            </div>
+                            <p class="item-subtitle">University of Technology</p>
+                            <p class="item-description">
+                                Recognized for academic excellence in all semesters from 2019 to 2022.
+                            </p>
+                        </div>
+                        
+                        <div class="honor-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Best Capstone Project</h3>
+                                <span class="item-date">2022</span>
+                            </div>
+                            <p class="item-subtitle">Computer Science Department</p>
+                            <p class="item-description">
+                                Awarded for developing an innovative AI-powered educational platform.
+                            </p>
+                        </div>
+                        
+                        <div class="honor-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Hackathon Winner</h3>
+                                <span class="item-date">2021</span>
+                            </div>
+                            <p class="item-subtitle">TechFest 2021</p>
+                            <p class="item-description">
+                                Won first place in the 48-hour hackathon for developing a community volunteer matching app.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Extracurriculars Section -->
+                <section id="extracurriculars">
+                    <h2 class="section-title">Extracurricular Activities</h2>
+                    <div class="section-content">
+                        <div class="extracurricular-item">
+                            <div class="item-header">
+                                <h3 class="item-title">President</h3>
+                                <span class="item-date">2020 - 2022</span>
+                            </div>
+                            <p class="item-subtitle">University Coding Club</p>
+                            <p class="item-description">
+                                Organized weekly coding workshops, guest speaker events, and hackathons. 
+                                Increased membership by 150% through outreach initiatives.
+                            </p>
+                        </div>
+                        
+                        <div class="extracurricular-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Volunteer</h3>
+                                <span class="item-date">2019 - Present</span>
+                            </div>
+                            <p class="item-subtitle">Code for Good</p>
+                            <p class="item-description">
+                                Teach programming fundamentals to underprivileged youth. 
+                                Developed curriculum for beginner web development course.
+                            </p>
+                        </div>
+                        
+                        <div class="extracurricular-item">
+                            <div class="item-header">
+                                <h3 class="item-title">Mentor</h3>
+                                <span class="item-date">2021 - Present</span>
+                            </div>
+                            <p class="item-subtitle">Women in Tech Initiative</p>
+                            <p class="item-description">
+                                Provide guidance and support to women pursuing careers in technology. 
+                                Conduct resume workshops and mock technical interviews.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Footer -->
+                <footer>
+                    <p>&copy; 2023 John Doe. All rights reserved.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="https://github.com/johndoe" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/johndoe" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:john.doe@example.com"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+11234567890"><i class="fas fa-phone"></i></a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY;
+            const backLayer = document.querySelector('.parallax__layer--back');
+            const deepLayer = document.querySelector('.parallax__layer--deep');
+            
+            if (backLayer) {
+                backLayer.style.transform = `translateZ(-1px) scale(2) translateY(${scrolled * 0.5}px)`;
+            }
+            
+            if (deepLayer) {
+                deepLayer.style.transform = `translateZ(-2px) scale(3) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+        
+        // Tooltip functionality for info buttons
+        document.getElementById('github-info').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("How to create a GitHub account:\n\n1. Go to github.com\n2. Click 'Sign Up'\n3. Fill in your details\n4. Verify your email address\n5. Start using GitHub!");
+        });
+        
+        document.getElementById('linkedin-info').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("How to create a LinkedIn account:\n\n1. Visit linkedin.com\n2. Click 'Join Now'\n3. Enter your information\n4. Build your profile\n5. Connect with professionals!");
+        });
+    </script>
+</body>
+</html>

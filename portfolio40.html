@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature-Inspired Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --earth-brown: #8B5A2B;
+            --leaf-green: #556B2F;
+            --sand: #F5DEB3;
+            --sky-blue: #87CEEB;
+            --stone: #B8B8B8;
+            --dark-green: #2E4C2E;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--sand);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--earth-brown);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-color: var(--sand);
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50% 100%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .contact-info a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .social-icon {
+            position: relative;
+        }
+        
+        .social-icon i {
+            font-size: 2rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon i:hover {
+            transform: scale(1.2);
+        }
+        
+        .info-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .social-icon:hover .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+            top: 120%;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--earth-brown);
+            margin: 0.5rem auto;
+        }
+        
+        .education-item, .experience-item, .project-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .education-item::before, .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--leaf-green);
+        }
+        
+        .project-item {
+            transition: transform 0.3s;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-item h3 {
+            color: var(--earth-brown);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--sky-blue);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--leaf-green);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            background-color: var(--stone);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #333;
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .interest-item {
+            background-color: var(--leaf-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .honors-list, .extracurriculars-list {
+            list-style-type: none;
+        }
+        
+        .honors-list li, .extracurriculars-list li {
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .honors-list li::before, .extracurriculars-list li::before {
+            content: '🌿';
+            position: absolute;
+            left: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top-left-radius: 50% 20%;
+            border-top-right-radius: 50% 20%;
+        }
+        
+        .organic-shape {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .shape-1 {
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+        }
+        
+        .shape-2 {
+            width: 100px;
+            height: 100px;
+            bottom: 20px;
+            right: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="organic-shape shape-1"></div>
+        <div class="organic-shape shape-2"></div>
+        <div class="container">
+            <div class="header-content">
+                <h1>Your Name</h1>
+                <p>Web Developer | Nature Enthusiast</p>
+                
+                <div class="contact-info">
+                    <a href="tel:+1234567890">
+                        <i class="fas fa-phone"></i>
+                        +123 456 7890
+                    </a>
+                    <a href="mailto:your.email@example.com">
+                        <i class="fas fa-envelope"></i>
+                        your.email@example.com
+                    </a>
+                </div>
+                
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <a href="https://github.com/yourusername" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <div class="info-tooltip">
+                            To create a GitHub account, visit github.com and click "Sign up"
+                        </div>
+                    </div>
+                    
+                    <div class="social-icon">
+                        <a href="https://linkedin.com/in/yourusername" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <div class="info-tooltip">
+                            To create a LinkedIn account, visit linkedin.com and click "Join now"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>University Name</h3>
+                <p><strong>Degree:</strong> Bachelor of Science in Computer Science</p>
+                <p><strong>Year:</strong> 2018 - 2022</p>
+                <p><strong>GPA:</strong> 3.8/4.0</p>
+                <p><strong>Relevant Coursework:</strong> Data Structures, Algorithms, Web Development, Database Systems</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>College Name</h3>
+                <p><strong>Degree:</strong> Associate in Science</p>
+                <p><strong>Year:</strong> 2016 - 2018</p>
+                <p><strong>GPA:</strong> 3.9/4.0</p>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3>Web Developer</h3>
+                <p><strong>Company Name</strong> | June 2022 - Present</p>
+                <ul>
+                    <li>Developed and maintained responsive web applications using React, Node.js, and MongoDB</li>
+                    <li>Collaborated with designers to implement UI/UX improvements</li>
+                    <li>Optimized website performance, reducing load times by 40%</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Frontend Developer Intern</h3>
+                <p><strong>Company Name</strong> | Summer 2021</p>
+                <ul>
+                    <li>Assisted in building a customer portal using Vue.js</li>
+                    <li>Implemented accessibility features to meet WCAG guidelines</li>
+                    <li>Participated in agile development processes</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-item">
+                <h3>Eco Tracker App</h3>
+                <p>A mobile application that helps users track their carbon footprint and suggests eco-friendly alternatives.</p>
+                <p><strong>Technologies:</strong> React Native, Firebase, Google Maps API</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <h3>Nature Blog Platform</h3>
+                <p>A full-stack blogging platform for nature enthusiasts with image upload and geotagging features.</p>
+                <p><strong>Technologies:</strong> Node.js, Express, MongoDB, AWS S3</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <h3>Plant Recognition AI</h3>
+                <p>Machine learning model that identifies plant species from images with 92% accuracy.</p>
+                <p><strong>Technologies:</strong> Python, TensorFlow, OpenCV</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">HTML5 & CSS3</span>
+                <span class="skill-tag">JavaScript (ES6+)</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Express</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Responsive Design</span>
+                <span class="skill-tag">UI/UX Principles</span>
+                <span class="skill-tag">RESTful APIs</span>
+                <span class="skill-tag">AWS</span>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h2 class="section-title">Area of Interest</h2>
+            <div class="interests-container">
+                <div class="interest-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>Sustainable Technology</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Machine Learning</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile Development</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>UI/UX Design</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <h2 class="section-title">Honors</h2>
+            <ul class="honors-list">
+                <li>Dean's List for 4 consecutive semesters</li>
+                <li>Winner of HackNature 2021 Hackathon</li>
+                <li>Google Developer Scholarship Recipient</li>
+                <li>Outstanding Senior Project Award</li>
+            </ul>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2 class="section-title">Extracurriculars</h2>
+            <ul class="extracurriculars-list">
+                <li>President of University Coding Club</li>
+                <li>Volunteer at local nature conservation organization</li>
+                <li>Mentor for high school robotics team</li>
+                <li>Organizer of annual Eco-Tech Conference</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <p>Made with ♥ and a connection to nature</p>
+        </div>
+    </footer>
+</body>
+</html>

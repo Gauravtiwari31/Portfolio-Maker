@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --nav-bg: rgba(44, 62, 80, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            touch-action: pan-y;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+
+        .info-tooltip {
+            position: absolute;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            width: 200px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .info-icon:hover + .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .info-icon {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 0.3rem;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding-bottom: 80px; /* Add space for mobile nav */
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.2rem;
+        }
+
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        .item-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .item-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .item-description {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .skill-category h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-name {
+            flex: 1;
+        }
+
+        .skill-level {
+            width: 100px;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-level-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style-type: none;
+        }
+
+        .interest-item {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        /* Enhanced Navigation Indicators */
+        .nav-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            background-color: var(--nav-bg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .indicator-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .indicator-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .indicator-dot::after {
+            content: attr(data-section);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .indicator-dot:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: 120%;
+        }
+
+        /* Enhanced Mobile navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--nav-bg);
+            z-index: 100;
+            padding: 0.5rem;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .mobile-nav-list {
+            display: flex;
+            justify-content: space-around;
+            list-style-type: none;
+        }
+
+        .mobile-nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 0.3rem;
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 0.3rem;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-item span {
+            font-size: 0.7rem;
+            display: block;
+        }
+
+        .mobile-nav-item.active {
+            color: white;
+            background-color: rgba(52, 152, 219, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .mobile-nav-item.active i {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Swipe instruction hint */
+        .swipe-hint {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--nav-bg);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+            animation: pulse 2s infinite;
+        }
+
+        .swipe-hint i {
+            font-size: 1rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .name {
+                font-size: 1.5rem;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .nav-indicator {
+                bottom: 70px;
+                padding: 8px 16px;
+            }
+
+            .indicator-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .swipe-hint {
+                bottom: 120px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Animation classes */
+        .slide-in {
+            animation: slideIn 0.5s forwards;
+        }
+
+        .slide-out {
+            animation: slideOut 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        /* Hidden class for sections */
+        .section-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-img">
+                <h1 class="name">Ram Manohar</h1>
+                <p class="title">Web Developer</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ram.manohar@example.com</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                        <span class="info-icon">i
+                            <span class="info-tooltip">To create a GitHub account: 1. Go to github.com 2. Click 'Sign up' 3. Enter your details 4. Verify your email</span>
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                        <span class="info-icon">i
+                            <span class="info-tooltip">To create a LinkedIn account: 1. Go to linkedin.com 2. Click 'Join now' 3. Enter your details 4. Build your profile</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Education Section -->
+            <section id="education" class="section">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+                <div class="education-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Master of Computer Science</h3>
+                        <span class="item-date">2020 - 2022</span>
+                    </div>
+                    <h4 class="item-subtitle">Tech University</h4>
+                    <p class="item-description">
+                        Specialized in Web Technologies and Artificial Intelligence. GPA: 3.9/4.0
+                    </p>
+                </div>
+                <div class="education-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Bachelor of Science in Computer Engineering</h3>
+                        <span class="item-date">2016 - 2020</span>
+                    </div>
+                    <h4 class="item-subtitle">State University</h4>
+                    <p class="item-description">
+                        Focused on software development and system design. Graduated with honors.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+                <div class="experience-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Senior Web Developer</h3>
+                        <span class="item-date">2021 - Present</span>
+                    </div>
+                    <h4 class="item-subtitle">Tech Solutions Inc.</h4>
+                    <p class="item-description">
+                        Lead developer for company's flagship web application. Implemented responsive designs and optimized performance.
+                    </p>
+                </div>
+                <div class="experience-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Web Developer Intern</h3>
+                        <span class="item-date">2019 - 2020</span>
+                    </div>
+                    <h4 class="item-subtitle">Digital Creations</h4>
+                    <p class="item-description">
+                        Developed and maintained client websites. Collaborated with designers to implement UI/UX improvements.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+                <div class="project-item">
+                    <div class="item-header">
+                        <h3 class="item-title">E-commerce Platform</h3>
+                        <span class="item-date">2022</span>
+                    </div>
+                    <p class="item-description">
+                        A full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database.
+                    </p>
+                    <a href="#" class="project-link">Project Link <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="project-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Task Management App</h3>
+                        <span class="item-date">2021</span>
+                    </div>
+                    <p class="item-description">
+                        A collaborative task management application with real-time updates using WebSockets.
+                    </p>
+                    <a href="#" class="project-link">Project Link <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="project-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Portfolio Website</h3>
+                        <span class="item-date">2020</span>
+                    </div>
+                    <p class="item-description">
+                        A responsive portfolio website built with HTML, CSS, and JavaScript.
+                    </p>
+                    <a href="#" class="project-link">Project Link <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>Frontend</h4>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">HTML/CSS</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 95%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 90%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">React</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 85%;"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Backend</h4>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">Node.js</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 88%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 80%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">SQL</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 75%;"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Tools</h4>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">Git</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 85%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Docker</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 70%;"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">AWS</span>
+                                <div class="skill-level">
+                                    <div class="skill-level-fill" style="width: 65%;"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interests Section -->
+            <section id="interests" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-heart"></i> Areas of Interest</h2>
+                <ul class="interests-list">
+                    <li class="interest-item">Web Development</li>
+                    <li class="interest-item">Artificial Intelligence</li>
+                    <li class="interest-item">User Experience</li>
+                    <li class="interest-item">Cloud Computing</li>
+                    <li class="interest-item">Open Source</li>
+                    <li class="interest-item">Mobile Development</li>
+                </ul>
+            </section>
+
+            <!-- Honors Section -->
+            <section id="honors" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-award"></i> Honors & Awards</h2>
+                <div class="honor-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Best Thesis Award</h3>
+                        <span class="item-date">2022</span>
+                    </div>
+                    <h4 class="item-subtitle">Tech University</h4>
+                    <p class="item-description">
+                        Awarded for outstanding research in web performance optimization techniques.
+                    </p>
+                </div>
+                <div class="honor-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Hackathon Winner</h3>
+                        <span class="item-date">2021</span>
+                    </div>
+                    <h4 class="item-subtitle">CodeFest 2021</h4>
+                    <p class="item-description">
+                        First place in the annual coding competition with a team of 3 developers.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Extracurriculars Section -->
+            <section id="extracurriculars" class="section section-hidden">
+                <h2 class="section-title"><i class="fas fa-users"></i> Extracurricular Activities</h2>
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Tech Club President</h3>
+                        <span class="item-date">2018 - 2020</span>
+                    </div>
+                    <h4 class="item-subtitle">University Tech Club</h4>
+                    <p class="item-description">
+                        Organized workshops, hackathons, and tech talks for over 200 members.
+                    </p>
+                </div>
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Volunteer Tutor</h3>
+                        <span class="item-date">2017 - 2019</span>
+                    </div>
+                    <h4 class="item-subtitle">Coding for Kids</h4>
+                    <p class="item-description">
+                        Taught basic programming concepts to underprivileged children in local community centers.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Ram Manohar. All rights reserved.</p>
+        </footer>
+
+        <!-- Enhanced Navigation Indicators -->
+        <div class="nav-indicator">
+            <div class="indicator-dot active" data-section="education" data-section-name="Education"></div>
+            <div class="indicator-dot" data-section="experience" data-section-name="Experience"></div>
+            <div class="indicator-dot" data-section="projects" data-section-name="Projects"></div>
+            <div class="indicator-dot" data-section="skills" data-section-name="Skills"></div>
+            <div class="indicator-dot" data-section="interests" data-section-name="Interests"></div>
+            <div class="indicator-dot" data-section="honors" data-section-name="Honors"></div>
+            <div class="indicator-dot" data-section="extracurriculars" data-section-name="Activities"></div>
+        </div>
+
+        <!-- Swipe hint for mobile -->
+        <div class="swipe-hint">
+            <i class="fas fa-arrows-alt-h"></i>
+            <span>Swipe to navigate</span>
+        </div>
+
+        <!-- Enhanced Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item active" data-section="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Edu</span>
+                </li>
+                <li class="mobile-nav-item" data-section="experience">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Exp</span>
+                </li>
+                <li class="mobile-nav-item" data-section="projects">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Proj</span>
+                </li>
+                <li class="mobile-nav-item" data-section="skills">
+                    <i class="fas fa-code"></i>
+                    <span>Skills</span>
+                </li>
+                <li class="mobile-nav-item" data-section="interests">
+                    <i class="fas fa-heart"></i>
+                    <span>Intr</span>
+                </li>
+                <li class="mobile-nav-item" data-section="honors">
+                    <i class="fas fa-award"></i>
+                    <span>Hon</span>
+                </li>
+                <li class="mobile-nav-item" data-section="extracurriculars">
+                    <i class="fas fa-users"></i>
+                    <span>Act</span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const indicators = document.querySelectorAll('.indicator-dot');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+            const sectionIds = ['education', 'experience', 'projects', 'skills', 'interests', 'honors', 'extracurriculars'];
+            let currentSectionIndex = 0;
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+            const swipeThreshold = 50;
+            const verticalThreshold = 30; // To distinguish horizontal from vertical swipes
+            let isSwiping = false;
+
+            // Initialize - show first section
+            showSection(currentSectionIndex);
+
+            // Enhanced touch event handling
+            document.body.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+                isSwiping = true;
+            }, { passive: true });
+
+            document.body.addEventListener('touchmove', function(e) {
+                if (!isSwiping) return;
+                
+                const currentX = e.changedTouches[0].screenX;
+                const currentY = e.changedTouches[0].screenY;
+                
+                // Check if this is primarily a horizontal swipe
+                if (Math.abs(currentX - touchStartX) > Math.abs(currentY - touchStartY)) {
+                    e.preventDefault(); // Prevent scroll when swiping horizontally
+                }
+            }, { passive: false });
+
+            document.body.addEventListener('touchend', function(e) {
+                if (!isSwiping) return;
+                
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+                isSwiping = false;
+            }, { passive: true });
+
+            function handleSwipe() {
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                // Only consider horizontal swipes if they're significantly more horizontal than vertical
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > verticalThreshold) {
+                    // Swipe left (next section)
+                    if (diffX > swipeThreshold && currentSectionIndex < sections.length - 1) {
+                        currentSectionIndex++;
+                        showSection(currentSectionIndex);
+                    }
+                    
+                    // Swipe right (previous section)
+                    if (diffX < -swipeThreshold && currentSectionIndex > 0) {
+                        currentSectionIndex--;
+                        showSection(currentSectionIndex);
+                    }
+                }
+            }
+
+            // Enhanced indicator clicks with tooltips
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    currentSectionIndex = index;
+                    showSection(currentSectionIndex);
+                });
+                
+                // Add section names as tooltips
+                const sectionName = indicator.getAttribute('data-section-name');
+                indicator.setAttribute('data-section', sectionName);
+            });
+
+            // Enhanced mobile nav item clicks
+            mobileNavItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    currentSectionIndex = index;
+                    showSection(currentSectionIndex);
+                });
+            });
+
+            function showSection(index) {
+                // Hide all sections with animation
+                sections.forEach(section => {
+                    if (!section.classList.contains('section-hidden')) {
+                        section.classList.add('slide-out');
+                        setTimeout(() => {
+                            section.classList.add('section-hidden');
+                            section.classList.remove('slide-out');
+                        }, 500);
+                    }
+                });
+                
+                // Show selected section with animation
+                const sectionId = sectionIds[index];
+                const currentSection = document.getElementById(sectionId);
+                if (currentSection) {
+                    currentSection.classList.remove('section-hidden');
+                    currentSection.classList.add('slide-in');
+                    
+                    // Remove animation class after animation completes
+                    setTimeout(() => {
+                        currentSection.classList.remove('slide-in');
+                    }, 500);
+                }
+                
+                // Update indicators
+                indicators.forEach((indicator, i) => {
+                    if (i === index) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+                
+                // Update mobile nav items
+                mobileNavItems.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' && currentSectionIndex < sections.length - 1) {
+                    currentSectionIndex++;
+                    showSection(currentSectionIndex);
+                } else if (e.key === 'ArrowLeft' && currentSectionIndex > 0) {
+                    currentSectionIndex--;
+                    showSection(currentSectionIndex);
+                }
+            });
+
+            // Hide swipe hint after first interaction
+            const swipeHint = document.querySelector('.swipe-hint');
+            function hideSwipeHint() {
+                swipeHint.style.display = 'none';
+                document.removeEventListener('touchstart', hideSwipeHint);
+                document.removeEventListener('click', hideSwipeHint);
+                document.removeEventListener('keydown', hideSwipeHint);
+            }
+            
+            document.addEventListener('touchstart', hideSwipeHint, { once: true });
+            document.addEventListener('click', hideSwipeHint, { once: true });
+            document.addEventListener('keydown', hideSwipeHint, { once: true });
+        });
+    </script>
+</body>
+</html>

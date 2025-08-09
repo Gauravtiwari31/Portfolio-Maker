@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Your Name</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a2a2a;
+            --secondary: #f5f5f5;
+            --accent: #ff5e62;
+            --text: #333;
+            --light-text: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 100px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .typewriter {
+            border-right: 3px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .typewriter h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .info-icon {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .info-icon:hover + .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        main {
+            padding: 50px 0;
+            position: relative;
+            top: -50px;
+        }
+        
+        section {
+            background-color: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--accent);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .section-content {
+            margin-left: 20px;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .item-date {
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        .item-subtitle {
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+        
+        .item-description {
+            margin-bottom: 10px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            text-decoration: underline;
+        }
+        
+        .interests-list {
+            list-style-type: none;
+        }
+        
+        .interests-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .interests-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .typewriter h2 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            section {
+                padding: 30px 20px;
+            }
+            
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 5px;
+            }
+        }
+        
+        /* Typewriter animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent) }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Your Name</h1>
+                <div class="typewriter">
+                    <h2 id="typewriter-text"></h2>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>your.email@example.com</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                        <div class="info-icon">i</div>
+                        <div class="info-tooltip">How to create GitHub account</div>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                        <div class="info-icon">i</div>
+                        <div class="info-tooltip">How to create LinkedIn profile</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="education">
+            <h3>Education</h3>
+            <div class="section-content">
+                <div class="education-item">
+                    <div class="item-header">
+                        <div class="item-title">University Name</div>
+                        <div class="item-date">2018 - 2022</div>
+                    </div>
+                    <div class="item-subtitle">Bachelor of Science in Computer Science</div>
+                    <div class="item-description">
+                        <p>Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="item-header">
+                        <div class="item-title">College Name</div>
+                        <div class="item-date">2016 - 2018</div>
+                    </div>
+                    <div class="item-subtitle">Higher Secondary Education</div>
+                    <div class="item-description">
+                        <p>Major in Science with Computer Science as elective subject.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h3>Experience</h3>
+            <div class="section-content">
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div class="item-title">Software Developer</div>
+                        <div class="item-date">2022 - Present</div>
+                    </div>
+                    <div class="item-subtitle">Tech Company Inc.</div>
+                    <div class="item-description">
+                        <p>Develop and maintain web applications using modern JavaScript frameworks. Collaborate with cross-functional teams to deliver high-quality software solutions.</p>
+                        <p>Key achievements: Led the development of a customer portal that increased user engagement by 40%.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div class="item-title">Intern</div>
+                        <div class="item-date">Summer 2021</div>
+                    </div>
+                    <div class="item-subtitle">Startup Solutions</div>
+                    <div class="item-description">
+                        <p>Assisted in developing mobile applications and participated in agile development processes. Gained experience in React Native and Firebase.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h3>Projects</h3>
+            <div class="section-content">
+                <div class="project-item">
+                    <div class="item-header">
+                        <div class="item-title">E-commerce Platform</div>
+                        <div class="item-date">2023</div>
+                    </div>
+                    <div class="item-description">
+                        <p>A full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database. Implemented payment gateway integration and inventory management.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="item-header">
+                        <div class="item-title">Task Management App</div>
+                        <div class="item-date">2022</div>
+                    </div>
+                    <div class="item-description">
+                        <p>A productivity application built with Flutter that helps users organize their tasks with priority levels and deadlines. Features include cloud sync and team collaboration.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="item-header">
+                        <div class="item-title">Weather Forecast Dashboard</div>
+                        <div class="item-date">2021</div>
+                    </div>
+                    <div class="item-description">
+                        <p>Interactive dashboard that displays weather data from multiple APIs with visualization charts. Built with JavaScript and D3.js.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h3>Technical Skills</h3>
+            <div class="section-content">
+                <div class="skills-container">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Flutter</span>
+                    <span class="skill-tag">Machine Learning</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h3>Area of Interest</h3>
+            <div class="section-content">
+                <ul class="interests-list">
+                    <li>Artificial Intelligence and Machine Learning</li>
+                    <li>Web Development and Progressive Web Apps</li>
+                    <li>User Experience Design</li>
+                    <li>Cloud Computing</li>
+                    <li>Open Source Contribution</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <h3>Honors</h3>
+            <div class="section-content">
+                <div class="honor-item">
+                    <div class="item-header">
+                        <div class="item-title">Dean's List</div>
+                        <div class="item-date">2019 - 2022</div>
+                    </div>
+                    <div class="item-subtitle">University Name</div>
+                    <div class="item-description">
+                        <p>Awarded for academic excellence in all semesters.</p>
+                    </div>
+                </div>
+                <div class="honor-item">
+                    <div class="item-header">
+                        <div class="item-title">Best Project Award</div>
+                        <div class="item-date">2021</div>
+                    </div>
+                    <div class="item-subtitle">Tech Conference 2021</div>
+                    <div class="item-description">
+                        <p>Won first prize for innovative use of machine learning in healthcare applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <h3>Extracurriculars</h3>
+            <div class="section-content">
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <div class="item-title">Coding Club President</div>
+                        <div class="item-date">2020 - 2022</div>
+                    </div>
+                    <div class="item-subtitle">University Coding Club</div>
+                    <div class="item-description">
+                        <p>Organized hackathons and coding competitions. Conducted workshops on web development and data structures.</p>
+                    </div>
+                </div>
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <div class="item-title">Volunteer</div>
+                        <div class="item-date">2019 - Present</div>
+                    </div>
+                    <div class="item-subtitle">Tech for Good Initiative</div>
+                    <div class="item-description">
+                        <p>Teaching coding to underprivileged children and developing software solutions for non-profit organizations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Typewriter effect
+        const phrases = [
+            "Software Developer",
+            "Web Designer",
+            "Tech Enthusiast",
+            "Problem Solver"
+        ];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        let isEnd = false;
+        
+        function typeWriter() {
+            const element = document.getElementById('typewriter-text');
+            const fullTxt = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                element.textContent = fullTxt.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                element.textContent = fullTxt.substring(0, currentChar + 1);
+                currentChar++;
+            }
+            
+            if (!isDeleting && currentChar === fullTxt.length) {
+                isEnd = true;
+                isDeleting = true;
+                setTimeout(typeWriter, 1500);
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                const speed = isDeleting ? 100 : 150;
+                setTimeout(typeWriter, speed);
+            }
+        }
+        
+        // Start the typewriter effect when the page loads
+        window.onload = function() {
+            setTimeout(typeWriter, 1000);
+            
+            // Tooltip functionality
+            const infoIcons = document.querySelectorAll('.info-icon');
+            infoIcons.forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tooltip = icon.nextElementSibling;
+                    tooltip.style.opacity = tooltip.style.opacity === '1' ? '0' : '1';
+                    tooltip.style.visibility = tooltip.style.visibility === 'visible' ? 'hidden' : 'visible';
+                });
+            });
+            
+            // Close tooltips when clicking elsewhere
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                });
+            });
+        };
+    </script>
+</body>
+</html>

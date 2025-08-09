@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Portfolio</title>
+    <style>
+        /* Asymmetrical Layout with Broken Grid */
+        :root {
+            --black: #111111;
+            --white: #fefefe;
+            --gray: #888888;
+            --accent: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            padding: 0 5%;
+        }
+        
+        /* Dynamic Header */
+        header {
+            padding: 10vh 5% 15vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5%;
+            align-items: end;
+        }
+        
+        .header-text {
+            grid-column: 1;
+        }
+        
+        .header-contact {
+            grid-column: 2;
+            text-align: right;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--gray);
+            max-width: 80%;
+        }
+        
+        .contact-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--black);
+            position: relative;
+        }
+        
+        .info-icon {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            font-style: normal;
+            font-size: 0.7rem;
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--black);
+            border-radius: 50%;
+        }
+        
+        .info-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            z-index: 10;
+            margin-left: 0.5rem;
+        }
+        
+        /* Asymmetrical Sections */
+        section {
+            padding: 8vh 0;
+            position: relative;
+        }
+        
+        section:nth-child(odd) {
+            margin-left: -5%;
+            padding-left: 5%;
+            width: 110%;
+        }
+        
+        section:nth-child(even) {
+            margin-right: -5%;
+            padding-right: 5%;
+            width: 110%;
+        }
+        
+        h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section:nth-child(odd) h2 {
+            padding-right: 15%;
+        }
+        
+        section:nth-child(even) h2 {
+            padding-left: 15%;
+        }
+        
+        /* Education - Diagonal Layout */
+        #education {
+            background-color: var(--white);
+            transform: skewY(-2deg);
+        }
+        
+        #education .section-content {
+            transform: skewY(2deg);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .education-item {
+            background: var(--white);
+            padding: 2rem;
+            border: 1px solid var(--gray);
+            box-shadow: 8px 8px 0 var(--accent);
+        }
+        
+        /* Experience - Staggered Layout */
+        #experience {
+            background-color: var(--white);
+        }
+        
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .experience-item:nth-child(even) {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        .experience-item:nth-child(even) .item-header {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        .experience-item:nth-child(even) .item-details {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        
+        /* Projects - Mosaic Layout */
+        #projects {
+            background-color: var(--white);
+            transform: skewY(2deg);
+        }
+        
+        #projects .section-content {
+            transform: skewY(-2deg);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-flow: dense;
+            gap: 1.5rem;
+        }
+        
+        .project-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border: 1px solid var(--gray);
+        }
+        
+        .project-item:nth-child(3n+1) {
+            grid-column: span 2;
+        }
+        
+        .project-item:nth-child(4n+2) {
+            grid-row: span 2;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .project-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover::after {
+            transform: translateX(4px);
+        }
+        
+        /* Skills - Radial Layout */
+        #skills {
+            background-color: var(--white);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .skill {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--black);
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Interests - Freeform Layout */
+        #interests {
+            background-color: var(--white);
+            transform: skewY(-1deg);
+        }
+        
+        #interests .section-content {
+            transform: skewY(1deg);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+        
+        .interest-item {
+            padding: 1rem 2rem;
+            border: 1px dashed var(--gray);
+            transform: rotate(var(--rotation));
+        }
+        
+        /* Honors & Extracurriculars - Alternating Layout */
+        #honors, #extracurriculars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        #honors .section-content, #extracurriculars .section-content {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .honor-item, .extracurricular-item {
+            padding: 1.5rem;
+        }
+        
+        .honor-item:nth-child(odd), .extracurricular-item:nth-child(odd) {
+            border-right: 1px solid var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .header-text, .header-contact {
+                grid-column: 1;
+                text-align: left;
+            }
+            
+            .tagline {
+                max-width: 100%;
+            }
+            
+            .social-links {
+                align-items: flex-start;
+            }
+            
+            section:nth-child(odd), section:nth-child(even) {
+                margin: 0;
+                padding: 5vh 5%;
+                width: 100%;
+            }
+            
+            #education, #projects, #interests {
+                transform: none;
+            }
+            
+            #education .section-content, #projects .section-content, #interests .section-content {
+                transform: none;
+            }
+            
+            .experience-item, .experience-item:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            
+            #honors .section-content, #extracurriculars .section-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .honor-item:nth-child(odd), .extracurricular-item:nth-child(odd) {
+                border-right: none;
+                border-bottom: 1px solid var(--gray);
+                padding-bottom: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .project-item:nth-child(3n+1), .project-item:nth-child(4n+2) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-text">
+                <h1>Your Name</h1>
+                <p class="tagline">A creative professional with a passion for innovative solutions and dynamic design</p>
+            </div>
+            <div class="header-contact">
+                <div class="contact-info">
+                    <p>your.email@example.com</p>
+                    <p>+1 (123) 456-7890</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                        GitHub
+                        <span class="info-icon" data-tooltip="To create a GitHub account: 1. Visit github.com 2. Click 'Sign up' 3. Enter your details 4. Verify your email">i</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                        LinkedIn
+                        <span class="info-icon" data-tooltip="To create a LinkedIn account: 1. Go to linkedin.com 2. Click 'Join now' 3. Enter your details 4. Complete your profile">i</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section id="education">
+                <h2>Education</h2>
+                <div class="section-content">
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">University Name</span>
+                            <span class="item-date">Expected Graduation: Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Degree Name, Major</p>
+                        <p class="item-description">Relevant coursework, honors, or achievements. GPA: X.XX/4.0 if notable.</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">Previous Institution</span>
+                            <span class="item-date">Month Year - Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Degree or Program Name</p>
+                        <p class="item-description">Key achievements or relevant information.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="section-content">
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <span class="item-title">Job Position</span>
+                            <span class="item-date">Month Year - Present</span>
+                        </div>
+                        <div class="item-details">
+                            <p class="item-subtitle">Company Name, Location</p>
+                            <p class="item-description">Concise description of your role and responsibilities. Focus on achievements and impact.</p>
+                            <p class="item-description">Highlight specific projects or accomplishments with measurable results.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <span class="item-title">Previous Position</span>
+                            <span class="item-date">Month Year - Month Year</span>
+                        </div>
+                        <div class="item-details">
+                            <p class="item-subtitle">Company Name, Location</p>
+                            <p class="item-description">Description of your role and contributions. Quantify achievements when possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="section-content">
+                    <div class="project-item">
+                        <div class="item-header">
+                            <span class="item-title">Project Name</span>
+                            <span class="item-date">Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Technologies Used: HTML, CSS, JavaScript</p>
+                        <p class="item-description">Project description highlighting the purpose and key features. Explain what problem it solves.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="item-header">
+                            <span class="item-title">Another Project</span>
+                            <span class="item-date">Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Technologies Used: Python, Django</p>
+                        <p class="item-description">Detailed description including challenges faced and how you overcame them.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="item-header">
+                            <span class="item-title">Mobile App Project</span>
+                            <span class="item-date">Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Technologies Used: React Native, Firebase</p>
+                        <p class="item-description">Description of mobile application with user statistics if available.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="skills">
+                <h2>Technical Skills</h2>
+                <div class="section-content">
+                    <div class="skills-container">
+                        <span class="skill">Python</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">React</span>
+                        <span class="skill">Node.js</span>
+                        <span class="skill">HTML/CSS</span>
+                        <span class="skill">SQL</span>
+                        <span class="skill">Git</span>
+                        <span class="skill">Docker</span>
+                        <span class="skill">AWS</span>
+                        <span class="skill">Linux</span>
+                        <span class="skill">UI/UX Design</span>
+                        <span class="skill">Data Analysis</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="interests">
+                <h2>Area of Interest</h2>
+                <div class="section-content">
+                    <div class="interest-item" style="--rotation: -3deg">
+                        Artificial Intelligence
+                    </div>
+                    <div class="interest-item" style="--rotation: 2deg">
+                        Creative Coding
+                    </div>
+                    <div class="interest-item" style="--rotation: 5deg">
+                        Human-Computer Interaction
+                    </div>
+                    <div class="interest-item" style="--rotation: -2deg">
+                        Data Visualization
+                    </div>
+                    <div class="interest-item" style="--rotation: 1deg">
+                        Experimental Design
+                    </div>
+                </div>
+            </section>
+            
+            <section id="honors">
+                <h2>Honors & Awards</h2>
+                <div class="section-content">
+                    <div class="honor-item">
+                        <div class="item-header">
+                            <span class="item-title">Award Name</span>
+                            <span class="item-date">Year</span>
+                        </div>
+                        <p class="item-subtitle">Organization</p>
+                        <p class="item-description">Description of the award and why it was received.</p>
+                    </div>
+                    
+                    <div class="honor-item">
+                        <div class="item-header">
+                            <span class="item-title">Scholarship Name</span>
+                            <span class="item-date">Year</span>
+                        </div>
+                        <p class="item-subtitle">Institution</p>
+                        <p class="item-description">Details about the scholarship and selection criteria.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="extracurriculars">
+                <h2>Extracurricular Activities</h2>
+                <div class="section-content">
+                    <div class="extracurricular-item">
+                        <div class="item-header">
+                            <span class="item-title">Club or Organization</span>
+                            <span class="item-date">Month Year - Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Position Held</p>
+                        <p class="item-description">Description of your involvement and responsibilities.</p>
+                    </div>
+                    
+                    <div class="extracurricular-item">
+                        <div class="item-header">
+                            <span class="item-title">Volunteer Work</span>
+                            <span class="item-date">Month Year - Month Year</span>
+                        </div>
+                        <p class="item-subtitle">Organization Name</p>
+                        <p class="item-description">Description of your volunteer activities and impact.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Update copyright year automatically
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Add random rotations to interest items
+        document.querySelectorAll('.interest-item').forEach(item => {
+            const rotation = (Math.random() * 10) - 5; // Random between -5 and 5 degrees
+            item.style.setProperty('--rotation', `${rotation}deg`);
+        });
+    </script>
+</body>
+</html>

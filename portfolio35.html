@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Infinite Exploration</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --dark: #0a1128;
+            --light: #f8f9fa;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            transform-style: preserve-3d;
+        }
+        
+        .zoom-stage {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card.active {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 0.3rem;
+            transition: transform 0.3s;
+        }
+        
+        .icon-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            background: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="zoom-stage">
+            <!-- Main Profile Card -->
+            <div class="card active" data-zoom="main">
+                <h1>Laado Kumari</h1>
+                <p>Full Stack Developer | UI/UX Enthusiast</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📱: +1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>GitHub: </span>
+                        <a href="https://github.com/laadokumari" target="_blank">github.com/laadokumari</a>
+                        <button class="icon-btn" onclick="openModal('github-modal')">ℹ️</button>
+                    </div>
+                    <div class="contact-item">
+                        <span>LinkedIn: </span>
+                        <a href="https://linkedin.com/in/laadokumari" target="_blank">linkedin.com/in/laadokumari</a>
+                        <button class="icon-btn" onclick="openModal('linkedin-modal')">ℹ️</button>
+                    </div>
+                </div>
+                
+                <p>Welcome to my interactive portfolio! Click on any section below to explore more details.</p>
+                
+                <div class="navigation">
+                    <h2>Explore My Portfolio</h2>
+                    <ul>
+                        <li><a href="#" onclick="zoomTo('education')">Education</a></li>
+                        <li><a href="#" onclick="zoomTo('experience')">Experience</a></li>
+                        <li><a href="#" onclick="zoomTo('projects')">Projects</a></li>
+                        <li><a href="#" onclick="zoomTo('skills')">Technical Skills</a></li>
+                        <li><a href="#" onclick="zoomTo('interests')">Areas of Interest</a></li>
+                        <li><a href="#" onclick="zoomTo('honors')">Honors & Awards</a></li>
+                        <li><a href="#" onclick="zoomTo('extracurriculars')">Extracurricular Activities</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Education Card (hidden by default) -->
+            <div class="card" data-zoom="education">
+                <h2>Education</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <h3>Master of Computer Science</h3>
+                <p>Stanford University | 2020 - 2022</p>
+                <p>Specialization in Artificial Intelligence</p>
+                <p>GPA: 3.9/4.0</p>
+                
+                <h3>Bachelor of Science in Computer Engineering</h3>
+                <p>University of California, Berkeley | 2016 - 2020</p>
+                <p>Minor in Mathematics</p>
+                <p>GPA: 3.8/4.0</p>
+            </div>
+            
+            <!-- Experience Card -->
+            <div class="card" data-zoom="experience">
+                <h2>Professional Experience</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <h3>Senior Software Engineer</h3>
+                <p>Tech Innovations Inc. | 2022 - Present</p>
+                <ul>
+                    <li>Lead development of customer-facing web applications</li>
+                    <li>Implemented CI/CD pipelines reducing deployment time by 40%</li>
+                    <li>Mentored junior developers and conducted code reviews</li>
+                </ul>
+                
+                <h3>Software Developer Intern</h3>
+                <p>Google Summer Internship | Summer 2021</p>
+                <ul>
+                    <li>Worked on improving search algorithm efficiency</li>
+                    <li>Developed internal tools for data visualization</li>
+                    <li>Collaborated with cross-functional teams on UX improvements</li>
+                </ul>
+            </div>
+            
+            <!-- Projects Card -->
+            <div class="card" data-zoom="projects">
+                <h2>Projects</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Infinite Zoom UI Framework</h3>
+                        <p>A JavaScript library for creating zoomable user interfaces with smooth transitions and animations.</p>
+                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>AI-Powered Portfolio Analyzer</h3>
+                        <p>Machine learning tool that analyzes investment portfolios and provides optimization suggestions.</p>
+                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>EcoTrack Carbon Footprint App</h3>
+                        <p>Mobile application that tracks daily carbon footprint with gamification elements.</p>
+                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Card -->
+            <div class="card" data-zoom="skills">
+                <h2>Technical Skills</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <h3>Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">TypeScript</span>
+                </div>
+                
+                <h3>Web Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">SASS</span>
+                </div>
+                
+                <h3>Database & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Firebase</span>
+                </div>
+            </div>
+            
+            <!-- Interests Card -->
+            <div class="card" data-zoom="interests">
+                <h2>Areas of Interest</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <ul>
+                    <li>Artificial Intelligence & Machine Learning</li>
+                    <li>Human-Computer Interaction</li>
+                    <li>Data Visualization</li>
+                    <li>Responsive Web Design</li>
+                    <li>Sustainable Technology</li>
+                </ul>
+            </div>
+            
+            <!-- Honors Card -->
+            <div class="card" data-zoom="honors">
+                <h2>Honors & Awards</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <h3>Dean's List</h3>
+                <p>University of California, Berkeley | 2017-2020</p>
+                
+                <h3>Best Capstone Project Award</h3>
+                <p>Computer Engineering Department | 2020</p>
+                
+                <h3>Google Code Jam Finalist</h3>
+                <p>2019 Edition | Top 100 out of 10,000+ participants</p>
+            </div>
+            
+            <!-- Extracurriculars Card -->
+            <div class="card" data-zoom="extracurriculars">
+                <h2>Extracurricular Activities</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <h3>President, Computer Science Club</h3>
+                <p>UC Berkeley | 2018-2020</p>
+                <p>Organized hackathons and tech talks with industry professionals</p>
+                
+                <h3>Volunteer Coding Instructor</h3>
+                <p>Code for All Non-profit | 2019-Present</p>
+                <p>Teach programming fundamentals to underprivileged youth</p>
+                
+                <h3>Open Source Contributor</h3>
+                <p>Various projects on GitHub | 2017-Present</p>
+                <p>Regular contributor to several popular open source projects</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="github-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('github-modal')">×</span>
+            <h2>How to Create a GitHub Account</h2>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Complete the verification process</li>
+                <li>Choose your plan (Free is sufficient for most users)</li>
+                <li>Complete your profile by adding a profile picture and bio</li>
+                <li>Start creating repositories to showcase your projects</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="modal" id="linkedin-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('linkedin-modal')">×</span>
+            <h2>How to Create a LinkedIn Account</h2>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill in your first and last name</li>
+                <li>Complete the verification process</li>
+                <li>Fill out your profile with:
+                    <ul>
+                        <li>Professional headline</li>
+                        <li>Work experience</li>
+                        <li>Education</li>
+                        <li>Skills</li>
+                        <li>Profile photo</li>
+                    </ul>
+                </li>
+                <li>Start connecting with professionals in your field</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Zoom functionality
+        function zoomTo(section) {
+            document.querySelector('.card.active').classList.remove('active');
+            document.querySelector(`.card[data-zoom="${section}"]`).classList.add('active');
+        }
+        
+        function zoomOut() {
+            document.querySelector('.card.active').classList.remove('active');
+            document.querySelector('.card[data-zoom="main"]').classList.add('active');
+        }
+        
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

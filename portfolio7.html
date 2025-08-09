@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --light-bg: #f8f9fa;
+            --dark-text: #2d3436;
+            --light-text: #636e72;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--light-text);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .social-link i {
+            margin-right: 8px;
+        }
+        
+        .info-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 5px;
+            cursor: help;
+            position: relative;
+        }
+        
+        .info-button:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 25px;
+            top: 0;
+            min-width: 200px;
+            background-color: white;
+            color: var(--dark-text);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: var(--card-shadow);
+            z-index: 10;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-header h2 {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-header h2 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .item {
+            margin-bottom: 20px;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .item-date {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .item-description {
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .interests-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .interest-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+        }
+        
+        .interest-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .interests-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Name</h1>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                    <span class="info-button" data-tooltip="Go to github.com, sign up with your email, choose a username, and set up your profile.">i</span>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                    <span class="info-button" data-tooltip="Go to linkedin.com, create an account, fill in your professional details, and connect with others.">i</span>
+                </a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="grid-container">
+                <!-- Education Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">University Name</span>
+                                <span class="item-date">2018 - 2022</span>
+                            </div>
+                            <p class="item-description">Bachelor of Science in Computer Science</p>
+                            <p>GPA: 3.8/4.0</p>
+                            <p>Relevant Coursework: Data Structures, Algorithms, Web Development</p>
+                        </div>
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">High School Name</span>
+                                <span class="item-date">2014 - 2018</span>
+                            </div>
+                            <p class="item-description">High School Diploma</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Software Developer Intern</span>
+                                <span class="item-date">Summer 2021</span>
+                            </div>
+                            <p class="item-description">Tech Company Inc.</p>
+                            <ul>
+                                <li>Developed web applications using React and Node.js</li>
+                                <li>Collaborated using Agile methodologies</li>
+                                <li>Improved user engagement by 25%</li>
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Teaching Assistant</span>
+                                <span class="item-date">2020 - 2021</span>
+                            </div>
+                            <p class="item-description">University CS Department</p>
+                            <ul>
+                                <li>Assisted students with programming assignments</li>
+                                <li>Held weekly office hours</li>
+                                <li>Graded assignments and provided feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projects Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">E-Commerce Website</span>
+                                <span class="item-date">2022</span>
+                            </div>
+                            <p class="item-description">Full-stack platform with authentication and payments</p>
+                            <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Task Management App</span>
+                                <span class="item-date">2021</span>
+                            </div>
+                            <p class="item-description">Mobile app for managing personal tasks</p>
+                            <p><strong>Technologies:</strong> Flutter, Firebase</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Skills Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-code"></i> Technical Skills</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="skills-container">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interests Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-heart"></i> Areas of Interest</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="interests-container">
+                            <div class="interest-item">
+                                <i class="fas fa-laptop-code"></i>
+                                <h3>Web Development</h3>
+                                <p>Building responsive web applications</p>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h3>Mobile Dev</h3>
+                                <p>Cross-platform mobile experiences</p>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-brain"></i>
+                                <h3>Machine Learning</h3>
+                                <p>AI and data science applications</p>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>Data Analysis</h3>
+                                <p>Extracting insights from data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Honors Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-award"></i> Honors</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Dean's List</span>
+                                <span class="item-date">2019 - 2022</span>
+                            </div>
+                            <p class="item-description">Awarded for academic excellence each semester</p>
+                        </div>
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Best Capstone Project</span>
+                                <span class="item-date">2022</span>
+                            </div>
+                            <p class="item-description">Outstanding senior project in CS department</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Extracurriculars Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-users"></i> Extracurriculars</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Computer Science Club</span>
+                                <span class="item-date">2019 - 2022</span>
+                            </div>
+                            <p class="item-description">Vice President</p>
+                            <p>Organized hackathons and tech talks</p>
+                        </div>
+                        <div class="item">
+                            <div class="item-header">
+                                <span class="item-title">Volunteer Tutor</span>
+                                <span class="item-date">2020 - 2021</span>
+                            </div>
+                            <p class="item-description">Local Community Center</p>
+                            <p>Taught basic computer skills</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

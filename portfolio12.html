@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <style>
+        /* Modern, clean vertical scroll layout */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Main content container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+        
+        /* Hero section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-bottom: 4rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            margin: 2rem 0;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .info-icon {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            font-style: normal;
+            font-size: 0.8rem;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+        }
+        
+        .info-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            z-index: 10;
+            margin-left: 0.5rem;
+        }
+        
+        /* Section styling */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        /* Education & Experience items */
+        .item {
+            margin-bottom: 2.5rem;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .item-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .item-subtitle {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-description {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--primary);
+        }
+        
+        .project-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover::after {
+            transform: translateX(4px);
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .skill {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Interests */
+        .interests-list {
+            list-style-type: none;
+            columns: 2;
+            column-gap: 2rem;
+        }
+        
+        .interests-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .interests-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding-top: 8rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .interests-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#hero" class="logo">PORTFOLIO</a>
+            <div class="nav-links">
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Your Name</h1>
+                <p class="hero-subtitle">Professional Title or Brief Introduction</p>
+                
+                <div class="contact-info">
+                    <p><strong>Email:</strong> your.email@example.com</p>
+                    <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                        GitHub
+                        <span class="info-icon" data-tooltip="To create a GitHub account: 1. Go to github.com 2. Click 'Sign up' 3. Enter your details 4. Verify your email">i</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                        LinkedIn
+                        <span class="info-icon" data-tooltip="To create a LinkedIn account: 1. Visit linkedin.com 2. Click 'Join now' 3. Enter your details 4. Complete your profile">i</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">University Name</h3>
+                    <span class="item-date">Expected Graduation: Month Year</span>
+                </div>
+                <p class="item-subtitle">Degree Name, Major</p>
+                <p class="item-description">Relevant coursework, honors, or achievements. GPA: X.XX/4.0 if notable.</p>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Previous Institution</h3>
+                    <span class="item-date">Month Year - Month Year</span>
+                </div>
+                <p class="item-subtitle">Degree or Program Name</p>
+                <p class="item-description">Key achievements or relevant information.</p>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experience</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Job Position</h3>
+                    <span class="item-date">Month Year - Present</span>
+                </div>
+                <p class="item-subtitle">Company Name, Location</p>
+                <p class="item-description">Concise description of your role and responsibilities. Focus on achievements and impact rather than duties.</p>
+                <p class="item-description">Another paragraph if needed to highlight specific projects or accomplishments.</p>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Previous Position</h3>
+                    <span class="item-date">Month Year - Month Year</span>
+                </div>
+                <p class="item-subtitle">Company Name, Location</p>
+                <p class="item-description">Description of your role and contributions. Quantify achievements when possible.</p>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="item-title">Project Name</h3>
+                    <p class="item-subtitle">Technologies Used: HTML, CSS, JavaScript, etc.</p>
+                    <p class="item-description">Project description highlighting the purpose, your role, and key features. Explain what problem it solves or what value it provides.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="item-title">Another Project</h3>
+                    <p class="item-subtitle">Technologies Used: Python, Django, PostgreSQL</p>
+                    <p class="item-description">Detailed description of the project including challenges faced and how you overcame them. Mention any notable results or feedback.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="item-title">Mobile Application</h3>
+                    <p class="item-subtitle">Technologies Used: React Native, Firebase</p>
+                    <p class="item-description">Description of mobile application with user statistics if available. Highlight unique features or challenges.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            
+            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Programming Languages</h3>
+            <div class="skills-container">
+                <span class="skill">Python</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Java</span>
+                <span class="skill">C++</span>
+                <span class="skill">SQL</span>
+            </div>
+            
+            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Web Development</h3>
+            <div class="skills-container">
+                <span class="skill">HTML5</span>
+                <span class="skill">CSS3</span>
+                <span class="skill">React</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">Django</span>
+            </div>
+            
+            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Tools & Technologies</h3>
+            <div class="skills-container">
+                <span class="skill">Git</span>
+                <span class="skill">Docker</span>
+                <span class="skill">AWS</span>
+                <span class="skill">Linux</span>
+                <span class="skill">VS Code</span>
+            </div>
+        </section>
+        
+        <!-- Interests Section -->
+        <section id="interests">
+            <h2>Area of Interest</h2>
+            
+            <ul class="interests-list">
+                <li>Artificial Intelligence and Machine Learning</li>
+                <li>Web Development and User Experience</li>
+                <li>Data Science and Analytics</li>
+                <li>Cloud Computing and Distributed Systems</li>
+                <li>Cybersecurity and Ethical Hacking</li>
+                <li>Human-Computer Interaction</li>
+                <li>Internet of Things (IoT)</li>
+                <li>Blockchain Technology</li>
+            </ul>
+        </section>
+        
+        <!-- Honors Section -->
+        <section id="honors">
+            <h2>Honors & Awards</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Award Name</h3>
+                    <span class="item-date">Year</span>
+                </div>
+                <p class="item-subtitle">Organization</p>
+                <p class="item-description">Description of the award and why it was received.</p>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Scholarship Name</h3>
+                    <span class="item-date">Year</span>
+                </div>
+                <p class="item-subtitle">Institution</p>
+                <p class="item-description">Details about the scholarship and selection criteria.</p>
+            </div>
+        </section>
+        
+        <!-- Extracurriculars Section -->
+        <section id="extracurriculars">
+            <h2>Extracurricular Activities</h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Club or Organization Name</h3>
+                    <span class="item-date">Month Year - Month Year</span>
+                </div>
+                <p class="item-subtitle">Position Held</p>
+                <p class="item-description">Description of your involvement, responsibilities, and any achievements.</p>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title">Volunteer Work</h3>
+                    <span class="item-date">Month Year - Month Year</span>
+                </div>
+                <p class="item-subtitle">Organization Name</p>
+                <p class="item-description">Description of your volunteer activities and impact made.</p>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p style="margin-bottom: 1.5rem;">Feel free to reach out for opportunities or collaborations.</p>
+            
+            <div class="contact-info">
+                <p><strong>Email:</strong> your.email@example.com</p>
+                <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+            </div>
+            
+            <div class="social-links" style="margin-top: 1.5rem;">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    GitHub
+                    <span class="info-icon" data-tooltip="Visit my GitHub profile">i</span>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    LinkedIn
+                    <span class="info-icon" data-tooltip="Connect with me on LinkedIn">i</span>
+                </a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Update copyright year automatically
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Change navbar style on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

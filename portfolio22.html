@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #10b981;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.8), rgba(16, 185, 129, 0.8));
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .info-button:hover {
+            opacity: 1;
+        }
+        
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .card .date {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 1;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1.5rem;
+            z-index: 2;
+            color: white;
+            width: 100%;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.8), rgba(16, 185, 129, 0.8));
+            z-index: 1;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>John Doe</h1>
+                <p>Web Developer & Designer</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/johndoe" target="_blank">github.com/johndoe</a>
+                        <button class="info-button" onclick="openModal('github-modal')">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a>
+                        <button class="info-button" onclick="openModal('linkedin-modal')">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            
+            <div class="card">
+                <h3>Bachelor of Science in Computer Science</h3>
+                <p class="date">2018 - 2022</p>
+                <p>University of Technology, Cityville</p>
+                <p>GPA: 3.8/4.0</p>
+            </div>
+            
+            <div class="card">
+                <h3>High School Diploma</h3>
+                <p class="date">2014 - 2018</p>
+                <p>Cityville High School</p>
+                <p>Graduated with Honors</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experience</h2>
+            </div>
+            
+            <div class="card">
+                <h3>Frontend Developer</h3>
+                <p class="date">June 2022 - Present</p>
+                <p>Tech Solutions Inc.</p>
+                <ul>
+                    <li>Developed responsive web applications using React.js and Vue.js</li>
+                    <li>Collaborated with UX designers to implement user-friendly interfaces</li>
+                    <li>Optimized application performance resulting in 30% faster load times</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Web Development Intern</h3>
+                <p class="date">Summer 2021</p>
+                <p>Digital Creations Agency</p>
+                <ul>
+                    <li>Assisted in building and maintaining client websites</li>
+                    <li>Implemented new features using HTML, CSS, and JavaScript</li>
+                    <li>Participated in code reviews and team meetings</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Code Editor Project">
+                    <div class="project-info">
+                        <h3>Online Code Editor</h3>
+                        <p>A browser-based code editor with real-time collaboration features</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E-commerce Project">
+                    <div class="project-info">
+                        <h3>E-commerce Platform</h3>
+                        <p>Full-stack e-commerce solution with payment integration</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Manager Project">
+                    <div class="project-info">
+                        <h3>Task Management App</h3>
+                        <p>Productivity application with drag-and-drop functionality</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            
+            <div class="skills-container">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React.js</span>
+                <span class="skill-tag">Vue.js</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Responsive Design</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">MongoDB</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="interests">
+        <div class="container">
+            <div class="section-title">
+                <h2>Areas of Interest</h2>
+            </div>
+            
+            <div class="card">
+                <ul>
+                    <li>Web Application Development</li>
+                    <li>User Interface Design</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Cloud Computing</li>
+                    <li>Open Source Projects</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="honors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Honors & Awards</h2>
+            </div>
+            
+            <div class="card">
+                <h3>Dean's List</h3>
+                <p class="date">2019 - 2022</p>
+                <p>University of Technology</p>
+                <p>Awarded for academic excellence each semester</p>
+            </div>
+            
+            <div class="card">
+                <h3>Best Capstone Project</h3>
+                <p class="date">2022</p>
+                <p>Computer Science Department</p>
+                <p>Recognized for outstanding senior project in web development</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="extracurriculars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Extracurriculars</h2>
+            </div>
+            
+            <div class="card">
+                <h3>University Coding Club</h3>
+                <p class="date">2019 - 2022</p>
+                <p>President (2021-2022)</p>
+                <ul>
+                    <li>Organized weekly coding workshops and hackathons</li>
+                    <li>Mentored junior members in web development</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>Volunteer Web Developer</h3>
+                <p class="date">Summer 2020</p>
+                <p>Local Nonprofit Organization</p>
+                <ul>
+                    <li>Redesigned and maintained organization's website</li>
+                    <li>Implemented donation system increasing contributions by 40%</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 John Doe. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://github.com/johndoe" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/johndoe" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:john.doe@example.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-file-pdf"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="github-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('github-modal')">&times;</button>
+            <h3>How to Create a GitHub Account</h3>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Complete the verification process</li>
+                <li>Choose your plan (Free is sufficient for most users)</li>
+                <li>Complete your profile information</li>
+                <li>Start creating repositories for your projects!</li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="linkedin-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('linkedin-modal')">&times;</button>
+            <h3>How to Create a LinkedIn Account</h3>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill in your first and last name</li>
+                <li>Complete the verification process</li>
+                <li>Add your current position and education</li>
+                <li>Customize your profile with skills, experiences, and a professional photo</li>
+                <li>Start connecting with professionals in your field</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>

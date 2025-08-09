@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Portfolio</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #333333;
+            --accent: #0066ff;
+            --light: #f5f5f5;
+            --gap: 2rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--light);
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        /* Typography Styles */
+        h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        h3 {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        p, li {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 6rem 0 4rem;
+            position: relative;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255,255,255,0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .info-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 3rem 0;
+            position: relative;
+        }
+        
+        .section-content {
+            background-color: rgba(255,255,255,0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            margin-bottom: 2rem;
+        }
+        
+        /* Experience & Education Styles */
+        .timeline-item {
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+        }
+        
+        .timeline-date {
+            color: var(--secondary);
+        }
+        
+        /* Projects Styles */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* Skills Styles */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+        }
+        
+        .skill-item {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        /* Floating elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: clamp(2.5rem, 12vw, 4rem);
+            }
+            
+            section {
+                padding: 2rem 0;
+            }
+            
+            .section-content {
+                padding: 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="floating">Your Name</h1>
+            <p>A passionate [Your Profession/Role] specializing in [Your Specialization].</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📱 +1 (123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                    <button class="info-button" onclick="openModal('github-modal')">i</button>
+                </div>
+                <div class="contact-item">
+                    <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+                    <button class="info-button" onclick="openModal('linkedin-modal')">i</button>
+                </div>
+            </div>
+        </header>
+        
+        <section id="education">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Education</h2>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">University Name</h3>
+                        <span class="timeline-date">2018 - 2022</span>
+                    </div>
+                    <p>Bachelor of Science in Computer Science</p>
+                    <p>GPA: 3.8/4.0</p>
+                    <ul>
+                        <li>Relevant coursework: Data Structures, Algorithms, Web Development, Machine Learning</li>
+                        <li>Dean's List all semesters</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Experience</h2>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Software Developer</h3>
+                        <span class="timeline-date">2022 - Present</span>
+                    </div>
+                    <p>Tech Company Inc.</p>
+                    <ul>
+                        <li>Developed and maintained web applications using React and Node.js</li>
+                        <li>Collaborated with cross-functional teams to deliver new features</li>
+                        <li>Improved application performance by 30% through optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Web Development Intern</h3>
+                        <span class="timeline-date">Summer 2021</span>
+                    </div>
+                    <p>Startup Company</p>
+                    <ul>
+                        <li>Built responsive web interfaces using modern CSS and JavaScript</li>
+                        <li>Assisted in backend API development</li>
+                        <li>Participated in agile development processes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card floating">
+                        <h3>Project Name 1</h3>
+                        <p>A brief description of what the project is about and what technologies were used.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                    
+                    <div class="project-card floating" style="animation-delay: 0.5s;">
+                        <h3>Project Name 2</h3>
+                        <p>A brief description of what the project is about and what technologies were used.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                    
+                    <div class="project-card floating" style="animation-delay: 1s;">
+                        <h3>Project Name 3</h3>
+                        <p>A brief description of what the project is about and what technologies were used.</p>
+                        <a href="#" class="project-link">Project Link →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Technical Skills</h2>
+                </div>
+                
+                <h3>Programming Languages</h3>
+                <ul class="skills-list">
+                    <li class="skill-item">JavaScript</li>
+                    <li class="skill-item">Python</li>
+                    <li class="skill-item">HTML/CSS</li>
+                    <li class="skill-item">Java</li>
+                    <li class="skill-item">SQL</li>
+                </ul>
+                
+                <h3>Frameworks & Libraries</h3>
+                <ul class="skills-list">
+                    <li class="skill-item">React</li>
+                    <li class="skill-item">Node.js</li>
+                    <li class="skill-item">Express</li>
+                    <li class="skill-item">Django</li>
+                </ul>
+                
+                <h3>Tools & Platforms</h3>
+                <ul class="skills-list">
+                    <li class="skill-item">Git</li>
+                    <li class="skill-item">Docker</li>
+                    <li class="skill-item">AWS</li>
+                    <li class="skill-item">Figma</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Areas of Interest</h2>
+                </div>
+                
+                <ul class="skills-list">
+                    <li class="skill-item">Web Development</li>
+                    <li class="skill-item">UI/UX Design</li>
+                    <li class="skill-item">Machine Learning</li>
+                    <li class="skill-item">Cloud Computing</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Honors & Awards</h2>
+                </div>
+                
+                <ul>
+                    <li>Dean's List - All Semesters</li>
+                    <li>Best Capstone Project Award - 2022</li>
+                    <li>Hackathon Winner - Tech Challenge 2021</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Extracurriculars</h2>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Computer Science Club</h3>
+                        <span class="timeline-date">2019 - 2022</span>
+                    </div>
+                    <p>President</p>
+                    <ul>
+                        <li>Organized weekly coding workshops</li>
+                        <li>Hosted guest speakers from industry</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Volunteer Work</h3>
+                        <span class="timeline-date">2020 - 2021</span>
+                    </div>
+                    <p>Coding Instructor</p>
+                    <ul>
+                        <li>Taught programming fundamentals to underprivileged youth</li>
+                        <li>Developed curriculum for beginner coders</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modals -->
+    <div id="github-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('github-modal')">×</button>
+            <h3>How to Create a GitHub Account</h3>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email, create a username and password</li>
+                <li>Verify your email address</li>
+                <li>Complete the setup questionnaire (optional)</li>
+                <li>Start creating repositories to showcase your work!</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div id="linkedin-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('linkedin-modal')">×</button>
+            <h3>How to Create a LinkedIn Account</h3>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your name, email, and create a password</li>
+                <li>Verify your email address</li>
+                <li>Complete your profile with education and work experience</li>
+                <li>Add a professional profile photo</li>
+                <li>Start connecting with professionals in your field</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#0066ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#0066ff",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+        
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target.className === "modal") {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Neon Portfolio</title>
+    <style>
+        :root {
+            --neon-pink: #ff6ec7;
+            --neon-blue: #00f3ff;
+            --neon-green: #46ff33;
+            --neon-purple: #9d00ff;
+            --neon-yellow: #fff700;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--darker-bg);
+            padding: 30px 0;
+            border-bottom: 2px solid var(--neon-purple);
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 110, 199, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item a {
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-item a:hover {
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        .info-btn {
+            background: none;
+            border: none;
+            color: var(--neon-yellow);
+            cursor: pointer;
+            font-size: 1rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .info-btn:hover {
+            background-color: var(--neon-yellow);
+            color: var(--dark-bg);
+            box-shadow: 0 0 10px var(--neon-yellow);
+        }
+        
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+        
+        h3 {
+            color: var(--neon-pink);
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            background-color: rgba(10, 10, 10, 0.7);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--neon-purple);
+            transition: all 0.3s;
+        }
+        
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+        
+        .date {
+            color: var(--neon-yellow);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill {
+            background-color: var(--darker-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            transition: all 0.3s;
+        }
+        
+        .skill:hover {
+            background-color: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-green);
+            transform: translateY(-5px);
+        }
+        
+        .interests-list {
+            list-style-type: none;
+        }
+        
+        .interests-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .interests-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: var(--darker-bg);
+            color: var(--neon-blue);
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid var(--neon-blue);
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            background-color: var(--darker-bg);
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 30px var(--neon-purple);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.5s;
+        }
+        
+        .close-btn {
+            color: var(--neon-pink);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+            }
+            to {
+                text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-blue);
+            }
+        }
+        
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--neon-yellow);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1 class="name">YOUR NAME</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>Phone: <a href="tel:+1234567890">+1234567890</a></span>
+                </div>
+                <div class="contact-item">
+                    <span>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></span>
+                    <button class="info-btn" onclick="openModal('githubModal')">i</button>
+                </div>
+                <div class="contact-item">
+                    <span>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></span>
+                    <button class="info-btn" onclick="openModal('linkedinModal')">i</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Your University Name</h3>
+                <p class="date">2020 - 2024</p>
+                <p>Bachelor of Science in Computer Science</p>
+                <p>GPA: 3.8/4.0</p>
+            </div>
+            <div class="education-item">
+                <h3>Your High School Name</h3>
+                <p class="date">2016 - 2020</p>
+                <p>High School Diploma</p>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Software Developer Intern</h3>
+                <p class="date">Summer 2023</p>
+                <p>Company Name</p>
+                <ul>
+                    <li>Developed and maintained web applications using React and Node.js</li>
+                    <li>Collaborated with team members to implement new features</li>
+                    <li>Participated in code reviews and bug fixing</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Freelance Web Developer</h3>
+                <p class="date">2021 - Present</p>
+                <p>Self-employed</p>
+                <ul>
+                    <li>Designed and developed websites for small businesses</li>
+                    <li>Implemented responsive designs and SEO best practices</li>
+                    <li>Provided ongoing maintenance and support</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-item">
+                <h3>Neon Portfolio Website</h3>
+                <p class="date">2023</p>
+                <p>A vibrant, high-contrast portfolio website with neon glow effects.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            <div class="project-item">
+                <h3>E-commerce Platform</h3>
+                <p class="date">2022</p>
+                <p>Full-stack e-commerce application with React, Node.js, and MongoDB.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            <div class="project-item">
+                <h3>Task Management App</h3>
+                <p class="date">2021</p>
+                <p>A productivity application for managing daily tasks and projects.</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill">HTML5</span>
+                <span class="skill">CSS3</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">Python</span>
+                <span class="skill">Java</span>
+                <span class="skill">SQL</span>
+                <span class="skill">Git</span>
+                <span class="skill">UI/UX Design</span>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h2>Area of Interest</h2>
+            <ul class="interests-list">
+                <li>Web Development</li>
+                <li>Artificial Intelligence</li>
+                <li>User Interface Design</li>
+                <li>Mobile Application Development</li>
+                <li>Cloud Computing</li>
+            </ul>
+        </section>
+        
+        <section id="honors">
+            <h2>Honors & Awards</h2>
+            <div class="honor-item">
+                <h3>Dean's List</h3>
+                <p class="date">2021 - 2023</p>
+                <p>Awarded for academic excellence each semester</p>
+            </div>
+            <div class="honor-item">
+                <h3>Hackathon Winner</h3>
+                <p class="date">2022</p>
+                <p>First place in regional coding competition</p>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2>Extracurricular Activities</h2>
+            <div class="extracurricular-item">
+                <h3>Computer Science Club</h3>
+                <p class="date">2020 - Present</p>
+                <p>Vice President</p>
+                <p>Organized workshops and coding competitions for members</p>
+            </div>
+            <div class="extracurricular-item">
+                <h3>Volunteer Tutor</h3>
+                <p class="date">2021 - 2022</p>
+                <p>Taught programming fundamentals to high school students</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- GitHub Info Modal -->
+    <div id="githubModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('githubModal')">&times;</span>
+            <h2>How to Create a GitHub Account</h2>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank" style="color: var(--neon-blue);">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a password, and choose a username</li>
+                <li>Verify your email address</li>
+                <li>Complete the setup questions</li>
+                <li>Start using GitHub to host your projects and collaborate with others</li>
+            </ol>
+            <p style="margin-top: 20px;">GitHub is essential for developers to showcase their work, contribute to open source, and collaborate on projects.</p>
+        </div>
+    </div>
+    
+    <!-- LinkedIn Info Modal -->
+    <div id="linkedinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('linkedinModal')">&times;</span>
+            <h2>How to Create a LinkedIn Account</h2>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank" style="color: var(--neon-blue);">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill out your profile with your name, location, and professional details</li>
+                <li>Add your education and work experience</li>
+                <li>Upload a professional profile photo</li>
+                <li>Start connecting with colleagues, classmates, and professionals in your field</li>
+            </ol>
+            <p style="margin-top: 20px;">LinkedIn is the world's largest professional network, essential for career growth and networking.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

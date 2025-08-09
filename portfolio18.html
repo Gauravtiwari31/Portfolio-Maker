@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sketch Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f9f5e9;
+            color: #333;
+            font-family: 'Kalam', cursive;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/notebook.png');
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px dashed #aaa;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            color: #222;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: #444;
+        }
+
+        h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            margin: 20px 0 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .info-button {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: help;
+            margin-left: 5px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .info-tooltip {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        .info-button:hover .info-tooltip {
+            display: block;
+        }
+
+        section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-content {
+            padding-left: 20px;
+            border-left: 2px dotted #ccc;
+            margin-left: 10px;
+        }
+
+        .entry {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .entry:before {
+            content: "•";
+            position: absolute;
+            left: -15px;
+            font-size: 1.5rem;
+            color: #666;
+        }
+
+        .date {
+            font-style: italic;
+            color: #666;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: #fff;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: #f0e6d2;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 2px dashed #aaa;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Alexandra Sketchwell</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>alex@sketchportfolio.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/sketchdev</span>
+                    <button class="info-button">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="info-tooltip">
+                            GitHub is a platform for version control and collaboration. 
+                            Sign up at github.com to create your own account and showcase your projects.
+                        </span>
+                    </button>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/sketchdesigner</span>
+                    <button class="info-button">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="info-tooltip">
+                            LinkedIn is a professional networking platform. 
+                            Create an account at linkedin.com to connect with other professionals 
+                            and showcase your experience.
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="section-content">
+                <div class="entry">
+                    <h3>Master of Fine Arts in Digital Design</h3>
+                    <div class="date">2018 - 2020</div>
+                    <p>University of Creative Arts, New York</p>
+                    <p>Specialization in Typography and Interactive Media</p>
+                </div>
+                <div class="entry">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <div class="date">2014 - 2018</div>
+                    <p>Tech Valley University, California</p>
+                    <p>Minor in Visual Arts</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="section-content">
+                <div class="entry">
+                    <h3>Senior UI/UX Designer</h3>
+                    <div class="date">2021 - Present</div>
+                    <p>Creative Digital Agency, San Francisco</p>
+                    <ul>
+                        <li>Lead designer for 10+ client projects with focus on typography and hand-drawn elements</li>
+                        <li>Developed custom sketch-style design system adopted company-wide</li>
+                        <li>Mentored junior designers in hand-lettering techniques</li>
+                    </ul>
+                </div>
+                <div class="entry">
+                    <h3>Freelance Lettering Artist</h3>
+                    <div class="date">2018 - 2021</div>
+                    <p>Self-employed</p>
+                    <ul>
+                        <li>Created custom hand-lettered logos for 50+ clients</li>
+                        <li>Designed packaging with hand-drawn typography for boutique brands</li>
+                        <li>Taught workshops on digital tools for hand-lettering artists</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="section-content">
+                <div class="entry">
+                    <h3>SketchFont - Handwritten Type Generator</h3>
+                    <p>A web app that converts user's handwriting into a custom web font with variable roughness settings.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="entry">
+                    <h3>Doodle Commerce UI Kit</h3>
+                    <p>Complete e-commerce interface system with hand-drawn elements and sketch-like interactions.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="entry">
+                    <h3>Notebook - Creative Coding Framework</h3>
+                    <p>JavaScript library for creating sketch-style animations and interactive elements.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="section-content">
+                <div class="skills-container">
+                    <span class="skill-tag">Hand Lettering</span>
+                    <span class="skill-tag">Typography</span>
+                    <span class="skill-tag">Adobe Illustrator</span>
+                    <span class="skill-tag">Procreate</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">p5.js</span>
+                    <span class="skill-tag">Web Fonts</span>
+                    <span class="skill-tag">Creative Coding</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests">
+            <h2>Areas of Interest</h2>
+            <div class="section-content">
+                <ul>
+                    <li>Experimental typography</li>
+                    <li>Generative art with handwritten elements</li>
+                    <li>Digital tools that preserve analog imperfections</li>
+                    <li>Interactive sketch experiences</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="honors">
+            <h2>Honors</h2>
+            <div class="section-content">
+                <div class="entry">
+                    <h3>Award of Excellence in Digital Typography</h3>
+                    <div class="date">2022</div>
+                    <p>Type Directors Club</p>
+                </div>
+                <div class="entry">
+                    <h3>Best UI Design - Sketch Category</h3>
+                    <div class="date">2021</div>
+                    <p>AWWWARDS</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="extracurriculars">
+            <h2>Extracurriculars</h2>
+            <div class="section-content">
+                <div class="entry">
+                    <h3>Urban Sketching Group Leader</h3>
+                    <p>Organize monthly meetups for digital and traditional sketch artists in the Bay Area</p>
+                </div>
+                <div class="entry">
+                    <h3>Volunteer Design Instructor</h3>
+                    <p>Teach typography basics at local community arts center</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Handcrafted with sketch-like care © 2023</p>
+        </footer>
+    </div>
+</body>
+</html>

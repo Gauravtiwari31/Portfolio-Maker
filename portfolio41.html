@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRUTAL PORTFOLIO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #f0f0f0;
+            color: #222;
+        }
+        .brutal-border {
+            border: 3px solid #222;
+            box-shadow: 8px 8px 0 #222;
+        }
+        .brutal-btn {
+            border: 2px solid #222;
+            box-shadow: 4px 4px 0 #222;
+            transition: all 0.1s;
+        }
+        .brutal-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #222;
+        }
+        .brutal-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0 #222;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const InfoButton = ({ title, content }) => {
+            const [isOpen, setIsOpen] = useState(false);
+            
+            return (
+                <div className="relative inline-block ml-2">
+                    <button 
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="brutal-btn bg-yellow-200 w-6 h-6 text-sm font-bold flex items-center justify-center"
+                    >
+                        i
+                    </button>
+                    {isOpen && (
+                        <div className="absolute left-full ml-2 w-64 p-3 bg-white brutal-border z-10">
+                            <h3 className="font-bold mb-2">{title}</h3>
+                            <p className="text-sm">{content}</p>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const Section = ({ title, children }) => (
+            <div className="mb-8 brutal-border bg-white p-5">
+                <h2 className="text-2xl font-bold mb-4 border-b-2 border-black pb-2">{title}</h2>
+                {children}
+            </div>
+        );
+
+        const ExperienceItem = ({ title, company, duration, description }) => (
+            <div className="mb-4">
+                <div className="flex justify-between items-baseline">
+                    <h3 className="font-bold text-lg">{title} • {company}</h3>
+                    <span className="text-sm bg-black text-white px-2 py-1">{duration}</span>
+                </div>
+                <p className="mt-1">{description}</p>
+            </div>
+        );
+
+        const ProjectCard = ({ title, description, link }) => (
+            <div className="brutal-border p-4 mb-4 bg-white">
+                <h3 className="font-bold text-lg mb-2">{title}</h3>
+                <p className="mb-3">{description}</p>
+                <a 
+                    href={link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="brutal-btn inline-block bg-blue-200 px-3 py-1 font-bold"
+                >
+                    Project Link
+                </a>
+            </div>
+        );
+
+        const SkillTag = ({ skill }) => (
+            <span className="inline-block brutal-border bg-green-200 px-3 py-1 mr-2 mb-2">
+                {skill}
+            </span>
+        );
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('projects');
+            
+            return (
+                <div className="max-w-4xl mx-auto">
+                    <header className="brutal-border bg-black text-white p-6 mb-8">
+                        <h1 className="text-4xl font-bold mb-2">LAADO KUMARI</h1>
+                        <p className="text-xl">Brutalist Developer & Designer</p>
+                    </header>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div className="md:col-span-1">
+                            <div className="brutal-border bg-white p-5 mb-6">
+                                <h2 className="text-xl font-bold mb-4 border-b-2 border-black pb-2">CONTACT</h2>
+                                <p className="mb-2">📞 +1 (555) 123-4567</p>
+                                
+                                <div className="mb-2 flex items-center">
+                                    <a 
+                                        href="https://github.com/laadokumari" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="font-bold underline mr-2"
+                                    >
+                                        GitHub
+                                    </a>
+                                    <InfoButton 
+                                        title="Create GitHub Account" 
+                                        content="Go to github.com, click 'Sign up', enter your details, and verify your email address to create a GitHub account."
+                                    />
+                                </div>
+                                
+                                <div className="flex items-center">
+                                    <a 
+                                        href="https://linkedin.com/in/laadokumari" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="font-bold underline mr-2"
+                                    >
+                                        LinkedIn
+                                    </a>
+                                    <InfoButton 
+                                        title="Create LinkedIn Account" 
+                                        content="Visit linkedin.com, click 'Join now', enter your information, and follow the steps to set up your professional profile."
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="brutal-border bg-white p-5 mb-6">
+                                <h2 className="text-xl font-bold mb-4 border-b-2 border-black pb-2">TECH SKILLS</h2>
+                                <div>
+                                    <SkillTag skill="JavaScript" />
+                                    <SkillTag skill="React" />
+                                    <SkillTag skill="HTML/CSS" />
+                                    <SkillTag skill="Node.js" />
+                                    <SkillTag skill="Python" />
+                                    <SkillTag skill="Git" />
+                                    <SkillTag skill="Tailwind CSS" />
+                                    <SkillTag skill="Figma" />
+                                </div>
+                            </div>
+
+                            <div className="brutal-border bg-white p-5">
+                                <h2 className="text-xl font-bold mb-4 border-b-2 border-black pb-2">INTERESTS</h2>
+                                <ul className="list-disc pl-5">
+                                    <li>Brutalist Design</li>
+                                    <li>Web Accessibility</li>
+                                    <li>Open Source</li>
+                                    <li>Minimalism</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="md:col-span-3">
+                            <Section title="EDUCATION">
+                                <div className="mb-4">
+                                    <div className="flex justify-between items-baseline">
+                                        <h3 className="font-bold text-lg">Computer Science Degree</h3>
+                                        <span className="text-sm bg-black text-white px-2 py-1">2018-2022</span>
+                                    </div>
+                                    <p className="font-bold">University of Technology</p>
+                                    <p>Specialized in Human-Computer Interaction and Web Development</p>
+                                </div>
+                            </Section>
+
+                            <Section title="EXPERIENCE">
+                                <ExperienceItem 
+                                    title="Frontend Developer"
+                                    company="Brutal Web Co."
+                                    duration="2022-Present"
+                                    description="Built accessible, performant websites with a focus on raw, unpolished aesthetics."
+                                />
+                                <ExperienceItem 
+                                    title="UI Designer"
+                                    company="Raw Design Agency"
+                                    duration="2020-2022"
+                                    description="Created brutalist interfaces that prioritize function over form."
+                                />
+                            </Section>
+
+                            <Section title="PROJECTS">
+                                <div className="flex space-x-2 mb-4">
+                                    <button 
+                                        onClick={() => setActiveTab('projects')}
+                                        className={`brutal-btn px-4 py-1 ${activeTab === 'projects' ? 'bg-black text-white' : 'bg-white'}`}
+                                    >
+                                        Projects
+                                    </button>
+                                    <button 
+                                        onClick={() => setActiveTab('project')}
+                                        className={`brutal-btn px-4 py-1 ${activeTab === 'project' ? 'bg-black text-white' : 'bg-white'}`}
+                                    >
+                                        Project
+                                    </button>
+                                </div>
+
+                                {activeTab === 'projects' ? (
+                                    <>
+                                        <ProjectCard 
+                                            title="Brutalist Framework"
+                                            description="An open-source CSS framework for creating raw, unpolished web interfaces."
+                                            link="https://github.com/laadokumari/brutalist-framework"
+                                        />
+                                        <ProjectCard 
+                                            title="Minimal Todo"
+                                            description="A todo app with zero styling - just pure functionality."
+                                            link="https://github.com/laadokumari/minimal-todo"
+                                        />
+                                    </>
+                                ) : (
+                                    <ProjectCard 
+                                        title="Terminal Portfolio"
+                                        description="A portfolio that looks like a Linux terminal, with brutalist aesthetics."
+                                        link="https://github.com/laadokumari/terminal-portfolio"
+                                    />
+                                )}
+                            </Section>
+
+                            <Section title="HONORS & AWARDS">
+                                <ul className="list-disc pl-5 space-y-2">
+                                    <li>Best Brutalist Design - Web Awards 2023</li>
+                                    <li>Hackathon Winner - Raw Code Competition 2021</li>
+                                    <li>Dean's List - University of Technology (2019-2022)</li>
+                                </ul>
+                            </Section>
+
+                            <Section title="EXTRACURRICULARS">
+                                <ul className="list-disc pl-5 space-y-2">
+                                    <li>Open Source Contributor</li>
+                                    <li>Tech Meetup Organizer</li>
+                                    <li>Amateur Woodworker</li>
+                                </ul>
+                            </Section>
+                        </div>
+                    </div>
+
+                    <footer className="brutal-border bg-black text-white p-4 mt-8 text-center">
+                        <p>© {new Date().getFullYear()} LAADO KUMARI - RAW AND UNFILTERED</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

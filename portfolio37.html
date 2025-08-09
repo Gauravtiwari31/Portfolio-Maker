@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--light-color);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--light-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-content {
+            margin-left: 1.5rem;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .education-item::before, .experience-item::before, .project-item::before, 
+        .honor-item::before, .extracurricular-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .date {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-category h4 {
+            margin-bottom: 0.8rem;
+            color: var(--secondary-color);
+        }
+        
+        .skill-item {
+            margin-bottom: 0.8rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .storytelling-section {
+            background-color: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        
+        .storytelling-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-container {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+            <h1>Your Name</h1>
+            <p class="tagline">Web Developer | Designer | Problem Solver</p>
+            
+            <div class="contact-info">
+                <a href="tel:+1234567890">
+                    <i class="fas fa-phone"></i> +123 456 7890
+                </a>
+                <a href="mailto:your.email@example.com">
+                    <i class="fas fa-envelope"></i> your.email@example.com
+                </a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="https://github.com/yourusername" class="social-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-icon info-tooltip">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="tooltip-text">How to create a GitHub account</span>
+                </a>
+                
+                <a href="https://linkedin.com/in/yourusername" class="social-icon" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon info-tooltip">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="tooltip-text">How to create a LinkedIn account</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="education">
+            <h2>Education</h2>
+            <div class="section-content">
+                <div class="education-item">
+                    <h3>University Name</h3>
+                    <span class="date">2018 - 2022</span>
+                    <p>Bachelor of Science in Computer Science</p>
+                    <p>GPA: 3.8/4.0</p>
+                    <p>Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>High School Name</h3>
+                    <span class="date">2014 - 2018</span>
+                    <p>High School Diploma</p>
+                    <p>Honors: Valedictorian, National Honor Society</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="section-content">
+                <div class="experience-item">
+                    <h3>Software Developer Intern</h3>
+                    <span class="company">Tech Company Inc.</span>
+                    <span class="date">Summer 2021</span>
+                    <ul>
+                        <li>Developed and maintained web applications using React and Node.js</li>
+                        <li>Collaborated with team members to implement new features</li>
+                        <li>Participated in code reviews and agile development processes</li>
+                    </ul>
+                    
+                    <div class="storytelling-section">
+                        <h3>My Journey at Tech Company Inc.</h3>
+                        <p>When I first joined Tech Company as an intern, I was nervous about working with a large codebase. However, my mentor guided me through the onboarding process and helped me understand the architecture. One of my proudest moments was when I identified a performance bottleneck in the application and proposed a solution that reduced page load times by 40%. This experience taught me the importance of optimization and teamwork in software development.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Freelance Web Developer</h3>
+                    <span class="date">2019 - Present</span>
+                    <ul>
+                        <li>Designed and developed websites for small businesses</li>
+                        <li>Consulted with clients to determine project requirements</li>
+                        <li>Implemented responsive designs and SEO best practices</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="section-content">
+                <div class="project-item">
+                    <h3>E-commerce Platform</h3>
+                    <span class="date">2022</span>
+                    <p>A full-stack e-commerce application with user authentication, product catalog, and payment processing.</p>
+                    <p><strong>Technologies:</strong> React, Node.js, Express, MongoDB, Stripe API</p>
+                    
+                    <div class="storytelling-section">
+                        <h3>The Story Behind This Project</h3>
+                        <p>This project began as a challenge to myself to build something more complex than I had attempted before. I started by sketching out the database schema and user flows. The biggest hurdle was implementing the payment system, which required careful attention to security. After several iterations and learning from online resources, I successfully integrated Stripe's API. The project not only improved my technical skills but also taught me valuable lessons in project planning and persistence.</p>
+                    </div>
+                    
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Task Management App</h3>
+                    <span class="date">2021</span>
+                    <p>A productivity application for managing tasks with drag-and-drop functionality and team collaboration features.</p>
+                    <p><strong>Technologies:</strong> Vue.js, Firebase, Vuex</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Weather Dashboard</h3>
+                    <span class="date">2020</span>
+                    <p>A weather application that displays current conditions and forecasts using data from a weather API.</p>
+                    <p><strong>Technologies:</strong> JavaScript, HTML, CSS, OpenWeatherMap API</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="section-content">
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Java</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Web Development</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>React</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Node.js</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Tools & Technologies</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Git/GitHub</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Docker</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>AWS</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h2>Areas of Interest</h2>
+            <div class="section-content">
+                <ul>
+                    <li>Web Application Development</li>
+                    <li>User Experience Design</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Cloud Computing</li>
+                    <li>Open Source Contribution</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <h2>Honors & Awards</h2>
+            <div class="section-content">
+                <div class="honor-item">
+                    <h3>Dean's List</h3>
+                    <span class="date">2019 - 2022</span>
+                    <p>Awarded for academic excellence in all semesters</p>
+                </div>
+                
+                <div class="honor-item">
+                    <h3>Hackathon Winner</h3>
+                    <span class="date">2021</span>
+                    <p>First place in University Coding Competition for developing an innovative education app</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2>Extracurricular Activities</h2>
+            <div class="section-content">
+                <div class="extracurricular-item">
+                    <h3>Computer Science Club</h3>
+                    <span class="date">2019 - 2022</span>
+                    <p>Vice President (2021-2022)</p>
+                    <p>Organized workshops and coding competitions for members</p>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <h3>Volunteer Tutor</h3>
+                    <span class="date">2020 - 2021</span>
+                    <p>Taught programming fundamentals to high school students</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <p>Designed and built with ❤️ by me</p>
+        </div>
+    </footer>
+</body>
+</html>

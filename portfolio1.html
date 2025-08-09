@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --accent-color: #bb86fc;
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--darker-bg);
+            border-bottom: 1px solid #333;
+        }
+        
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .section-title {
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .card {
+            background-color: var(--darker-bg);
+            border: 1px solid #333;
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .skill-bar {
+            background-color: #333;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-progress {
+            background-color: var(--accent-color);
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            border: none;
+            color: #121212;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background-color: #9e6ad6;
+        }
+        
+        .social-icon {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-color);
+        }
+        
+        .info-tooltip {
+            cursor: pointer;
+            color: var(--accent-color);
+            margin-left: 5px;
+        }
+        
+        .modal-content {
+            background-color: var(--darker-bg);
+            color: var(--text-primary);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #333;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 mb-4">Ram Manohar</h1>
+                    <h3 class="mb-4">Full Stack Developer</h3>
+                    <p class="lead">I build exceptional digital experiences with clean code and innovative design.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="btn btn-primary btn-lg me-3">Download CV</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://via.placeholder.com/400x400" alt="Profile" class="img-fluid rounded-circle" style="max-width: 300px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="section bg-darker">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-phone fa-2x mb-3"></i>
+                            <h5>Contact No</h5>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fab fa-github fa-2x mb-3"></i>
+                            <h5>GitHub 
+                                <span class="info-tooltip" data-bs-toggle="modal" data-bs-target="#githubModal">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </h5>
+                            <a href="https://github.com/username" target="_blank">github.com/username</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fab fa-linkedin fa-2x mb-3"></i>
+                            <h5>LinkedIn 
+                                <span class="info-tooltip" data-bs-toggle="modal" data-bs-target="#linkedinModal">
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
+                            </h5>
+                            <a href="https://linkedin.com/in/username" target="_blank">linkedin.com/in/username</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Master of Computer Science</h4>
+                            <h5>Stanford University</h5>
+                            <p class="text-muted">2018 - 2020</p>
+                            <p>Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Bachelor of Technology</h4>
+                            <h5>MIT</h5>
+                            <p class="text-muted">2014 - 2018</p>
+                            <p>Major in Computer Science with minor in Mathematics. GPA: 3.9/4.0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4>Senior Software Engineer</h4>
+                                <span class="badge bg-primary">2020 - Present</span>
+                            </div>
+                            <h5>Google</h5>
+                            <ul>
+                                <li>Led development of new features for Google Search</li>
+                                <li>Optimized algorithms improving search speed by 15%</li>
+                                <li>Mentored junior developers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4>Software Developer</h4>
+                                <span class="badge bg-primary">2018 - 2020</span>
+                            </div>
+                            <h5>Amazon</h5>
+                            <ul>
+                                <li>Developed backend services for AWS</li>
+                                <li>Implemented CI/CD pipelines</li>
+                                <li>Reduced server costs by 20% through optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>E-commerce Platform</h4>
+                            <p>Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>AI Chatbot</h4>
+                            <p>Natural language processing chatbot using Python and TensorFlow</p>
+                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Portfolio Website</h4>
+                            <p>Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Programming Languages</h4>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 90%">JavaScript</div>
+                    </div>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 85%">Python</div>
+                    </div>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 80%">Java</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Frameworks & Technologies</h4>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 95%">React</div>
+                    </div>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 85%">Node.js</div>
+                    </div>
+                    <div class="skill-bar mb-3">
+                        <div class="skill-progress" style="width: 75%">TensorFlow</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Area of Interest Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Area of Interest</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-brain fa-3x mb-3"></i>
+                            <h5>Artificial Intelligence</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-mobile-alt fa-3x mb-3"></i>
+                            <h5>Mobile Development</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                            <h5>Cyber Security</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-cloud fa-3x mb-3"></i>
+                            <h5>Cloud Computing</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honors Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Honors</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Google Developer Expert</h4>
+                            <p class="text-muted">2021</p>
+                            <p>Recognized by Google for exceptional contributions to developer community</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Hackathon Winner</h4>
+                            <p class="text-muted">2019</p>
+                            <p>First place in National Coding Competition with AI-powered solution</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extracurriculars Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Extracurriculars</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Tech Blog Writer</h4>
+                            <p>Regularly publish articles on Medium about modern web development</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Coding Mentor</h4>
+                            <p>Volunteer mentor at local coding bootcamp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4>Open Source Contributor</h4>
+                            <p>Active contributor to several popular open source projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control bg-dark text-light" placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Subject">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control bg-dark text-light" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="mb-4">Contact Information</h4>
+                            <p><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</p>
+                            <p><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                            <p><i class="fas fa-envelope me-2"></i> john.doe@example.com</p>
+                            <div class="mt-4">
+                                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-darker text-center">
+        <div class="container">
+            <p class="mb-0">© 2023 John Doe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GitHub Info Modal -->
+    <div class="modal fade" id="githubModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">How to Create GitHub Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li>Go to github.com</li>
+                        <li>Click "Sign up"</li>
+                        <li>Enter your email, create username and password</li>
+                        <li>Verify your email address</li>
+                        <li>Complete your profile</li>
+                        <li>Start using GitHub!</li>
+                    </ol>
+                    <p>GitHub is essential for developers to showcase projects and collaborate.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LinkedIn Info Modal -->
+    <div class="modal fade" id="linkedinModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">How to Create LinkedIn Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li>Go to linkedin.com</li>
+                        <li>Click "Join now"</li>
+                        <li>Enter your email and create password</li>
+                        <li>Fill in your personal information</li>
+                        <li>Add your education and work experience</li>
+                        <li>Connect with people you know</li>
+                    </ol>
+                    <p>LinkedIn is crucial for professional networking and job opportunities.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .voice-control {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .voice-control:hover {
+            background-color: #2980b9;
+        }
+        
+        .voice-control i {
+            margin-right: 5px;
+        }
+        
+        .voice-status {
+            display: none;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        
+        main {
+            padding-top: 100px;
+        }
+        
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-link i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .github { color: #333; }
+        .linkedin { color: #0077b5; }
+        
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .education-header, .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .education-degree, .experience-position {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .education-institution, .experience-company {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .education-duration, .experience-duration {
+            color: #777;
+            font-style: italic;
+        }
+        
+        .education-description, .experience-description {
+            margin-top: 15px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .skill-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .project-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .project-description {
+            margin-bottom: 15px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .interest-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .interest-item:hover {
+            background-color: var(--success-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-text {
+            margin-bottom: 20px;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-header, .experience-header {
+                flex-direction: column;
+            }
+            
+            .education-duration, .experience-duration {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfolio<span>Pro</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#interests">Interests</a></li>
+                    <li><a href="#honors">Honors</a></li>
+                    <li><a href="#extracurriculars">Extracurriculars</a></li>
+                </ul>
+                <button class="voice-control" id="voiceControl">
+                    <i class="fas fa-microphone"></i> Voice Control
+                </button>
+                <span class="voice-status" id="voiceStatus">Listening...</span>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img">
+                <h1>Ram Manohar</h1>
+                <p>Web Developer | UI/UX Designer | Tech Enthusiast</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ram.manohar@example.com</span>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com/johndoe" class="social-link github" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                        <span class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Click to create your GitHub account</span>
+                        </span>
+                    </a>
+                    <a href="https://linkedin.com/in/johndoe" class="social-link linkedin" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                        <span class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Click to create your LinkedIn account</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Education</h2>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-header">
+                        <div>
+                            <h3 class="education-degree">Master of Science in Computer Science</h3>
+                            <p class="education-institution">Stanford University</p>
+                        </div>
+                        <p class="education-duration">2020 - 2022</p>
+                    </div>
+                    <div class="education-description">
+                        <p>Specialized in Artificial Intelligence and Machine Learning. Completed thesis on "Neural Networks for Image Recognition".</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-header">
+                        <div>
+                            <h3 class="education-degree">Bachelor of Technology in Computer Engineering</h3>
+                            <p class="education-institution">Massachusetts Institute of Technology</p>
+                        </div>
+                        <p class="education-duration">2016 - 2020</p>
+                    </div>
+                    <div class="education-description">
+                        <p>Graduated with honors. Focused on software development, algorithms, and data structures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Experience</h2>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-position">Senior Software Engineer</h3>
+                            <p class="experience-company">Google Inc.</p>
+                        </div>
+                        <p class="experience-duration">2022 - Present</p>
+                    </div>
+                    <div class="experience-description">
+                        <p>Lead developer for Google Search features. Implemented new algorithms to improve search relevance by 15%. Mentored junior developers and conducted code reviews.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-position">Software Development Intern</h3>
+                            <p class="experience-company">Microsoft</p>
+                        </div>
+                        <p class="experience-duration">Summer 2019</p>
+                    </div>
+                    <div class="experience-description">
+                        <p>Worked on Azure cloud services team. Developed new features for Azure Functions and improved deployment pipelines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Projects</h2>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/400x200" alt="Project 1" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Voice Assistant App</h3>
+                            <p class="project-description">A voice-controlled personal assistant application that can perform tasks, answer questions, and control smart home devices.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/400x200" alt="Project 2" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">E-commerce Platform</h3>
+                            <p class="project-description">A full-stack e-commerce solution with payment integration, inventory management, and customer analytics.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/400x200" alt="Project 3" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Health Tracker App</h3>
+                            <p class="project-description">Mobile application that tracks fitness activities, nutrition, and provides personalized health recommendations.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Technical Skills</h2>
+                </div>
+                
+                <div class="skills-container">
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">HTML/CSS</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">MongoDB</div>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">Docker</div>
+                    <div class="skill-item">AWS</div>
+                    <div class="skill-item">Machine Learning</div>
+                    <div class="skill-item">UI/UX Design</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Area of Interest</h2>
+                </div>
+                
+                <ul class="interests-list">
+                    <li class="interest-item">Artificial Intelligence</li>
+                    <li class="interest-item">Web Development</li>
+                    <li class="interest-item">Mobile Applications</li>
+                    <li class="interest-item">Cloud Computing</li>
+                    <li class="interest-item">Data Science</li>
+                    <li class="interest-item">Human-Computer Interaction</li>
+                    <li class="interest-item">Open Source Contribution</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="honors">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Honors & Awards</h2>
+                </div>
+                
+                <div class="honor-item">
+                    <h3>Google Developer Scholarship</h3>
+                    <p>2021 - Awarded to top 1% of applicants for demonstrating exceptional coding skills and potential.</p>
+                </div>
+                
+                <div class="honor-item">
+                    <h3>Best Undergraduate Thesis Award</h3>
+                    <p>2020 - Recognized for outstanding research in computer vision applications.</p>
+                </div>
+                
+                <div class="honor-item">
+                    <h3>Hackathon Winner</h3>
+                    <p>2019 - First place in national coding competition for developing an innovative education platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="extracurriculars">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Extracurricular Activities</h2>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <h3>Tech Club President</h3>
+                    <p>2018-2020 - Organized workshops, hackathons, and tech talks for university students.</p>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <h3>Coding Instructor</h3>
+                    <p>Volunteer at local community center teaching programming basics to underprivileged youth.</p>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <h3>Open Source Contributor</h3>
+                    <p>Regular contributor to several open source projects on GitHub.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2023 Ram Manohar. All rights reserved.</p>
+            <a href="#home" class="back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Voice control functionality
+            const voiceControl = document.getElementById('voiceControl');
+            const voiceStatus = document.getElementById('voiceStatus');
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            
+            voiceControl.addEventListener('click', function() {
+                if (voiceControl.classList.contains('listening')) {
+                    recognition.stop();
+                    voiceControl.classList.remove('listening');
+                    voiceStatus.style.display = 'none';
+                } else {
+                    recognition.start();
+                    voiceControl.classList.add('listening');
+                    voiceStatus.style.display = 'inline-block';
+                }
+            });
+            
+            recognition.onresult = function(event) {
+                const command = event.results[0][0].transcript.toLowerCase();
+                voiceStatus.textContent = `Heard: ${command}`;
+                
+                // Process voice commands
+                if (command.includes('home') || command.includes('start')) {
+                    window.location.href = '#home';
+                } else if (command.includes('education')) {
+                    window.location.href = '#education';
+                } else if (command.includes('experience') || command.includes('work')) {
+                    window.location.href = '#experience';
+                } else if (command.includes('project')) {
+                    window.location.href = '#projects';
+                } else if (command.includes('skill')) {
+                    window.location.href = '#skills';
+                } else if (command.includes('interest')) {
+                    window.location.href = '#interests';
+                } else if (command.includes('honor') || command.includes('award')) {
+                    window.location.href = '#honors';
+                } else if (command.includes('extra') || command.includes('activity')) {
+                    window.location.href = '#extracurriculars';
+                } else if (command.includes('contact') || command.includes('linkedin') || command.includes('github')) {
+                    const contactSection = document.querySelector('.contact-info');
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                } else if (command.includes('stop') || command.includes('exit')) {
+                    recognition.stop();
+                    voiceControl.classList.remove('listening');
+                    voiceStatus.style.display = 'none';
+                }
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error', event.error);
+                voiceStatus.textContent = `Error: ${event.error}`;
+                setTimeout(() => {
+                    voiceStatus.style.display = 'none';
+                }, 3000);
+                voiceControl.classList.remove('listening');
+            };
+            
+            // Smooth scrolling for all links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Highlight active section in navigation
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        document.querySelectorAll('nav a').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

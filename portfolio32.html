@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .contact-info {
+            margin-top: 10px;
+        }
+        
+        .contact-info a {
+            color: var(--light-color);
+            margin-right: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 5px;
+            color: var(--primary-color);
+        }
+        
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 15px 0;
+            display: block;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+        
+        .item-date {
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .item-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .skill-item {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .interest-item {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .interest-item i {
+            color: var(--primary-color);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .ai-suggestion {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+            position: relative;
+        }
+        
+        .ai-suggestion h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .ai-suggestion .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile {
+                flex-direction: column;
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="profile">
+                <img src="https://via.placeholder.com/100" alt="Profile Picture" class="profile-pic">
+                <div>
+                    <h1>Your Name</h1>
+                    <div class="contact-info">
+                        <a href="tel:+1234567890"><i class="fas fa-phone"></i> +123 456 7890</a>
+                        <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i> your.email@example.com</a>
+                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <span class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Create a GitHub account at github.com/signup to showcase your projects</span>
+                        </span>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <span class="info-tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Create a LinkedIn profile at linkedin.com/signup to build your professional network</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Portfolio</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#honors">Honors</a></li>
+                <li><a href="#extracurriculars">Extracurriculars</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <p>Hello! I'm a passionate [Your Profession/Field] with expertise in [Your Skills]. I love solving complex problems and creating innovative solutions. With [X] years of experience in [Your Field], I've developed a strong foundation in [Key Skills] and a commitment to continuous learning.</p>
+                
+                <div class="ai-suggestion">
+                    <button class="close-btn"><i class="fas fa-times"></i></button>
+                    <h4>AI Suggestion</h4>
+                    <p>Based on your profile, we suggest highlighting your experience with [specific technology] as it's currently in high demand. Consider adding a personal touch by mentioning your passion for [related interest].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">University Name</h3>
+                    <span class="item-date">2018 - 2022</span>
+                </div>
+                <h4 class="item-subtitle">Bachelor of Science in Computer Science</h4>
+                <p>GPA: 3.8/4.0 | Relevant Coursework: Data Structures, Algorithms, Database Systems, Web Development</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">High School Name</h3>
+                    <span class="item-date">2016 - 2018</span>
+                </div>
+                <h4 class="item-subtitle">Science Stream</h4>
+                <p>Graduated with honors | Focus on Mathematics and Physics</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experience</h2>
+            </div>
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">Software Developer</h3>
+                    <span class="item-date">2022 - Present</span>
+                </div>
+                <h4 class="item-subtitle">Tech Company Inc.</h4>
+                <ul>
+                    <li>Developed and maintained web applications using React, Node.js, and MongoDB</li>
+                    <li>Collaborated with cross-functional teams to deliver high-quality software solutions</li>
+                    <li>Implemented CI/CD pipelines reducing deployment time by 30%</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">Intern</h3>
+                    <span class="item-date">Summer 2021</span>
+                </div>
+                <h4 class="item-subtitle">Startup XYZ</h4>
+                <ul>
+                    <li>Assisted in developing a mobile application using Flutter</li>
+                    <li>Conducted user research and implemented feedback to improve UX</li>
+                    <li>Gained experience with Agile development methodologies</li>
+                </ul>
+                
+                <div class="ai-suggestion">
+                    <button class="close-btn"><i class="fas fa-times"></i></button>
+                    <h4>AI Suggestion</h4>
+                    <p>Your internship experience would stand out more with quantifiable results. For example, "Improved app performance by 25% through optimizing database queries."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">E-commerce Platform</h3>
+                    <span class="item-date">2023</span>
+                </div>
+                <p>A full-stack e-commerce application with user authentication, product catalog, and payment integration.</p>
+                <p><strong>Technologies:</strong> React, Node.js, Express, MongoDB, Stripe API</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">Task Management App</h3>
+                    <span class="item-date">2022</span>
+                </div>
+                <p>A collaborative task management tool with real-time updates and team features.</p>
+                <p><strong>Technologies:</strong> Vue.js, Firebase, Tailwind CSS</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <h3 class="item-title">Machine Learning Model for Image Recognition</h3>
+                    <span class="item-date">2021</span>
+                </div>
+                <p>Developed a CNN model to classify images with 92% accuracy on the test set.</p>
+                <p><strong>Technologies:</strong> Python, TensorFlow, Keras, OpenCV</p>
+                <a href="#" class="project-link">Project Link</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">React</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">HTML/CSS</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">Docker</div>
+                <div class="skill-item">AWS</div>
+                <div class="skill-item">Machine Learning</div>
+            </div>
+            
+            <div class="ai-suggestion">
+                <button class="close-btn"><i class="fas fa-times"></i></button>
+                <h4>AI Suggestion</h4>
+                <p>Consider organizing your skills by category (e.g., Frontend, Backend, DevOps) to make them easier to scan. Also, highlighting your most proficient skills first can make a stronger impression.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="interests">
+        <div class="container">
+            <div class="section-title">
+                <h2>Area of Interest</h2>
+            </div>
+            <div class="interests-container">
+                <div class="interest-item">
+                    <i class="fas fa-code"></i>
+                    <span>Web Development</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Artificial Intelligence</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile Development</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Cybersecurity</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Data Science</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="honors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Honors & Awards</h2>
+            </div>
+            <div class="honor-item">
+                <div class="item-header">
+                    <h3 class="item-title">Dean's List</h3>
+                    <span class="item-date">2019-2021</span>
+                </div>
+                <p>Awarded for academic excellence in Computer Science program</p>
+            </div>
+            
+            <div class="honor-item">
+                <div class="item-header">
+                    <h3 class="item-title">Hackathon Winner</h3>
+                    <span class="item-date">2020</span>
+                </div>
+                <p>First place in University Tech Hackathon for developing a health tracking app</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="extracurriculars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Extracurricular Activities</h2>
+            </div>
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <h3 class="item-title">Computer Science Club</h3>
+                    <span class="item-date">2019-2022</span>
+                </div>
+                <p>Organized workshops and coding competitions for club members</p>
+            </div>
+            
+            <div class="extracurricular-item">
+                <div class="item-header">
+                    <h3 class="item-title">Volunteer Tutor</h3>
+                    <span class="item-date">2020-2021</span>
+                </div>
+                <p>Taught programming basics to underprivileged high school students</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-github fa-lg"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-envelope fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close AI suggestion boxes
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.ai-suggestion').style.display = 'none';
+            });
+        });
+        
+        // Smart content suggestions could be enhanced with actual AI integration
+        // This is just a placeholder for the functionality
+        function showSmartSuggestion(section) {
+            // In a real implementation, this would analyze content and make suggestions
+            console.log(`Showing smart suggestion for ${section}`);
+        }
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            background-color: white;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        section {
+            margin-bottom: 30px;
+        }
+        
+        section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        
+        .item-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .item-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .item-description {
+            color: var(--text-color);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .skill-item {
+            background-color: var(--light-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .modal-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .modal-content ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-content li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-radius: 5px;
+                margin-bottom: 5px;
+            }
+            
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>John Doe</h1>
+            <p>Web Developer & Designer</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📱 +1 (123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <span>👨‍💻 <a href="https://github.com/johndoe" target="_blank">github.com/johndoe</a></span>
+                    <button class="info-button" onclick="openModal('github-modal')">ℹ️</button>
+                </div>
+                <div class="contact-item">
+                    <span>🔗 <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></span>
+                    <button class="info-button" onclick="openModal('linkedin-modal')">ℹ️</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="openTab(event, 'education')">Education</button>
+            <button class="tab" onclick="openTab(event, 'experience')">Experience</button>
+            <button class="tab" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tab" onclick="openTab(event, 'skills')">Technical Skills</button>
+            <button class="tab" onclick="openTab(event, 'interests')">Areas of Interest</button>
+            <button class="tab" onclick="openTab(event, 'honors')">Honors</button>
+            <button class="tab" onclick="openTab(event, 'extracurriculars')">Extracurriculars</button>
+        </div>
+        
+        <!-- Education Tab -->
+        <div id="education" class="tab-content active">
+            <section>
+                <h2>Education</h2>
+                <div class="education-item">
+                    <div class="item-header">
+                        <span class="item-title">Master of Science in Computer Science</span>
+                        <span class="item-date">2019 - 2021</span>
+                    </div>
+                    <div class="item-subtitle">Stanford University, CA</div>
+                    <div class="item-description">
+                        Specialized in Artificial Intelligence and Machine Learning. GPA: 3.8/4.0
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="item-header">
+                        <span class="item-title">Bachelor of Science in Software Engineering</span>
+                        <span class="item-date">2015 - 2019</span>
+                    </div>
+                    <div class="item-subtitle">Massachusetts Institute of Technology, MA</div>
+                    <div class="item-description">
+                        Minor in Data Science. Graduated with honors. GPA: 3.9/4.0
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Experience Tab -->
+        <div id="experience" class="tab-content">
+            <section>
+                <h2>Work Experience</h2>
+                <div class="experience-item">
+                    <div class="item-header">
+                        <span class="item-title">Senior Software Engineer</span>
+                        <span class="item-date">2021 - Present</span>
+                    </div>
+                    <div class="item-subtitle">Google, Mountain View, CA</div>
+                    <div class="item-description">
+                        <p>Lead developer for Google Search algorithms team. Responsible for implementing new machine learning models to improve search relevance.</p>
+                        <p>Mentored 5 junior developers and conducted code reviews.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="item-header">
+                        <span class="item-title">Software Engineer Intern</span>
+                        <span class="item-date">Summer 2020</span>
+                    </div>
+                    <div class="item-subtitle">Facebook, Menlo Park, CA</div>
+                    <div class="item-description">
+                        <p>Worked on the News Feed team to develop new features for content personalization.</p>
+                        <p>Implemented A/B testing framework that reduced deployment time by 30%.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Projects Tab -->
+        <div id="projects" class="tab-content">
+            <section>
+                <h2>Projects</h2>
+                <div class="project-item">
+                    <div class="item-header">
+                        <span class="item-title">AI-Powered Personal Assistant</span>
+                        <span class="item-date">2023</span>
+                    </div>
+                    <div class="item-description">
+                        <p>Developed a voice-controlled personal assistant using natural language processing and machine learning. The system can schedule appointments, answer questions, and control smart home devices.</p>
+                        <p>Technologies used: Python, TensorFlow, NLP, AWS Lambda</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="item-header">
+                        <span class="item-title">E-commerce Platform</span>
+                        <span class="item-date">2022</span>
+                    </div>
+                    <div class="item-description">
+                        <p>Built a full-stack e-commerce platform with payment integration, product management, and user authentication.</p>
+                        <p>Technologies used: React, Node.js, MongoDB, Stripe API</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="item-header">
+                        <span class="item-title">Health Monitoring App</span>
+                        <span class="item-date">2021</span>
+                    </div>
+                    <div class="item-description">
+                        <p>Created a mobile application that tracks health metrics and provides personalized recommendations using machine learning.</p>
+                        <p>Technologies used: Flutter, Firebase, Python, Scikit-learn</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Skills Tab -->
+        <div id="skills" class="tab-content">
+            <section>
+                <h2>Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">Java</span>
+                        <span class="skill-item">C++</span>
+                        <span class="skill-item">TypeScript</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Web Development</h3>
+                        <span class="skill-item">HTML5</span>
+                        <span class="skill-item">CSS3</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">Express</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Databases</h3>
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">Firebase</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Tools & Technologies</h3>
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">TensorFlow</span>
+                        <span class="skill-item">PyTorch</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Interests Tab -->
+        <div id="interests" class="tab-content">
+            <section>
+                <h2>Areas of Interest</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Technical Interests</h3>
+                        <span class="skill-item">Artificial Intelligence</span>
+                        <span class="skill-item">Machine Learning</span>
+                        <span class="skill-item">Natural Language Processing</span>
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">Blockchain Technology</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Other Interests</h3>
+                        <span class="skill-item">Photography</span>
+                        <span class="skill-item">Travel</span>
+                        <span class="skill-item">Chess</span>
+                        <span class="skill-item">Hiking</span>
+                        <span class="skill-item">Reading</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Honors Tab -->
+        <div id="honors" class="tab-content">
+            <section>
+                <h2>Honors & Awards</h2>
+                <div class="honor-item">
+                    <div class="item-header">
+                        <span class="item-title">Google Excellence Award</span>
+                        <span class="item-date">2022</span>
+                    </div>
+                    <div class="item-description">
+                        Recognized for outstanding contributions to the search algorithm improvement project.
+                    </div>
+                </div>
+                
+                <div class="honor-item">
+                    <div class="item-header">
+                        <span class="item-title">Best Thesis Award</span>
+                        <span class="item-date">2021</span>
+                    </div>
+                    <div class="item-description">
+                        Awarded for research on "Advanced Neural Networks for Natural Language Understanding".
+                    </div>
+                </div>
+                
+                <div class="honor-item">
+                    <div class="item-header">
+                        <span class="item-title">Hackathon Winner</span>
+                        <span class="item-date">2020</span>
+                    </div>
+                    <div class="item-description">
+                        Won first place in Stanford's annual AI Hackathon for developing a real-time translation app.
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Extracurriculars Tab -->
+        <div id="extracurriculars" class="tab-content">
+            <section>
+                <h2>Extracurricular Activities</h2>
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <span class="item-title">Tech Mentor</span>
+                        <span class="item-date">2020 - Present</span>
+                    </div>
+                    <div class="item-subtitle">Code for America</div>
+                    <div class="item-description">
+                        Volunteer mentor teaching coding skills to underprivileged youth in local communities.
+                    </div>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <span class="item-title">President</span>
+                        <span class="item-date">2018 - 2019</span>
+                    </div>
+                    <div class="item-subtitle">MIT Computer Science Club</div>
+                    <div class="item-description">
+                        Organized tech talks, hackathons, and networking events for 200+ members.
+                    </div>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <span class="item-title">Volunteer</span>
+                        <span class="item-date">2017 - 2019</span>
+                    </div>
+                    <div class="item-subtitle">Habitat for Humanity</div>
+                    <div class="item-description">
+                        Participated in building homes for low-income families in the Boston area.
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- GitHub Info Modal -->
+        <div id="github-modal" class="info-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal('github-modal')">&times;</span>
+                <h2>How to Create a GitHub Account</h2>
+                <ol>
+                    <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                    <li>Click on "Sign up" in the top right corner</li>
+                    <li>Enter your email address, create a username and password</li>
+                    <li>Complete the verification process</li>
+                    <li>Choose your plan (Free is sufficient for most users)</li>
+                    <li>Complete your profile by adding a profile picture and bio</li>
+                    <li>Start creating repositories for your projects</li>
+                </ol>
+                <p>GitHub is essential for showcasing your coding projects to potential employers and collaborators.</p>
+            </div>
+        </div>
+        
+        <!-- LinkedIn Info Modal -->
+        <div id="linkedin-modal" class="info-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal('linkedin-modal')">&times;</span>
+                <h2>How to Create a LinkedIn Account</h2>
+                <ol>
+                    <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                    <li>Click on "Join now"</li>
+                    <li>Enter your email address and create a password</li>
+                    <li>Complete your profile with your name and location</li>
+                    <li>Add your current or most recent position</li>
+                    <li>Upload a professional profile photo</li>
+                    <li>Add your education history</li>
+                    <li>Write a compelling headline and summary</li>
+                    <li>Start connecting with colleagues and classmates</li>
+                </ol>
+                <p>LinkedIn is crucial for professional networking and job opportunities.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 John Doe. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tabs
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            // Show the current tab and add active class
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === "info-modal") {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

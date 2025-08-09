@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | AR Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--light-color);
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .about-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skills {
+            background-color: #f1f1f1;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .skill-item p {
+            color: var(--text-light);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 25px;
+        }
+        
+        .project-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .project-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .project-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .education-container, .experience-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+            left: 20px;
+            top: 0;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .timeline-duration {
+            display: inline-block;
+            background-color: rgba(52, 152, 219, 0.2);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .timeline-content h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        .timeline-content p {
+            color: var(--text-light);
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .contact-info {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .contact-info ul {
+            list-style: none;
+        }
+        
+        .contact-info ul li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info ul li i {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            margin-right: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* AR Preview Section */
+        .ar-preview {
+            background-color: var(--light-color);
+        }
+        
+        .ar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .ar-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .ar-content h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .ar-content p {
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .ar-viewer {
+            flex: 1;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ar-viewer img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .ar-placeholder {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .ar-placeholder i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .ar-placeholder p {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .modal-body {
+            margin-top: 20px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content, .about-content, .ar-container, .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero-text, .about-text, .ar-content, .contact-info {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero-image, .about-image, .ar-viewer {
+                width: 100%;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .tooltip i {
+            color: var(--primary-color);
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfolio<span>.</span></div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#ar-preview">AR Preview</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Hi, I'm <span>Your Name</span></h1>
+                    <p>Augmented Reality Developer & Creative Technologist</p>
+                    <div>
+                        <a href="#contact" class="btn">Contact Me</a>
+                        <a href="#projects" class="btn btn-outline">View Projects</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://via.placeholder.com/500x500" alt="Profile Image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who Am I?</h3>
+                    <p>I'm a passionate Augmented Reality developer with expertise in creating immersive digital experiences that blend the physical and virtual worlds. With a strong background in computer science and design, I bring technical skills and creative vision to every project.</p>
+                    <p>My goal is to push the boundaries of what's possible with AR technology and create meaningful experiences that engage and delight users.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x400" alt="About Image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3>AR Development</h3>
+                    <p>ARKit, ARCore, Vuforia, Unity3D, Unreal Engine, WebXR</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Programming</h3>
+                    <p>C#, C++, Python, JavaScript, Swift, Java</p>
+                </div>
+                <div class="skill-item">
+                    <h3>3D Modeling</h3>
+                    <p>Blender, Maya, 3ds Max, Substance Painter</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Web Development</h3>
+                    <p>HTML5, CSS3, JavaScript, React, Three.js</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Mobile Development</h3>
+                    <p>iOS (Swift), Android (Kotlin), React Native</p>
+                </div>
+                <div class="skill-item">
+                    <h3>UI/UX Design</h3>
+                    <p>Figma, Adobe XD, User Research, Prototyping</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            <div class="education-container">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-duration">2018 - 2022</span>
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <h4>University Name, City</h4>
+                        <p>Specialized in Human-Computer Interaction and Augmented Reality. Graduated with honors.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-duration">2020</span>
+                        <h3>Advanced AR Development Certification</h3>
+                        <h4>Online Platform</h4>
+                        <p>Completed intensive training in advanced augmented reality techniques and spatial computing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experience</h2>
+            </div>
+            <div class="experience-container">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-duration">2021 - Present</span>
+                        <h3>AR Developer</h3>
+                        <h4>Tech Innovations Inc.</h4>
+                        <p>Lead developer for AR applications across multiple platforms. Designed and implemented interactive AR experiences for retail, education, and entertainment sectors.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-duration">2019 - 2021</span>
+                        <h3>Junior XR Developer</h3>
+                        <h4>Digital Creations Studio</h4>
+                        <p>Developed prototypes for AR/VR applications. Collaborated with designers and 3D artists to create immersive experiences.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-duration">2018 - 2019</span>
+                        <h3>Intern - Mobile Development</h3>
+                        <h4>AppWorks</h4>
+                        <p>Assisted in developing mobile applications with AR features. Gained experience in cross-platform development and user testing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="AR Museum Guide">
+                    </div>
+                    <div class="project-info">
+                        <h3>AR Museum Guide</h3>
+                        <p>An augmented reality application that enhances museum experiences by providing interactive information about exhibits through mobile devices.</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Virtual Try-On">
+                    </div>
+                    <div class="project-info">
+                        <h3>Virtual Try-On for E-commerce</h3>
+                        <p>AR solution that allows customers to virtually try products before purchasing, increasing engagement and reducing returns.</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Educational AR">
+                    </div>
+                    <div class="project-info">
+                        <h3>Educational AR Platform</h3>
+                        <p>Interactive learning platform that uses AR to visualize complex concepts in science and mathematics for students.</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ar-preview" class="ar-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>AR Preview</h2>
+            </div>
+            <div class="ar-container">
+                <div class="ar-content">
+                    <h3>Experience My AR Project</h3>
+                    <p>This is an interactive preview of my latest augmented reality project. The application allows users to visualize 3D models in their real environment and interact with them through intuitive gestures.</p>
+                    <p>Key features include:</p>
+                    <ul>
+                        <li>Real-time object tracking and placement</li>
+                        <li>Interactive 3D model manipulation</li>
+                        <li>Multi-user collaborative AR experience</li>
+                        <li>Cloud-anchored persistent AR content</li>
+                    </ul>
+                    <a href="#" class="btn">View Full Project</a>
+                </div>
+                <div class="ar-viewer">
+                    <div class="ar-placeholder">
+                        <i class="fas fa-mobile-alt"></i>
+                        <p>Point your device camera to view AR content</p>
+                        <p>or</p>
+                        <button class="btn">View in Browser</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interests">
+        <div class="container">
+            <div class="section-title">
+                <h2>Areas of Interest</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3>Extended Reality (XR)</h3>
+                    <p>Exploring the convergence of AR, VR, and MR technologies to create seamless mixed reality experiences.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Spatial Computing</h3>
+                    <p>Developing applications that understand and interact with the physical space around them.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Computer Vision</h3>
+                    <p>Implementing advanced image recognition and tracking algorithms for AR applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="honors" class="honors">
+        <div class="container">
+            <div class="section-title">
+                <h2>Honors & Awards</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3>Best AR Application 2022</h3>
+                    <p>Awarded for innovative use of augmented reality in education at the Tech Innovation Awards.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>University Honors</h3>
+                    <p>Graduated with distinction for academic excellence in Computer Science.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Hackathon Winner</h3>
+                    <p>First place in the National AR/VR Hackathon for developing a prototype AR navigation system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="extracurriculars" class="extracurriculars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Extracurricular Activities</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3>XR Meetup Organizer</h3>
+                    <p>Organize monthly meetups for AR/VR enthusiasts and professionals to share knowledge and network.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Tech Mentor</h3>
+                    <p>Volunteer as a mentor for high school students interested in augmented reality and game development.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Open Source Contributor</h3>
+                    <p>Contribute to open source AR projects and libraries to support the developer community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Feel free to reach out for collaborations or just to say hello! I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                    <ul>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (123) 456-7890</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>your.email@example.com</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-github"></i>
+                            <span>
+                                <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Go to github.com and sign up to create your own account</span>
+                                </div>
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fab fa-linkedin"></i>
+                            <span>
+                                <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Go to linkedin.com and sign up to create your professional profile</span>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Let's create something amazing together!</p>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <p class="copyright">&copy; 2023 Your Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- How to Create GitHub Account Modal -->
+    <div id="githubModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>How to Create a GitHub Account</h3>
+            <div class="modal-body">
+                <ol>
+                    <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                    <li>Click on "Sign up" in the top right corner</li>
+                    <li>Enter your email address, create a password, and choose a username</li>
+                    <li>Verify your account by solving the puzzle</li>
+                    <li>Choose your plan (Free is sufficient for most users)</li>
+                    <li>Complete the setup questions</li>
+                    <li>Verify your email address by clicking the link sent to your email</li>
+                    <li>Your GitHub account is now ready to use!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Create LinkedIn Account Modal -->
+    <div id="linkedinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>How to Create a LinkedIn Account</h3>
+            <div class="modal-body">
+                <ol>
+                    <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                    <li>Click on "Join now"</li>
+                    <li>Enter your email address and create a password</li>
+                    <li>Fill in your first and last name</li>
+                    <li>Click "Agree & Join" to accept the terms</li>
+                    <li>Verify your account through the email sent to you</li>
+                    <li>Complete your profile by adding your location, current position, and education</li>
+                    <li>Add a professional profile photo</li>
+                    <li>Start connecting with colleagues and building your network</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.querySelector('nav ul').classList.remove('show');
+            });
+        });
+
+        // Modal functionality
+        const githubTooltip = document.querySelector('.tooltip i.fa-info-circle');
+        const linkedinTooltip = document.querySelectorAll('.tooltip i.fa-info-circle')[1];
+        const githubModal = document.getElementById('githubModal');
+        const linkedinModal = document.getElementById('linkedinModal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+
+        githubTooltip.addEventListener('click', function() {
+            githubModal.style.display = 'flex';
+        });
+
+        linkedinTooltip.addEventListener('click', function() {
+            linkedinModal.style.display = 'flex';
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // AR Preview Button
+        const arButton = document.querySelector('.ar-viewer .btn');
+        if (arButton) {
+            arButton.addEventListener('click', function() {
+                alert('This would launch the AR experience in your browser or appropriate viewer');
+            });
+        }
+    </script>
+</body>
+</html>

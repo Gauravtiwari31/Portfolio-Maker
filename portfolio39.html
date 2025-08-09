@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Grid Portfolio</title>
+    <style>
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --dark-bg: #0d0221;
+            --grid-line: rgba(5, 217, 232, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--dark-bg) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: var(--neon-blue);
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        
+        .glitch::after {
+            color: var(--neon-pink);
+            z-index: -2;
+            animation: glitch-effect 2s infinite reverse;
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--neon-blue);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--neon-pink);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: header-underline 3s infinite alternate;
+        }
+        
+        @keyframes header-underline {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            letter-spacing: 3px;
+        }
+        
+        .contact-info {
+            text-align: right;
+        }
+        
+        .contact-info p {
+            margin-bottom: 5px;
+            color: var(--neon-pink);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+        
+        .social-link {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid var(--neon-purple);
+            border-radius: 3px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .social-link:hover {
+            background-color: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+            color: white;
+        }
+        
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-bg);
+            color: white;
+            border: 1px solid var(--neon-blue);
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+        
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 65%, rgba(255, 42, 109, 0.1) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        section:hover {
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+        }
+        
+        h2 {
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px var(--neon-pink);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+        }
+        
+        .section-content {
+            padding: 10px;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed rgba(5, 217, 232, 0.3);
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        h3 {
+            color: var(--neon-blue);
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+        
+        .date {
+            color: var(--neon-purple);
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill {
+            padding: 5px 15px;
+            background-color: rgba(5, 217, 232, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 20px;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--neon-purple);
+            text-decoration: none;
+            border: 1px solid var(--neon-purple);
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple);
+            color: white;
+        }
+        
+        .neon-pulse {
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from {
+                text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            }
+            to {
+                text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--neon-blue);
+            margin-top: 40px;
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-info {
+                text-align: left;
+                margin-top: 20px;
+            }
+            
+            .social-links {
+                justify-content: flex-start;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="Laado Kumari">Laado Kumari</h1>
+            <div class="contact-info">
+                <p>Email: john.doe@example.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <div class="social-links">
+                    <a href="https://github.com/laadokumari" class="social-link" target="_blank">
+                        GitHub
+                        <div class="info-tooltip">i
+                            <span class="tooltip-text">Create GitHub account at github.com/signup</span>
+                        </div>
+                    </a>
+                    <a href="https://linkedin.com/in/laadokumari" class="social-link" target="_blank">
+                        LinkedIn
+                        <div class="info-tooltip">i
+                            <span class="tooltip-text">Create LinkedIn account at linkedin.com/signup</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <section id="education">
+            <h2 class="neon-pulse">EDUCATION</h2>
+            <div class="section-content">
+                <div class="education-item">
+                    <h3>Massachusetts Institute of Technology</h3>
+                    <p class="date">2018 - 2022</p>
+                    <p>Bachelor of Science in Computer Science and Engineering</p>
+                    <p>GPA: 3.9/4.0</p>
+                </div>
+                <div class="education-item">
+                    <h3>Cyberpunk High School</h3>
+                    <p class="date">2014 - 2018</p>
+                    <p>High School Diploma with Honors</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2 class="neon-pulse">EXPERIENCE</h2>
+            <div class="section-content">
+                <div class="experience-item">
+                    <h3>Neon Grid Technologies</h3>
+                    <p class="date">June 2022 - Present</p>
+                    <p><strong>Senior Software Engineer</strong></p>
+                    <p>Developed cutting-edge cyberpunk-themed web applications using React, Three.js, and WebGL. Led a team of 5 developers in creating immersive digital experiences.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Glitch Corp</h3>
+                    <p class="date">Summer 2021</p>
+                    <p><strong>Software Engineering Intern</strong></p>
+                    <p>Implemented glitch effects and retro-futuristic UI components for client projects. Optimized rendering performance for complex animations.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2 class="neon-pulse">PROJECTS</h2>
+            <div class="section-content">
+                <div class="project-item">
+                    <h3>Neon City Simulation</h3>
+                    <p class="date">2023</p>
+                    <p>A procedurally generated cyberpunk city with interactive elements, built with Three.js and WebGL shaders.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="project-item">
+                    <h3>Retro Terminal Emulator</h3>
+                    <p class="date">2022</p>
+                    <p>A browser-based terminal emulator with CRT screen effects and authentic typing sounds.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="project-item">
+                    <h3>Augmented Reality HUD</h3>
+                    <p class="date">2021</p>
+                    <p>Experimental AR overlay that mimics cyberpunk-style head-up displays using WebXR.</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2 class="neon-pulse">TECHNICAL SKILLS</h2>
+            <div class="section-content">
+                <div class="skills-container">
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">React</div>
+                    <div class="skill">Three.js</div>
+                    <div class="skill">WebGL</div>
+                    <div class="skill">Node.js</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">GLSL</div>
+                    <div class="skill">WebXR</div>
+                    <div class="skill">CSS3</div>
+                    <div class="skill">HTML5</div>
+                    <div class="skill">Git</div>
+                    <div class="skill">UI/UX Design</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="interests">
+            <h2 class="neon-pulse">AREA OF INTEREST</h2>
+            <div class="section-content">
+                <p>Interactive Web Graphics • Procedural Generation • Cyberpunk Aesthetics • Retro-futurism • Augmented Reality • Glitch Art • Digital Archaeology</p>
+            </div>
+        </section>
+        
+        <section id="honors">
+            <h2 class="neon-pulse">HONORS</h2>
+            <div class="section-content">
+                <div class="honor-item">
+                    <h3>Best in Show - WebXR Awards 2023</h3>
+                    <p class="date">March 2023</p>
+                    <p>Awarded for innovative use of augmented reality in browser-based applications.</p>
+                </div>
+                <div class="honor-item">
+                    <h3>MIT Dean's List</h3>
+                    <p class="date">2019 - 2022</p>
+                    <p>Recognized for academic excellence all semesters.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2 class="neon-pulse">EXTRACURRICULARS</h2>
+            <div class="section-content">
+                <div class="extracurricular-item">
+                    <h3>Cyberpunk Film Society</h3>
+                    <p class="date">2018 - Present</p>
+                    <p>Founder and organizer of monthly screenings and discussions.</p>
+                </div>
+                <div class="extracurricular-item">
+                    <h3>Retro Computing Club</h3>
+                    <p class="date">2020 - 2022</p>
+                    <p>Vice president, organized workshops on vintage computing.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 Laado Kumari | DESIGNED WITH CYBERPUNK AESTHETICS</p>
+        </footer>
+    </div>
+</body>
+</html>

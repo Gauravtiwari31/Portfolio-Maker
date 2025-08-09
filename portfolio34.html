@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 5px;
+            vertical-align: super;
+        }
+        
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Card Flip Animation */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            margin: 1rem;
+            min-height: 300px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .flip-card-front {
+            background-color: white;
+            color: var(--dark-color);
+        }
+        
+        .flip-card-back {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            background-color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -10px;
+        }
+        
+        .right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img">
+            <h1>Your Name</h1>
+            <p class="tagline">Web Developer | Designer | Programmer</p>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> your.email@example.com</p>
+            </div>
+            
+            <div class="social-icons">
+                <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <button class="info-button" onclick="openModal('github-modal')">i</button>
+                
+                <a href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <button class="info-button" onclick="openModal('linkedin-modal')">i</button>
+            </div>
+        </div>
+    </header>
+    
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>University Name</h3>
+                        <p class="timeline-date">2018 - 2022</p>
+                        <p>Bachelor of Science in Computer Science</p>
+                        <p>GPA: 3.8/4.0</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>High School Name</h3>
+                        <p class="timeline-date">2014 - 2018</p>
+                        <p>High School Diploma</p>
+                        <p>Graduated with Honors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Software Developer</h3>
+                        <p class="timeline-date">2022 - Present</p>
+                        <p>ABC Tech Solutions</p>
+                        <ul>
+                            <li>Developed and maintained web applications using React and Node.js</li>
+                            <li>Collaborated with cross-functional teams to deliver high-quality software</li>
+                            <li>Implemented CI/CD pipelines for automated deployment</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Web Development Intern</h3>
+                        <p class="timeline-date">Summer 2021</p>
+                        <p>XYZ Digital Agency</p>
+                        <ul>
+                            <li>Assisted in building responsive websites for clients</li>
+                            <li>Participated in client meetings and requirement gathering</li>
+                            <li>Optimized website performance and SEO</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-container">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="project-title">E-commerce Website</h3>
+                            <p>A full-stack e-commerce platform with payment integration and admin dashboard.</p>
+                            <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>E-commerce Website</h3>
+                            <p>This project includes features like product catalog, shopping cart, user authentication, and payment processing.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="project-title">Task Management App</h3>
+                            <p>A collaborative task management application with real-time updates.</p>
+                            <p><strong>Technologies:</strong> Vue.js, Firebase</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Task Management App</h3>
+                            <p>Features include task creation, assignment, due dates, priority levels, and team collaboration.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 class="project-title">Weather Dashboard</h3>
+                            <p>A weather application that displays current and forecasted weather data.</p>
+                            <p><strong>Technologies:</strong> JavaScript, OpenWeather API</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Weather Dashboard</h3>
+                            <p>Users can search by location, save favorites, and view detailed weather information including charts.</p>
+                            <a href="#" class="project-link">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">HTML5</div>
+                <div class="skill-item">CSS3</div>
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">React</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">MongoDB</div>
+                <div class="skill-item">UI/UX Design</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="interests">
+        <div class="container">
+            <h2>Area of Interest</h2>
+            <div class="section-content">
+                <ul style="list-style-type: none; text-align: center;">
+                    <li>Web Development</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Cloud Computing</li>
+                    <li>Data Visualization</li>
+                    <li>User Experience Design</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="honors">
+        <div class="container">
+            <h2>Honors & Awards</h2>
+            <div class="section-content">
+                <ul>
+                    <li>Dean's List - University Name (2019-2022)</li>
+                    <li>1st Place - National Coding Competition 2021</li>
+                    <li>Best Project Award - Tech Expo 2020</li>
+                    <li>Academic Scholarship Recipient</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="extracurriculars">
+        <div class="container">
+            <h2>Extracurricular Activities</h2>
+            <div class="section-content">
+                <ul>
+                    <li>President - Computer Science Club (2020-2022)</li>
+                    <li>Volunteer - Local Coding Bootcamp for Teens</li>
+                    <li>Member - University Hackathon Team</li>
+                    <li>Organizer - Tech Conference 2021</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modals -->
+    <div id="github-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('github-modal')">&times;</span>
+            <h3>How to Create a GitHub Account</h3>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Complete the verification process</li>
+                <li>Choose your plan (Free is sufficient for most users)</li>
+                <li>Complete your profile information</li>
+                <li>Start creating repositories for your projects!</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div id="linkedin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('linkedin-modal')">&times;</span>
+            <h3>How to Create a LinkedIn Account</h3>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill in your first and last name</li>
+                <li>Complete the verification process</li>
+                <li>Add your current position and education</li>
+                <li>Customize your profile with skills, experiences, and a professional photo</li>
+                <li>Start connecting with professionals in your field</li>
+            </ol>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

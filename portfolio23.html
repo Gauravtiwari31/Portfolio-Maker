@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f0f0f0;
+            --text-color: #333333;
+            --accent-color: #6a5acd;
+            --background-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --card-border: rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --text-color: #f0f0f0;
+            --background-color: #121212;
+            --card-bg: #1e1e1e;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .info-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .info-button:hover {
+            opacity: 1;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .date {
+            font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-tag {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--card-border);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .contact-info, .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+            <h1>Your Name</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>your.email@example.com</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="info-button" onclick="openModal('github-modal')">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <button class="info-button" onclick="openModal('linkedin-modal')">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+            </div>
+        </header>
+        
+        <main>
+            <section class="section">
+                <div class="card">
+                    <h2>About Me</h2>
+                    <p>Hello! I'm a passionate developer/designer/engineer with expertise in various technologies. I love creating beautiful, functional applications that solve real-world problems.</p>
+                    <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Education</h2>
+                    <div class="education-item">
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <p class="date">2018 - 2022</p>
+                        <p>University Name, City, Country</p>
+                        <p>GPA: 3.8/4.0</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>High School Diploma</h3>
+                        <p class="date">2014 - 2018</p>
+                        <p>High School Name, City, Country</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Experience</h2>
+                    <div class="experience-item">
+                        <h3>Software Developer</h3>
+                        <p class="date">June 2022 - Present</p>
+                        <p>Company Name, City, Country</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Developed and maintained web applications using modern frameworks</li>
+                            <li>Collaborated with cross-functional teams to deliver high-quality software</li>
+                            <li>Implemented responsive designs and optimized performance</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Intern Developer</h3>
+                        <p class="date">Summer 2021</p>
+                        <p>Another Company, City, Country</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Assisted in developing new features for the company's main product</li>
+                            <li>Participated in code reviews and team meetings</li>
+                            <li>Learned industry best practices and workflows</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Projects</h2>
+                    <div class="project-item">
+                        <h3>E-commerce Platform</h3>
+                        <p>A full-stack e-commerce solution with user authentication, product management, and payment processing.</p>
+                        <p><strong>Technologies:</strong> React, Node.js, MongoDB, Stripe API</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                    <div class="project-item">
+                        <h3>Task Management App</h3>
+                        <p>A collaborative task management application with real-time updates and team features.</p>
+                        <p><strong>Technologies:</strong> Vue.js, Firebase, Tailwind CSS</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                    <div class="project-item">
+                        <h3>Weather Dashboard</h3>
+                        <p>A weather application that displays current conditions and forecasts using data from multiple APIs.</p>
+                        <p><strong>Technologies:</strong> JavaScript, OpenWeather API, Chart.js</p>
+                        <a href="#" class="project-link">Project Link</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-container">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Area of Interest</h2>
+                    <div class="skills-container">
+                        <span class="skill-tag">Web Development</span>
+                        <span class="skill-tag">Mobile Development</span>
+                        <span class="skill-tag">Cloud Computing</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Honors & Awards</h2>
+                    <div class="honor-item">
+                        <h3>Dean's List</h3>
+                        <p class="date">2019 - 2022</p>
+                        <p>Awarded for academic excellence each semester</p>
+                    </div>
+                    <div class="honor-item">
+                        <h3>Hackathon Winner</h3>
+                        <p class="date">2021</p>
+                        <p>First place in regional coding competition</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="card">
+                    <h2>Extracurricular Activities</h2>
+                    <div class="extracurricular-item">
+                        <h3>Computer Science Club</h3>
+                        <p class="date">2019 - 2022</p>
+                        <p>Organized workshops and coding competitions for members</p>
+                    </div>
+                    <div class="extracurricular-item">
+                        <h3>Volunteer Tutor</h3>
+                        <p class="date">2020 - 2021</p>
+                        <p>Taught programming basics to underprivileged students</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- GitHub Info Modal -->
+    <div id="github-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('github-modal')">&times;</span>
+            <h2>How to Create a GitHub Account</h2>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank" style="color: var(--accent-color);">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Verify your email address</li>
+                <li>Complete the setup by answering a few questions (optional)</li>
+                <li>Start using GitHub to host your projects and collaborate with others</li>
+            </ol>
+            <p>GitHub is essential for developers to showcase their work, contribute to open source, and collaborate on projects.</p>
+        </div>
+    </div>
+    
+    <!-- LinkedIn Info Modal -->
+    <div id="linkedin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('linkedin-modal')">&times;</span>
+            <h2>How to Create a LinkedIn Account</h2>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank" style="color: var(--accent-color);">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill in your first and last name</li>
+                <li>Verify your email address</li>
+                <li>Complete your profile by adding your education, experience, and skills</li>
+                <li>Connect with professionals in your field</li>
+            </ol>
+            <p>LinkedIn is the professional social network where you can showcase your career, connect with colleagues, and find job opportunities.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved user preference or use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>

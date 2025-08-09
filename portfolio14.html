@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .profile h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info a:hover {
+            transform: translateY(-3px);
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px) rotate(10deg);
+        }
+        
+        .social-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .info-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .social-icon:hover .info-tooltip {
+            opacity: 1;
+        }
+        
+        .cube-container {
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            margin: 0 auto;
+        }
+        
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 15s infinite linear;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            backface-visibility: visible;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+        .cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(100px); }
+        .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(100px); }
+        .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(100px); }
+        .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(100px); }
+        .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(100px); }
+        
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .card p {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .card .date {
+            font-style: italic;
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .skill-tag:hover {
+            background-color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .floating-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(0, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .cube-container {
+                margin-top: 2rem;
+            }
+            
+            .profile h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="floating-bg">
+            <div class="floating-element" style="width: 100px; height: 100px; top: 10%; left: 10%;"></div>
+            <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 70%;"></div>
+            <div class="floating-element" style="width: 80px; height: 80px; top: 30%; left: 80%;"></div>
+            <div class="floating-element" style="width: 120px; height: 120px; top: 70%; left: 20%;"></div>
+        </div>
+        <div class="container header-content">
+            <div class="profile">
+                <h1>John Doe</h1>
+                <p>Web Developer & Designer</p>
+                
+                <div class="contact-info">
+                    <a href="tel:+1234567890">
+                        <i class="fas fa-phone"></i> +1 (234) 567-890
+                    </a>
+                    <a href="mailto:john.doe@example.com">
+                        <i class="fas fa-envelope"></i> john.doe@example.com
+                    </a>
+                </div>
+                
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                        <div class="info-tooltip">Visit my GitHub profile</div>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-tooltip">How to create a GitHub account: Go to github.com and click 'Sign up'</div>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <div class="info-tooltip">Visit my LinkedIn profile</div>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-tooltip">How to create a LinkedIn account: Go to linkedin.com and click 'Join now'</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cube-container">
+                <div class="cube">
+                    <div class="cube-face"><i class="fas fa-code"></i></div>
+                    <div class="cube-face"><i class="fas fa-laptop-code"></i></div>
+                    <div class="cube-face"><i class="fas fa-paint-brush"></i></div>
+                    <div class="cube-face"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="cube-face"><i class="fas fa-database"></i></div>
+                    <div class="cube-face"><i class="fas fa-server"></i></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>Master of Computer Science</h3>
+                    <p class="date">2020 - 2022</p>
+                    <p>University of Technology</p>
+                    <p>GPA: 3.8/4.0</p>
+                    <p>Specialization in Web Technologies</p>
+                </div>
+                <div class="card">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p class="date">2016 - 2020</p>
+                    <p>State University</p>
+                    <p>GPA: 3.6/4.0</p>
+                    <p>Minor in Digital Design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>Senior Web Developer</h3>
+                    <p class="date">2022 - Present</p>
+                    <p>Tech Solutions Inc.</p>
+                    <ul>
+                        <li>Lead developer for company's flagship web application</li>
+                        <li>Implemented responsive design for mobile users</li>
+                        <li>Optimized performance reducing load times by 40%</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Web Developer Intern</h3>
+                    <p class="date">2019 - 2020</p>
+                    <p>Digital Creations LLC</p>
+                    <ul>
+                        <li>Developed and maintained client websites</li>
+                        <li>Assisted in UX/UI design improvements</li>
+                        <li>Implemented SEO best practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>E-commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with payment integration</p>
+                    <p><strong>Technologies:</strong> React, Node.js, MongoDB, Stripe API</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="card">
+                    <h3>Portfolio Generator</h3>
+                    <p>A web app that generates personalized portfolio websites</p>
+                    <p><strong>Technologies:</strong> Vue.js, Firebase, SCSS</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+                <div class="card">
+                    <h3>Task Management App</h3>
+                    <p>Collaborative task management with real-time updates</p>
+                    <p><strong>Technologies:</strong> Angular, NestJS, WebSockets</p>
+                    <a href="#" class="project-link">Project Link</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="card">
+                <h3>Programming Languages</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+                
+                <h3 style="margin-top: 1.5rem;">Frameworks & Libraries</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Vue.js</span>
+                    <span class="skill-tag">Angular</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">Django</span>
+                </div>
+                
+                <h3 style="margin-top: 1.5rem;">Tools & Platforms</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="interests">
+        <div class="container">
+            <h2>Area of Interest</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>Web Accessibility</h3>
+                    <p>Creating inclusive web experiences for all users</p>
+                </div>
+                <div class="card">
+                    <h3>Progressive Web Apps</h3>
+                    <p>Building app-like experiences on the web</p>
+                </div>
+                <div class="card">
+                    <h3>UI/UX Design</h3>
+                    <p>Crafting intuitive and beautiful user interfaces</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="honors">
+        <div class="container">
+            <h2>Honors & Awards</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>Best Web Project 2022</h3>
+                    <p class="date">Tech Innovation Awards</p>
+                    <p>Awarded for innovative use of WebGL in e-commerce</p>
+                </div>
+                <div class="card">
+                    <h3>Dean's List</h3>
+                    <p class="date">2018 - 2020</p>
+                    <p>Academic excellence recognition</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="extracurriculars">
+        <div class="container">
+            <h2>Extracurriculars</h2>
+            <div class="section-content">
+                <div class="card">
+                    <h3>Tech Meetup Organizer</h3>
+                    <p class="date">2021 - Present</p>
+                    <p>Organize monthly web development meetups</p>
+                </div>
+                <div class="card">
+                    <h3>Open Source Contributor</h3>
+                    <p class="date">2019 - Present</p>
+                    <p>Contribute to various JavaScript open source projects</p>
+                </div>
+                <div class="card">
+                    <h3>Coding Mentor</h3>
+                    <p class="date">2020 - Present</p>
+                    <p>Mentor aspiring developers through online platforms</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 John Doe. All rights reserved.</p>
+            <p>Designed with ❤️ and modern web technologies</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Make cube interactive
+        const cube = document.querySelector('.cube');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cubeX = 0;
+        let cubeY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) / 100;
+            mouseY = (e.clientY - window.innerHeight / 2) / 100;
+        });
+        
+        function animateCube() {
+            cubeX += (mouseX - cubeX) * 0.05;
+            cubeY += (mouseY - cubeY) * 0.05;
+            
+            cube.style.transform = `rotateX(${cubeY}deg) rotateY(${cubeX}deg)`;
+            
+            requestAnimationFrame(animateCube);
+        }
+        
+        animateCube();
+        
+        // Add zoom effect to cards on hover
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .info-tooltip {
+            position: absolute;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            width: 200px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .info-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .info-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .info-btn:hover + .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+            font-size: 2rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .education-item:hover, .experience-item:hover, .project-item:hover, .honor-item:hover, .extracurricular-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .interest-item {
+            display: inline-block;
+            background-color: var(--light-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .interest-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .project-link i {
+            margin-left: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+            <h1>John Doe</h1>
+            <p class="tagline">Web Developer & UI/UX Enthusiast</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>john.doe@example.com</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                    <button class="info-btn">i</button>
+                    <div class="info-tooltip">
+                        To create a GitHub account: Go to github.com, click Sign Up, enter your details, verify your email, and you're ready to go!
+                    </div>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                    <button class="info-btn">i</button>
+                    <div class="info-tooltip">
+                        To create a LinkedIn account: Visit linkedin.com, click Join Now, enter your information, connect with others, and build your professional profile.
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="education">
+            <h2>Education</h2>
+            <div class="section-content">
+                <div class="education-item">
+                    <h3>Master of Computer Science</h3>
+                    <p class="date">2020 - 2022</p>
+                    <p>Stanford University, Stanford, CA</p>
+                    <p>Specialization in Artificial Intelligence</p>
+                </div>
+                <div class="education-item">
+                    <h3>Bachelor of Science in Computer Engineering</h3>
+                    <p class="date">2016 - 2020</p>
+                    <p>University of California, Berkeley</p>
+                    <p>Minor in Mathematics</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="section-content">
+                <div class="experience-item">
+                    <h3>Senior Web Developer</h3>
+                    <p class="date">2022 - Present</p>
+                    <p>Google, Mountain View, CA</p>
+                    <ul>
+                        <li>Developed and maintained responsive web applications</li>
+                        <li>Led a team of 5 developers in implementing new features</li>
+                        <li>Optimized application performance reducing load time by 40%</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h3>Frontend Developer Intern</h3>
+                    <p class="date">Summer 2021</p>
+                    <p>Facebook, Menlo Park, CA</p>
+                    <ul>
+                        <li>Implemented new UI components using React</li>
+                        <li>Collaborated with designers to improve user experience</li>
+                        <li>Fixed critical bugs in the main application</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="section-content">
+                <div class="project-item">
+                    <h3>E-Commerce Platform</h3>
+                    <p class="date">2023</p>
+                    <p>A full-stack e-commerce solution with payment integration, product management, and user authentication.</p>
+                    <p><strong>Technologies:</strong> React, Node.js, MongoDB, Stripe API</p>
+                    <a href="#" class="project-link">Project Link <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="project-item">
+                    <h3>Task Management App</h3>
+                    <p class="date">2022</p>
+                    <p>A collaborative task management application with real-time updates and team features.</p>
+                    <p><strong>Technologies:</strong> Vue.js, Firebase, Vuex</p>
+                    <a href="#" class="project-link">Project Link <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="section-content">
+                <div class="skills-container">
+                    <div class="skill">HTML5</div>
+                    <div class="skill">CSS3</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">React</div>
+                    <div class="skill">Vue.js</div>
+                    <div class="skill">Node.js</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">Django</div>
+                    <div class="skill">MongoDB</div>
+                    <div class="skill">PostgreSQL</div>
+                    <div class="skill">Git</div>
+                    <div class="skill">Docker</div>
+                    <div class="skill">AWS</div>
+                    <div class="skill">UI/UX Design</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests">
+            <h2>Area of Interest</h2>
+            <div class="section-content" style="text-align: center;">
+                <div class="interest-item">Artificial Intelligence</div>
+                <div class="interest-item">Machine Learning</div>
+                <div class="interest-item">Web Development</div>
+                <div class="interest-item">Mobile Development</div>
+                <div class="interest-item">Cloud Computing</div>
+                <div class="interest-item">Data Visualization</div>
+                <div class="interest-item">User Experience</div>
+                <div class="interest-item">Blockchain</div>
+            </div>
+        </section>
+
+        <section id="honors">
+            <h2>Honors & Awards</h2>
+            <div class="section-content">
+                <div class="honor-item">
+                    <h3>Google Developer Scholarship</h3>
+                    <p class="date">2021</p>
+                    <p>Awarded to top 1% of applicants for demonstrating exceptional coding skills and potential.</p>
+                </div>
+                <div class="honor-item">
+                    <h3>Best Senior Project Award</h3>
+                    <p class="date">2020</p>
+                    <p>Recognized for developing an innovative AI-based solution for campus navigation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="extracurriculars">
+            <h2>Extracurricular Activities</h2>
+            <div class="section-content">
+                <div class="extracurricular-item">
+                    <h3>Tech Club President</h3>
+                    <p class="date">2019 - 2020</p>
+                    <p>Organized hackathons, coding workshops, and tech talks with industry professionals.</p>
+                </div>
+                <div class="extracurricular-item">
+                    <h3>Volunteer Coding Instructor</h3>
+                    <p class="date">2018 - Present</p>
+                    <p>Teach programming fundamentals to underprivileged youth in local community centers.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 John Doe. All rights reserved.</p>
+            <p>Designed with ❤️ and modern web technologies</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const items = document.querySelectorAll('.education-item, .experience-item, .project-item, .honor-item, .extracurricular-item');
+            
+            items.forEach(item => {
+                const itemPosition = item.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(itemPosition < screenPosition) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animation
+        document.querySelectorAll('.education-item, .experience-item, .project-item, .honor-item, .extracurricular-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        // Run on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

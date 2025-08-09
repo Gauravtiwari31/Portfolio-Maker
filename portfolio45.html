@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ram Manohar - Business Development Executive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#0f172a',
+                        'neon-blue': '#3b82f6',
+                        'electric-blue': '#2563eb',
+                        'cyan': '#06b6d4',
+                        'dark-teal': '#0f766e'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0e7490 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #020617 0%, #1e3a8a 50%, #164e63 100%);
+        }
+        .gradient-bg {
+        background: linear-gradient(135deg, #0a0e23 0%, #3b0764 50%, #0066ff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .dark .gradient-bg {
+        background: linear-gradient(135deg, #02000e 0%, #6d28d9 50%, #00f0ff 100%);
+    }
+    
+    .animated-bg {
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
+        animation: bgShift 15s ease-in-out infinite;
+    }
+    
+    .bg-element-1 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, #00f0ff, transparent 70%);
+        top: 20%;
+        left: 10%;
+    }
+    
+    .bg-element-2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, #7e22ce, transparent 70%);
+        bottom: 15%;
+        right: 10%;
+    }
+    
+    .bg-element-3 {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, #ff00aa, transparent 70%);
+        top: 60%;
+        left: 30%;
+    }
+        #cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        .cursor-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.7);
+            pointer-events: none;
+            animation: particle-fade 1s forwards;
+            mix-blend-mode: screen;
+        }
+        
+        @keyframes particle-fade {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+        
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: floatShape 15s infinite ease-in-out;
+            cursor: move;
+            user-select: none;
+            z-index: 1;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(90deg); }
+            50% { transform: translate(0, -60px) rotate(180deg); }
+            75% { transform: translate(-50px, -30px) rotate(270deg); }
+        }
+        
+        .card-hover {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        }
+        
+        .skill-tag {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .theme-transition {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+        
+        .content-layer {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-neon-blue { color: #3b82f6; }
+        .text-electric-blue { color: #2563eb; }
+        .bg-neon-blue { background-color: #3b82f6; }
+        .bg-electric-blue { background-color: #2563eb; }
+        
+        nav {
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .animated-bg {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: bgShift 15s ease-in-out infinite;
+        }
+        
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 0%, 100% 100%; }
+            50% { background-position: 100% 50%, 0% 50%; }
+        }
+        
+        .cyber-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, #06b6d4, #3b82f6, transparent);
+            animation: borderSlide 3s linear infinite;
+        }
+        
+        @keyframes borderSlide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Interactive background elements */
+        .interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            transition: transform 0.5s ease-out;
+        }
+        
+        .bg-element-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #3b82f6, transparent 70%);
+            top: 20%;
+            left: 10%;
+        }
+        
+        .bg-element-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #06b6d4, transparent 70%);
+            bottom: 15%;
+            right: 10%;
+        }
+        
+        .bg-element-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #0ea5e9, transparent 70%);
+            top: 60%;
+            left: 30%;
+        }
+    </style>
+</head>
+<body class="theme-transition bg-deep-blue dark:bg-gray-900 text-gray-100 dark:text-gray-100">
+    <!-- Interactive Background Elements -->
+    <div class="interactive-bg">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+        <div class="bg-element bg-element-3"></div>
+    </div>
+
+    <!-- Cursor Trail Container -->
+    <div id="cursor-trail"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-deep-blue/80 dark:bg-gray-900/80 backdrop-blur-md z-50 shadow-lg cyber-border">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-neon-blue glow-blue">RM</h1>
+                <div class="flex items-center space-x-6">
+                    <a href="#about" class="hover:text-neon-blue transition-colors">About</a>
+                    <a href="#experience" class="hover:text-neon-blue transition-colors">Experience</a>
+                    <a href="#expertise" class="hover:text-neon-blue transition-colors">Expertise</a>
+                    <a href="#education" class="hover:text-neon-blue transition-colors">Education</a>
+                    <a href="#contact" class="hover:text-neon-blue transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors glow-blue">
+                        <i class="fas fa-sun text-yellow-400 dark:hidden"></i>
+                        <i class="fas fa-moon text-blue-400 hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-screen flex items-center justify-center text-white">
+        <!-- Floating geometric shapes -->
+        <div class="smoke-container">
+            <div class="floating-shape" style="width: 100px; height: 100px; top: 20%; left: 15%; animation-delay: 0s;"></div>
+            <div class="floating-shape" style="width: 80px; height: 80px; top: 60%; left: 80%; animation-delay: 5s;"></div>
+            <div class="floating-shape" style="width: 60px; height: 60px; top: 40%; left: 90%; animation-delay: 10s;"></div>
+            <div class="floating-shape" style="width: 120px; height: 120px; top: 70%; left: 10%; animation-delay: 15s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center content-layer">
+            <div class="animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-blue">Ram Manohar</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 text-neon-blue">Business Development Executive</p>
+                <p class="text-lg mb-8 opacity-80">Results-driven executive with a sharp strategic mind and a reputation for disrupting industries and dominating markets.</p>
+                <div class="flex justify-center space-x-4 mb-8">
+                    <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" 
+                       class="bg-white/20 hover:bg-neon-blue/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-blue">
+                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                    </a>
+                    <a href="mailto:thomas@novoresume.com" 
+                       class="bg-white/20 hover:bg-electric-blue/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-cyan">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </a>
+                </div>
+                <a href="#about" class="inline-block animate-bounce">
+                    <i class="fas fa-chevron-down text-2xl text-neon-blue"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800 dark:bg-gray-800 animated-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Professional Profile</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
+                    <p class="text-lg leading-relaxed mb-6 text-gray-200">
+                        Results-driven Business Development Executive with a sharp strategic mind and a reputation for disrupting industries and dominating markets. 
+                        Adept at high-stakes negotiations, corporate expansion, and financial risk assessment. Skilled in developing innovative solutions 
+                        for scaling businesses, optimizing revenue streams, and fostering high-impact partnerships. Excels in dynamic, high-pressure 
+                        environments where adaptability and foresight are paramount.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-neon-blue">Contact Info</h3>
+                            <div class="space-y-2 text-gray-200">
+                                <p><i class="fas fa-envelope text-electric-blue mr-2"></i>thomas@novoresume.com</p>
+                                <p><i class="fas fa-phone text-electric-blue mr-2"></i>(555) 1919-1929</p>
+                                <p><i class="fas fa-map-marker-alt text-electric-blue mr-2"></i>London, UK</p>
+                                <p><i class="fab fa-linkedin text-electric-blue mr-2"></i>linkedin.com/in/ram.manohar</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-neon-blue">Languages</h3>
+                            <div class="space-y-2 text-gray-200">
+                                <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>English - Native</p>
+                                <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>French - Professional</p>
+                                <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>Mandarin - Professional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-900 dark:bg-gray-900 animated-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Work Experience</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- CEO Experience -->
+                <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover shadow-lg backdrop-blur-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-briefcase text-electric-blue text-2xl mr-3 glow-cyan"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">CEO & Managing Director</h3>
+                            <p class="text-gray-300">Shelby Company Ltd.</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-neon-blue font-semibold">Global Operations</p>
+                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">06/2016 - Present</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-globe text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Scaled operations globally, expanding into new markets across Europe, the U.S., and Asia.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-handshake text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Spearheaded multi-million-dollar acquisitions, integrating strategic partners into a growing corporate empire.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-file-contract text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Negotiated high-profile contracts with Fortune 500 clients and private equity investors, securing record-breaking funding rounds.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-shield-alt text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Established a risk and security compliance division, ensuring corporate governance and legal protection in high-stakes industries.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-chess-queen text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Led a diversification strategy, successfully expanding into fintech, logistics, and cybersecurity sectors.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Development Director -->
+                <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover shadow-lg backdrop-blur-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-electric-blue text-2xl mr-3 glow-cyan"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Business Development Director</h3>
+                            <p class="text-gray-300">Small Heath Enterprises</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-neon-blue font-semibold">Revenue Growth & Strategy</p>
+                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">02/2010 - 05/2016</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-chart-pie text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Increased annual revenue by 250% through data-driven market penetration strategies.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-robot text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Introduced CRM automation, improving customer engagement and retention by 45%.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-balance-scale text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Developed a risk management framework to mitigate financial volatility and secure long-term profitability.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-users text-neon-blue mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-300">Led a cross-functional team in executing high-impact growth initiatives, optimizing supply chain logistics, and expanding distribution channels.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-20 bg-gray-800 dark:bg-gray-800 animated-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Areas of Expertise</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Core Skills -->
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-6 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-neon-blue flex items-center">
+                            <i class="fas fa-star mr-2"></i>Core Competencies
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Market Intelligence</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Competitive Analysis</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Advanced Negotiation</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Stakeholder Management</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Risk Mitigation</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Crisis Management</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Strategic Growth</span>
+                                    <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Market Expansion</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Skills -->
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-6 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-electric-blue flex items-center">
+                            <i class="fas fa-cogs mr-2"></i>Technical Proficiencies
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Cybersecurity</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Compliance Frameworks</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Financial Forecasting</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Investment Strategy</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">AI & Machine Learning</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Business Insights</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">CRM & Automation</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Salesforce</span>
+                                    <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">HubSpot</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900 dark:bg-gray-900 animated-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Education & Achievements</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Education -->
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                            <i class="fas fa-graduation-cap text-electric-blue mr-3 glow-cyan"></i>Education
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-neon-blue pl-4">
+                                <h4 class="text-xl font-bold text-white">MBA in Business Strategy & Finance</h4>
+                                <p class="text-gray-300">London Business School</p>
+                                <p class="text-sm text-gray-400">Specialization in Competitive Strategy, Mergers & Acquisitions, and Global Markets</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Honors & Awards -->
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                            <i class="fas fa-trophy text-electric-blue mr-3 glow-cyan"></i>Honors & Awards
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-white">European Business Titan Award (2021)</h4>
+                                <p class="text-gray-300">Recognized for innovative leadership in global expansion</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Top 50 CEOs in Emerging Markets (2020)</h4>
+                                <p class="text-gray-300">For spearheading transformative business growth</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Strategic Disruptor of the Year (2019)</h4>
+                                <p class="text-gray-300">Awarded for aggressive market dominance strategies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conferences & Courses -->
+                <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 mt-8 card-hover backdrop-blur-sm">
+                    <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
+                        <i class="fas fa-microphone text-electric-blue mr-3 glow-cyan"></i>Conferences & Courses
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-600/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-white">Davos World Economic Forum (2023)</h4>
+                            <p class="text-sm text-gray-300">Speaker on global market shifts & industry dominance</p>
+                        </div>
+                        <div class="bg-gray-600/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-white">MIT Sloan Executive Summit (2022)</h4>
+                            <p class="text-sm text-gray-300">On AI for predictive business strategy</p>
+                        </div>
+                        <div class="bg-gray-600/30 p-4 rounded-lg">
+                            <h4 class="font-semibold text-white">The Art of War in Business (2021)</h4>
+                            <p class="text-sm text-gray-300">Keynote on corporate warfare strategies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800 dark:bg-gray-800 animated-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-white">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-electric-blue text-xl mr-4 glow-cyan"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Email</p>
+                                    <p class="text-gray-300">thomas@novoresume.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-electric-blue text-xl mr-4 glow-cyan"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Phone</p>
+                                    <p class="text-gray-300">(555) 1919-1929</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-electric-blue text-xl mr-4 glow-cyan"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Location</p>
+                                    <p class="text-gray-300">London, United Kingdom</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
+                        <h3 class="text-2xl font-semibold mb-6 text-white">Professional Network</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" 
+                               class="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors glow-blue">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="mt-6 text-gray-300">
+                            I'm always open to discussing new business opportunities, strategic partnerships, or speaking engagements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Ram Manohar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    'deep-blue': '#0a0e23',
+                    'neon-blue': '#00f0ff',
+                    'electric-blue': '#0066ff',
+                    'cyan': '#00f7ff',
+                    'dark-teal': '#00c2cb',
+                    'violet': '#7e22ce',
+                    'hot-pink': '#ff00aa'
+                }
+            }
+        }
+    }
+        // Enhanced Cursor Particle Trail Effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorTrail = document.getElementById('cursor-trail');
+            let lastX = 0;
+            let lastY = 0;
+            let mouseSpeed = 0;
+            let particleCount = 0;
+            const maxParticles = 100;
+            
+            document.addEventListener('mousemove', (e) => {
+                const nowX = e.clientX;
+                const nowY = e.clientY;
+                
+                const deltaX = nowX - lastX;
+                const deltaY = nowY - lastY;
+                mouseSpeed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                
+                // Create particles based on mouse speed
+                const particlesToCreate = Math.min(3, Math.floor(mouseSpeed / 5));
+                
+                for (let i = 0; i < particlesToCreate; i++) {
+                    if (particleCount < maxParticles) {
+                        createParticle(nowX, nowY);
+                        particleCount++;
+                    }
+                }
+                
+                lastX = nowX;
+                lastY = nowY;
+            });
+            
+            function createParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'cursor-particle';
+                
+                // Randomize size and color slightly
+                const size = 4 + Math.random() * 6;
+                const hue = 210 + Math.random() * 30; // Blue-ish range
+                const saturation = 70 + Math.random() * 20;
+                const lightness = 50 + Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.7)`;
+                
+                // Random movement direction
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 1 + Math.random() * 3;
+                const xVelocity = Math.cos(angle) * velocity;
+                const yVelocity = Math.sin(angle) * velocity;
+                
+                cursorTrail.appendChild(particle);
+                
+                // Animate particle
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+                let scale = 1;
+                
+                const animate = () => {
+                    posX += xVelocity;
+                    posY += yVelocity;
+                    opacity -= 0.02;
+                    scale -= 0.01;
+                    
+                    if (opacity <= 0) {
+                        particle.remove();
+                        particleCount--;
+                        return;
+                    }
+                    
+                    particle.style.left = `${posX}px`;
+                    particle.style.top = `${posY}px`;
+                    particle.style.opacity = opacity;
+                    particle.style.transform = `scale(${scale})`;
+                    
+                    requestAnimationFrame(animate);
+                };
+                
+                requestAnimationFrame(animate);
+            }
+        });
+
+        // Draggable background elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgElements = document.querySelectorAll('.bg-element');
+            let isDragging = false;
+            let currentElement = null;
+            let offsetX, offsetY;
+            
+            bgElements.forEach(element => {
+                element.style.pointerEvents = 'auto';
+                element.style.cursor = 'move';
+                
+                element.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    currentElement = element;
+                    offsetX = e.clientX - element.getBoundingClientRect().left;
+                    offsetY = e.clientY - element.getBoundingClientRect().top;
+                    element.style.transition = 'none';
+                    e.preventDefault();
+                });
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging || !currentElement) return;
+                
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                
+                currentElement.style.left = `${x}px`;
+                currentElement.style.top = `${y}px`;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isDragging && currentElement) {
+                    currentElement.style.transition = 'transform 0.5s ease-out';
+                    isDragging = false;
+                    currentElement = null;
+                }
+            });
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            htmlElement.classList.add('dark');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-deep-blue/90', 'dark:bg-gray-900/90');
+                nav.classList.remove('bg-deep-blue/80', 'dark:bg-gray-900/80');
+            } else {
+                nav.classList.add('bg-deep-blue/80', 'dark:bg-gray-900/80');
+                nav.classList.remove('bg-deep-blue/90', 'dark:bg-gray-900/90');
+            }
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Typing effect for the main title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        window.addEventListener('load', () => {
+            const titleElement = document.querySelector('h1');
+            if (titleElement && titleElement.textContent === 'Ram Manohar') {
+                typeWriter(titleElement, 'Ram Manohar', 150);
+            }
+        });
+    </script>
+</body>
+</html>
