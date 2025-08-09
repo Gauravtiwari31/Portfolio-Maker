@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real‑Time Video Effects (Single HTML)</title>
+  <style>
+    :root{
+      --bg:#0b0d10;--panel:#12161b;--muted:#8892a6;--accent:#7c5cff;--text:#e8ecf3;--warn:#ffb86b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b0d10,#0d1117);color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    header{padding:14px 18px;border-bottom:1px solid #1b2230;background:rgba(10,12,16,.7);backdrop-filter:saturate(140%) blur(8px);position:sticky;top:0;z-index:5}
+    header h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
+    header small{display:block;color:var(--muted)}
+
+    .wrap{padding:16px;display:grid;grid-template-columns: 280px 1fr;gap:16px;min-height:calc(100% - 56px)}
+    @media (max-width: 980px){.wrap{grid-template-columns:1fr}}
+
+    /* Sidebar */
+    .panel{background:var(--panel);border:1px solid #1a2233;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .controls{padding:14px;position:sticky;top:78px;max-height:calc(100vh - 96px);overflow:auto}
+    .controls h2{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#9fb3c8}
+    .group{padding:12px;border:1px solid #202a3d;border-radius:12px;margin:10px 0;background:#0f1319}
+    .group label{display:flex;justify-content:space-between;gap:10px;margin:10px 0;color:#c9d7ee}
+    .group input[type="range"]{width:100%}
+    .row{display:flex;gap:8px;align-items:center}
+    select,button,input[type="file"]{background:#0c1117;color:var(--text);border:1px solid #243049;border-radius:10px;padding:8px 10px;font-size:13px}
+    button{cursor:pointer}
+    button.primary{background:linear-gradient(180deg,#7c5cff,#5f3bff);border-color:#6c4dff}
+    button.ghost{background:#0c1117;border-color:#2b3750}
+    button:disabled{opacity:.5;cursor:not-allowed}
+
+    /* Stage */
+    .stage{display:grid;gap:12px}
+    body.drag-over{background:linear-gradient(180deg,#1a1f3a,#2a1f3a);}
+
+    .players{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 980px){.players{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid #1a2233;border-radius:14px;position:relative;overflow:hidden}
+    .card h3{position:absolute;left:10px;top:8px;margin:0;font-size:12px;color:#c0c9da;background:#0c1117;border:1px solid #232e46;border-radius:999px;padding:4px 8px}
+    .video-wrap{aspect-ratio:16/9;background:#000;display:grid;place-items:center}
+    video,canvas{max-width:100%;width:100%;height:auto;display:block}
+
+    .bar{display:flex;flex-wrap:wrap;gap:8px}
+    .hint{color:var(--muted);font-size:12px}
+    footer{padding:12px 18px;color:#9db1c7}
+    code.inline{background:#0c1117;border:1px solid #232e46;border-radius:6px;padding:0 6px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Real‑Time Video Effects <small>Upload a video → preview original & processed side‑by‑side → tweak sliders → (optional) record/export processed output</small></h1>
+  </header>
+
+  <div class="wrap">
+    <!-- Controls Sidebar -->
+    <aside class="panel">
+      <div class="controls">
+        <h2>1) Load Video</h2>
+        <div class="group">
+          <input id="file" type="file" accept="video/*" style="width:100%;word-wrap:break-word;overflow:hidden;text-overflow:ellipsis;" />
+          <div class="hint" style="margin-top:8px">or drop a file onto the page</div>
+        </div>
+
+        <h2>2) Choose Effect</h2>
+        <div class="group">
+          <label class="row" style="gap:10px">
+            <span>Effect</span>
+            <select id="effect">
+              <option value="none">None</option>
+              <option value="grayscale">Grayscale</option>
+              <option value="sepia">Sepia</option>
+              <option value="invert">Invert</option>
+              <option value="hue">Hue Rotate</option>
+              <option value="sat">Saturation</option>
+              <option value="bc">Brightness / Contrast</option>
+              <option value="vignette">Vignette</option>
+              <option value="pixelate">Pixelate</option>
+              <option value="blur">Blur (9‑tap)</option>
+              <option value="sobel">Edge Detect (Sobel)</option>
+              <option value="sharpen">Sharpen</option>
+              <option value="posterize">Posterize</option>
+              <option value="glitch">Scanline / Jitter</option>
+            </select>
+          </label>
+          <div id="params"></div>
+        </div>
+
+        <h2>3) Export</h2>
+        <div class="group">
+          <div class="bar">
+            <button id="downloadVideo" class="primary" disabled>Download Processed Video</button>
+            <button id="snapshot" class="ghost" disabled>Capture Frame (PNG)</button>
+          </div>
+          <div class="hint" style="margin-top:6px">Download saves the current <b>processed</b> frame as video or image.</div>
+        </div>
+
+        <h2>Tips</h2>
+        <div class="group">
+          <ul style="margin:0 0 0 16px;padding:0;color:#b9c8da">
+            <li>Use the video controls under the Original panel to play/pause or seek.</li>
+            <li>All effects run on the GPU via WebGL for real‑time playback.</li>
+            <li>Edge and Blur are heavier; reduce resolution or slider values if needed.</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Stage -->
+    <main class="stage">
+      <div class="players">
+        <section class="card">
+          <h3>Original</h3>
+          <div class="video-wrap">
+            <video id="vid" playsinline controls muted></video>
+          </div>
+        </section>
+        <section class="card">
+          <h3>Processed</h3>
+          <div class="video-wrap">
+            <canvas id="gl"></canvas>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    Built with plain HTML + WebGL shaders. No frameworks, no servers, all in one file 👌
+  </footer>
+
+  <script>
+  // ---------- Helpers ----------
+  const $ = (sel, el=document) => el.querySelector(sel);
+  const fileInput = $('#file');
+  const vid = $('#vid');
+  const glCanvas = $('#gl');
+
+  const effectSel = $('#effect');
+  const paramsBox = $('#params');
+
+  const downloadVideoBtn = $('#downloadVideo');
+  const snapshotBtn = $('#snapshot');
+
+  let gl, program, texture, positionBuffer, texcoordBuffer, vao;
+  let width = 1280, height = 720; // will adapt to video
+  let rafId;
+
+
+  const state = {
+    effect: 'none',
+    uniforms: {},
+  };
+
+  const VERT = `#version 300 es
+  in vec2 a_position; in vec2 a_texcoord; out vec2 v_uv;
+  void main(){ v_uv = a_texcoord; gl_Position = vec4(a_position,0.,1.); }
+  `;
+
+  // Common fragment header with sampler
+  const FRAG_BASE = `#version 300 es
+  precision highp float;
+  uniform sampler2D u_tex;
+  uniform vec2 u_texSize;
+  uniform float u_time;
+  in vec2 v_uv; out vec4 outColor;
+
+  vec3 rgb2hsv(vec3 c){
+    vec4 K = vec4(0., -1./3., 2./3., -1.);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+    float d = q.x - min(q.w, q.y); float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y)/(6.*d + e)), d/(q.x + e), q.x);
+  }
+  vec3 hsv2rgb(vec3 c){
+    vec3 p = abs(fract(c.xxx + vec3(0.,1./3.,2./3.))*6.-3.);
+    return c.z * mix(vec3(1.), clamp(p-1.,0.,1.), c.y);
+  }
+  `;
+
+  const EFFECTS = {
+    none: { name: 'None', params: [], frag: FRAG_BASE + `
+      void main(){ outColor = texture(u_tex, v_uv); }
+    `},
+    grayscale: { name:'Grayscale', params:[], frag: FRAG_BASE + `
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; float g = dot(c, vec3(0.299,0.587,0.114)); outColor = vec4(vec3(g),1.); }
+    `},
+    sepia: { name:'Sepia', params:[], frag: FRAG_BASE + `
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; vec3 s = vec3(
+        dot(c, vec3(0.393,0.769,0.189)),
+        dot(c, vec3(0.349,0.686,0.168)),
+        dot(c, vec3(0.272,0.534,0.131))
+      ); outColor = vec4(s,1.); }
+    `},
+    invert: { name:'Invert', params:[], frag: FRAG_BASE + `
+      void main(){ vec4 c = texture(u_tex, v_uv); outColor = vec4(vec3(1.)-c.rgb, c.a); }
+    `},
+    hue: { name:'Hue Rotate', params:[{key:'uHue',label:'Hue (°)',min:0,max:360,step:1,def:0}], frag: FRAG_BASE + `
+      uniform float uHue; // degrees
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; vec3 hsv = rgb2hsv(c); hsv.x = fract(hsv.x + uHue/360.0); outColor = vec4(hsv2rgb(hsv),1.); }
+    `},
+    sat: { name:'Saturation', params:[{key:'uSat',label:'Saturation',min:0,max:3,step:0.01,def:1}], frag: FRAG_BASE + `
+      uniform float uSat;
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; vec3 hsv = rgb2hsv(c); hsv.y *= uSat; outColor = vec4(hsv2rgb(hsv),1.); }
+    `},
+    bc: { name:'Brightness/Contrast', params:[
+      {key:'uBright',label:'Brightness',min:-1,max:1,step:0.01,def:0},
+      {key:'uContrast',label:'Contrast',min:0,max:3,step:0.01,def:1}
+    ], frag: FRAG_BASE + `
+      uniform float uBright; uniform float uContrast;
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; c = c + uBright; c = (c - 0.5) * uContrast + 0.5; outColor = vec4(c,1.); }
+    `},
+    vignette: { name:'Vignette', params:[
+      {key:'uVignette',label:'Strength',min:0,max:1,step:0.01,def:0.5},
+      {key:'uSoft',label:'Softness',min:0.001,max:1,step:0.001,def:0.35}
+    ], frag: FRAG_BASE + `
+      uniform float uVignette; uniform float uSoft;
+      void main(){ vec2 uv = v_uv; vec3 c = texture(u_tex, uv).rgb; float d = distance(uv, vec2(0.5)); float vig = smoothstep(0.8, 0.8-uSoft, d) * uVignette; c *= (1.0 - vig); outColor = vec4(c,1.); }
+    `},
+    pixelate: { name:'Pixelate', params:[{key:'uPixel',label:'Pixel Size',min:1,max:64,step:1,def:8}], frag: FRAG_BASE + `
+      uniform float uPixel; 
+      void main(){ vec2 uv = v_uv; vec2 size = u_texSize / uPixel; uv = floor(uv * size) / size; outColor = texture(u_tex, uv); }
+    `},
+    blur: { name:'Blur (9‑tap)', params:[{key:'uRadius',label:'Radius',min:0,max:6,step:0.1,def:2}], frag: FRAG_BASE + `
+      uniform float uRadius;
+      vec4 sampleAt(vec2 uv){ return texture(u_tex, uv); }
+      void main(){
+        vec2 texel = 1.0 / u_texSize;
+        float r = uRadius;
+        vec4 c = vec4(0.0);
+        c += sampleAt(v_uv + texel*vec2(-r,-r));
+        c += sampleAt(v_uv + texel*vec2( 0.,-r));
+        c += sampleAt(v_uv + texel*vec2( r,-r));
+        c += sampleAt(v_uv + texel*vec2(-r, 0.));
+        c += sampleAt(v_uv);
+        c += sampleAt(v_uv + texel*vec2( r, 0.));
+        c += sampleAt(v_uv + texel*vec2(-r, r));
+        c += sampleAt(v_uv + texel*vec2( 0., r));
+        c += sampleAt(v_uv + texel*vec2( r, r));
+        outColor = c/9.0;
+      }
+    `},
+    sobel: { name:'Sobel', params:[{key:'uMix',label:'Blend',min:0,max:1,step:0.01,def:1}], frag: FRAG_BASE + `
+      uniform float uMix;
+      void main(){
+        vec2 texel = 1.0 / u_texSize;
+        float kx[9]; float ky[9];
+        kx[0]=-1.;kx[1]=0.;kx[2]=1.;kx[3]=-2.;kx[4]=0.;kx[5]=2.;kx[6]=-1.;kx[7]=0.;kx[8]=1.;
+        ky[0]=-1.;ky[1]=-2.;ky[2]=-1.;ky[3]=0.;ky[4]=0.;ky[5]=0.;ky[6]=1.;ky[7]=2.;ky[8]=1.;
+        vec3 sX = vec3(0.), sY = vec3(0.);
+        int i=0; for(int y=-1;y<=1;y++) for(int x=-1;x<=1;x++){
+          vec3 c = texture(u_tex, v_uv + texel*vec2(float(x),float(y))).rgb;
+          sX += c * kx[i]; sY += c * ky[i]; i++;
+        }
+        float mag = length(sX) + length(sY);
+        vec3 edge = vec3(mag);
+        vec3 base = texture(u_tex, v_uv).rgb;
+        vec3 mixed = mix(base, edge, uMix);
+        outColor = vec4(mixed,1.);
+      }
+    `},
+    sharpen: { name:'Sharpen', params:[{key:'uAmt',label:'Amount',min:0,max:2,step:0.01,def:0.6}], frag: FRAG_BASE + `
+      uniform float uAmt;
+      void main(){
+        vec2 t = 1.0 / u_texSize; vec3 c = texture(u_tex, v_uv).rgb;
+        vec3 s = texture(u_tex, v_uv + vec2( t.x, 0.)).rgb +
+                 texture(u_tex, v_uv + vec2(-t.x, 0.)).rgb +
+                 texture(u_tex, v_uv + vec2(0.,  t.y)).rgb +
+                 texture(u_tex, v_uv + vec2(0., -t.y)).rgb;
+        vec3 lap = (4.0 * c - s);
+        vec3 outc = c + uAmt * lap;
+        outColor = vec4(outc,1.);
+      }
+    `},
+    posterize: { name:'Posterize', params:[{key:'uLevels',label:'Levels',min:2,max:32,step:1,def:6}], frag: FRAG_BASE + `
+      uniform float uLevels;
+      void main(){ vec3 c = texture(u_tex, v_uv).rgb; vec3 q = floor(c * uLevels)/uLevels; outColor = vec4(q,1.); }
+    `},
+    glitch: { name:'Scanline/Jitter', params:[
+      {key:'uAmount',label:'Amount',min:0,max:1,step:0.01,def:0.2},
+      {key:'uScan',label:'Scanlines',min:0,max:1,step:0.01,def:0.4}
+    ], frag: FRAG_BASE + `
+      uniform float uAmount; uniform float uScan;
+      float hash(float x){ return fract(sin(x*1234.567)*43758.5453); }
+      void main(){
+        float n = hash(floor(u_time*60.0));
+        float jitter = (n-0.5) * uAmount * 0.01;
+        vec2 uv = v_uv + vec2(jitter,0.0);
+        vec3 c = texture(u_tex, uv).rgb;
+        float scan = sin(v_uv.y * u_texSize.y * 3.14159) * uScan * 0.2;
+        c *= (1.0 - scan);
+        outColor = vec4(c,1.);
+      }
+    `},
+  };
+
+  function createUI(effectKey){
+    const def = EFFECTS[effectKey];
+    paramsBox.innerHTML = '';
+    state.uniforms = {};
+    def.params.forEach(p => {
+      state.uniforms[p.key] = p.def;
+      const wrap = document.createElement('div'); wrap.className = 'row'; wrap.style.alignItems='center';
+      const label = document.createElement('label'); label.style.width='100%';
+      label.innerHTML = `${p.label} <span><code class="inline" id="val_${p.key}">${p.def}</code></span>`;
+      const input = document.createElement('input'); input.type='range'; input.min=p.min; input.max=p.max; input.step=p.step; input.value=p.def; input.addEventListener('input',()=>{
+        let v = Number(input.value);
+        state.uniforms[p.key] = v; $('#val_'+p.key).textContent = v;
+      });
+      label.appendChild(input); wrap.appendChild(label); paramsBox.appendChild(wrap);
+    });
+  }
+
+  function makeShader(gl, type, src){ const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); if(!gl.getShaderParameter(sh, gl.COMPILE_STATUS)){ throw new Error(gl.getShaderInfoLog(sh) || 'shader compile error'); } return sh; }
+  function makeProgram(gl, vsSrc, fsSrc){ const vs = makeShader(gl, gl.VERTEX_SHADER, vsSrc); const fs = makeShader(gl, gl.FRAGMENT_SHADER, fsSrc); const prog = gl.createProgram(); gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog); if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){ throw new Error(gl.getProgramInfoLog(prog)||'link error'); } return prog; }
+
+  function initGL(){
+    gl = glCanvas.getContext('webgl2', {alpha:false, preserveDrawingBuffer:true});
+    if(!gl){ alert('WebGL2 not supported in this browser.'); return; }
+    // Geometry: two triangles covering clipspace
+    positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+       1, -1,  1,  1, -1,  1
+    ]), gl.STATIC_DRAW);
+    texcoordBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      0,1, 1,1, 0,0,
+      1,1, 1,0, 0,0
+    ]), gl.STATIC_DRAW);
+    createProgramFor(effectSel.value);
+
+    texture = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  }
+
+  function createProgramFor(effectKey){
+    if(program) gl.deleteProgram(program);
+    createUI(effectKey);
+    program = makeProgram(gl, VERT, EFFECTS[effectKey].frag);
+    gl.useProgram(program);
+    // attributes
+    const posLoc = gl.getAttribLocation(program, 'a_position');
+    const uvLoc  = gl.getAttribLocation(program, 'a_texcoord');
+
+    const vaoLocal = gl.createVertexArray(); gl.bindVertexArray(vaoLocal);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer); gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer); gl.enableVertexAttribArray(uvLoc);  gl.vertexAttribPointer(uvLoc, 2, gl.FLOAT, false, 0, 0);
+    vao = vaoLocal;
+  }
+
+  function resizeToVideo(){
+    width = vid.videoWidth || 1280; height = vid.videoHeight || 720;
+    glCanvas.width = width; glCanvas.height = height;
+  }
+
+  function renderLoop(t){
+    rafId = requestAnimationFrame(renderLoop);
+    if(vid.readyState >= 2){
+      if(glCanvas.width !== vid.videoWidth || glCanvas.height !== vid.videoHeight) resizeToVideo();
+      gl.viewport(0,0,glCanvas.width, glCanvas.height);
+      gl.useProgram(program); gl.bindVertexArray(vao);
+      // upload current video frame as texture
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texture);
+      try{ gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vid); }catch(e){ /* Safari quirks */ }
+      // uniforms
+      const texLoc = gl.getUniformLocation(program,'u_tex'); gl.uniform1i(texLoc, 0);
+      const sizeLoc = gl.getUniformLocation(program,'u_texSize'); if(sizeLoc) gl.uniform2f(sizeLoc, glCanvas.width, glCanvas.height);
+      const timeLoc = gl.getUniformLocation(program,'u_time'); if(timeLoc) gl.uniform1f(timeLoc, performance.now()/1000);
+      for(const [k,v] of Object.entries(state.uniforms)){
+        const loc = gl.getUniformLocation(program, k); if(loc) gl.uniform1f(loc, v);
+      }
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+  }
+
+  function loadFile(file){
+    const url = URL.createObjectURL(file);
+    vid.src = url; vid.play().catch(()=>{});
+    downloadVideoBtn.disabled = false; snapshotBtn.disabled = false;
+  }
+
+  // Download processed video
+  function downloadProcessedVideo(){
+    if(!vid.src) return;
+    
+    // Create a temporary canvas to capture the processed frame
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = glCanvas.width;
+    tempCanvas.height = glCanvas.height;
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    // Draw the processed frame
+    tempCtx.drawImage(glCanvas, 0, 0);
+    
+    // Convert to blob and download
+    tempCanvas.toBlob(blob => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'processed-frame.png';
+      a.click();
+    }, 'image/png');
+  }
+
+  function snapshot(){
+    glCanvas.toBlob(blob => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'frame.png'; a.click(); }, 'image/png');
+  }
+
+  // Events
+  fileInput.addEventListener('change', e => { if(e.target.files?.[0]) loadFile(e.target.files[0]); });
+  effectSel.addEventListener('change', () => { state.effect = effectSel.value; createProgramFor(state.effect); });
+  downloadVideoBtn.addEventListener('click', downloadProcessedVideo);
+  snapshotBtn.addEventListener('click', snapshot);
+
+  // Drag & drop - entire page is droppable
+  ['dragenter','dragover'].forEach(ev=> document.addEventListener(ev, e=>{
+    e.preventDefault(); 
+    document.body.classList.add('drag-over');
+  }));
+  ['dragleave','drop'].forEach(ev=> document.addEventListener(ev, e=>{
+    e.preventDefault(); 
+    document.body.classList.remove('drag-over');
+  }));
+  document.addEventListener('drop', e=>{ 
+    e.preventDefault();
+    document.body.classList.remove('drag-over');
+    const file = [...e.dataTransfer.files].find(f=>f.type.startsWith('video/')); 
+    if(file) loadFile(file); 
+  });
+
+
+
+  // Boot
+  initGL();
+  renderLoop();
+  </script>
+</body>
+</html>
