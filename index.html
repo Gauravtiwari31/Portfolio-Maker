@@ -1045,11 +1045,238 @@
                 setShowPreview(true);
             };
             
-                            const handleDeploy = () => {
+            // =====================================
+            // DOM PATCHING SYSTEM (NEW ARCHITECTURE) 
+            // =====================================
+
+            // Enhanced JSON Resume Standard
+            const defaultResumeData = {
+                basics: {
+                    name: "John Doe",
+                    label: "Software Engineer", 
+                    email: "john.doe@example.com",
+                    phone: "+1-555-0123",
+                    summary: "Passionate software engineer with experience building applications.",
+                    profiles: [
+                        { network: "GitHub", url: "https://github.com/johndoe" },
+                        { network: "LinkedIn", url: "https://linkedin.com/in/johndoe" }
+                    ]
+                },
+                work: [
+                    {
+                        name: "Tech Corp",
+                        position: "Software Engineer", 
+                        duration: "2022 - Present",
+                        summary: "Led development of scalable applications.",
+                        highlights: ["Improved performance by 40%", "Mentored junior developers"]
+                    }
+                ],
+                education: [
+                    {
+                        institution: "University of Technology",
+                        studyType: "Bachelor of Science",
+                        area: "Computer Science", 
+                        year: "2020"
+                    }
+                ],
+                skills: [
+                    { name: "JavaScript" }, { name: "React" }, { name: "Node.js" }
+                ],
+                projects: [
+                    {
+                        name: "E-commerce Platform",
+                        description: "Full-stack solution with React and Node.js",
+                        url: "https://github.com/johndoe/ecommerce"
+                    }
+                ],
+                interests: [{ name: "Artificial Intelligence" }, { name: "Machine Learning" }],
+                awards: [
+                    { title: "Developer Award", date: "2021", summary: "Recognized for contributions" }
+                ],
+                extracurricular: [
+                    { name: "Tech Blog Writer", description: "Regular tech articles" }
+                ]
+            };
+
+            // Convert form data to JSON Resume format
+            function convertFormDataToResume(formData) {
+                return {
+                    basics: {
+                        name: formData.name || defaultResumeData.basics.name,
+                        label: formData.jobTitle || defaultResumeData.basics.label,
+                        email: formData.email || defaultResumeData.basics.email,
+                        phone: formData.contactNo || defaultResumeData.basics.phone,
+                        summary: formData.summary || defaultResumeData.basics.summary,
+                        profiles: [
+                            { network: "GitHub", url: formData.github || defaultResumeData.basics.profiles[0].url },
+                            { network: "LinkedIn", url: formData.linkedin || defaultResumeData.basics.profiles[1].url }
+                        ]
+                    },
+                    work: formData.experience?.length > 0 ? formData.experience.map(exp => ({
+                        name: exp.company,
+                        position: exp.position,
+                        duration: exp.duration,
+                        summary: exp.description,
+                        highlights: []
+                    })) : defaultResumeData.work,
+                    education: formData.education?.length > 0 ? formData.education.map(edu => ({
+                        institution: edu.institution,
+                        studyType: edu.degree,
+                        area: edu.degree,
+                        year: edu.year
+                    })) : defaultResumeData.education,
+                    skills: formData.technicalSkills?.length > 0 ? formData.technicalSkills.map(skill => ({ name: skill })) : defaultResumeData.skills,
+                    projects: formData.projects?.length > 0 ? formData.projects.map(proj => ({
+                        name: proj.title || proj.name,
+                        description: proj.description,
+                        url: proj.link || proj.url
+                    })) : defaultResumeData.projects,
+                    interests: formData.areaOfInterest?.length > 0 ? formData.areaOfInterest.map(interest => ({ name: interest })) : defaultResumeData.interests,
+                    awards: formData.honors?.length > 0 ? formData.honors.map(honor => ({ title: honor, date: "2023", summary: `Recognized for ${honor}` })) : defaultResumeData.awards,
+                    extracurricular: formData.extracurriculars?.length > 0 ? formData.extracurriculars.map(activity => ({ name: activity, description: `Active in ${activity}` })) : defaultResumeData.extracurricular
+                };
+            }
+
+            // DOM Patching Utility Functions
+            function get(obj, path) {
+                return path.split('.').reduce((o, k) => {
+                    if (k.match(/^\d+$/)) return o?.[parseInt(k)];
+                    return o?.[k];
+                }, obj);
+            }
+
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = String(str ?? '');
+                return div.innerHTML;
+            }
+
+            function fillDataAttributes(dom, data) {
+                // Fill text content
+                dom.querySelectorAll('[data-field]').forEach(el => {
+                    const path = el.getAttribute('data-field');
+                    const value = get(data, path);
+                    if (value) el.textContent = value;
+                });
+
+                // Fill attributes  
+                dom.querySelectorAll('[data-attr]').forEach(el => {
+                    const path = el.getAttribute('data-field');
+                    const attr = el.getAttribute('data-attr');
+                    const value = get(data, path);
+                    if (value && attr) el.setAttribute(attr, value);
+                });
+
+                // Handle repeating sections
+                dom.querySelectorAll('[data-repeat]').forEach(container => {
+                    const key = container.getAttribute('data-repeat');
+                    const template = container.querySelector('template');
+                    const array = get(data, key) || [];
+                    
+                    if (template && array.length > 0) {
+                        container.innerHTML = '';
+                        array.forEach(item => {
+                            const clone = template.content.cloneNode(true);
+                            clone.querySelectorAll('[data-field]').forEach(el => {
+                                const fieldPath = el.getAttribute('data-field');
+                                const value = fieldPath === '.' ? item : get(item, fieldPath);
+                                if (value) el.textContent = value;
+                            });
+                            clone.querySelectorAll('[data-attr]').forEach(el => {
+                                const fieldPath = el.getAttribute('data-field');
+                                const attr = el.getAttribute('data-attr');
+                                const value = fieldPath === '.' ? item : get(item, fieldPath);
+                                if (value && attr) el.setAttribute(attr, value);
+                            });
+                            container.appendChild(clone);
+                        });
+                    }
+                });
+            }
+
+            // Main DOM Patching Function
+            async function patchTemplate(templateId, formData) {
+                try {
+                    const response = await fetch(`portfolio${templateId}.html`);
+                    if (!response.ok) throw new Error(`Template ${templateId} not found`);
+                    
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const dom = parser.parseFromString(html, 'text/html');
+                    
+                    // Add base tag for relative assets
+                    const base = dom.createElement('base');
+                    base.href = window.location.origin + '/';
+                    dom.head.insertBefore(base, dom.head.firstChild);
+                    
+                    // Convert form data to JSON Resume format
+                    const resumeData = convertFormDataToResume(formData);
+                    
+                    // Apply DOM patches
+                    fillDataAttributes(dom, resumeData);
+                    
+                    // Return serialized HTML
+                    const serializer = new XMLSerializer();
+                    return serializer.serializeToString(dom);
+                    
+                } catch (error) {
+                    console.error('Error patching template:', error);
+                    return null;
+                }
+            }
+
+            // Enhanced Preview Function
+            const [previewHTML, setPreviewHTML] = useState('');
+            const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+
+            const updatePreview = async () => {
+                if (!selectedTemplate) return;
+                
+                setIsLoadingPreview(true);
+                try {
+                    const patchedHTML = await patchTemplate(selectedTemplate.id, formData);
+                    if (patchedHTML) {
+                        setPreviewHTML(patchedHTML);
+                    }
+                } catch (error) {
+                    console.error('Preview error:', error);
+                } finally {
+                    setIsLoadingPreview(false);
+                }
+            };
+
+            // Auto-update preview when template or form data changes
+            React.useEffect(() => {
+                if (selectedTemplate && showPreview) {
+                    updatePreview();
+                }
+            }, [selectedTemplate, formData, showPreview]);
+
+            // Enhanced Deploy Function with DOM Patching
+            const handleDeploy = async () => {
                 if (!selectedTemplate) {
-                        alert('Please select a template first!');
+                    alert('Please select a template first!');
                     return;
                 }
+                
+                try {
+                    const patchedHTML = await patchTemplate(selectedTemplate.id, formData);
+                    if (patchedHTML) {
+                        const blob = new Blob([patchedHTML], { type: 'text/html' });
+                        const url = URL.createObjectURL(blob);
+                        window.open(url, '_blank');
+                        
+                        // Clean up after 10 seconds
+                        setTimeout(() => URL.revokeObjectURL(url), 10000);
+                    }
+                } catch (error) {
+                    console.error('Deploy error:', error);
+                    alert('Error deploying portfolio. Please try again.');
+                }
+            };
+
+            // Legacy deploy function (fallback)
+            const handleDeployLegacy = () => {
                     
                     // Generate the complete HTML with user data
                     const name = formData.name || 'Your Name';

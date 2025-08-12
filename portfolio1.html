@@ -141,16 +141,16 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 mb-4">Ram Manohar</h1>
-                    <h3 class="mb-4">Full Stack Developer</h3>
-                    <p class="lead">I build exceptional digital experiences with clean code and innovative design.</p>
+                    <h1 class="display-4 mb-4" data-field="basics.name">Ram Manohar</h1>
+                    <h3 class="mb-4" data-field="basics.label">Full Stack Developer</h3>
+                    <p class="lead" data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                     <div class="d-flex mt-4">
                         <a href="#" class="btn btn-primary btn-lg me-3">Download CV</a>
                         <a href="#contact" class="btn btn-outline-light btn-lg">Contact Me</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="https://via.placeholder.com/400x400" alt="Profile" class="img-fluid rounded-circle" style="max-width: 300px;">
+                    <img src="https://via.placeholder.com/400x400" alt="Profile" class="img-fluid rounded-circle" style="max-width: 300px;" data-field="basics.picture" data-attr="src">
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
                         <div class="card-body text-center">
                             <i class="fas fa-phone fa-2x mb-3"></i>
                             <h5>Contact No</h5>
-                            <p>+1 (555) 123-4567</p>
+                            <p data-field="basics.phone">+1 (555) 123-4567</p>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                                     <i class="fas fa-info-circle"></i>
                                 </span>
                             </h5>
-                            <a href="https://github.com/username" target="_blank">github.com/username</a>
+                            <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                                     <i class="fas fa-info-circle"></i>
                                 </span>
                             </h5>
-                            <a href="https://linkedin.com/in/username" target="_blank">linkedin.com/in/username</a>
+                            <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                         </div>
                     </div>
                 </div>
@@ -203,24 +203,37 @@
     <section class="section" id="education">
         <div class="container">
             <h2 class="section-title">Education</h2>
-            <div class="row">
+            <div class="row" data-repeat="education">
+                <template>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="studyType">Master of Computer Science</h4>
+                                <h5 data-field="institution">Stanford University</h5>
+                                <p class="text-muted" data-field="year">2018 - 2020</p>
+                                <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content for when no data attributes are found -->
                 <div class="col-lg-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Master of Computer Science</h4>
-                            <h5>Stanford University</h5>
-                            <p class="text-muted">2018 - 2020</p>
-                            <p>Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                            <h4 data-field="education.0.studyType">Master of Computer Science</h4>
+                            <h5 data-field="education.0.institution">Stanford University</h5>
+                            <p class="text-muted" data-field="education.0.year">2018 - 2020</p>
+                            <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Bachelor of Technology</h4>
-                            <h5>MIT</h5>
-                            <p class="text-muted">2014 - 2018</p>
-                            <p>Major in Computer Science with minor in Mathematics. GPA: 3.9/4.0</p>
+                            <h4 data-field="education.1.studyType">Bachelor of Technology</h4>
+                            <h5 data-field="education.1.institution">MIT</h5>
+                            <p class="text-muted" data-field="education.1.year">2014 - 2018</p>
+                            <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                         </div>
                     </div>
                 </div>
@@ -232,15 +245,34 @@
     <section class="section" id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
-            <div class="row">
+            <div class="row" data-repeat="work">
+                <template>
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h4 data-field="position">Senior Software Engineer</h4>
+                                    <span class="badge bg-primary" data-field="duration">2020 - Present</span>
+                                </div>
+                                <h5 data-field="name">Google</h5>
+                                <p data-field="summary">Led development of scalable applications.</p>
+                                <ul data-repeat-inner="highlights">
+                                    <template><li data-field=".">Achievement item</li></template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h4>Senior Software Engineer</h4>
-                                <span class="badge bg-primary">2020 - Present</span>
+                                <h4 data-field="work.0.position">Senior Software Engineer</h4>
+                                <span class="badge bg-primary" data-field="work.0.duration">2020 - Present</span>
                             </div>
-                            <h5>Google</h5>
+                            <h5 data-field="work.0.name">Google</h5>
+                            <p data-field="work.0.summary">Led development of new features for Google Search</p>
                             <ul>
                                 <li>Led development of new features for Google Search</li>
                                 <li>Optimized algorithms improving search speed by 15%</li>
@@ -253,10 +285,11 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h4>Software Developer</h4>
-                                <span class="badge bg-primary">2018 - 2020</span>
+                                <h4 data-field="work.1.position">Software Developer</h4>
+                                <span class="badge bg-primary" data-field="work.1.duration">2018 - 2020</span>
                             </div>
-                            <h5>Amazon</h5>
+                            <h5 data-field="work.1.name">Amazon</h5>
+                            <p data-field="work.1.summary">Developed backend services for AWS</p>
                             <ul>
                                 <li>Developed backend services for AWS</li>
                                 <li>Implemented CI/CD pipelines</li>
@@ -273,31 +306,43 @@
     <section class="section" id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
-            <div class="row">
+            <div class="row" data-repeat="projects">
+                <template>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="name">Project Name</h4>
+                                <p data-field="description">Project description</p>
+                                <a href="#" class="btn btn-sm btn-primary" data-field="url" data-attr="href">Project Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>E-commerce Platform</h4>
-                            <p>Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
-                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                            <h4 data-field="projects.0.name">E-commerce Platform</h4>
+                            <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                            <a href="#" class="btn btn-sm btn-primary" data-field="projects.0.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>AI Chatbot</h4>
-                            <p>Natural language processing chatbot using Python and TensorFlow</p>
-                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                            <h4 data-field="projects.1.name">AI Chatbot</h4>
+                            <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                            <a href="#" class="btn btn-sm btn-primary" data-field="projects.1.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Portfolio Website</h4>
-                            <p>Responsive portfolio website using HTML, CSS, and JavaScript</p>
-                            <a href="#" class="btn btn-sm btn-primary">Project Link</a>
+                            <h4 data-field="projects.2.name">Portfolio Website</h4>
+                            <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                            <a href="#" class="btn btn-sm btn-primary" data-field="projects.2.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
@@ -310,28 +355,36 @@
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
             <div class="row">
-                <div class="col-md-6">
-                    <h4>Programming Languages</h4>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 90%">JavaScript</div>
+                <div class="col-md-12" data-repeat="skills">
+                    <template>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 85%" data-field="name">Skill Name</div>
+                        </div>
+                    </template>
+                    <!-- Fallback content -->
+                    <div class="col-md-6">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 90%" data-field="skills.0.name">JavaScript</div>
+                        </div>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 85%" data-field="skills.1.name">Python</div>
+                        </div>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 80%" data-field="skills.2.name">Java</div>
+                        </div>
                     </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 85%">Python</div>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 80%">Java</div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h4>Frameworks & Technologies</h4>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 95%">React</div>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 85%">Node.js</div>
-                    </div>
-                    <div class="skill-bar mb-3">
-                        <div class="skill-progress" style="width: 75%">TensorFlow</div>
+                    <div class="col-md-6">
+                        <h4>Frameworks & Technologies</h4>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 95%" data-field="skills.3.name">React</div>
+                        </div>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 85%" data-field="skills.4.name">Node.js</div>
+                        </div>
+                        <div class="skill-bar mb-3">
+                            <div class="skill-progress" style="width: 75%" data-field="skills.5.name">TensorFlow</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -342,12 +395,23 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Area of Interest</h2>
-            <div class="row">
+            <div class="row" data-repeat="interests">
+                <template>
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 text-center">
+                            <div class="card-body">
+                                <i class="fas fa-brain fa-3x mb-3"></i>
+                                <h5 data-field="name">Interest Name</h5>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="col-md-3 mb-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
                             <i class="fas fa-brain fa-3x mb-3"></i>
-                            <h5>Artificial Intelligence</h5>
+                            <h5 data-field="interests.0.name">Artificial Intelligence</h5>
                         </div>
                     </div>
                 </div>
@@ -355,7 +419,7 @@
                     <div class="card h-100 text-center">
                         <div class="card-body">
                             <i class="fas fa-mobile-alt fa-3x mb-3"></i>
-                            <h5>Mobile Development</h5>
+                            <h5 data-field="interests.1.name">Mobile Development</h5>
                         </div>
                     </div>
                 </div>
@@ -363,7 +427,7 @@
                     <div class="card h-100 text-center">
                         <div class="card-body">
                             <i class="fas fa-shield-alt fa-3x mb-3"></i>
-                            <h5>Cyber Security</h5>
+                            <h5 data-field="interests.2.name">Cyber Security</h5>
                         </div>
                     </div>
                 </div>
@@ -371,7 +435,7 @@
                     <div class="card h-100 text-center">
                         <div class="card-body">
                             <i class="fas fa-cloud fa-3x mb-3"></i>
-                            <h5>Cloud Computing</h5>
+                            <h5 data-field="interests.3.name">Cloud Computing</h5>
                         </div>
                     </div>
                 </div>
@@ -383,22 +447,34 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Honors</h2>
-            <div class="row">
+            <div class="row" data-repeat="awards">
+                <template>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="title">Award Title</h4>
+                                <p class="text-muted" data-field="date">2021</p>
+                                <p data-field="summary">Award description</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Google Developer Expert</h4>
-                            <p class="text-muted">2021</p>
-                            <p>Recognized by Google for exceptional contributions to developer community</p>
+                            <h4 data-field="awards.0.title">Google Developer Expert</h4>
+                            <p class="text-muted" data-field="awards.0.date">2021</p>
+                            <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Hackathon Winner</h4>
-                            <p class="text-muted">2019</p>
-                            <p>First place in National Coding Competition with AI-powered solution</p>
+                            <h4 data-field="awards.1.title">Hackathon Winner</h4>
+                            <p class="text-muted" data-field="awards.1.date">2019</p>
+                            <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                         </div>
                     </div>
                 </div>
@@ -410,28 +486,39 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Extracurriculars</h2>
-            <div class="row">
+            <div class="row" data-repeat="extracurricular">
+                <template>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="name">Activity Name</h4>
+                                <p data-field="description">Activity description</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Tech Blog Writer</h4>
-                            <p>Regularly publish articles on Medium about modern web development</p>
+                            <h4 data-field="extracurricular.0.name">Tech Blog Writer</h4>
+                            <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Coding Mentor</h4>
-                            <p>Volunteer mentor at local coding bootcamp</p>
+                            <h4 data-field="extracurricular.1.name">Coding Mentor</h4>
+                            <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Open Source Contributor</h4>
-                            <p>Active contributor to several popular open source projects</p>
+                            <h4 data-field="extracurricular.2.name">Open Source Contributor</h4>
+                            <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
                         </div>
                     </div>
                 </div>
@@ -466,11 +553,11 @@
                         <div class="card-body">
                             <h4 class="mb-4">Contact Information</h4>
                             <p><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</p>
-                            <p><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
-                            <p><i class="fas fa-envelope me-2"></i> john.doe@example.com</p>
+                            <p><i class="fas fa-phone me-2"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
+                            <p><i class="fas fa-envelope me-2"></i> <span data-field="basics.email">john.doe@example.com</span></p>
                             <div class="mt-4">
-                                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-icon" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-icon" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                             </div>
