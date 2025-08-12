@@ -147,16 +147,17 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">Laado Kumari</h1>
-                    <h3 class="mb-4 text-muted">Software Engineer</h3>
-                    <p class="lead mb-4">I build scalable, efficient solutions with clean code and modern technologies.</p>
+                    <!-- Keep names as in Portfolio 1 -->
+                    <h1 class="display-4 fw-bold mb-4" data-field="basics.name">Ram Manohar</h1>
+                    <h3 class="mb-4 text-muted" data-field="basics.label">Full Stack Developer</h3>
+                    <p class="lead mb-4" data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                     <div class="d-flex mt-4">
                         <a href="#" class="btn btn-primary btn-lg me-3">Download CV</a>
                         <a href="#contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="https://via.placeholder.com/400x400" alt="Profile" class="img-fluid rounded-circle shadow" style="max-width: 300px;">
+                    <img src="https://via.placeholder.com/400x400" alt="Profile" class="img-fluid rounded-circle shadow" style="max-width: 300px;" data-field="basics.picture" data-attr="src">
                 </div>
             </div>
         </div>
@@ -170,7 +171,7 @@
                     <div class="card h-100 contact-info-card">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-phone me-2"></i>Contact No</h5>
-                            <p class="card-text">+1 (555) 987-6543</p>
+                            <p class="card-text" data-field="basics.phone">+1 (555) 123-4567</p>
                         </div>
                     </div>
                 </div>
@@ -183,7 +184,7 @@
                                     <i class="fas fa-info-circle"></i>
                                 </span>
                             </h5>
-                            <a href="https://github.com/LaadoKumari" target="_blank" class="text-decoration-none">github.com/LaadoKumari</a>
+                            <a href="https://github.com/username" target="_blank" class="text-decoration-none" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                         </div>
                     </div>
                 </div>
@@ -196,7 +197,7 @@
                                     <i class="fas fa-info-circle"></i>
                                 </span>
                             </h5>
-                            <a href="https://linkedin.com/in/LaadoKumari" target="_blank" class="text-decoration-none">linkedin.com/in/LaadoKumari</a>
+                            <a href="https://linkedin.com/in/username" target="_blank" class="text-decoration-none" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                         </div>
                     </div>
                 </div>
@@ -208,18 +209,40 @@
     <section class="section bg-white" id="education">
         <div class="container">
             <h2 class="section-title">Education</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="education">
+                <template>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4 data-field="studyType">Degree</h4>
+                                        <h5 class="text-muted" data-field="institution">Institution</h5>
+                                    </div>
+                                    <span class="badge bg-primary" data-field="year">Year</span>
+                                </div>
+                                <p class="mt-3" data-field="area">Details about specialization, GPA, honors, etc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h4>Master of Science in Computer Science</h4>
-                                    <h5 class="text-muted">Stanford University</h5>
+                                    <h4 data-field="education.0.studyType">Master of Computer Science</h4>
+                                    <h5 class="text-muted" data-field="education.0.institution">Stanford University</h5>
                                 </div>
-                                <span class="badge bg-primary">2019 - 2021</span>
+                                <span class="badge bg-primary" data-field="education.0.year">2018 - 2020</span>
                             </div>
-                            <p class="mt-3">Specialized in Artificial Intelligence with research focused on natural language processing. GPA: 3.8/4.0</p>
+                            <p class="mt-3" data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning. GPA: 3.8/4.0</p>
                         </div>
                     </div>
                 </div>
@@ -228,12 +251,12 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h4>Bachelor of Computer Engineering</h4>
-                                    <h5 class="text-muted">University of California</h5>
+                                    <h4 data-field="education.1.studyType">Bachelor of Technology</h4>
+                                    <h5 class="text-muted" data-field="education.1.institution">MIT</h5>
                                 </div>
-                                <span class="badge bg-primary">2015 - 2019</span>
+                                <span class="badge bg-primary" data-field="education.1.year">2014 - 2018</span>
                             </div>
-                            <p class="mt-3">Major in Computer Engineering with minor in Mathematics. Graduated with honors. GPA: 3.9/4.0</p>
+                            <p class="mt-3" data-field="education.1.area">Computer Science with minor in Mathematics. Graduated with honors.</p>
                         </div>
                     </div>
                 </div>
@@ -245,20 +268,42 @@
     <section class="section" id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="work">
+                <template>
+                    <div class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="mb-0" data-field="position">Position</h4>
+                                    <span class="badge bg-primary" data-field="duration">Duration</span>
+                                </div>
+                                <h5 class="text-muted" data-field="name">Company</h5>
+                                <p class="mt-3" data-field="summary">Role summary</p>
+                                <ul class="mt-3" data-repeat-inner="highlights">
+                                    <template><li data-field=".">Achievement item</li></template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="mb-0">Senior Software Engineer</h4>
-                                <span class="badge bg-primary">2021 - Present</span>
+                                <h4 class="mb-0" data-field="work.0.position">Senior Software Engineer</h4>
+                                <span class="badge bg-primary" data-field="work.0.duration">2020 - Present</span>
                             </div>
-                            <h5 class="text-muted">Microsoft</h5>
+                            <h5 class="text-muted" data-field="work.0.name">Google</h5>
                             <ul class="mt-3">
-                                <li>Lead developer for Azure Machine Learning services</li>
-                                <li>Designed and implemented scalable microservices architecture</li>
-                                <li>Mentored junior engineers and conducted code reviews</li>
-                                <li>Improved system performance by 30% through optimization</li>
+                                <li>Led development of scalable applications</li>
+                                <li>Optimized algorithms improving performance by 15%</li>
+                                <li>Mentored junior developers</li>
                             </ul>
                         </div>
                     </div>
@@ -267,19 +312,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="mb-0">Software Developer</h4>
-                                <span class="badge bg-primary">2019 - 2021</span>
+                                <h4 class="mb-0" data-field="work.1.position">Software Developer</h4>
+                                <span class="badge bg-primary" data-field="work.1.duration">2018 - 2020</span>
                             </div>
-                            <h5 class="text-muted">Amazon Web Services</h5>
+                            <h5 class="text-muted" data-field="work.1.name">Amazon</h5>
                             <ul class="mt-3">
-                                <li>Developed core features for AWS Lambda service</li>
-                                <li>Implemented CI/CD pipelines reducing deployment time by 40%</li>
-                                <li>Collaborated with cross-functional teams to deliver new features</li>
+                                <li>Developed backend services for AWS</li>
+                                <li>Implemented CI/CD pipelines</li>
+                                <li>Reduced server costs by 20% through optimization</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -287,38 +333,57 @@
     <section class="section bg-white" id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="projects">
+                <template>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="name">Project Name</h4>
+                                <p class="text-muted" data-field="stack">Tech stack (optional)</p>
+                                <p data-field="description">Project description</p>
+                                <a href="#" class="btn btn-sm btn-primary mt-2" data-field="url" data-attr="href">Project Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>AI Content Generator</h4>
-                            <p class="text-muted">Python, TensorFlow, Flask</p>
-                            <p>Developed an AI-powered content generation tool that creates SEO-optimized articles.</p>
-                            <a href="#" class="btn btn-sm btn-primary mt-2">Project Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h4>Task Management App</h4>
+                            <h4 data-field="projects.0.name">E-commerce Platform</h4>
                             <p class="text-muted">React, Node.js, MongoDB</p>
-                            <p>Full-stack application for team task management with real-time updates.</p>
-                            <a href="#" class="btn btn-sm btn-primary mt-2">Project Link</a>
+                            <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                            <a href="#" class="btn btn-sm btn-primary mt-2" data-field="projects.0.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>E-commerce Analytics</h4>
-                            <p class="text-muted">JavaScript, D3.js, Express</p>
-                            <p>Data visualization dashboard for e-commerce business metrics and trends.</p>
-                            <a href="#" class="btn btn-sm btn-primary mt-2">Project Link</a>
+                            <h4 data-field="projects.1.name">AI Chatbot</h4>
+                            <p class="text-muted">Python, TensorFlow, Flask</p>
+                            <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                            <a href="#" class="btn btn-sm btn-primary mt-2" data-field="projects.1.url" data-attr="href">Project Link</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 data-field="projects.2.name">Portfolio Website</h4>
+                            <p class="text-muted">HTML, CSS, JavaScript</p>
+                            <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                            <a href="#" class="btn btn-sm btn-primary mt-2" data-field="projects.2.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -326,12 +391,59 @@
     <section class="section" id="skills">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
+
+            <!-- Dynamic (JSON) - flat list like Portfolio 1 -->
+            <div class="row" data-repeat="skills">
+                <template>
+                    <div class="col-md-6 mb-3">
+                        <div class="mb-1 d-flex justify-content-between">
+                            <span data-field="name">Skill</span>
+                            <span data-field="level">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static (two columns, categories) -->
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <h4 class="mb-3">Programming Languages</h4>
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Python</span>
+                            <span data-field="skills.0.name">JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span data-field="skills.1.name">Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span data-field="skills.2.name">Java</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h4 class="mb-3">Frameworks & Tools</h4>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span data-field="skills.3.name">React</span>
                             <span>95%</span>
                         </div>
                         <div class="skill-bar">
@@ -340,37 +452,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>JavaScript</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Java</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h4 class="mb-3">Frameworks & Tools</h4>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>React</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Node.js</span>
+                            <span data-field="skills.4.name">Node.js</span>
                             <span>88%</span>
                         </div>
                         <div class="skill-bar">
@@ -379,15 +461,16 @@
                     </div>
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Docker</span>
-                            <span>80%</span>
+                            <span data-field="skills.5.name">TensorFlow</span>
+                            <span>75%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
+                            <div class="skill-progress" style="width: 75%"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -395,13 +478,30 @@
     <section class="section bg-white">
         <div class="container">
             <h2 class="section-title">Area of Interest</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="interests">
+                <template>
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 interest-card">
+                            <div class="interest-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5 data-field="name">Interest Name</h5>
+                            <p class="text-muted" data-field="details"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-md-3 mb-4">
                     <div class="card h-100 interest-card">
                         <div class="interest-icon">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h5>Machine Learning</h5>
+                        <h5 data-field="interests.0.name">Artificial Intelligence</h5>
                         <p class="text-muted">Deep learning, NLP, Computer Vision</p>
                     </div>
                 </div>
@@ -410,7 +510,7 @@
                         <div class="interest-icon">
                             <i class="fas fa-cloud"></i>
                         </div>
-                        <h5>Cloud Computing</h5>
+                        <h5 data-field="interests.1.name">Cloud Computing</h5>
                         <p class="text-muted">AWS, Azure, Serverless Architecture</p>
                     </div>
                 </div>
@@ -419,8 +519,8 @@
                         <div class="interest-icon">
                             <i class="fas fa-database"></i>
                         </div>
-                        <h5>Big Data</h5>
-                        <p class="text-muted">Data pipelines, Analytics, Visualization</p>
+                        <h5 data-field="interests.2.name">Big Data</h5>
+                        <p class="text-muted">Pipelines, Analytics, Visualization</p>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
@@ -428,7 +528,7 @@
                         <div class="interest-icon">
                             <i class="fas fa-lock"></i>
                         </div>
-                        <h5>Cyber Security</h5>
+                        <h5 data-field="interests.3.name">Cyber Security</h5>
                         <p class="text-muted">Encryption, Ethical Hacking</p>
                     </div>
                 </div>
@@ -440,26 +540,44 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Honors</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="awards">
+                <template>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="title">Award Title</h4>
+                                <p class="text-muted" data-field="date">2021</p>
+                                <p data-field="summary">Award description</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Microsoft MVP Award</h4>
-                            <p class="text-muted">2022</p>
-                            <p>Recognized as Most Valuable Professional for contributions to developer community and technical expertise in cloud technologies.</p>
+                            <h4 data-field="awards.0.title">Google Developer Expert</h4>
+                            <p class="text-muted" data-field="awards.0.date">2021</p>
+                            <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Hackathon Champion</h4>
-                            <p class="text-muted">2020</p>
-                            <p>Won first place in national coding competition with AI-powered healthcare solution.</p>
+                            <h4 data-field="awards.1.title">Hackathon Winner</h4>
+                            <p class="text-muted" data-field="awards.1.date">2019</p>
+                            <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -467,32 +585,49 @@
     <section class="section bg-white">
         <div class="container">
             <h2 class="section-title">Extracurriculars</h2>
+
+            <!-- Dynamic (JSON) -->
+            <div class="row" data-repeat="extracurricular">
+                <template>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 data-field="name">Activity Name</h4>
+                                <p class="text-muted" data-field="description">Activity description</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Fallback Static -->
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Tech Speaker</h4>
-                            <p class="text-muted">Regular presenter at tech conferences and meetups on topics including AI, cloud computing, and web development.</p>
+                            <h4 data-field="extracurricular.0.name">Tech Blog Writer</h4>
+                            <p class="text-muted" data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Open Source Contributor</h4>
-                            <p class="text-muted">Active contributor to several popular open source projects including React and VS Code extensions.</p>
+                            <h4 data-field="extracurricular.1.name">Coding Mentor</h4>
+                            <p class="text-muted" data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h4>Coding Instructor</h4>
-                            <p class="text-muted">Volunteer instructor teaching programming to underprivileged youth through non-profit organizations.</p>
+                            <h4 data-field="extracurricular.2.name">Open Source Contributor</h4>
+                            <p class="text-muted" data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -527,11 +662,11 @@
                         <div class="card-body">
                             <h4 class="mb-4">Contact Information</h4>
                             <p><i class="fas fa-map-marker-alt me-2"></i> San Francisco, California</p>
-                            <p><i class="fas fa-phone me-2"></i> +1 (555) 987-6543</p>
-                            <p><i class="fas fa-envelope me-2"></i> laado.kumari@example.com</p>
+                            <p><i class="fas fa-phone me-2"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
+                            <p><i class="fas fa-envelope me-2"></i> <span data-field="basics.email">john.doe@example.com</span></p>
                             <div class="mt-4">
-                                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-icon" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-icon" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="social-icon"><i class="fab fa-medium"></i></a>
                             </div>
@@ -545,7 +680,7 @@
     <!-- Footer -->
     <footer class="py-4 bg-light text-center">
         <div class="container">
-            <p class="mb-0">© 2023 Sarah Williams. All rights reserved.</p>
+            <p class="mb-0">© 2023 John Doe. All rights reserved.</p>
         </div>
     </footer>
 
