@@ -318,16 +318,16 @@
 <body>
     <div class="container">
         <header>
-            <h1>Your Name</h1>
+            <h1 data-field="basics.name">Ram Manohar</h1>
             <div class="contact-info">
-                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-phone"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
             </div>
             <div class="social-links">
-                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                     <i class="fab fa-github"></i> GitHub
                     <span class="info-button" data-tooltip="Go to github.com, sign up with your email, choose a username, and set up your profile.">i</span>
                 </a>
-                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                     <i class="fab fa-linkedin"></i> LinkedIn
                     <span class="info-button" data-tooltip="Go to linkedin.com, create an account, fill in your professional details, and connect with others.">i</span>
                 </a>
@@ -341,20 +341,19 @@
                 
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <div class="timeline-date">2018 - 2022</div>
-                        <h3 class="timeline-title">University Name</h3>
-                        <p>Bachelor of Science in Computer Science</p>
-                        <p>GPA: 3.8/4.0</p>
-                        <p>Relevant Coursework: Data Structures, Algorithms, Web Development, Database Systems</p>
+                        <div class="timeline-date" data-field="education.0.year">2018 - 2020</div>
+                        <h3 class="timeline-title" data-field="education.0.studyType">Master of Computer Science</h3>
+                        <p data-field="education.0.institution">Stanford University</p>
+                        <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <div class="timeline-date">2014 - 2018</div>
-                        <h3 class="timeline-title">High School Name</h3>
-                        <p>High School Diploma</p>
-                        <p>Honors: National Honor Society, AP Scholar</p>
+                        <div class="timeline-date" data-field="education.1.year">2014 - 2018</div>
+                        <h3 class="timeline-title" data-field="education.1.studyType">Bachelor of Technology</h3>
+                        <p data-field="education.1.institution">MIT</p>
+                        <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                     </div>
                 </div>
             </div>
@@ -365,26 +364,26 @@
                 
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <div class="timeline-date">Summer 2021</div>
-                        <h3 class="timeline-title">Software Developer Intern</h3>
-                        <p>Tech Company Inc.</p>
+                        <div class="timeline-date" data-field="work.0.duration">2020 - Present</div>
+                        <h3 class="timeline-title" data-field="work.0.position">Senior Software Engineer</h3>
+                        <p data-field="work.0.name">Google</p>
                         <ul>
-                            <li>Developed web applications using React and Node.js</li>
-                            <li>Collaborated using Agile methodologies</li>
-                            <li>Improved user engagement by 25% through feature implementations</li>
+                            <li data-field="work.0.highlights.0">Led development of new features for Google Search</li>
+                            <li data-field="work.0.highlights.1">Optimized algorithms improving search speed by 15%</li>
+                            <li data-field="work.0.highlights.2">Mentored junior developers</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <div class="timeline-date">2020 - 2021</div>
-                        <h3 class="timeline-title">Teaching Assistant</h3>
-                        <p>University Computer Science Department</p>
+                        <div class="timeline-date" data-field="work.1.duration">2018 - 2020</div>
+                        <h3 class="timeline-title" data-field="work.1.position">Software Developer</h3>
+                        <p data-field="work.1.name">Amazon</p>
                         <ul>
-                            <li>Assisted students with programming assignments in Java and Python</li>
-                            <li>Held weekly office hours to help students understand course material</li>
-                            <li>Graded assignments and provided constructive feedback</li>
+                            <li data-field="work.1.highlights.0">Developed backend services for AWS</li>
+                            <li data-field="work.1.highlights.1">Implemented CI/CD pipelines</li>
+                            <li data-field="work.1.highlights.2">Reduced server costs by 20% through optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -397,30 +396,27 @@
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <div class="timeline-date">2022</div>
-                        <h3 class="timeline-title">E-Commerce Website</h3>
-                        <p>A full-stack e-commerce platform with user authentication, product catalog, and payment processing.</p>
-                        <p><strong>Technologies:</strong> React, Node.js, Express, MongoDB</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 class="timeline-title" data-field="projects.0.name">E-commerce Platform</h3>
+                        <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="timeline-date">2021</div>
-                        <h3 class="timeline-title">Task Management App</h3>
-                        <p>A mobile application for managing personal tasks with reminders and progress tracking.</p>
-                        <p><strong>Technologies:</strong> Flutter, Firebase</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 class="timeline-title" data-field="projects.1.name">AI Chatbot</h3>
+                        <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <div class="timeline-date">2020</div>
-                        <h3 class="timeline-title">Weather Dashboard</h3>
-                        <p>A web application that displays current weather and forecasts using API data.</p>
-                        <p><strong>Technologies:</strong> JavaScript, HTML/CSS, Weather API</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 class="timeline-title" data-field="projects.2.name">Portfolio Website</h3>
+                        <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </div>
@@ -431,17 +427,17 @@
                 
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <div class="timeline-date">2019 - 2022</div>
-                        <h3 class="timeline-title">Dean's List</h3>
-                        <p>Awarded for academic excellence each semester with GPA above 3.7</p>
+                        <div class="timeline-date" data-field="awards.0.date">2021</div>
+                        <h3 class="timeline-title" data-field="awards.0.title">Google Developer Expert</h3>
+                        <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <div class="timeline-date">2022</div>
-                        <h3 class="timeline-title">Best Capstone Project</h3>
-                        <p>Recognized for outstanding senior project in Computer Science department</p>
+                        <div class="timeline-date" data-field="awards.1.date">2019</div>
+                        <h3 class="timeline-title" data-field="awards.1.title">Hackathon Winner</h3>
+                        <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                     </div>
                 </div>
             </div>
@@ -453,24 +449,16 @@
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <div class="timeline-date">2019 - 2022</div>
-                        <h3 class="timeline-title">Computer Science Club</h3>
-                        <p>Vice President</p>
-                        <ul>
-                            <li>Organized hackathons and tech talks with industry professionals</li>
-                            <li>Led workshops on web development and mobile app creation</li>
-                        </ul>
+                        <h3 class="timeline-title" data-field="extracurricular.0.name">Tech Blog Writer</h3>
+                        <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="timeline-date">2020 - 2021</div>
-                        <h3 class="timeline-title">Volunteer Tutor</h3>
-                        <p>Local Community Center</p>
-                        <ul>
-                            <li>Taught basic computer skills to seniors and underprivileged youth</li>
-                            <li>Helped with resume building and job search techniques</li>
-                        </ul>
+                        <h3 class="timeline-title" data-field="extracurricular.1.name">Coding Mentor</h3>
+                        <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                     </div>
                 </div>
             </div>
@@ -479,18 +467,18 @@
             <div class="skills-section">
                 <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
                 <div class="skills-container">
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.1.name">Python</span>
+                    <span class="skill-tag" data-field="skills.2.name">Java</span>
+                    <span class="skill-tag" data-field="skills.3.name">React</span>
+                    <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                    <span class="skill-tag" data-field="skills.5.name">TensorFlow</span>
                     <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Node.js</span>
                     <span class="skill-tag">SQL</span>
                     <span class="skill-tag">MongoDB</span>
                     <span class="skill-tag">Git</span>
                     <span class="skill-tag">Docker</span>
                     <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Flutter</span>
                 </div>
             </div>
             
@@ -499,31 +487,31 @@
                 <h2 class="section-title"><i class="fas fa-heart"></i> Areas of Interest</h2>
                 <div class="interests-grid">
                     <div class="interest-card">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Web Development</h3>
-                        <p>Building responsive and accessible web applications</p>
+                        <i class="fas fa-brain"></i>
+                        <h3 data-field="interests.0.name">Artificial Intelligence</h3>
+                        <p>Exploring AI and machine learning applications</p>
                     </div>
                     <div class="interest-card">
                         <i class="fas fa-mobile-alt"></i>
-                        <h3>Mobile Development</h3>
+                        <h3 data-field="interests.1.name">Mobile Development</h3>
                         <p>Creating cross-platform mobile experiences</p>
                     </div>
                     <div class="interest-card">
-                        <i class="fas fa-brain"></i>
-                        <h3>Machine Learning</h3>
-                        <p>Exploring AI and data science applications</p>
+                        <i class="fas fa-shield-alt"></i>
+                        <h3 data-field="interests.2.name">Cyber Security</h3>
+                        <p>Securing applications and systems</p>
                     </div>
                     <div class="interest-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Data Analysis</h3>
-                        <p>Extracting insights from complex datasets</p>
+                        <i class="fas fa-cloud"></i>
+                        <h3 data-field="interests.3.name">Cloud Computing</h3>
+                        <p>Building scalable cloud solutions</p>
                     </div>
                 </div>
             </div>
         </main>
         
         <footer>
-            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
         </footer>
     </div>
 </body>

@@ -345,21 +345,22 @@
         </div>
         <div class="container header-content">
             <div class="profile">
-                <h1>John Doe</h1>
-                <p>Web Developer & Designer</p>
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p data-field="basics.label">Full Stack Developer</p>
+                <p class="item-description" data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                 
                 <div class="contact-info">
-                    <a href="tel:+1234567890">
-                        <i class="fas fa-phone"></i> +1 (234) 567-890
+                    <a href="tel:+15551234567" data-field="basics.phone">
+                        <i class="fas fa-phone"></i> +1 (555) 123-4567
                     </a>
-                    <a href="mailto:john.doe@example.com">
+                    <a href="mailto:john.doe@example.com" data-field="basics.email">
                         <i class="fas fa-envelope"></i> john.doe@example.com
                     </a>
                 </div>
                 
                 <div class="social-icons">
                     <div class="social-icon">
-                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
                         <div class="info-tooltip">Visit my GitHub profile</div>
                     </div>
                     <div class="social-icon">
@@ -367,7 +368,7 @@
                         <div class="info-tooltip">How to create a GitHub account: Go to github.com and click 'Sign up'</div>
                     </div>
                     <div class="social-icon">
-                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
                         <div class="info-tooltip">Visit my LinkedIn profile</div>
                     </div>
                     <div class="social-icon">
@@ -393,20 +394,28 @@
     <section id="education">
         <div class="container">
             <h2>Education</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="education">
+                <template>
+                    <div class="card">
+                        <h3 data-field="studyType">Master of Computer Science</h3>
+                        <p class="date" data-field="year">2018 - 2020</p>
+                        <p data-field="institution">Stanford University</p>
+                        <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>Master of Computer Science</h3>
-                    <p class="date">2020 - 2022</p>
-                    <p>University of Technology</p>
-                    <p>GPA: 3.8/4.0</p>
-                    <p>Specialization in Web Technologies</p>
+                    <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                    <p class="date" data-field="education.0.year">2018 - 2020</p>
+                    <p data-field="education.0.institution">Stanford University</p>
+                    <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                 </div>
                 <div class="card">
-                    <h3>Bachelor of Science in Computer Science</h3>
-                    <p class="date">2016 - 2020</p>
-                    <p>State University</p>
-                    <p>GPA: 3.6/4.0</p>
-                    <p>Minor in Digital Design</p>
+                    <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                    <p class="date" data-field="education.1.year">2014 - 2018</p>
+                    <p data-field="education.1.institution">MIT</p>
+                    <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                 </div>
             </div>
         </div>
@@ -415,25 +424,40 @@
     <section id="experience">
         <div class="container">
             <h2>Experience</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="work">
+                <template>
+                    <div class="card">
+                        <h3 data-field="position">Senior Software Engineer</h3>
+                        <p class="date" data-field="duration">2020 - Present</p>
+                        <p data-field="name">Google</p>
+                        <p data-field="summary">Led development of scalable applications.</p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>Senior Web Developer</h3>
-                    <p class="date">2022 - Present</p>
-                    <p>Tech Solutions Inc.</p>
+                    <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                    <p class="date" data-field="work.0.duration">2020 - Present</p>
+                    <p data-field="work.0.name">Google</p>
+                    <p data-field="work.0.summary">Led development of new features for Google Search</p>
                     <ul>
-                        <li>Lead developer for company's flagship web application</li>
-                        <li>Implemented responsive design for mobile users</li>
-                        <li>Optimized performance reducing load times by 40%</li>
+                        <li>Led development of new features for Google Search</li>
+                        <li>Optimized algorithms improving search speed by 15%</li>
+                        <li>Mentored junior developers</li>
                     </ul>
                 </div>
                 <div class="card">
-                    <h3>Web Developer Intern</h3>
-                    <p class="date">2019 - 2020</p>
-                    <p>Digital Creations LLC</p>
+                    <h3 data-field="work.1.position">Software Developer</h3>
+                    <p class="date" data-field="work.1.duration">2018 - 2020</p>
+                    <p data-field="work.1.name">Amazon</p>
+                    <p data-field="work.1.summary">Developed backend services for AWS</p>
                     <ul>
-                        <li>Developed and maintained client websites</li>
-                        <li>Assisted in UX/UI design improvements</li>
-                        <li>Implemented SEO best practices</li>
+                        <li>Developed backend services for AWS</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Reduced server costs by 20% through optimization</li>
                     </ul>
                 </div>
             </div>
@@ -443,24 +467,30 @@
     <section id="projects">
         <div class="container">
             <h2>Projects</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="projects">
+                <template>
+                    <div class="card">
+                        <h3 data-field="name">Project Name</h3>
+                        <p data-field="description">Project description</p>
+                        <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>E-commerce Platform</h3>
-                    <p>A full-stack e-commerce solution with payment integration</p>
-                    <p><strong>Technologies:</strong> React, Node.js, MongoDB, Stripe API</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                    <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                 </div>
                 <div class="card">
-                    <h3>Portfolio Generator</h3>
-                    <p>A web app that generates personalized portfolio websites</p>
-                    <p><strong>Technologies:</strong> Vue.js, Firebase, SCSS</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 data-field="projects.1.name">AI Chatbot</h3>
+                    <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                    <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                 </div>
                 <div class="card">
-                    <h3>Task Management App</h3>
-                    <p>Collaborative task management with real-time updates</p>
-                    <p><strong>Technologies:</strong> Angular, NestJS, WebSockets</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 data-field="projects.2.name">Portfolio Website</h3>
+                    <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                    <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                 </div>
             </div>
         </div>
@@ -472,30 +502,16 @@
             <div class="card">
                 <h3>Programming Languages</h3>
                 <div class="skills-container">
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.1.name">Python</span>
+                    <span class="skill-tag" data-field="skills.2.name">Java</span>
                 </div>
                 
-                <h3 style="margin-top: 1.5rem;">Frameworks & Libraries</h3>
+                <h3 style="margin-top: 1.5rem;">Frameworks & Technologies</h3>
                 <div class="skills-container">
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Vue.js</span>
-                    <span class="skill-tag">Angular</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">Django</span>
-                </div>
-                
-                <h3 style="margin-top: 1.5rem;">Tools & Platforms</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Firebase</span>
-                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag" data-field="skills.3.name">React</span>
+                    <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                    <span class="skill-tag" data-field="skills.5.name">TensorFlow</span>
                 </div>
             </div>
         </div>
@@ -504,18 +520,25 @@
     <section id="interests">
         <div class="container">
             <h2>Area of Interest</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="interests">
+                <template>
+                    <div class="card">
+                        <h3 data-field="name">Interest Name</h3>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>Web Accessibility</h3>
-                    <p>Creating inclusive web experiences for all users</p>
+                    <h3 data-field="interests.0.name">Artificial Intelligence</h3>
                 </div>
                 <div class="card">
-                    <h3>Progressive Web Apps</h3>
-                    <p>Building app-like experiences on the web</p>
+                    <h3 data-field="interests.1.name">Mobile Development</h3>
                 </div>
                 <div class="card">
-                    <h3>UI/UX Design</h3>
-                    <p>Crafting intuitive and beautiful user interfaces</p>
+                    <h3 data-field="interests.2.name">Cyber Security</h3>
+                </div>
+                <div class="card">
+                    <h3 data-field="interests.3.name">Cloud Computing</h3>
                 </div>
             </div>
         </div>
@@ -524,16 +547,25 @@
     <section id="honors">
         <div class="container">
             <h2>Honors & Awards</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="awards">
+                <template>
+                    <div class="card">
+                        <h3 data-field="title">Award Title</h3>
+                        <p class="date" data-field="date">2021</p>
+                        <p data-field="summary">Award description</p>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>Best Web Project 2022</h3>
-                    <p class="date">Tech Innovation Awards</p>
-                    <p>Awarded for innovative use of WebGL in e-commerce</p>
+                    <h3 data-field="awards.0.title">Google Developer Expert</h3>
+                    <p class="date" data-field="awards.0.date">2021</p>
+                    <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                 </div>
                 <div class="card">
-                    <h3>Dean's List</h3>
-                    <p class="date">2018 - 2020</p>
-                    <p>Academic excellence recognition</p>
+                    <h3 data-field="awards.1.title">Hackathon Winner</h3>
+                    <p class="date" data-field="awards.1.date">2019</p>
+                    <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                 </div>
             </div>
         </div>
@@ -542,21 +574,26 @@
     <section id="extracurriculars">
         <div class="container">
             <h2>Extracurriculars</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="extracurricular">
+                <template>
+                    <div class="card">
+                        <h3 data-field="name">Activity Name</h3>
+                        <p data-field="description">Activity description</p>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="card">
-                    <h3>Tech Meetup Organizer</h3>
-                    <p class="date">2021 - Present</p>
-                    <p>Organize monthly web development meetups</p>
+                    <h3 data-field="extracurricular.0.name">Tech Blog Writer</h3>
+                    <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                 </div>
                 <div class="card">
-                    <h3>Open Source Contributor</h3>
-                    <p class="date">2019 - Present</p>
-                    <p>Contribute to various JavaScript open source projects</p>
+                    <h3 data-field="extracurricular.1.name">Coding Mentor</h3>
+                    <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                 </div>
                 <div class="card">
-                    <h3>Coding Mentor</h3>
-                    <p class="date">2020 - Present</p>
-                    <p>Mentor aspiring developers through online platforms</p>
+                    <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                    <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
                 </div>
             </div>
         </div>
@@ -564,7 +601,7 @@
     
     <footer>
         <div class="container">
-            <p>&copy; 2023 John Doe. All rights reserved.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
             <p>Designed with ❤️ and modern web technologies</p>
         </div>
     </footer>

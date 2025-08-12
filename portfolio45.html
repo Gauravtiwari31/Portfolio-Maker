@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ram Manohar - Business Development Executive</title>
+    <title data-field="basics.name">Ram Manohar - Business Development Executive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -291,15 +291,15 @@
         
         <div class="container mx-auto px-4 text-center content-layer">
             <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-blue">Ram Manohar</h1>
-                <p class="text-xl md:text-2xl mb-8 opacity-90 text-neon-blue">Business Development Executive</p>
-                <p class="text-lg mb-8 opacity-80">Results-driven executive with a sharp strategic mind and a reputation for disrupting industries and dominating markets.</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-blue" data-field="basics.name">Ram Manohar</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 text-neon-blue" data-field="basics.label">Business Development Executive</p>
+                <p class="text-lg mb-8 opacity-80" data-field="basics.summary">Results-driven executive with a sharp strategic mind and a reputation for disrupting industries and dominating markets.</p>
                 <div class="flex justify-center space-x-4 mb-8">
-                    <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" 
+                    <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" data-field="basics.profiles.1.url" data-attr="href"
                        class="bg-white/20 hover:bg-neon-blue/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-blue">
                         <i class="fab fa-linkedin mr-2"></i>LinkedIn
                     </a>
-                    <a href="mailto:thomas@novoresume.com" 
+                    <a href="mailto:thomas@novoresume.com" data-field="basics.email"
                        class="bg-white/20 hover:bg-electric-blue/30 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 glow-cyan">
                         <i class="fas fa-envelope mr-2"></i>Email
                     </a>
@@ -317,7 +317,7 @@
             <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Professional Profile</h2>
             <div class="max-w-4xl mx-auto">
                 <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
-                    <p class="text-lg leading-relaxed mb-6 text-gray-200">
+                    <p class="text-lg leading-relaxed mb-6 text-gray-200" data-field="basics.summary">
                         Results-driven Business Development Executive with a sharp strategic mind and a reputation for disrupting industries and dominating markets. 
                         Adept at high-stakes negotiations, corporate expansion, and financial risk assessment. Skilled in developing innovative solutions 
                         for scaling businesses, optimizing revenue streams, and fostering high-impact partnerships. Excels in dynamic, high-pressure 
@@ -327,15 +327,19 @@
                         <div>
                             <h3 class="text-xl font-semibold mb-3 text-neon-blue">Contact Info</h3>
                             <div class="space-y-2 text-gray-200">
-                                <p><i class="fas fa-envelope text-electric-blue mr-2"></i>thomas@novoresume.com</p>
-                                <p><i class="fas fa-phone text-electric-blue mr-2"></i>(555) 1919-1929</p>
-                                <p><i class="fas fa-map-marker-alt text-electric-blue mr-2"></i>London, UK</p>
-                                <p><i class="fab fa-linkedin text-electric-blue mr-2"></i>linkedin.com/in/ram.manohar</p>
+                                <p><i class="fas fa-envelope text-electric-blue mr-2"></i><span data-field="basics.email">thomas@novoresume.com</span></p>
+                                <p><i class="fas fa-phone text-electric-blue mr-2"></i><span data-field="basics.phone">(555) 1919-1929</span></p>
+                                <p><i class="fas fa-map-marker-alt text-electric-blue mr-2"></i><span data-field="basics.location">London, UK</span></p>
+                                <p><i class="fab fa-linkedin text-electric-blue mr-2"></i><a href="#" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/ram.manohar</a></p>
                             </div>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold mb-3 text-neon-blue">Languages</h3>
-                            <div class="space-y-2 text-gray-200">
+                            <div class="space-y-2 text-gray-200" data-repeat="languages">
+                                <template>
+                                    <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i><span data-field="language">English</span> - <span data-field="fluency">Native</span></p>
+                                </template>
+                                <!-- Fallback content -->
                                 <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>English - Native</p>
                                 <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>French - Professional</p>
                                 <p><i class="fas fa-check-circle text-cyan-400 mr-2"></i>Mandarin - Professional</p>
@@ -351,19 +355,47 @@
     <section id="experience" class="py-20 bg-gray-900 dark:bg-gray-900 animated-bg">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12 text-neon-blue glow-blue">Work Experience</h2>
-            <div class="max-w-4xl mx-auto space-y-8">
+            <div class="max-w-4xl mx-auto space-y-8" data-repeat="work">
+                <template>
+                    <!-- CEO Experience -->
+                    <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover shadow-lg backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-briefcase text-electric-blue text-2xl mr-3 glow-cyan"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white" data-field="position">CEO & Managing Director</h3>
+                                <p class="text-gray-300" data-field="company">Shelby Company Ltd.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-6">
+                            <p class="text-neon-blue font-semibold" data-field="department">Global Operations</p>
+                            <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm" data-field="duration">06/2016 - Present</span>
+                        </div>
+                        <div class="space-y-4" data-repeat-inner="highlights">
+                            <template>
+                                <div class="flex items-start">
+                                    <i class="fas fa-globe text-neon-blue mt-1 mr-3"></i>
+                                    <div>
+                                        <p class="text-gray-300" data-field=".">Scaled operations globally, expanding into new markets across Europe, the U.S., and Asia.</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <!-- CEO Experience -->
                 <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover shadow-lg backdrop-blur-sm">
                     <div class="flex items-center mb-4">
                         <i class="fas fa-briefcase text-electric-blue text-2xl mr-3 glow-cyan"></i>
                         <div>
-                            <h3 class="text-2xl font-bold text-white">CEO & Managing Director</h3>
-                            <p class="text-gray-300">Shelby Company Ltd.</p>
+                            <h3 class="text-2xl font-bold text-white" data-field="work.0.position">CEO & Managing Director</h3>
+                            <p class="text-gray-300" data-field="work.0.company">Shelby Company Ltd.</p>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-6">
-                        <p class="text-neon-blue font-semibold">Global Operations</p>
-                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">06/2016 - Present</span>
+                        <p class="text-neon-blue font-semibold" data-field="work.0.department">Global Operations</p>
+                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm" data-field="work.0.duration">06/2016 - Present</span>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-start">
@@ -404,13 +436,13 @@
                     <div class="flex items-center mb-4">
                         <i class="fas fa-chart-line text-electric-blue text-2xl mr-3 glow-cyan"></i>
                         <div>
-                            <h3 class="text-2xl font-bold text-white">Business Development Director</h3>
-                            <p class="text-gray-300">Small Heath Enterprises</p>
+                            <h3 class="text-2xl font-bold text-white" data-field="work.1.position">Business Development Director</h3>
+                            <p class="text-gray-300" data-field="work.1.company">Small Heath Enterprises</p>
                         </div>
                     </div>
                     <div class="flex justify-between items-center mb-6">
-                        <p class="text-neon-blue font-semibold">Revenue Growth & Strategy</p>
-                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">02/2010 - 05/2016</span>
+                        <p class="text-neon-blue font-semibold" data-field="work.1.department">Revenue Growth & Strategy</p>
+                        <span class="bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm" data-field="work.1.duration">02/2010 - 05/2016</span>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-start">
@@ -456,7 +488,11 @@
                         </h3>
                         <div class="space-y-4">
                             <div>
-                                <div class="flex flex-wrap gap-2">
+                                <div class="flex flex-wrap gap-2" data-repeat="skills">
+                                    <template>
+                                        <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm" data-field="name">Market Intelligence</span>
+                                    </template>
+                                    <!-- Fallback content -->
                                     <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Market Intelligence</span>
                                     <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Competitive Analysis</span>
                                     <span class="skill-tag bg-blue-900/50 text-neon-blue px-3 py-1 rounded-full text-sm">Advanced Negotiation</span>
@@ -477,7 +513,11 @@
                         </h3>
                         <div class="space-y-4">
                             <div>
-                                <div class="flex flex-wrap gap-2">
+                                <div class="flex flex-wrap gap-2" data-repeat="technicalSkills">
+                                    <template>
+                                        <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm" data-field="name">Cybersecurity</span>
+                                    </template>
+                                    <!-- Fallback content -->
                                     <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Cybersecurity</span>
                                     <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Compliance Frameworks</span>
                                     <span class="skill-tag bg-cyan-900/50 text-electric-blue px-3 py-1 rounded-full text-sm">Financial Forecasting</span>
@@ -507,11 +547,19 @@
                         <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
                             <i class="fas fa-graduation-cap text-electric-blue mr-3 glow-cyan"></i>Education
                         </h3>
-                        <div class="space-y-6">
+                        <div class="space-y-6" data-repeat="education">
+                            <template>
+                                <div class="border-l-4 border-neon-blue pl-4">
+                                    <h4 class="text-xl font-bold text-white" data-field="studyType">MBA in Business Strategy & Finance</h4>
+                                    <p class="text-gray-300" data-field="institution">London Business School</p>
+                                    <p class="text-sm text-gray-400" data-field="description">Specialization in Competitive Strategy, Mergers & Acquisitions, and Global Markets</p>
+                                </div>
+                            </template>
+                            <!-- Fallback content -->
                             <div class="border-l-4 border-neon-blue pl-4">
-                                <h4 class="text-xl font-bold text-white">MBA in Business Strategy & Finance</h4>
-                                <p class="text-gray-300">London Business School</p>
-                                <p class="text-sm text-gray-400">Specialization in Competitive Strategy, Mergers & Acquisitions, and Global Markets</p>
+                                <h4 class="text-xl font-bold text-white" data-field="education.0.studyType">MBA in Business Strategy & Finance</h4>
+                                <p class="text-gray-300" data-field="education.0.institution">London Business School</p>
+                                <p class="text-sm text-gray-400" data-field="education.0.description">Specialization in Competitive Strategy, Mergers & Acquisitions, and Global Markets</p>
                             </div>
                         </div>
                     </div>
@@ -521,18 +569,25 @@
                         <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
                             <i class="fas fa-trophy text-electric-blue mr-3 glow-cyan"></i>Honors & Awards
                         </h3>
-                        <div class="space-y-4">
+                        <div class="space-y-4" data-repeat="awards">
+                            <template>
+                                <div>
+                                    <h4 class="font-semibold text-white" data-field="title">European Business Titan Award (2021)</h4>
+                                    <p class="text-gray-300" data-field="description">Recognized for innovative leadership in global expansion</p>
+                                </div>
+                            </template>
+                            <!-- Fallback content -->
                             <div>
-                                <h4 class="font-semibold text-white">European Business Titan Award (2021)</h4>
-                                <p class="text-gray-300">Recognized for innovative leadership in global expansion</p>
+                                <h4 class="font-semibold text-white" data-field="awards.0.title">European Business Titan Award (2021)</h4>
+                                <p class="text-gray-300" data-field="awards.0.description">Recognized for innovative leadership in global expansion</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white">Top 50 CEOs in Emerging Markets (2020)</h4>
-                                <p class="text-gray-300">For spearheading transformative business growth</p>
+                                <h4 class="font-semibold text-white" data-field="awards.1.title">Top 50 CEOs in Emerging Markets (2020)</h4>
+                                <p class="text-gray-300" data-field="awards.1.description">For spearheading transformative business growth</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white">Strategic Disruptor of the Year (2019)</h4>
-                                <p class="text-gray-300">Awarded for aggressive market dominance strategies</p>
+                                <h4 class="font-semibold text-white" data-field="awards.2.title">Strategic Disruptor of the Year (2019)</h4>
+                                <p class="text-gray-300" data-field="awards.2.description">Awarded for aggressive market dominance strategies</p>
                             </div>
                         </div>
                     </div>
@@ -543,18 +598,25 @@
                     <h3 class="text-2xl font-semibold mb-6 text-white flex items-center">
                         <i class="fas fa-microphone text-electric-blue mr-3 glow-cyan"></i>Conferences & Courses
                     </h3>
-                    <div class="grid md:grid-cols-3 gap-4">
+                    <div class="grid md:grid-cols-3 gap-4" data-repeat="conferences">
+                        <template>
+                            <div class="bg-gray-600/30 p-4 rounded-lg">
+                                <h4 class="font-semibold text-white" data-field="name">Davos World Economic Forum (2023)</h4>
+                                <p class="text-sm text-gray-300" data-field="description">Speaker on global market shifts & industry dominance</p>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="bg-gray-600/30 p-4 rounded-lg">
-                            <h4 class="font-semibold text-white">Davos World Economic Forum (2023)</h4>
-                            <p class="text-sm text-gray-300">Speaker on global market shifts & industry dominance</p>
+                            <h4 class="font-semibold text-white" data-field="conferences.0.name">Davos World Economic Forum (2023)</h4>
+                            <p class="text-sm text-gray-300" data-field="conferences.0.description">Speaker on global market shifts & industry dominance</p>
                         </div>
                         <div class="bg-gray-600/30 p-4 rounded-lg">
-                            <h4 class="font-semibold text-white">MIT Sloan Executive Summit (2022)</h4>
-                            <p class="text-sm text-gray-300">On AI for predictive business strategy</p>
+                            <h4 class="font-semibold text-white" data-field="conferences.1.name">MIT Sloan Executive Summit (2022)</h4>
+                            <p class="text-sm text-gray-300" data-field="conferences.1.description">On AI for predictive business strategy</p>
                         </div>
                         <div class="bg-gray-600/30 p-4 rounded-lg">
-                            <h4 class="font-semibold text-white">The Art of War in Business (2021)</h4>
-                            <p class="text-sm text-gray-300">Keynote on corporate warfare strategies</p>
+                            <h4 class="font-semibold text-white" data-field="conferences.2.name">The Art of War in Business (2021)</h4>
+                            <p class="text-sm text-gray-300" data-field="conferences.2.description">Keynote on corporate warfare strategies</p>
                         </div>
                     </div>
                 </div>
@@ -575,21 +637,21 @@
                                 <i class="fas fa-envelope text-electric-blue text-xl mr-4 glow-cyan"></i>
                                 <div>
                                     <p class="font-semibold text-white">Email</p>
-                                    <p class="text-gray-300">thomas@novoresume.com</p>
+                                    <p class="text-gray-300" data-field="basics.email">thomas@novoresume.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-phone text-electric-blue text-xl mr-4 glow-cyan"></i>
                                 <div>
                                     <p class="font-semibold text-white">Phone</p>
-                                    <p class="text-gray-300">(555) 1919-1929</p>
+                                    <p class="text-gray-300" data-field="basics.phone">(555) 1919-1929</p>
                                 </div>
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-map-marker-alt text-electric-blue text-xl mr-4 glow-cyan"></i>
                                 <div>
                                     <p class="font-semibold text-white">Location</p>
-                                    <p class="text-gray-300">London, United Kingdom</p>
+                                    <p class="text-gray-300" data-field="basics.location">London, United Kingdom</p>
                                 </div>
                             </div>
                         </div>
@@ -598,7 +660,7 @@
                     <div class="bg-gray-700/50 dark:bg-gray-700/50 rounded-lg p-8 card-hover backdrop-blur-sm">
                         <h3 class="text-2xl font-semibold mb-6 text-white">Professional Network</h3>
                         <div class="flex space-x-4">
-                            <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" 
+                            <a href="https://www.linkedin.com/in/ram.manohar" target="_blank" data-field="basics.profiles.1.url" data-attr="href"
                                class="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors glow-blue">
                                 <i class="fab fa-linkedin text-xl"></i>
                             </a>
@@ -615,7 +677,7 @@
     <!-- Footer -->
     <footer class="bg-black text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Ram Manohar. All rights reserved.</p>
+            <p>&copy; <span data-field="basics.year">2025</span> <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
         </div>
     </footer>
 

@@ -546,25 +546,25 @@
         <!-- Home Section -->
         <section id="home">
             <div class="header">
-                <img src="https://via.placeholder.com/200" alt="Profile Picture" class="profile-img">
+                <img src="https://via.placeholder.com/400x400" alt="Profile Picture" class="profile-img" data-field="basics.picture" data-attr="src">
                 <div>
-                    <h1>Ram Manohar</h1>
-                    <p>Web Developer & Designer</p>
+                    <h1 data-field="basics.name">Ram Manohar</h1>
+                    <p data-field="basics.label">Full Stack Developer</p>
                     
                     <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
-                        <p><i class="fas fa-envelope"></i> ram.manohar@example.com</p>
+                        <p><i class="fas fa-phone"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
+                        <p><i class="fas fa-envelope"></i> <span data-field="basics.email">john.doe@example.com</span></p>
                     </div>
                     
                     <div class="social-links">
-                        <a href="https://github.com/Rammanohar" class="social-link" target="_blank">
+                        <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                             <i class="fab fa-github"></i> GitHub
                         </a>
                         <button class="info-button" onclick="openModal('github-modal')" aria-label="GitHub info">
                             <i class="fas fa-info-circle"></i>
                         </button>
                         
-                        <a href="https://linkedin.com/in/Rammanohar" class="social-link" target="_blank">
+                        <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
                         <button class="info-button" onclick="openModal('linkedin-modal')" aria-label="LinkedIn info">
@@ -578,21 +578,32 @@
         <!-- Education Section -->
         <section id="education">
             <h2>Education</h2>
-            <div class="timeline">
+            <div class="timeline" data-repeat="education">
+                <template>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3 data-field="studyType">Master of Computer Science</h3>
+                            <p class="timeline-date" data-field="year">2018 - 2020</p>
+                            <p data-field="institution">Stanford University</p>
+                            <p data-field="area">Specialized in Artificial Intelligence and Machine Learning with a 3.8 GPA.</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h3>Master of Computer Science</h3>
-                        <p class="timeline-date">2020 - 2022</p>
-                        <p>Stanford University</p>
-                        <p>Specialized in Artificial Intelligence and Machine Learning with a 3.8 GPA.</p>
+                        <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                        <p class="timeline-date" data-field="education.0.year">2018 - 2020</p>
+                        <p data-field="education.0.institution">Stanford University</p>
+                        <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning with a 3.8 GPA.</p>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h3>Bachelor of Science in Computer Engineering</h3>
-                        <p class="timeline-date">2016 - 2020</p>
-                        <p>University of California, Berkeley</p>
-                        <p>Graduated with honors. Minor in Mathematics.</p>
+                        <h3 data-field="education.1.studyType">Bachelor of Science in Computer Engineering</h3>
+                        <p class="timeline-date" data-field="education.1.year">2016 - 2020</p>
+                        <p data-field="education.1.institution">University of California, Berkeley</p>
+                        <p data-field="education.1.area">Graduated with honors. Minor in Mathematics.</p>
                     </div>
                 </div>
             </div>
@@ -601,29 +612,45 @@
         <!-- Experience Section -->
         <section id="experience">
             <h2>Experience</h2>
-            <div class="timeline">
+            <div class="timeline" data-repeat="work">
+                <template>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3 data-field="position">Senior Web Developer</h3>
+                            <p class="timeline-date" data-field="duration">2021 - Present</p>
+                            <p data-field="name">Google Inc.</p>
+                            <p data-field="summary">Leading a team of developers to create innovative web applications using React, Node.js, and MongoDB.</p>
+                            <ul data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h3>Senior Web Developer</h3>
-                        <p class="timeline-date">2021 - Present</p>
-                        <p>Google Inc.</p>
-                        <p>Leading a team of developers to create innovative web applications using React, Node.js, and MongoDB.</p>
+                        <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                        <p class="timeline-date" data-field="work.0.duration">2020 - Present</p>
+                        <p data-field="work.0.name">Google</p>
+                        <p data-field="work.0.summary">Led development of new features for Google Search</p>
+                        <ul>
+                            <li>Led development of new features for Google Search</li>
+                            <li>Optimized algorithms improving search speed by 15%</li>
+                            <li>Mentored junior developers</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h3>Web Developer</h3>
-                        <p class="timeline-date">2019 - 2021</p>
-                        <p>Facebook</p>
-                        <p>Developed and maintained front-end components for various social media platforms.</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Intern</h3>
-                        <p class="timeline-date">Summer 2018</p>
-                        <p>Microsoft</p>
-                        <p>Worked on Azure cloud services and assisted in developing web applications.</p>
+                        <h3 data-field="work.1.position">Software Developer</h3>
+                        <p class="timeline-date" data-field="work.1.duration">2018 - 2020</p>
+                        <p data-field="work.1.name">Amazon</p>
+                        <p data-field="work.1.summary">Developed backend services for AWS</p>
+                        <ul>
+                            <li>Developed backend services for AWS</li>
+                            <li>Implemented CI/CD pipelines</li>
+                            <li>Reduced server costs by 20% through optimization</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -632,29 +659,40 @@
         <!-- Projects Section -->
         <section id="projects">
             <h2>Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-grid" data-repeat="projects">
+                <template>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/300x200" alt="Project Image" class="project-img">
+                        <div class="project-info">
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="project-card">
                     <img src="https://via.placeholder.com/300x200" alt="E-Commerce Platform" class="project-img">
                     <div class="project-info">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce solution with React, Node.js, and MongoDB.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.0.name">E-Commerce Platform</h3>
+                        <p data-field="projects.0.description">A full-stack e-commerce solution with React, Node.js, and MongoDB.</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <img src="https://via.placeholder.com/300x200" alt="Task Management App" class="project-img">
                     <div class="project-info">
-                        <h3>Task Management App</h3>
-                        <p>A productivity application built with Vue.js and Firebase.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.1.name">AI Chatbot</h3>
+                        <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow.</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <img src="https://via.placeholder.com/300x200" alt="Weather Dashboard" class="project-img">
                     <div class="project-info">
-                        <h3>Weather Dashboard</h3>
-                        <p>Real-time weather information using Weather API and JavaScript.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.2.name">Portfolio Website</h3>
+                        <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript.</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </div>
@@ -663,61 +701,58 @@
         <!-- Skills Section -->
         <section id="skills">
             <h2>Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">HTML/CSS</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%;"></div>
+            <div class="skills-container" data-repeat="skills">
+                <template>
+                    <div class="skill-category">
+                        <h3>Category</h3>
+                        <div class="skill-item">
+                            <span class="skill-name" data-field="name">Skill Name</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
                         </div>
                     </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
                     <div class="skill-item">
-                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-name" data-field="skills.0.name">JavaScript</span>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 90%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">React</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Node.js</span>
+                        <span class="skill-name" data-field="skills.1.name">Python</span>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 85%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Python</span>
+                        <span class="skill-name" data-field="skills.2.name">Java</span>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 80%;"></div>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <span class="skill-name">PHP</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%;"></div>
-                        </div>
-                    </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Database</h3>
+                    <h3>Frameworks & Technologies</h3>
                     <div class="skill-item">
-                        <span class="skill-name">MongoDB</span>
+                        <span class="skill-name" data-field="skills.3.name">React</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name" data-field="skills.4.name">Node.js</span>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 85%;"></div>
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">MySQL</span>
+                        <span class="skill-name" data-field="skills.5.name">TensorFlow</span>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%;"></div>
+                            <div class="skill-progress" style="width: 75%;"></div>
                         </div>
                     </div>
                 </div>
@@ -727,34 +762,43 @@
         <!-- Interests Section -->
         <section id="interests">
             <h2>Area of Interest</h2>
-            <ul class="interests-list">
-                <li>Artificial Intelligence and Machine Learning</li>
-                <li>Web Development and Design</li>
-                <li>Cloud Computing</li>
-                <li>Data Visualization</li>
-                <li>User Experience Design</li>
+            <ul class="interests-list" data-repeat="interests">
+                <template>
+                    <li data-field="name">Interest Name</li>
+                </template>
+                <!-- Fallback content -->
+                <li data-field="interests.0.name">Artificial Intelligence and Machine Learning</li>
+                <li data-field="interests.1.name">Web Development and Design</li>
+                <li data-field="interests.2.name">Cloud Computing</li>
+                <li data-field="interests.3.name">Data Visualization</li>
             </ul>
         </section>
 
         <!-- Honors Section -->
         <section id="honors">
             <h2>Honors & Awards</h2>
-            <ul class="honors-list">
-                <li>Google Developer Scholarship - 2021</li>
-                <li>Best Paper Award at International Web Conference - 2020</li>
-                <li>Dean's List - All Semesters (2016-2020)</li>
-                <li>National Coding Competition Winner - 2019</li>
+            <ul class="honors-list" data-repeat="awards">
+                <template>
+                    <li data-field="title">Award Title</li>
+                </template>
+                <!-- Fallback content -->
+                <li data-field="awards.0.title">Google Developer Expert</li>
+                <li data-field="awards.1.title">Hackathon Winner</li>
+                <li data-field="awards.2.title">Dean's List - All Semesters (2016-2020)</li>
             </ul>
         </section>
 
         <!-- Extracurriculars Section -->
         <section id="extracurriculars">
             <h2>Extracurricular Activities</h2>
-            <ul class="extracurriculars-list">
-                <li>President of University Coding Club (2018-2020)</li>
-                <li>Volunteer Web Developer for Non-Profit Organizations</li>
-                <li>Mentor at Coding Bootcamps</li>
-                <li>Organizer of Hackathons and Tech Meetups</li>
+            <ul class="extracurriculars-list" data-repeat="extracurricular">
+                <template>
+                    <li data-field="name">Activity Name</li>
+                </template>
+                <!-- Fallback content -->
+                <li data-field="extracurricular.0.name">Tech Blog Writer</li>
+                <li data-field="extracurricular.1.name">Coding Mentor</li>
+                <li data-field="extracurricular.2.name">Open Source Contributor</li>
             </ul>
         </section>
     </div>

@@ -313,35 +313,30 @@
     
     <div class="container">
         <header>
-            <h1>Ram Manohar</h1>
-            <p>Full Stack Developer | AI Enthusiast | Tech Innovator</p>
+            <h1 data-field="basics.name">Ram Manohar</h1>
+            <p data-field="basics.label">Full Stack Developer</p>
+            <p data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
             
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+1 (555) 123-4567</span>
+                    <span data-field="basics.phone">+1 (555) 123-4567</span>
                 </div>
                 
                 <div class="contact-item">
                     <i class="fab fa-github"></i>
-                    <span>github.com/rammanohar</span>
-                    <button class="icon-button" aria-label="How to create GitHub account">
+                    <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
+                    <button class="icon-button" aria-label="How to create GitHub account" data-bs-toggle="modal" data-bs-target="#githubModal">
                         <i class="fas fa-info-circle"></i>
                     </button>
-                    <div class="info-tooltip">
-                        To create a GitHub account: 1) Go to github.com 2) Click 'Sign up' 3) Enter your details 4) Verify your email
-                    </div>
                 </div>
                 
                 <div class="contact-item">
                     <i class="fab fa-linkedin"></i>
-                    <span>linkedin.com/in/rammanohar</span>
-                    <button class="icon-button" aria-label="How to create LinkedIn account">
+                    <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
+                    <button class="icon-button" aria-label="How to create LinkedIn account" data-bs-toggle="modal" data-bs-target="#linkedinModal">
                         <i class="fas fa-info-circle"></i>
                     </button>
-                    <div class="info-tooltip">
-                        To create a LinkedIn account: 1) Go to linkedin.com 2) Click 'Join now' 3) Enter your details 4) Complete your profile
-                    </div>
                 </div>
             </div>
         </header>
@@ -350,18 +345,27 @@
             <section id="education">
                 <div class="card">
                     <h2>Education</h2>
-                    <div class="timeline">
+                    <div class="timeline" data-repeat="education">
+                        <template>
+                            <div class="timeline-item">
+                                <div class="timeline-date" data-field="year">2018 - 2020</div>
+                                <h3 data-field="studyType">Master of Computer Science</h3>
+                                <p data-field="institution">Stanford University</p>
+                                <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="timeline-item">
-                            <div class="timeline-date">2020 - 2024</div>
-                            <h3>Bachelor of Science in Computer Science</h3>
-                            <p>Massachusetts Institute of Technology (MIT)</p>
-                            <p>GPA: 3.9/4.0 | Specialization in Artificial Intelligence</p>
+                            <div class="timeline-date" data-field="education.0.year">2018 - 2020</div>
+                            <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                            <p data-field="education.0.institution">Stanford University</p>
+                            <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-date">2016 - 2020</div>
-                            <h3>High School Diploma</h3>
-                            <p>St. Paul's Preparatory School</p>
-                            <p>Valedictorian | National Merit Scholar</p>
+                            <div class="timeline-date" data-field="education.1.year">2014 - 2018</div>
+                            <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                            <p data-field="education.1.institution">MIT</p>
+                            <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                         </div>
                     </div>
                 </div>
@@ -370,25 +374,39 @@
             <section id="experience">
                 <div class="card">
                     <h2>Experience</h2>
-                    <div class="timeline">
+                    <div class="timeline" data-repeat="work">
+                        <template>
+                            <div class="timeline-item">
+                                <div class="timeline-date" data-field="duration">2020 - Present</div>
+                                <h3 data-field="position">Senior Software Engineer</h3>
+                                <p data-field="name">Google</p>
+                                <p data-field="summary">Led development of scalable applications.</p>
+                                <ul data-repeat-inner="highlights">
+                                    <template><li data-field=".">Achievement item</li></template>
+                                </ul>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="timeline-item">
-                            <div class="timeline-date">2023 - Present</div>
-                            <h3>Software Engineer Intern</h3>
-                            <p>Google | Mountain View, CA</p>
+                            <div class="timeline-date" data-field="work.0.duration">2020 - Present</div>
+                            <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                            <p data-field="work.0.name">Google</p>
+                            <p data-field="work.0.summary">Led development of new features for Google Search</p>
                             <ul>
-                                <li>Developed new features for Google Cloud Platform using Python and Go</li>
-                                <li>Optimized database queries reducing response time by 40%</li>
-                                <li>Collaborated with AI team to implement machine learning models</li>
+                                <li>Led development of new features for Google Search</li>
+                                <li>Optimized algorithms improving search speed by 15%</li>
+                                <li>Mentored junior developers</li>
                             </ul>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-date">2021 - 2023</div>
-                            <h3>Web Developer</h3>
-                            <p>TechStart Inc. | Boston, MA</p>
+                            <div class="timeline-date" data-field="work.1.duration">2018 - 2020</div>
+                            <h3 data-field="work.1.position">Software Developer</h3>
+                            <p data-field="work.1.name">Amazon</p>
+                            <p data-field="work.1.summary">Developed backend services for AWS</p>
                             <ul>
-                                <li>Built responsive web applications using React and Node.js</li>
-                                <li>Implemented RESTful APIs serving 10,000+ daily requests</li>
-                                <li>Mentored junior developers in coding best practices</li>
+                                <li>Developed backend services for AWS</li>
+                                <li>Implemented CI/CD pipelines</li>
+                                <li>Reduced server costs by 20% through optimization</li>
                             </ul>
                         </div>
                     </div>
@@ -398,31 +416,40 @@
             <section id="projects">
                 <div class="card">
                     <h2>Projects</h2>
-                    <div class="section-grid">
+                    <div class="section-grid" data-repeat="projects">
+                        <template>
+                            <div class="project card">
+                                <img src="https://via.placeholder.com/400x200/0a0a1a/00f7ff?text=Project" alt="Project" style="width:100%; height:100%; object-fit:cover;" data-field="picture" data-attr="src">
+                                <div class="project-content">
+                                    <h3 data-field="name">Project Name</h3>
+                                    <p data-field="description">Project description</p>
+                                    <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                                </div>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="project card">
-                            <img src="https://via.placeholder.com/400x200/0a0a1a/00f7ff?text=AI+Chatbot" alt="AI Chatbot Project" style="width:100%; height:100%; object-fit:cover;">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/00f7ff?text=E-Commerce" alt="E-Commerce Platform" style="width:100%; height:100%; object-fit:cover;" data-field="projects.0.picture" data-attr="src">
                             <div class="project-content">
-                                <h3>AI Personal Assistant</h3>
-                                <p>An NLP-powered chatbot that schedules meetings, answers queries, and automates tasks.</p>
-                                <a href="#" class="project-link">Project Link</a>
+                                <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                                <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                                <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                             </div>
                         </div>
-                        
                         <div class="project card">
-                            <img src="https://via.placeholder.com/400x200/0a0a1a/ff00e4?text=E-Commerce+App" alt="E-Commerce App" style="width:100%; height:100%; object-fit:cover;">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/ff00e4?text=AI+Chatbot" alt="AI Chatbot" style="width:100%; height:100%; object-fit:cover;" data-field="projects.1.picture" data-attr="src">
                             <div class="project-content">
-                                <h3>E-Commerce Platform</h3>
-                                <p>Full-stack online store with payment integration and recommendation engine.</p>
-                                <a href="#" class="project-link">Project Link</a>
+                                <h3 data-field="projects.1.name">AI Chatbot</h3>
+                                <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                                <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                             </div>
                         </div>
-                        
                         <div class="project card">
-                            <img src="https://via.placeholder.com/400x200/0a0a1a/ffffff?text=Health+Tracker" alt="Health Tracker" style="width:100%; height:100%; object-fit:cover;">
+                            <img src="https://via.placeholder.com/400x200/0a0a1a/ffffff?text=Portfolio" alt="Portfolio Website" style="width:100%; height:100%; object-fit:cover;" data-field="projects.2.picture" data-attr="src">
                             <div class="project-content">
-                                <h3>Health & Fitness Tracker</h3>
-                                <p>Mobile app that tracks workouts, nutrition, and provides personalized plans.</p>
-                                <a href="#" class="project-link">Project Link</a>
+                                <h3 data-field="projects.2.name">Portfolio Website</h3>
+                                <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                                <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                             </div>
                         </div>
                     </div>
@@ -432,19 +459,17 @@
             <section id="skills">
                 <div class="card">
                     <h2>Technical Skills</h2>
-                    <div class="skills-list">
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">TensorFlow</span>
-                        <span class="skill-item">Django</span>
-                        <span class="skill-item">SQL</span>
-                        <span class="skill-item">MongoDB</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">AWS</span>
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">Linux</span>
+                    <div class="skills-list" data-repeat="skills">
+                        <template>
+                            <span class="skill-item" data-field="name">Skill Name</span>
+                        </template>
+                        <!-- Fallback content -->
+                        <span class="skill-item" data-field="skills.0.name">JavaScript</span>
+                        <span class="skill-item" data-field="skills.1.name">Python</span>
+                        <span class="skill-item" data-field="skills.2.name">Java</span>
+                        <span class="skill-item" data-field="skills.3.name">React</span>
+                        <span class="skill-item" data-field="skills.4.name">Node.js</span>
+                        <span class="skill-item" data-field="skills.5.name">TensorFlow</span>
                     </div>
                 </div>
             </section>
@@ -452,13 +477,15 @@
             <section id="interests">
                 <div class="card">
                     <h2>Area of Interest</h2>
-                    <ul>
-                        <li>Artificial Intelligence & Machine Learning</li>
-                        <li>Natural Language Processing</li>
-                        <li>Computer Vision</li>
-                        <li>Blockchain Technology</li>
-                        <li>Quantum Computing</li>
-                        <li>Human-Computer Interaction</li>
+                    <ul data-repeat="interests">
+                        <template>
+                            <li data-field="name">Interest Name</li>
+                        </template>
+                        <!-- Fallback content -->
+                        <li data-field="interests.0.name">Artificial Intelligence</li>
+                        <li data-field="interests.1.name">Mobile Development</li>
+                        <li data-field="interests.2.name">Cyber Security</li>
+                        <li data-field="interests.3.name">Cloud Computing</li>
                     </ul>
                 </div>
             </section>
@@ -466,12 +493,13 @@
             <section id="honors">
                 <div class="card">
                     <h2>Honors & Awards</h2>
-                    <ul>
-                        <li>Google Code-in Grand Prize Winner (2022)</li>
-                        <li>ACM International Collegiate Programming Contest Finalist (2023)</li>
-                        <li>National Science Foundation Scholarship Recipient</li>
-                        <li>MIT Dean's List (All Semesters)</li>
-                        <li>Best Paper Award at IEEE Conference on AI (2023)</li>
+                    <ul data-repeat="awards">
+                        <template>
+                            <li data-field="title">Award Title</li>
+                        </template>
+                        <!-- Fallback content -->
+                        <li data-field="awards.0.title">Google Developer Expert</li>
+                        <li data-field="awards.1.title">Hackathon Winner</li>
                     </ul>
                 </div>
             </section>
@@ -479,23 +507,77 @@
             <section id="extracurriculars">
                 <div class="card">
                     <h2>Extracurriculars</h2>
-                    <ul>
-                        <li>President, MIT Computer Science Club</li>
-                        <li>Volunteer Instructor at Code for All (Non-profit)</li>
-                        <li>Open Source Contributor (50+ repositories)</li>
-                        <li>Tech Blogger (200+ articles on Medium)</li>
-                        <li>Varsity Debate Team Captain</li>
+                    <ul data-repeat="extracurricular">
+                        <template>
+                            <li data-field="name">Activity Name</li>
+                        </template>
+                        <!-- Fallback content -->
+                        <li data-field="extracurricular.0.name">Tech Blog Writer</li>
+                        <li data-field="extracurricular.1.name">Coding Mentor</li>
+                        <li data-field="extracurricular.2.name">Open Source Contributor</li>
                     </ul>
                 </div>
             </section>
         </main>
         
         <footer>
-            <p>&copy; 2023 Ram Manohar | 3D Holographic Portfolio</p>
-            <p>Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> and cutting-edge web technologies</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span> | 3D Holographic Portfolio</p>
         </footer>
     </div>
     
+    <!-- GitHub Info Modal -->
+    <div class="modal fade" id="githubModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">How to Create GitHub Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li>Go to github.com</li>
+                        <li>Click "Sign up"</li>
+                        <li>Enter your email, create username and password</li>
+                        <li>Verify your email address</li>
+                        <li>Complete your profile</li>
+                        <li>Start using GitHub!</li>
+                    </ol>
+                    <p>GitHub is essential for developers to showcase projects and collaborate.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LinkedIn Info Modal -->
+    <div class="modal fade" id="linkedinModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">How to Create LinkedIn Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li>Go to linkedin.com</li>
+                        <li>Click "Join now"</li>
+                        <li>Enter your email and create password</li>
+                        <li>Fill in your personal information</li>
+                        <li>Add your education and work experience</li>
+                        <li>Connect with people you know</li>
+                    </ol>
+                    <p>LinkedIn is crucial for professional networking and job opportunities.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Add 3D hover effects
         document.addEventListener('mousemove', function(e) {
@@ -523,15 +605,6 @@
                     card.style.transform = '';
                 });
             }
-        });
-        
-        // Tooltip functionality
-        const infoButtons = document.querySelectorAll('.icon-button');
-        infoButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const tooltip = this.nextElementSibling;
-                tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
-            });
         });
     </script>
 </body>

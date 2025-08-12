@@ -248,26 +248,26 @@
         <div class="zoom-stage">
             <!-- Main Profile Card -->
             <div class="card active" data-zoom="main">
-                <h1>Laado Kumari</h1>
-                <p>Full Stack Developer | UI/UX Enthusiast</p>
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p data-field="basics.label">Full Stack Developer | UI/UX Enthusiast</p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
-                        <span>📱: +1 (123) 456-7890</span>
+                        <span>📱: <span data-field="basics.phone">+1 (555) 123-4567</span></span>
                     </div>
                     <div class="contact-item">
                         <span>GitHub: </span>
-                        <a href="https://github.com/laadokumari" target="_blank">github.com/laadokumari</a>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                         <button class="icon-btn" onclick="openModal('github-modal')">ℹ️</button>
                     </div>
                     <div class="contact-item">
                         <span>LinkedIn: </span>
-                        <a href="https://linkedin.com/in/laadokumari" target="_blank">linkedin.com/in/laadokumari</a>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                         <button class="icon-btn" onclick="openModal('linkedin-modal')">ℹ️</button>
                     </div>
                 </div>
                 
-                <p>Welcome to my interactive portfolio! Click on any section below to explore more details.</p>
+                <p data-field="basics.summary">Welcome to my interactive portfolio! Click on any section below to explore more details.</p>
                 
                 <div class="navigation">
                     <h2>Explore My Portfolio</h2>
@@ -288,14 +288,24 @@
                 <h2>Education</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
-                <h3>Master of Computer Science</h3>
-                <p>Stanford University | 2020 - 2022</p>
-                <p>Specialization in Artificial Intelligence</p>
+                <div data-repeat="education">
+                    <template>
+                        <h3 data-field="studyType">Master of Computer Science</h3>
+                        <p data-field="institution">Stanford University | <span data-field="year">2018 - 2020</span></p>
+                        <p data-field="area">Specialization in Artificial Intelligence</p>
+                        <p>GPA: 3.9/4.0</p>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                <p data-field="education.0.institution">Stanford University | <span data-field="education.0.year">2018 - 2020</span></p>
+                <p data-field="education.0.area">Specialization in Artificial Intelligence</p>
                 <p>GPA: 3.9/4.0</p>
                 
-                <h3>Bachelor of Science in Computer Engineering</h3>
-                <p>University of California, Berkeley | 2016 - 2020</p>
-                <p>Minor in Mathematics</p>
+                <h3 data-field="education.1.studyType">Bachelor of Science in Computer Engineering</h3>
+                <p data-field="education.1.institution">MIT | <span data-field="education.1.year">2014 - 2018</span></p>
+                <p data-field="education.1.area">Minor in Mathematics</p>
                 <p>GPA: 3.8/4.0</p>
             </div>
             
@@ -304,20 +314,31 @@
                 <h2>Professional Experience</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
-                <h3>Senior Software Engineer</h3>
-                <p>Tech Innovations Inc. | 2022 - Present</p>
+                <div data-repeat="work">
+                    <template>
+                        <h3 data-field="position">Senior Software Engineer</h3>
+                        <p data-field="name">Google | <span data-field="duration">2020 - Present</span></p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                <p data-field="work.0.name">Google | <span data-field="work.0.duration">2020 - Present</span></p>
                 <ul>
-                    <li>Lead development of customer-facing web applications</li>
-                    <li>Implemented CI/CD pipelines reducing deployment time by 40%</li>
-                    <li>Mentored junior developers and conducted code reviews</li>
+                    <li data-field="work.0.highlights.0">Led development of customer-facing web applications</li>
+                    <li data-field="work.0.highlights.1">Implemented CI/CD pipelines reducing deployment time by 40%</li>
+                    <li data-field="work.0.highlights.2">Mentored junior developers and conducted code reviews</li>
                 </ul>
                 
-                <h3>Software Developer Intern</h3>
-                <p>Google Summer Internship | Summer 2021</p>
+                <h3 data-field="work.1.position">Software Developer Intern</h3>
+                <p data-field="work.1.name">Amazon | <span data-field="work.1.duration">Summer 2021</span></p>
                 <ul>
-                    <li>Worked on improving search algorithm efficiency</li>
-                    <li>Developed internal tools for data visualization</li>
-                    <li>Collaborated with cross-functional teams on UX improvements</li>
+                    <li data-field="work.1.highlights.0">Worked on improving search algorithm efficiency</li>
+                    <li data-field="work.1.highlights.1">Developed internal tools for data visualization</li>
+                    <li data-field="work.1.highlights.2">Collaborated with cross-functional teams on UX improvements</li>
                 </ul>
             </div>
             
@@ -326,23 +347,34 @@
                 <h2>Projects</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
+                <div class="project-grid" data-repeat="projects">
+                    <template>
+                        <div class="project-card">
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" target="_blank" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
                 <div class="project-grid">
                     <div class="project-card">
-                        <h3>Infinite Zoom UI Framework</h3>
-                        <p>A JavaScript library for creating zoomable user interfaces with smooth transitions and animations.</p>
-                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                        <h3 data-field="projects.0.name">Infinite Zoom UI Framework</h3>
+                        <p data-field="projects.0.description">A JavaScript library for creating zoomable user interfaces with smooth transitions and animations.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                     
                     <div class="project-card">
-                        <h3>AI-Powered Portfolio Analyzer</h3>
-                        <p>Machine learning tool that analyzes investment portfolios and provides optimization suggestions.</p>
-                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                        <h3 data-field="projects.1.name">AI-Powered Portfolio Analyzer</h3>
+                        <p data-field="projects.1.description">Machine learning tool that analyzes investment portfolios and provides optimization suggestions.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                     
                     <div class="project-card">
-                        <h3>EcoTrack Carbon Footprint App</h3>
-                        <p>Mobile application that tracks daily carbon footprint with gamification elements.</p>
-                        <a href="#" class="project-link" target="_blank">Project Link</a>
+                        <h3 data-field="projects.2.name">EcoTrack Carbon Footprint App</h3>
+                        <p data-field="projects.2.description">Mobile application that tracks daily carbon footprint with gamification elements.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </div>
@@ -352,31 +384,41 @@
                 <h2>Technical Skills</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
-                <h3>Programming Languages</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">TypeScript</span>
+                <div data-repeat="skills">
+                    <template>
+                        <h3 data-field="category">Programming Languages</h3>
+                        <div class="skill-tags" data-repeat-inner="items">
+                            <template><span class="skill-tag" data-field=".">Skill</span></template>
+                        </div>
+                    </template>
                 </div>
                 
-                <h3>Web Development</h3>
+                <!-- Fallback content -->
+                <h3 data-field="skills.0.category">Programming Languages</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">SASS</span>
+                    <span class="skill-tag" data-field="skills.0.items.0">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.0.items.1">Python</span>
+                    <span class="skill-tag" data-field="skills.0.items.2">Java</span>
+                    <span class="skill-tag" data-field="skills.0.items.3">C++</span>
+                    <span class="skill-tag" data-field="skills.0.items.4">TypeScript</span>
                 </div>
                 
-                <h3>Database & Cloud</h3>
+                <h3 data-field="skills.1.category">Web Development</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">MongoDB</span>
-                    <span class="skill-tag">PostgreSQL</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag" data-field="skills.1.items.0">React</span>
+                    <span class="skill-tag" data-field="skills.1.items.1">Node.js</span>
+                    <span class="skill-tag" data-field="skills.1.items.2">Express</span>
+                    <span class="skill-tag" data-field="skills.1.items.3">HTML5</span>
+                    <span class="skill-tag" data-field="skills.1.items.4">CSS3</span>
+                    <span class="skill-tag" data-field="skills.1.items.5">SASS</span>
+                </div>
+                
+                <h3 data-field="skills.2.category">Database & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-field="skills.2.items.0">MongoDB</span>
+                    <span class="skill-tag" data-field="skills.2.items.1">PostgreSQL</span>
+                    <span class="skill-tag" data-field="skills.2.items.2">AWS</span>
+                    <span class="skill-tag" data-field="skills.2.items.3">Firebase</span>
                 </div>
             </div>
             
@@ -385,12 +427,21 @@
                 <h2>Areas of Interest</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
+                <div data-repeat="interests">
+                    <template>
+                        <ul>
+                            <li data-field="name">Interest Name</li>
+                        </ul>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
                 <ul>
-                    <li>Artificial Intelligence & Machine Learning</li>
-                    <li>Human-Computer Interaction</li>
-                    <li>Data Visualization</li>
-                    <li>Responsive Web Design</li>
-                    <li>Sustainable Technology</li>
+                    <li data-field="interests.0.name">Artificial Intelligence & Machine Learning</li>
+                    <li data-field="interests.1.name">Human-Computer Interaction</li>
+                    <li data-field="interests.2.name">Data Visualization</li>
+                    <li data-field="interests.3.name">Responsive Web Design</li>
+                    <li data-field="interests.4.name">Sustainable Technology</li>
                 </ul>
             </div>
             
@@ -399,14 +450,24 @@
                 <h2>Honors & Awards</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
-                <h3>Dean's List</h3>
-                <p>University of California, Berkeley | 2017-2020</p>
+                <div data-repeat="awards">
+                    <template>
+                        <h3 data-field="title">Award Title</h3>
+                        <p data-field="awarder">Organization | <span data-field="date">Year</span></p>
+                        <p data-field="summary">Award description</p>
+                    </template>
+                </div>
                 
-                <h3>Best Capstone Project Award</h3>
-                <p>Computer Engineering Department | 2020</p>
+                <!-- Fallback content -->
+                <h3 data-field="awards.0.title">Dean's List</h3>
+                <p data-field="awards.0.awarder">MIT | <span data-field="awards.0.date">2017-2020</span></p>
                 
-                <h3>Google Code Jam Finalist</h3>
-                <p>2019 Edition | Top 100 out of 10,000+ participants</p>
+                <h3 data-field="awards.1.title">Best Capstone Project Award</h3>
+                <p data-field="awards.1.awarder">Computer Engineering Department | <span data-field="awards.1.date">2020</span></p>
+                
+                <h3 data-field="awards.2.title">Google Code Jam Finalist</h3>
+                <p data-field="awards.2.awarder">2019 Edition | <span data-field="awards.2.date">2019</span></p>
+                <p data-field="awards.2.summary">Top 100 out of 10,000+ participants</p>
             </div>
             
             <!-- Extracurriculars Card -->
@@ -414,17 +475,26 @@
                 <h2>Extracurricular Activities</h2>
                 <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
                 
-                <h3>President, Computer Science Club</h3>
-                <p>UC Berkeley | 2018-2020</p>
-                <p>Organized hackathons and tech talks with industry professionals</p>
+                <div data-repeat="extracurricular">
+                    <template>
+                        <h3 data-field="name">Activity Name</h3>
+                        <p data-field="organization">Organization | <span data-field="date">Duration</span></p>
+                        <p data-field="description">Activity description</p>
+                    </template>
+                </div>
                 
-                <h3>Volunteer Coding Instructor</h3>
-                <p>Code for All Non-profit | 2019-Present</p>
-                <p>Teach programming fundamentals to underprivileged youth</p>
+                <!-- Fallback content -->
+                <h3 data-field="extracurricular.0.name">President, Computer Science Club</h3>
+                <p data-field="extracurricular.0.organization">MIT | <span data-field="extracurricular.0.date">2018-2020</span></p>
+                <p data-field="extracurricular.0.description">Organized hackathons and tech talks with industry professionals</p>
                 
-                <h3>Open Source Contributor</h3>
-                <p>Various projects on GitHub | 2017-Present</p>
-                <p>Regular contributor to several popular open source projects</p>
+                <h3 data-field="extracurricular.1.name">Volunteer Coding Instructor</h3>
+                <p data-field="extracurricular.1.organization">Code for All Non-profit | <span data-field="extracurricular.1.date">2019-Present</span></p>
+                <p data-field="extracurricular.1.description">Teach programming fundamentals to underprivileged youth</p>
+                
+                <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                <p data-field="extracurricular.2.organization">Various projects on GitHub | <span data-field="extracurricular.2.date">2017-Present</span></p>
+                <p data-field="extracurricular.2.description">Regular contributor to several popular open source projects</p>
             </div>
         </div>
     </div>

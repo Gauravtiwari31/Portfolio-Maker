@@ -260,16 +260,16 @@
 <body>
     <div class="container">
         <header>
-            <h1>Your Name</h1>
+            <h1 data-field="basics.name">Ram Manohar</h1>
             <div class="contact-info">
-                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-phone"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
             </div>
             <div class="social-links">
-                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                     <i class="fab fa-github"></i> GitHub
                     <span class="info-button" data-tooltip="Go to github.com, sign up with your email, choose a username, and set up your profile.">i</span>
                 </a>
-                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                     <i class="fab fa-linkedin"></i> LinkedIn
                     <span class="info-button" data-tooltip="Go to linkedin.com, create an account, fill in your professional details, and connect with others.">i</span>
                 </a>
@@ -283,22 +283,33 @@
                     <div class="card-header">
                         <h2><i class="fas fa-graduation-cap"></i> Education</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="education">
+                        <template>
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title" data-field="studyType">Master of Computer Science</span>
+                                    <span class="item-date" data-field="year">2018 - 2020</span>
+                                </div>
+                                <p class="item-description" data-field="institution">Stanford University</p>
+                                <p data-field="area">Specialized in Artificial Intelligence and Machine Learning.</p>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">University Name</span>
-                                <span class="item-date">2018 - 2022</span>
+                                <span class="item-title" data-field="education.0.studyType">Master of Computer Science</span>
+                                <span class="item-date" data-field="education.0.year">2018 - 2020</span>
                             </div>
-                            <p class="item-description">Bachelor of Science in Computer Science</p>
-                            <p>GPA: 3.8/4.0</p>
-                            <p>Relevant Coursework: Data Structures, Algorithms, Web Development</p>
+                            <p class="item-description" data-field="education.0.institution">Stanford University</p>
+                            <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                         </div>
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">High School Name</span>
-                                <span class="item-date">2014 - 2018</span>
+                                <span class="item-title" data-field="education.1.studyType">Bachelor of Technology</span>
+                                <span class="item-date" data-field="education.1.year">2014 - 2018</span>
                             </div>
-                            <p class="item-description">High School Diploma</p>
+                            <p class="item-description" data-field="education.1.institution">MIT</p>
+                            <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                         </div>
                     </div>
                 </div>
@@ -308,29 +319,45 @@
                     <div class="card-header">
                         <h2><i class="fas fa-briefcase"></i> Experience</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="work">
+                        <template>
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title" data-field="position">Senior Software Engineer</span>
+                                    <span class="item-date" data-field="duration">2020 - Present</span>
+                                </div>
+                                <p class="item-description" data-field="name">Google</p>
+                                <p data-field="summary">Led development of scalable applications.</p>
+                                <ul data-repeat-inner="highlights">
+                                    <template><li data-field=".">Achievement item</li></template>
+                                </ul>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Software Developer Intern</span>
-                                <span class="item-date">Summer 2021</span>
+                                <span class="item-title" data-field="work.0.position">Senior Software Engineer</span>
+                                <span class="item-date" data-field="work.0.duration">2020 - Present</span>
                             </div>
-                            <p class="item-description">Tech Company Inc.</p>
+                            <p class="item-description" data-field="work.0.name">Google</p>
+                            <p data-field="work.0.summary">Led development of new features for Google Search</p>
                             <ul>
-                                <li>Developed web applications using React and Node.js</li>
-                                <li>Collaborated using Agile methodologies</li>
-                                <li>Improved user engagement by 25%</li>
+                                <li>Led development of new features for Google Search</li>
+                                <li>Optimized algorithms improving search speed by 15%</li>
+                                <li>Mentored junior developers</li>
                             </ul>
                         </div>
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Teaching Assistant</span>
-                                <span class="item-date">2020 - 2021</span>
+                                <span class="item-title" data-field="work.1.position">Software Developer</span>
+                                <span class="item-date" data-field="work.1.duration">2018 - 2020</span>
                             </div>
-                            <p class="item-description">University CS Department</p>
+                            <p class="item-description" data-field="work.1.name">Amazon</p>
+                            <p data-field="work.1.summary">Developed backend services for AWS</p>
                             <ul>
-                                <li>Assisted students with programming assignments</li>
-                                <li>Held weekly office hours</li>
-                                <li>Graded assignments and provided feedback</li>
+                                <li>Developed backend services for AWS</li>
+                                <li>Implemented CI/CD pipelines</li>
+                                <li>Reduced server costs by 20% through optimization</li>
                             </ul>
                         </div>
                     </div>
@@ -341,24 +368,33 @@
                     <div class="card-header">
                         <h2><i class="fas fa-project-diagram"></i> Projects</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="projects">
+                        <template>
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title" data-field="name">Project Name</span>
+                                    <span class="item-date">2022</span>
+                                </div>
+                                <p class="item-description" data-field="description">Project description</p>
+                                <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">E-Commerce Website</span>
+                                <span class="item-title" data-field="projects.0.name">E-commerce Platform</span>
                                 <span class="item-date">2022</span>
                             </div>
-                            <p class="item-description">Full-stack platform with authentication and payments</p>
-                            <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
-                            <a href="#" class="project-link">Project Link</a>
+                            <p class="item-description" data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                            <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                         </div>
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Task Management App</span>
+                                <span class="item-title" data-field="projects.1.name">AI Chatbot</span>
                                 <span class="item-date">2021</span>
                             </div>
-                            <p class="item-description">Mobile app for managing personal tasks</p>
-                            <p><strong>Technologies:</strong> Flutter, Firebase</p>
-                            <a href="#" class="project-link">Project Link</a>
+                            <p class="item-description" data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                            <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
@@ -368,14 +404,21 @@
                     <div class="card-header">
                         <h2><i class="fas fa-code"></i> Technical Skills</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="skills">
+                        <template>
+                            <div class="skills-container">
+                                <span class="skill-tag" data-field="name">Skill Name</span>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="skills-container">
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                            <span class="skill-tag" data-field="skills.1.name">Python</span>
+                            <span class="skill-tag" data-field="skills.2.name">Java</span>
+                            <span class="skill-tag" data-field="skills.3.name">React</span>
+                            <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                            <span class="skill-tag" data-field="skills.5.name">TensorFlow</span>
                             <span class="skill-tag">HTML/CSS</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Node.js</span>
                             <span class="skill-tag">SQL</span>
                             <span class="skill-tag">MongoDB</span>
                             <span class="skill-tag">Git</span>
@@ -390,27 +433,37 @@
                     <div class="card-header">
                         <h2><i class="fas fa-heart"></i> Areas of Interest</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="interests">
+                        <template>
+                            <div class="interests-container">
+                                <div class="interest-item">
+                                    <i class="fas fa-laptop-code"></i>
+                                    <h3 data-field="name">Interest Name</h3>
+                                    <p>Description</p>
+                                </div>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="interests-container">
                             <div class="interest-item">
-                                <i class="fas fa-laptop-code"></i>
-                                <h3>Web Development</h3>
-                                <p>Building responsive web applications</p>
+                                <i class="fas fa-brain"></i>
+                                <h3 data-field="interests.0.name">Artificial Intelligence</h3>
+                                <p>AI and machine learning applications</p>
                             </div>
                             <div class="interest-item">
                                 <i class="fas fa-mobile-alt"></i>
-                                <h3>Mobile Dev</h3>
+                                <h3 data-field="interests.1.name">Mobile Development</h3>
                                 <p>Cross-platform mobile experiences</p>
                             </div>
                             <div class="interest-item">
-                                <i class="fas fa-brain"></i>
-                                <h3>Machine Learning</h3>
-                                <p>AI and data science applications</p>
+                                <i class="fas fa-shield-alt"></i>
+                                <h3 data-field="interests.2.name">Cyber Security</h3>
+                                <p>Security protocols and best practices</p>
                             </div>
                             <div class="interest-item">
-                                <i class="fas fa-chart-line"></i>
-                                <h3>Data Analysis</h3>
-                                <p>Extracting insights from data</p>
+                                <i class="fas fa-cloud"></i>
+                                <h3 data-field="interests.3.name">Cloud Computing</h3>
+                                <p>Scalable cloud infrastructure</p>
                             </div>
                         </div>
                     </div>
@@ -421,20 +474,30 @@
                     <div class="card-header">
                         <h2><i class="fas fa-award"></i> Honors</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="awards">
+                        <template>
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title" data-field="title">Award Title</span>
+                                    <span class="item-date" data-field="date">2021</span>
+                                </div>
+                                <p class="item-description" data-field="summary">Award description</p>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Dean's List</span>
-                                <span class="item-date">2019 - 2022</span>
+                                <span class="item-title" data-field="awards.0.title">Google Developer Expert</span>
+                                <span class="item-date" data-field="awards.0.date">2021</span>
                             </div>
-                            <p class="item-description">Awarded for academic excellence each semester</p>
+                            <p class="item-description" data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                         </div>
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Best Capstone Project</span>
-                                <span class="item-date">2022</span>
+                                <span class="item-title" data-field="awards.1.title">Hackathon Winner</span>
+                                <span class="item-date" data-field="awards.1.date">2019</span>
                             </div>
-                            <p class="item-description">Outstanding senior project in CS department</p>
+                            <p class="item-description" data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                         </div>
                     </div>
                 </div>
@@ -444,22 +507,30 @@
                     <div class="card-header">
                         <h2><i class="fas fa-users"></i> Extracurriculars</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" data-repeat="extracurricular">
+                        <template>
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title" data-field="name">Activity Name</span>
+                                    <span class="item-date">2020 - 2021</span>
+                                </div>
+                                <p class="item-description" data-field="description">Activity description</p>
+                            </div>
+                        </template>
+                        <!-- Fallback content -->
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Computer Science Club</span>
-                                <span class="item-date">2019 - 2022</span>
+                                <span class="item-title" data-field="extracurricular.0.name">Tech Blog Writer</span>
+                                <span class="item-date">2020 - Present</span>
                             </div>
-                            <p class="item-description">Vice President</p>
-                            <p>Organized hackathons and tech talks</p>
+                            <p class="item-description" data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                         </div>
                         <div class="item">
                             <div class="item-header">
-                                <span class="item-title">Volunteer Tutor</span>
-                                <span class="item-date">2020 - 2021</span>
+                                <span class="item-title" data-field="extracurricular.1.name">Coding Mentor</span>
+                                <span class="item-date">2019 - 2021</span>
                             </div>
-                            <p class="item-description">Local Community Center</p>
-                            <p>Taught basic computer skills</p>
+                            <p class="item-description" data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                         </div>
                     </div>
                 </div>
@@ -467,7 +538,7 @@
         </main>
         
         <footer>
-            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
         </footer>
     </div>
 </body>

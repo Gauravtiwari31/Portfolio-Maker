@@ -292,19 +292,19 @@
         </header>
         
         <main>
-            <section class="hologram">
-                <h1>RAM MANOHAR</h1>
-                <p>Frontend Developer | UI/UX Designer | Tech Enthusiast</p>
+            <section class="hologram" id="about">
+                <h1 data-field="basics.name">RAM MANOHAR</h1>
+                <p data-field="basics.label">Frontend Developer | UI/UX Designer | Tech Enthusiast</p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="icon">📱</div>
-                        <span>+1 (555) 123-4567</span>
+                        <span data-field="basics.phone">+1 (555) 123-4567</span>
                     </div>
                     <div class="contact-item">
                         <div class="icon">⌨️</div>
                         <span>
-                            <a href="https://github.com/rammanohar" target="_blank">github.com/rammanohar</a>
+                            <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                             <div class="info-tooltip">
                                 <span class="icon" style="width:20px;height:20px;font-size:12px;">i</span>
                                 <span class="tooltip-text">Create GitHub: Visit github.com, sign up with email, choose username, verify account</span>
@@ -314,7 +314,7 @@
                     <div class="contact-item">
                         <div class="icon">🔗</div>
                         <span>
-                            <a href="https://linkedin.com/in/rammanohar" target="_blank">linkedin.com/in/rammanohar</a>
+                            <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                             <div class="info-tooltip">
                                 <span class="icon" style="width:20px;height:20px;font-size:12px;">i</span>
                                 <span class="tooltip-text">Create LinkedIn: Visit linkedin.com, sign up with email, complete profile details</span>
@@ -324,135 +324,206 @@
                 </div>
             </section>
             
-            <section class="hologram">
+            <section class="hologram" id="education">
                 <h2>Education</h2>
-                <div class="grid">
+                <div class="grid" data-repeat="education">
+                    <template>
+                        <div class="card">
+                            <h3 data-field="institution">Quantum Computing Institute</h3>
+                            <p data-field="studyType">M.Sc. in Advanced Computer Science</p>
+                            <p class="text-muted" data-field="year">2022 - 2024</p>
+                            <p data-field="area">Specialization in AI and Neural Networks</p>
+                        </div>
+                    </template>
+                    <!-- Fallback content -->
                     <div class="card">
-                        <h3>Quantum Computing Institute</h3>
-                        <p>M.Sc. in Advanced Computer Science</p>
-                        <p>2022 - 2024</p>
-                        <p>Specialization in AI and Neural Networks</p>
+                        <h3 data-field="education.0.institution">Quantum Computing Institute</h3>
+                        <p data-field="education.0.studyType">M.Sc. in Advanced Computer Science</p>
+                        <p class="text-muted" data-field="education.0.year">2022 - 2024</p>
+                        <p data-field="education.0.area">Specialization in AI and Neural Networks</p>
                     </div>
                     <div class="card">
-                        <h3>Neo Tokyo University</h3>
-                        <p>B.Sc. in Computer Science</p>
-                        <p>2018 - 2022</p>
-                        <p>Minor in Human-Computer Interaction</p>
+                        <h3 data-field="education.1.institution">Neo Tokyo University</h3>
+                        <p data-field="education.1.studyType">B.Sc. in Computer Science</p>
+                        <p class="text-muted" data-field="education.1.year">2018 - 2022</p>
+                        <p data-field="education.1.area">Minor in Human-Computer Interaction</p>
                     </div>
                 </div>
             </section>
             
-            <section class="hologram">
+            <section class="hologram" id="experience">
                 <h2>Experience</h2>
-                <div class="grid">
+                <div class="grid" data-repeat="work">
+                    <template>
+                        <div class="card">
+                            <div class="d-flex justify-content-between">
+                                <h3 data-field="position">Senior Frontend Developer</h3>
+                                <span class="badge" data-field="duration">2023 - Present</span>
+                            </div>
+                            <h4 data-field="name">Cyberdyne Systems</h4>
+                            <p data-field="summary">Developing next-gen UI for AI interfaces using React and WebGL</p>
+                            <ul data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </div>
+                    </template>
+                    <!-- Fallback content -->
                     <div class="card">
-                        <h3>Cyberdyne Systems</h3>
-                        <p>Senior Frontend Developer</p>
-                        <p>2023 - Present</p>
-                        <p>Developing next-gen UI for AI interfaces using React and WebGL</p>
+                        <div class="d-flex justify-content-between">
+                            <h3 data-field="work.0.position">Senior Frontend Developer</h3>
+                            <span class="badge" data-field="work.0.duration">2023 - Present</span>
+                        </div>
+                        <h4 data-field="work.0.name">Cyberdyne Systems</h4>
+                        <p data-field="work.0.summary">Developing next-gen UI for AI interfaces using React and WebGL</p>
+                        <ul>
+                            <li>Created holographic UI components for AI dashboard</li>
+                            <li>Optimized rendering performance by 40%</li>
+                            <li>Led team of 5 frontend developers</li>
+                        </ul>
                     </div>
                     <div class="card">
-                        <h3>OmniCorp Technologies</h3>
-                        <p>UI/UX Designer</p>
-                        <p>2021 - 2023</p>
-                        <p>Designed holographic interfaces for enterprise applications</p>
+                        <div class="d-flex justify-content-between">
+                            <h3 data-field="work.1.position">UI/UX Designer</h3>
+                            <span class="badge" data-field="work.1.duration">2021 - 2023</span>
+                        </div>
+                        <h4 data-field="work.1.name">OmniCorp Technologies</h4>
+                        <p data-field="work.1.summary">Designed holographic interfaces for enterprise applications</p>
+                        <ul>
+                            <li>Created 50+ interface designs</li>
+                            <li>Improved user engagement by 35%</li>
+                            <li>Conducted user research studies</li>
+                        </ul>
                     </div>
                     <div class="card">
-                        <h3>Neon Digital</h3>
-                        <p>Junior Developer</p>
-                        <p>2019 - 2021</p>
-                        <p>Built responsive web applications with Vue.js</p>
+                        <div class="d-flex justify-content-between">
+                            <h3 data-field="work.2.position">Junior Developer</h3>
+                            <span class="badge" data-field="work.2.duration">2019 - 2021</span>
+                        </div>
+                        <h4 data-field="work.2.name">Neon Digital</h4>
+                        <p data-field="work.2.summary">Built responsive web applications with Vue.js</p>
+                        <ul>
+                            <li>Developed 10+ client websites</li>
+                            <li>Implemented responsive designs</li>
+                            <li>Fixed 200+ bugs</li>
+                        </ul>
                     </div>
                 </div>
             </section>
             
-            <section class="hologram">
+            <section class="hologram" id="projects">
                 <h2>Projects</h2>
-                <div class="grid">
+                <div class="grid" data-repeat="projects">
+                    <template>
+                        <div class="card">
+                            <h3 data-field="name">HoloDesk OS</h3>
+                            <p data-field="description">A futuristic desktop environment with gesture controls and holographic displays</p>
+                            <p>Tech: <span data-field="keywords">React, Three.js, WebXR</span></p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </template>
+                    <!-- Fallback content -->
                     <div class="card">
-                        <h3>HoloDesk OS</h3>
-                        <p>A futuristic desktop environment with gesture controls and holographic displays</p>
+                        <h3 data-field="projects.0.name">HoloDesk OS</h3>
+                        <p data-field="projects.0.description">A futuristic desktop environment with gesture controls and holographic displays</p>
                         <p>Tech: React, Three.js, WebXR</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                     <div class="card">
-                        <h3>Neural Interface</h3>
-                        <p>Brain-computer interface for controlling devices with neural signals</p>
+                        <h3 data-field="projects.1.name">Neural Interface</h3>
+                        <p data-field="projects.1.description">Brain-computer interface for controlling devices with neural signals</p>
                         <p>Tech: Python, TensorFlow, EEG</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                     <div class="card">
-                        <h3>Quantum Chat</h3>
-                        <p>End-to-end encrypted messaging using quantum key distribution</p>
+                        <h3 data-field="projects.2.name">Quantum Chat</h3>
+                        <p data-field="projects.2.description">End-to-end encrypted messaging using quantum key distribution</p>
                         <p>Tech: Node.js, Qiskit, WebSockets</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </section>
             
-            <section class="hologram">
+            <section class="hologram" id="skills">
                 <h2>Technical Skills</h2>
-                <div>
-                    <span class="skill-tag">JavaScript/ES6+</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Vue.js</span>
-                    <span class="skill-tag">Three.js</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">TensorFlow</span>
-                    <span class="skill-tag">WebGL</span>
-                    <span class="skill-tag">WebXR</span>
-                    <span class="skill-tag">CSS3/Sass</span>
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">UI/UX Design</span>
+                <div data-repeat="skills">
+                    <template>
+                        <span class="skill-tag" data-field="name">JavaScript/ES6+</span>
+                    </template>
+                    <!-- Fallback content -->
+                    <span class="skill-tag" data-field="skills.0.name">JavaScript/ES6+</span>
+                    <span class="skill-tag" data-field="skills.1.name">React</span>
+                    <span class="skill-tag" data-field="skills.2.name">Vue.js</span>
+                    <span class="skill-tag" data-field="skills.3.name">Three.js</span>
+                    <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                    <span class="skill-tag" data-field="skills.5.name">Python</span>
+                    <span class="skill-tag" data-field="skills.6.name">TensorFlow</span>
+                    <span class="skill-tag" data-field="skills.7.name">WebGL</span>
+                    <span class="skill-tag" data-field="skills.8.name">WebXR</span>
+                    <span class="skill-tag" data-field="skills.9.name">CSS3/Sass</span>
+                    <span class="skill-tag" data-field="skills.10.name">HTML5</span>
+                    <span class="skill-tag" data-field="skills.11.name">Git</span>
+                    <span class="skill-tag" data-field="skills.12.name">UI/UX Design</span>
                 </div>
             </section>
             
             <section class="hologram">
                 <h2>Area Of Interest</h2>
-                <ul>
-                    <li>Human-Computer Interaction</li>
-                    <li>Augmented Reality Interfaces</li>
-                    <li>Neural Networks</li>
-                    <li>Quantum Computing</li>
-                    <li>Cybersecurity</li>
+                <ul data-repeat="interests">
+                    <template>
+                        <li data-field="name">Human-Computer Interaction</li>
+                    </template>
+                    <!-- Fallback content -->
+                    <li data-field="interests.0.name">Human-Computer Interaction</li>
+                    <li data-field="interests.1.name">Augmented Reality Interfaces</li>
+                    <li data-field="interests.2.name">Neural Networks</li>
+                    <li data-field="interests.3.name">Quantum Computing</li>
+                    <li data-field="interests.4.name">Cybersecurity</li>
                 </ul>
             </section>
             
             <section class="hologram">
                 <h2>Honors</h2>
-                <ul>
-                    <li>Best Innovation Award - Future Tech Conference 2023</li>
-                    <li>Top 10 Hackers - Global Cyber Challenge 2022</li>
-                    <li>Academic Excellence Scholarship - Neo Tokyo University</li>
+                <ul data-repeat="awards">
+                    <template>
+                        <li data-field="title">Best Innovation Award - Future Tech Conference 2023</li>
+                    </template>
+                    <!-- Fallback content -->
+                    <li data-field="awards.0.title">Best Innovation Award - Future Tech Conference 2023</li>
+                    <li data-field="awards.1.title">Top 10 Hackers - Global Cyber Challenge 2022</li>
+                    <li data-field="awards.2.title">Academic Excellence Scholarship - Neo Tokyo University</li>
                 </ul>
             </section>
             
             <section class="hologram">
                 <h2>Extracurriculars</h2>
-                <ul>
-                    <li>President - Future Technologies Club</li>
-                    <li>Mentor - Coding for Tomorrow Initiative</li>
-                    <li>Competitive Programming Team</li>
-                    <li>VR Game Development Group</li>
+                <ul data-repeat="extracurricular">
+                    <template>
+                        <li data-field="name">President - Future Technologies Club</li>
+                    </template>
+                    <!-- Fallback content -->
+                    <li data-field="extracurricular.0.name">President - Future Technologies Club</li>
+                    <li data-field="extracurricular.1.name">Mentor - Coding for Tomorrow Initiative</li>
+                    <li data-field="extracurricular.2.name">Competitive Programming Team</li>
+                    <li data-field="extracurricular.3.name">VR Game Development Group</li>
                 </ul>
             </section>
         </main>
         
         <footer>
-            <p>© 2024 RAM MANOHAR | ALL SYSTEMS OPERATIONAL</p>
+            <p>© <span id="current-year"></span> <span data-field="basics.name">RAM MANOHAR</span> | ALL SYSTEMS OPERATIONAL</p>
             <p>Last updated: <span id="current-date"></span></p>
         </footer>
     </div>
     
     <script>
-        // Set current date
-        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+        // Set current date and year
+        const now = new Date();
+        document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', {
             year: 'numeric', 
             month: 'long', 
             day: 'numeric'
         });
+        document.getElementById('current-year').textContent = now.getFullYear();
         
         // Add holographic effect to all hologram sections
         document.querySelectorAll('.hologram').forEach((hologram, index) => {

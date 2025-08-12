@@ -748,15 +748,16 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Hi, I'm <span>Your Name</span></h1>
-                    <p>Augmented Reality Developer & Creative Technologist</p>
+                    <h1>Hi, I'm <span data-field="basics.name">Ram Manohar</span></h1>
+                    <p data-field="basics.label">Augmented Reality Developer & Creative Technologist</p>
+                    <p data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                     <div>
                         <a href="#contact" class="btn">Contact Me</a>
                         <a href="#projects" class="btn btn-outline">View Projects</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://via.placeholder.com/500x500" alt="Profile Image">
+                    <img src="https://via.placeholder.com/500x500" alt="Profile Image" data-field="basics.picture" data-attr="src">
                 </div>
             </div>
         </div>
@@ -773,8 +774,8 @@
                     <p>I'm a passionate Augmented Reality developer with expertise in creating immersive digital experiences that blend the physical and virtual worlds. With a strong background in computer science and design, I bring technical skills and creative vision to every project.</p>
                     <p>My goal is to push the boundaries of what's possible with AR technology and create meaningful experiences that engage and delight users.</p>
                     <div class="social-links">
-                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="about-image">
@@ -792,27 +793,27 @@
             <div class="skills-container">
                 <div class="skill-item">
                     <h3>AR Development</h3>
-                    <p>ARKit, ARCore, Vuforia, Unity3D, Unreal Engine, WebXR</p>
+                    <p data-field="skills.0.keywords">ARKit, ARCore, Vuforia, Unity3D, Unreal Engine, WebXR</p>
                 </div>
                 <div class="skill-item">
                     <h3>Programming</h3>
-                    <p>C#, C++, Python, JavaScript, Swift, Java</p>
+                    <p data-field="skills.1.keywords">C#, C++, Python, JavaScript, Swift, Java</p>
                 </div>
                 <div class="skill-item">
                     <h3>3D Modeling</h3>
-                    <p>Blender, Maya, 3ds Max, Substance Painter</p>
+                    <p data-field="skills.2.keywords">Blender, Maya, 3ds Max, Substance Painter</p>
                 </div>
                 <div class="skill-item">
                     <h3>Web Development</h3>
-                    <p>HTML5, CSS3, JavaScript, React, Three.js</p>
+                    <p data-field="skills.3.keywords">HTML5, CSS3, JavaScript, React, Three.js</p>
                 </div>
                 <div class="skill-item">
                     <h3>Mobile Development</h3>
-                    <p>iOS (Swift), Android (Kotlin), React Native</p>
+                    <p data-field="skills.4.keywords">iOS (Swift), Android (Kotlin), React Native</p>
                 </div>
                 <div class="skill-item">
                     <h3>UI/UX Design</h3>
-                    <p>Figma, Adobe XD, User Research, Prototyping</p>
+                    <p data-field="skills.5.keywords">Figma, Adobe XD, User Research, Prototyping</p>
                 </div>
             </div>
         </div>
@@ -823,16 +824,30 @@
             <div class="section-title">
                 <h2>Education</h2>
             </div>
-            <div class="education-container">
+            <div class="education-container" data-repeat="education">
+                <template>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-duration" data-field="year">2018 - 2022</span>
+                            <h3 data-field="studyType">Bachelor of Science in Computer Science</h3>
+                            <h4 data-field="institution">University Name, City</h4>
+                            <p data-field="area">Specialized in Human-Computer Interaction and Augmented Reality. Graduated with honors.</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item">
                     <div class="timeline-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <div class="timeline-content">
-                        <span class="timeline-duration">2018 - 2022</span>
-                        <h3>Bachelor of Science in Computer Science</h3>
-                        <h4>University Name, City</h4>
-                        <p>Specialized in Human-Computer Interaction and Augmented Reality. Graduated with honors.</p>
+                        <span class="timeline-duration" data-field="education.0.year">2018 - 2022</span>
+                        <h3 data-field="education.0.studyType">Bachelor of Science in Computer Science</h3>
+                        <h4 data-field="education.0.institution">Stanford University</h4>
+                        <p data-field="education.0.area">Specialized in Human-Computer Interaction and Augmented Reality. Graduated with honors.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -840,10 +855,10 @@
                         <i class="fas fa-certificate"></i>
                     </div>
                     <div class="timeline-content">
-                        <span class="timeline-duration">2020</span>
-                        <h3>Advanced AR Development Certification</h3>
-                        <h4>Online Platform</h4>
-                        <p>Completed intensive training in advanced augmented reality techniques and spatial computing.</p>
+                        <span class="timeline-duration" data-field="education.1.year">2020</span>
+                        <h3 data-field="education.1.studyType">Advanced AR Development Certification</h3>
+                        <h4 data-field="education.1.institution">Online Platform</h4>
+                        <p data-field="education.1.area">Completed intensive training in advanced augmented reality techniques and spatial computing.</p>
                     </div>
                 </div>
             </div>
@@ -855,16 +870,38 @@
             <div class="section-title">
                 <h2>Experience</h2>
             </div>
-            <div class="experience-container">
+            <div class="experience-container" data-repeat="work">
+                <template>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-duration" data-field="duration">2021 - Present</span>
+                            <h3 data-field="position">AR Developer</h3>
+                            <h4 data-field="name">Tech Innovations Inc.</h4>
+                            <p data-field="summary">Lead developer for AR applications across multiple platforms. Designed and implemented interactive AR experiences for retail, education, and entertainment sectors.</p>
+                            <ul data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item">
                     <div class="timeline-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <div class="timeline-content">
-                        <span class="timeline-duration">2021 - Present</span>
-                        <h3>AR Developer</h3>
-                        <h4>Tech Innovations Inc.</h4>
-                        <p>Lead developer for AR applications across multiple platforms. Designed and implemented interactive AR experiences for retail, education, and entertainment sectors.</p>
+                        <span class="timeline-duration" data-field="work.0.duration">2021 - Present</span>
+                        <h3 data-field="work.0.position">AR Developer</h3>
+                        <h4 data-field="work.0.name">Tech Innovations Inc.</h4>
+                        <p data-field="work.0.summary">Lead developer for AR applications across multiple platforms. Designed and implemented interactive AR experiences for retail, education, and entertainment sectors.</p>
+                        <ul>
+                            <li>Developed 10+ AR applications with 100,000+ downloads</li>
+                            <li>Optimized rendering pipeline improving performance by 30%</li>
+                            <li>Led team of 5 developers in creating innovative AR solutions</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -872,21 +909,15 @@
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <div class="timeline-content">
-                        <span class="timeline-duration">2019 - 2021</span>
-                        <h3>Junior XR Developer</h3>
-                        <h4>Digital Creations Studio</h4>
-                        <p>Developed prototypes for AR/VR applications. Collaborated with designers and 3D artists to create immersive experiences.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <span class="timeline-duration">2018 - 2019</span>
-                        <h3>Intern - Mobile Development</h3>
-                        <h4>AppWorks</h4>
-                        <p>Assisted in developing mobile applications with AR features. Gained experience in cross-platform development and user testing.</p>
+                        <span class="timeline-duration" data-field="work.1.duration">2019 - 2021</span>
+                        <h3 data-field="work.1.position">Junior XR Developer</h3>
+                        <h4 data-field="work.1.name">Digital Creations Studio</h4>
+                        <p data-field="work.1.summary">Developed prototypes for AR/VR applications. Collaborated with designers and 3D artists to create immersive experiences.</p>
+                        <ul>
+                            <li>Created 15+ AR/VR prototypes for clients</li>
+                            <li>Implemented gesture recognition system</li>
+                            <li>Reduced development time by 20% through reusable components</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -898,35 +929,48 @@
             <div class="section-title">
                 <h2>Projects</h2>
             </div>
-            <div class="projects-container">
+            <div class="projects-container" data-repeat="projects">
+                <template>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/600x400" alt="Project Image" data-field="image" data-attr="src">
+                        </div>
+                        <div class="project-info">
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="AR Museum Guide">
+                        <img src="https://via.placeholder.com/600x400" alt="AR Museum Guide" data-field="projects.0.image" data-attr="src">
                     </div>
                     <div class="project-info">
-                        <h3>AR Museum Guide</h3>
-                        <p>An augmented reality application that enhances museum experiences by providing interactive information about exhibits through mobile devices.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.0.name">AR Museum Guide</h3>
+                        <p data-field="projects.0.description">An augmented reality application that enhances museum experiences by providing interactive information about exhibits through mobile devices.</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Virtual Try-On">
+                        <img src="https://via.placeholder.com/600x400" alt="Virtual Try-On" data-field="projects.1.image" data-attr="src">
                     </div>
                     <div class="project-info">
-                        <h3>Virtual Try-On for E-commerce</h3>
-                        <p>AR solution that allows customers to virtually try products before purchasing, increasing engagement and reducing returns.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.1.name">Virtual Try-On for E-commerce</h3>
+                        <p data-field="projects.1.description">AR solution that allows customers to virtually try products before purchasing, increasing engagement and reducing returns.</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Educational AR">
+                        <img src="https://via.placeholder.com/600x400" alt="Educational AR" data-field="projects.2.image" data-attr="src">
                     </div>
                     <div class="project-info">
-                        <h3>Educational AR Platform</h3>
-                        <p>Interactive learning platform that uses AR to visualize complex concepts in science and mathematics for students.</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.2.name">Educational AR Platform</h3>
+                        <p data-field="projects.2.description">Interactive learning platform that uses AR to visualize complex concepts in science and mathematics for students.</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </div>
@@ -968,18 +1012,25 @@
             <div class="section-title">
                 <h2>Areas of Interest</h2>
             </div>
-            <div class="skills-container">
+            <div class="skills-container" data-repeat="interests">
+                <template>
+                    <div class="skill-item">
+                        <h3 data-field="name">Interest Name</h3>
+                        <p data-field="description">Interest description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="skill-item">
-                    <h3>Extended Reality (XR)</h3>
-                    <p>Exploring the convergence of AR, VR, and MR technologies to create seamless mixed reality experiences.</p>
+                    <h3 data-field="interests.0.name">Extended Reality (XR)</h3>
+                    <p data-field="interests.0.description">Exploring the convergence of AR, VR, and MR technologies to create seamless mixed reality experiences.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>Spatial Computing</h3>
-                    <p>Developing applications that understand and interact with the physical space around them.</p>
+                    <h3 data-field="interests.1.name">Spatial Computing</h3>
+                    <p data-field="interests.1.description">Developing applications that understand and interact with the physical space around them.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>Computer Vision</h3>
-                    <p>Implementing advanced image recognition and tracking algorithms for AR applications.</p>
+                    <h3 data-field="interests.2.name">Computer Vision</h3>
+                    <p data-field="interests.2.description">Implementing advanced image recognition and tracking algorithms for AR applications.</p>
                 </div>
             </div>
         </div>
@@ -990,18 +1041,25 @@
             <div class="section-title">
                 <h2>Honors & Awards</h2>
             </div>
-            <div class="skills-container">
+            <div class="skills-container" data-repeat="awards">
+                <template>
+                    <div class="skill-item">
+                        <h3 data-field="title">Award Title</h3>
+                        <p data-field="summary">Award description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="skill-item">
-                    <h3>Best AR Application 2022</h3>
-                    <p>Awarded for innovative use of augmented reality in education at the Tech Innovation Awards.</p>
+                    <h3 data-field="awards.0.title">Best AR Application 2022</h3>
+                    <p data-field="awards.0.summary">Awarded for innovative use of augmented reality in education at the Tech Innovation Awards.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>University Honors</h3>
-                    <p>Graduated with distinction for academic excellence in Computer Science.</p>
+                    <h3 data-field="awards.1.title">University Honors</h3>
+                    <p data-field="awards.1.summary">Graduated with distinction for academic excellence in Computer Science.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>Hackathon Winner</h3>
-                    <p>First place in the National AR/VR Hackathon for developing a prototype AR navigation system.</p>
+                    <h3 data-field="awards.2.title">Hackathon Winner</h3>
+                    <p data-field="awards.2.summary">First place in the National AR/VR Hackathon for developing a prototype AR navigation system.</p>
                 </div>
             </div>
         </div>
@@ -1012,18 +1070,25 @@
             <div class="section-title">
                 <h2>Extracurricular Activities</h2>
             </div>
-            <div class="skills-container">
+            <div class="skills-container" data-repeat="extracurricular">
+                <template>
+                    <div class="skill-item">
+                        <h3 data-field="name">Activity Name</h3>
+                        <p data-field="description">Activity description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="skill-item">
-                    <h3>XR Meetup Organizer</h3>
-                    <p>Organize monthly meetups for AR/VR enthusiasts and professionals to share knowledge and network.</p>
+                    <h3 data-field="extracurricular.0.name">XR Meetup Organizer</h3>
+                    <p data-field="extracurricular.0.description">Organize monthly meetups for AR/VR enthusiasts and professionals to share knowledge and network.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>Tech Mentor</h3>
-                    <p>Volunteer as a mentor for high school students interested in augmented reality and game development.</p>
+                    <h3 data-field="extracurricular.1.name">Tech Mentor</h3>
+                    <p data-field="extracurricular.1.description">Volunteer as a mentor for high school students interested in augmented reality and game development.</p>
                 </div>
                 <div class="skill-item">
-                    <h3>Open Source Contributor</h3>
-                    <p>Contribute to open source AR projects and libraries to support the developer community.</p>
+                    <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                    <p data-field="extracurricular.2.description">Contribute to open source AR projects and libraries to support the developer community.</p>
                 </div>
             </div>
         </div>
@@ -1041,16 +1106,16 @@
                     <ul>
                         <li>
                             <i class="fas fa-phone"></i>
-                            <span>+1 (123) 456-7890</span>
+                            <span data-field="basics.phone">+1 (555) 123-4567</span>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>your.email@example.com</span>
+                            <span data-field="basics.email">john.doe@example.com</span>
                         </li>
                         <li>
                             <i class="fab fa-github"></i>
                             <span>
-                                <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                                <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                                 <div class="tooltip">
                                     <i class="fas fa-info-circle"></i>
                                     <span class="tooltiptext">Go to github.com and sign up to create your own account</span>
@@ -1060,7 +1125,7 @@
                         <li>
                             <i class="fab fa-linkedin"></i>
                             <span>
-                                <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
+                                <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                                 <div class="tooltip">
                                     <i class="fas fa-info-circle"></i>
                                     <span class="tooltiptext">Go to linkedin.com and sign up to create your professional profile</span>
@@ -1069,10 +1134,10 @@
                         </li>
                     </ul>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" data-field="basics.profiles.2.url" data-attr="href"><i class="fab fa-twitter"></i></a>
+                        <a href="#" data-field="basics.profiles.3.url" data-attr="href"><i class="fab fa-instagram"></i></a>
+                        <a href="#" data-field="basics.profiles.4.url" data-attr="href"><i class="fab fa-facebook"></i></a>
+                        <a href="#" data-field="basics.profiles.5.url" data-attr="href"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
@@ -1109,7 +1174,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <p class="copyright">&copy; 2023 Your Name. All Rights Reserved.</p>
+            <p class="copyright">&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All Rights Reserved.</p>
         </div>
     </footer>
 

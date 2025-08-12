@@ -357,22 +357,22 @@
 <body>
     <header>
         <div class="container">
-            <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img">
-            <h1>Your Name</h1>
-            <p class="tagline">Web Developer | Designer | Programmer</p>
+            <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img" data-field="basics.picture" data-attr="src">
+            <h1 data-field="basics.name">Ram Manohar</h1>
+            <p class="tagline" data-field="basics.label">Full Stack Developer</p>
             
             <div class="contact-info">
-                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
-                <p><i class="fas fa-envelope"></i> your.email@example.com</p>
+                <p><i class="fas fa-phone"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
+                <p><i class="fas fa-envelope"></i> <span data-field="basics.email">john.doe@example.com</span></p>
             </div>
             
             <div class="social-icons">
-                <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+                <a href="https://github.com/username" target="_blank" title="GitHub" data-field="basics.profiles.0.url" data-attr="href">
                     <i class="fab fa-github"></i>
                 </a>
                 <button class="info-button" onclick="openModal('github-modal')">i</button>
                 
-                <a href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
+                <a href="https://linkedin.com/in/username" target="_blank" title="LinkedIn" data-field="basics.profiles.1.url" data-attr="href">
                     <i class="fab fa-linkedin"></i>
                 </a>
                 <button class="info-button" onclick="openModal('linkedin-modal')">i</button>
@@ -383,21 +383,32 @@
     <section id="education">
         <div class="container">
             <h2>Education</h2>
-            <div class="timeline">
+            <div class="timeline" data-repeat="education">
+                <template>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3 data-field="institution">Stanford University</h3>
+                            <p class="timeline-date" data-field="year">2018 - 2020</p>
+                            <p data-field="studyType">Master of Computer Science</p>
+                            <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h3>University Name</h3>
-                        <p class="timeline-date">2018 - 2022</p>
-                        <p>Bachelor of Science in Computer Science</p>
-                        <p>GPA: 3.8/4.0</p>
+                        <h3 data-field="education.0.institution">Stanford University</h3>
+                        <p class="timeline-date" data-field="education.0.year">2018 - 2020</p>
+                        <p data-field="education.0.studyType">Master of Computer Science</p>
+                        <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h3>High School Name</h3>
-                        <p class="timeline-date">2014 - 2018</p>
-                        <p>High School Diploma</p>
-                        <p>Graduated with Honors</p>
+                        <h3 data-field="education.1.institution">MIT</h3>
+                        <p class="timeline-date" data-field="education.1.year">2014 - 2018</p>
+                        <p data-field="education.1.studyType">Bachelor of Technology</p>
+                        <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                     </div>
                 </div>
             </div>
@@ -407,28 +418,41 @@
     <section id="experience">
         <div class="container">
             <h2>Experience</h2>
-            <div class="timeline">
+            <div class="timeline" data-repeat="work">
+                <template>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3 data-field="position">Senior Software Engineer</h3>
+                            <p class="timeline-date" data-field="duration">2020 - Present</p>
+                            <p data-field="name">Google</p>
+                            <ul data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h3>Software Developer</h3>
-                        <p class="timeline-date">2022 - Present</p>
-                        <p>ABC Tech Solutions</p>
+                        <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                        <p class="timeline-date" data-field="work.0.duration">2020 - Present</p>
+                        <p data-field="work.0.name">Google</p>
                         <ul>
-                            <li>Developed and maintained web applications using React and Node.js</li>
-                            <li>Collaborated with cross-functional teams to deliver high-quality software</li>
-                            <li>Implemented CI/CD pipelines for automated deployment</li>
+                            <li>Led development of new features for Google Search</li>
+                            <li>Optimized algorithms improving search speed by 15%</li>
+                            <li>Mentored junior developers</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
-                        <h3>Web Development Intern</h3>
-                        <p class="timeline-date">Summer 2021</p>
-                        <p>XYZ Digital Agency</p>
+                        <h3 data-field="work.1.position">Software Developer</h3>
+                        <p class="timeline-date" data-field="work.1.duration">2018 - 2020</p>
+                        <p data-field="work.1.name">Amazon</p>
                         <ul>
-                            <li>Assisted in building responsive websites for clients</li>
-                            <li>Participated in client meetings and requirement gathering</li>
-                            <li>Optimized website performance and SEO</li>
+                            <li>Developed backend services for AWS</li>
+                            <li>Implemented CI/CD pipelines</li>
+                            <li>Reduced server costs by 20% through optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -439,18 +463,33 @@
     <section id="projects">
         <div class="container">
             <h2>Projects</h2>
-            <div class="projects-container">
+            <div class="projects-container" data-repeat="projects">
+                <template>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h3 class="project-title" data-field="name">Project Name</h3>
+                                <p data-field="description">Project description</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3 data-field="name">Project Name</h3>
+                                <p data-field="description">Project description</p>
+                                <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <h3 class="project-title">E-commerce Website</h3>
-                            <p>A full-stack e-commerce platform with payment integration and admin dashboard.</p>
-                            <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+                            <h3 class="project-title" data-field="projects.0.name">E-commerce Platform</h3>
+                            <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
                         </div>
                         <div class="flip-card-back">
-                            <h3>E-commerce Website</h3>
-                            <p>This project includes features like product catalog, shopping cart, user authentication, and payment processing.</p>
-                            <a href="#" class="project-link">Project Link</a>
+                            <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                            <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                            <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
@@ -458,14 +497,13 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <h3 class="project-title">Task Management App</h3>
-                            <p>A collaborative task management application with real-time updates.</p>
-                            <p><strong>Technologies:</strong> Vue.js, Firebase</p>
+                            <h3 class="project-title" data-field="projects.1.name">AI Chatbot</h3>
+                            <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
                         </div>
                         <div class="flip-card-back">
-                            <h3>Task Management App</h3>
-                            <p>Features include task creation, assignment, due dates, priority levels, and team collaboration.</p>
-                            <a href="#" class="project-link">Project Link</a>
+                            <h3 data-field="projects.1.name">AI Chatbot</h3>
+                            <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                            <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
@@ -473,14 +511,13 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <h3 class="project-title">Weather Dashboard</h3>
-                            <p>A weather application that displays current and forecasted weather data.</p>
-                            <p><strong>Technologies:</strong> JavaScript, OpenWeather API</p>
+                            <h3 class="project-title" data-field="projects.2.name">Portfolio Website</h3>
+                            <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
                         </div>
                         <div class="flip-card-back">
-                            <h3>Weather Dashboard</h3>
-                            <p>Users can search by location, save favorites, and view detailed weather information including charts.</p>
-                            <a href="#" class="project-link">Project Link</a>
+                            <h3 data-field="projects.2.name">Portfolio Website</h3>
+                            <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                            <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                         </div>
                     </div>
                 </div>
@@ -491,17 +528,17 @@
     <section id="skills">
         <div class="container">
             <h2>Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-item">HTML5</div>
-                <div class="skill-item">CSS3</div>
-                <div class="skill-item">JavaScript</div>
-                <div class="skill-item">React</div>
-                <div class="skill-item">Node.js</div>
-                <div class="skill-item">Python</div>
-                <div class="skill-item">Git</div>
-                <div class="skill-item">SQL</div>
-                <div class="skill-item">MongoDB</div>
-                <div class="skill-item">UI/UX Design</div>
+            <div class="skills-container" data-repeat="skills">
+                <template>
+                    <div class="skill-item" data-field="name">Skill Name</div>
+                </template>
+                <!-- Fallback content -->
+                <div class="skill-item" data-field="skills.0.name">JavaScript</div>
+                <div class="skill-item" data-field="skills.1.name">Python</div>
+                <div class="skill-item" data-field="skills.2.name">Java</div>
+                <div class="skill-item" data-field="skills.3.name">React</div>
+                <div class="skill-item" data-field="skills.4.name">Node.js</div>
+                <div class="skill-item" data-field="skills.5.name">TensorFlow</div>
             </div>
         </div>
     </section>
@@ -509,13 +546,18 @@
     <section id="interests">
         <div class="container">
             <h2>Area of Interest</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="interests">
+                <template>
+                    <ul style="list-style-type: none; text-align: center;">
+                        <li data-field="name">Interest Name</li>
+                    </ul>
+                </template>
+                <!-- Fallback content -->
                 <ul style="list-style-type: none; text-align: center;">
-                    <li>Web Development</li>
-                    <li>Artificial Intelligence</li>
-                    <li>Cloud Computing</li>
-                    <li>Data Visualization</li>
-                    <li>User Experience Design</li>
+                    <li data-field="interests.0.name">Artificial Intelligence</li>
+                    <li data-field="interests.1.name">Mobile Development</li>
+                    <li data-field="interests.2.name">Cyber Security</li>
+                    <li data-field="interests.3.name">Cloud Computing</li>
                 </ul>
             </div>
         </div>
@@ -524,12 +566,16 @@
     <section id="honors">
         <div class="container">
             <h2>Honors & Awards</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="awards">
+                <template>
+                    <ul>
+                        <li data-field="title">Award Title</li>
+                    </ul>
+                </template>
+                <!-- Fallback content -->
                 <ul>
-                    <li>Dean's List - University Name (2019-2022)</li>
-                    <li>1st Place - National Coding Competition 2021</li>
-                    <li>Best Project Award - Tech Expo 2020</li>
-                    <li>Academic Scholarship Recipient</li>
+                    <li data-field="awards.0.title">Google Developer Expert</li>
+                    <li data-field="awards.1.title">Hackathon Winner</li>
                 </ul>
             </div>
         </div>
@@ -538,12 +584,17 @@
     <section id="extracurriculars">
         <div class="container">
             <h2>Extracurricular Activities</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="extracurricular">
+                <template>
+                    <ul>
+                        <li data-field="name">Activity Name</li>
+                    </ul>
+                </template>
+                <!-- Fallback content -->
                 <ul>
-                    <li>President - Computer Science Club (2020-2022)</li>
-                    <li>Volunteer - Local Coding Bootcamp for Teens</li>
-                    <li>Member - University Hackathon Team</li>
-                    <li>Organizer - Tech Conference 2021</li>
+                    <li data-field="extracurricular.0.name">Tech Blog Writer</li>
+                    <li data-field="extracurricular.1.name">Coding Mentor</li>
+                    <li data-field="extracurricular.2.name">Open Source Contributor</li>
                 </ul>
             </div>
         </div>
@@ -585,7 +636,7 @@
     
     <footer>
         <div class="container">
-            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
         </div>
     </footer>
     

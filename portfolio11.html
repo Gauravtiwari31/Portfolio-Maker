@@ -254,20 +254,20 @@
 </head>
 <body>
     <header>
-        <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img">
-        <h1>John Doe</h1>
+        <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-img" data-field="basics.picture" data-attr="src">
+        <h1 data-field="basics.name">Ram Manohar</h1>
         <div class="contact-info">
-            <p>Email: john.doe@example.com | Phone: (123) 456-7890</p>
+            <p>Email: <span data-field="basics.email">john.doe@example.com</span> | Phone: <span data-field="basics.phone">(123) 456-7890</span></p>
         </div>
         <div class="social-links">
-            <a href="https://github.com/johndoe" class="social-link" target="_blank">
+            <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                 GitHub 
                 <div class="info-tooltip">
                     <i class="fas fa-info-circle"></i>
                     <span class="tooltip-text">Go to github.com > Sign up with email > Complete profile setup</span>
                 </div>
             </a>
-            <a href="https://linkedin.com/in/johndoe" class="social-link" target="_blank">
+            <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                 LinkedIn 
                 <div class="info-tooltip">
                     <i class="fas fa-info-circle"></i>
@@ -293,68 +293,103 @@
         <!-- Education Section -->
         <section class="section" id="education">
             <h2 class="section-title">Education</h2>
-            <div class="card">
-                <h3>Master of Computer Science</h3>
-                <p class="date">2020 - 2022</p>
-                <p>Stanford University</p>
-                <p>Specialization in Artificial Intelligence</p>
-                <p>GPA: 3.9/4.0</p>
-            </div>
-            <div class="card">
-                <h3>Bachelor of Science in Computer Engineering</h3>
-                <p class="date">2016 - 2020</p>
-                <p>University of California, Berkeley</p>
-                <p>Minor in Mathematics</p>
-                <p>GPA: 3.8/4.0</p>
+            <div class="card" data-repeat="education">
+                <template>
+                    <div class="card">
+                        <h3 data-field="studyType">Master of Computer Science</h3>
+                        <p class="date" data-field="year">2020 - 2022</p>
+                        <p data-field="institution">Stanford University</p>
+                        <p data-field="area">Specialization in Artificial Intelligence</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                    <p class="date" data-field="education.0.year">2018 - 2020</p>
+                    <p data-field="education.0.institution">Stanford University</p>
+                    <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
+                </div>
+                <div class="card">
+                    <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                    <p class="date" data-field="education.1.year">2014 - 2018</p>
+                    <p data-field="education.1.institution">MIT</p>
+                    <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
+                </div>
             </div>
         </section>
 
         <!-- Experience Section -->
         <section class="section" id="experience">
             <h2 class="section-title">Experience</h2>
-            <div class="card">
-                <h3>Senior Software Engineer</h3>
-                <p class="date">2022 - Present</p>
-                <p>Google Inc.</p>
-                <p>• Developed scalable backend systems for Google Cloud Platform</p>
-                <p>• Led a team of 5 engineers to deliver new features</p>
-                <p>• Optimized database queries improving performance by 40%</p>
-            </div>
-            <div class="card">
-                <h3>Software Engineer Intern</h3>
-                <p class="date">Summer 2021</p>
-                <p>Facebook (Meta)</p>
-                <p>• Worked on React components for the main Facebook feed</p>
-                <p>• Implemented new features that increased user engagement by 15%</p>
+            <div class="card" data-repeat="work">
+                <template>
+                    <div class="card">
+                        <h3 data-field="position">Senior Software Engineer</h3>
+                        <p class="date" data-field="duration">2022 - Present</p>
+                        <p data-field="name">Google Inc.</p>
+                        <p data-field="summary">Developed scalable backend systems for Google Cloud Platform</p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                    <p class="date" data-field="work.0.duration">2020 - Present</p>
+                    <p data-field="work.0.name">Google</p>
+                    <p data-field="work.0.summary">Led development of new features for Google Search</p>
+                    <ul>
+                        <li>Led development of new features for Google Search</li>
+                        <li>Optimized algorithms improving search speed by 15%</li>
+                        <li>Mentored junior developers</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 data-field="work.1.position">Software Developer</h3>
+                    <p class="date" data-field="work.1.duration">2018 - 2020</p>
+                    <p data-field="work.1.name">Amazon</p>
+                    <p data-field="work.1.summary">Developed backend services for AWS</p>
+                    <ul>
+                        <li>Developed backend services for AWS</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Reduced server costs by 20% through optimization</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section class="section" id="projects">
             <h2 class="section-title">Projects</h2>
-            <div class="card">
-                <h3>AI-Powered Personal Assistant</h3>
-                <p class="date">2022</p>
-                <p>Developed a voice-controlled personal assistant using Python, TensorFlow, and NLP techniques.</p>
-                <p>• Implemented natural language understanding with 92% accuracy</p>
-                <p>• Integrated with multiple APIs for calendar, email, and smart home control</p>
-                <a href="https://github.com/johndoe/ai-assistant" class="project-link" target="_blank">Project Link</a>
-            </div>
-            <div class="card">
-                <h3>Blockchain-Based Voting System</h3>
-                <p class="date">2021</p>
-                <p>Created a secure, decentralized voting platform using Ethereum smart contracts.</p>
-                <p>• Implemented voter identity verification</p>
-                <p>• Ensured complete transparency and auditability</p>
-                <a href="https://github.com/johndoe/blockchain-voting" class="project-link" target="_blank">Project Link</a>
-            </div>
-            <div class="card">
-                <h3>E-Commerce Analytics Dashboard</h3>
-                <p class="date">2020</p>
-                <p>Built a real-time analytics dashboard for e-commerce businesses using React and Node.js.</p>
-                <p>• Visualized sales trends and customer behavior</p>
-                <p>• Integrated with Shopify and WooCommerce APIs</p>
-                <a href="https://github.com/johndoe/ecommerce-analytics" class="project-link" target="_blank">Project Link</a>
+            <div class="card" data-repeat="projects">
+                <template>
+                    <div class="card">
+                        <h3 data-field="name">Project Name</h3>
+                        <p class="date">2022</p>
+                        <p data-field="description">Project description</p>
+                        <a href="#" class="project-link" target="_blank" data-field="url" data-attr="href">Project Link</a>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                    <p class="date">2022</p>
+                    <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.0.url" data-attr="href">Project Link</a>
+                </div>
+                <div class="card">
+                    <h3 data-field="projects.1.name">AI Chatbot</h3>
+                    <p class="date">2021</p>
+                    <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.1.url" data-attr="href">Project Link</a>
+                </div>
+                <div class="card">
+                    <h3 data-field="projects.2.name">Portfolio Website</h3>
+                    <p class="date">2020</p>
+                    <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.2.url" data-attr="href">Project Link</a>
+                </div>
             </div>
         </section>
 
@@ -363,24 +398,22 @@
             <h2 class="section-title">Technical Skills</h2>
             <div class="card">
                 <h3>Programming Languages</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">Go</span>
-                    <span class="skill-tag">TypeScript</span>
+                <div class="skills-container" data-repeat="skills">
+                    <template>
+                        <span class="skill-tag" data-field="name">Python</span>
+                    </template>
+                    <!-- Fallback content -->
+                    <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.1.name">Python</span>
+                    <span class="skill-tag" data-field="skills.2.name">Java</span>
                 </div>
             </div>
             <div class="card">
                 <h3>Web Development</h3>
                 <div class="skills-container">
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">Django</span>
-                    <span class="skill-tag">Flask</span>
-                    <span class="skill-tag">HTML5/CSS3</span>
+                    <span class="skill-tag" data-field="skills.3.name">React</span>
+                    <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                    <span class="skill-tag" data-field="skills.5.name">HTML5/CSS3</span>
                 </div>
             </div>
             <div class="card">
@@ -389,17 +422,13 @@
                     <span class="skill-tag">MySQL</span>
                     <span class="skill-tag">PostgreSQL</span>
                     <span class="skill-tag">MongoDB</span>
-                    <span class="skill-tag">Firebase</span>
-                    <span class="skill-tag">Redis</span>
                 </div>
             </div>
             <div class="card">
                 <h3>DevOps & Cloud</h3>
                 <div class="skills-container">
                     <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Kubernetes</span>
                     <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Google Cloud</span>
                     <span class="skill-tag">CI/CD</span>
                 </div>
             </div>
@@ -408,23 +437,24 @@
         <!-- Interests Section -->
         <section class="section" id="interests">
             <h2 class="section-title">Areas of Interest</h2>
-            <div class="card">
-                <h3>Professional Interests</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Artificial Intelligence</span>
-                    <span class="skill-tag">Machine Learning</span>
-                    <span class="skill-tag">Blockchain</span>
-                    <span class="skill-tag">Cloud Computing</span>
-                    <span class="skill-tag">Cybersecurity</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Research Interests</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Natural Language Processing</span>
-                    <span class="skill-tag">Computer Vision</span>
-                    <span class="skill-tag">Distributed Systems</span>
-                    <span class="skill-tag">Quantum Computing</span>
+            <div class="card" data-repeat="interests">
+                <template>
+                    <div class="card">
+                        <h3>Professional Interests</h3>
+                        <div class="skills-container">
+                            <span class="skill-tag" data-field="name">Artificial Intelligence</span>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3>Professional Interests</h3>
+                    <div class="skills-container">
+                        <span class="skill-tag" data-field="interests.0.name">Artificial Intelligence</span>
+                        <span class="skill-tag" data-field="interests.1.name">Mobile Development</span>
+                        <span class="skill-tag" data-field="interests.2.name">Cyber Security</span>
+                        <span class="skill-tag" data-field="interests.3.name">Cloud Computing</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -432,49 +462,61 @@
         <!-- Honors Section -->
         <section class="section" id="honors">
             <h2 class="section-title">Honors & Awards</h2>
-            <div class="card">
-                <h3>Google Excellence Award</h3>
-                <p class="date">2023</p>
-                <p>Awarded for outstanding contributions to cloud infrastructure development</p>
-            </div>
-            <div class="card">
-                <h3>Dean's List</h3>
-                <p class="date">2018 - 2020</p>
-                <p>Recognized for academic excellence throughout undergraduate studies</p>
-            </div>
-            <div class="card">
-                <h3>Hackathon Winner</h3>
-                <p class="date">2019</p>
-                <p>1st place in Stanford's annual AI Hackathon for developing an innovative healthcare solution</p>
+            <div class="card" data-repeat="awards">
+                <template>
+                    <div class="card">
+                        <h3 data-field="title">Award Title</h3>
+                        <p class="date" data-field="date">2021</p>
+                        <p data-field="summary">Award description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3 data-field="awards.0.title">Google Developer Expert</h3>
+                    <p class="date" data-field="awards.0.date">2021</p>
+                    <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
+                </div>
+                <div class="card">
+                    <h3 data-field="awards.1.title">Hackathon Winner</h3>
+                    <p class="date" data-field="awards.1.date">2019</p>
+                    <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
+                </div>
             </div>
         </section>
 
         <!-- Extracurriculars Section -->
         <section class="section" id="extracurriculars">
             <h2 class="section-title">Extracurricular Activities</h2>
-            <div class="card">
-                <h3>Tech Club President</h3>
-                <p class="date">2019 - 2020</p>
-                <p>• Organized weekly coding workshops and hackathons</p>
-                <p>• Invited industry speakers for tech talks</p>
-            </div>
-            <div class="card">
-                <h3>Open Source Contributor</h3>
-                <p class="date">2018 - Present</p>
-                <p>• Contributed to major projects like React and TensorFlow</p>
-                <p>• Maintained several popular npm packages</p>
-            </div>
-            <div class="card">
-                <h3>Mentor</h3>
-                <p class="date">2020 - Present</p>
-                <p>• Mentored 10+ students in computer science through online platforms</p>
-                <p>• Conducted resume reviews and mock interviews</p>
+            <div class="card" data-repeat="extracurricular">
+                <template>
+                    <div class="card">
+                        <h3 data-field="name">Activity Name</h3>
+                        <p class="date">2019 - 2020</p>
+                        <p data-field="description">Activity description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card">
+                    <h3 data-field="extracurricular.0.name">Tech Blog Writer</h3>
+                    <p class="date">2019 - Present</p>
+                    <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
+                </div>
+                <div class="card">
+                    <h3 data-field="extracurricular.1.name">Coding Mentor</h3>
+                    <p class="date">2020 - Present</p>
+                    <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
+                </div>
+                <div class="card">
+                    <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                    <p class="date">2018 - Present</p>
+                    <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
+                </div>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2023 John Doe. All rights reserved.</p>
+        <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
     </footer>
 
     <script>

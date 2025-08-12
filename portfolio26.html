@@ -440,27 +440,28 @@
     
     <div class="container">
         <header>
-            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-            <h1>Your Name</h1>
+            <img src="https://via.placeholder.com/400x400" alt="Profile Picture" class="profile-img" data-field="basics.picture" data-attr="src">
+            <h1 data-field="basics.name">Ram Manohar</h1>
+            <h3 data-field="basics.label">Full Stack Developer</h3>
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+1 (123) 456-7890</span>
+                    <span data-field="basics.phone">+1 (555) 123-4567</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>your.email@example.com</span>
+                    <span data-field="basics.email">john.doe@example.com</span>
                 </div>
             </div>
             <div class="social-links">
-                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                     <i class="fab fa-github"></i>
                     <span>GitHub</span>
                 </a>
                 <button class="info-button" onclick="openModal('github-modal')">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                     <i class="fab fa-linkedin"></i>
                     <span>LinkedIn</span>
                 </a>
@@ -474,7 +475,7 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>About Me</h2>
-                    <p>Hello! I'm a passionate developer/designer/engineer with expertise in various technologies. I love creating beautiful, functional applications that solve real-world problems with fluid, intuitive interfaces.</p>
+                    <p data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                     <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities that inspire my creative process.</p>
                 </div>
             </section>
@@ -482,16 +483,24 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Education</h2>
-                    <div class="education-item">
-                        <h3>Bachelor of Science in Computer Science</h3>
-                        <p class="date">2018 - 2022</p>
-                        <p>University Name, City, Country</p>
-                        <p>GPA: 3.8/4.0</p>
+                    <div class="education-item" data-repeat="education">
+                        <template>
+                            <h3 data-field="studyType">Master of Computer Science</h3>
+                            <p class="date" data-field="year">2018 - 2020</p>
+                            <p data-field="institution">Stanford University</p>
+                            <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                        </template>
+                        <!-- Fallback content -->
+                        <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                        <p class="date" data-field="education.0.year">2018 - 2020</p>
+                        <p data-field="education.0.institution">Stanford University</p>
+                        <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                     </div>
                     <div class="education-item">
-                        <h3>High School Diploma</h3>
-                        <p class="date">2014 - 2018</p>
-                        <p>High School Name, City, Country</p>
+                        <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                        <p class="date" data-field="education.1.year">2014 - 2018</p>
+                        <p data-field="education.1.institution">MIT</p>
+                        <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                     </div>
                 </div>
             </section>
@@ -499,25 +508,36 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Experience</h2>
-                    <div class="experience-item">
-                        <h3>Frontend Developer</h3>
-                        <p class="date">June 2022 - Present</p>
-                        <p>Creative Solutions Inc., San Francisco, USA</p>
+                    <div class="experience-item" data-repeat="work">
+                        <template>
+                            <h3 data-field="position">Senior Software Engineer</h3>
+                            <p class="date" data-field="duration">2020 - Present</p>
+                            <p data-field="name">Google</p>
+                            <p data-field="summary">Led development of scalable applications.</p>
+                            <ul style="margin-left: 20px; margin-top: 10px;" data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </template>
+                        <!-- Fallback content -->
+                        <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                        <p class="date" data-field="work.0.duration">2020 - Present</p>
+                        <p data-field="work.0.name">Google</p>
+                        <p data-field="work.0.summary">Led development of new features for Google Search</p>
                         <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Developed fluid, animated user interfaces with React and GSAP</li>
-                            <li>Implemented motion design principles for enhanced UX</li>
-                            <li>Collaborated with designers to create organic transitions</li>
-                            <li>Optimized performance of animated components</li>
+                            <li>Led development of new features for Google Search</li>
+                            <li>Optimized algorithms improving search speed by 15%</li>
+                            <li>Mentored junior developers</li>
                         </ul>
                     </div>
                     <div class="experience-item">
-                        <h3>UI/UX Intern</h3>
-                        <p class="date">Summer 2021</p>
-                        <p>Digital Dreams Agency, New York, USA</p>
+                        <h3 data-field="work.1.position">Software Developer</h3>
+                        <p class="date" data-field="work.1.duration">2018 - 2020</p>
+                        <p data-field="work.1.name">Amazon</p>
+                        <p data-field="work.1.summary">Developed backend services for AWS</p>
                         <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Assisted in creating motion prototypes</li>
-                            <li>Researched liquid motion design trends</li>
-                            <li>Developed micro-interactions for mobile apps</li>
+                            <li>Developed backend services for AWS</li>
+                            <li>Implemented CI/CD pipelines</li>
+                            <li>Reduced server costs by 20% through optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -526,23 +546,30 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Projects</h2>
-                    <div class="project-item">
-                        <h3>Liquid Dashboard</h3>
-                        <p>An admin dashboard with fluid animations and organic transitions for data visualization.</p>
-                        <p><strong>Technologies:</strong> React, Framer Motion, D3.js, Node.js</p>
-                        <a href="#" class="project-link">Project Link</a>
+                    <div class="project-item" data-repeat="projects">
+                        <template>
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <p><strong>Technologies:</strong> <span data-field="technologies">Technologies used</span></p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                        </template>
+                        <!-- Fallback content -->
+                        <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                        <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                        <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                     <div class="project-item">
-                        <h3>Morphing UI Components</h3>
-                        <p>A library of reusable components with smooth morphing animations between states.</p>
-                        <p><strong>Technologies:</strong> Vue.js, GSAP, CSS Shapes</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.1.name">AI Chatbot</h3>
+                        <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                        <p><strong>Technologies:</strong> Python, TensorFlow</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                     <div class="project-item">
-                        <h3>Fluid Art Generator</h3>
-                        <p>An interactive art generator that creates organic, flowing patterns in real-time.</p>
-                        <p><strong>Technologies:</strong> JavaScript, Canvas API, WebGL</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.2.name">Portfolio Website</h3>
+                        <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                        <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </section>
@@ -550,19 +577,17 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Technical Skills</h2>
-                    <div class="skills-container">
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vue.js</span>
-                        <span class="skill-tag">GSAP</span>
-                        <span class="skill-tag">Framer Motion</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">UI/UX Design</span>
-                        <span class="skill-tag">Motion Design</span>
-                        <span class="skill-tag">WebGL</span>
-                        <span class="skill-tag">Canvas API</span>
-                        <span class="skill-tag">CSS Animations</span>
+                    <div class="skills-container" data-repeat="skills">
+                        <template>
+                            <span class="skill-tag" data-field="name">Skill Name</span>
+                        </template>
+                        <!-- Fallback content -->
+                        <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                        <span class="skill-tag" data-field="skills.1.name">Python</span>
+                        <span class="skill-tag" data-field="skills.2.name">Java</span>
+                        <span class="skill-tag" data-field="skills.3.name">React</span>
+                        <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                        <span class="skill-tag" data-field="skills.5.name">TensorFlow</span>
                     </div>
                 </div>
             </section>
@@ -570,13 +595,15 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Area of Interest</h2>
-                    <div class="skills-container">
-                        <span class="skill-tag">Motion Design</span>
-                        <span class="skill-tag">Interactive Media</span>
-                        <span class="skill-tag">Creative Coding</span>
-                        <span class="skill-tag">Generative Art</span>
-                        <span class="skill-tag">UI Animation</span>
-                        <span class="skill-tag">Micro-interactions</span>
+                    <div class="skills-container" data-repeat="interests">
+                        <template>
+                            <span class="skill-tag" data-field="name">Interest Name</span>
+                        </template>
+                        <!-- Fallback content -->
+                        <span class="skill-tag" data-field="interests.0.name">Artificial Intelligence</span>
+                        <span class="skill-tag" data-field="interests.1.name">Mobile Development</span>
+                        <span class="skill-tag" data-field="interests.2.name">Cyber Security</span>
+                        <span class="skill-tag" data-field="interests.3.name">Cloud Computing</span>
                     </div>
                 </div>
             </section>
@@ -584,15 +611,21 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Honors & Awards</h2>
-                    <div class="honor-item">
-                        <h3>Best Motion Design</h3>
-                        <p class="date">2022</p>
-                        <p>Awarded for innovative use of liquid motion in web applications</p>
+                    <div class="honor-item" data-repeat="awards">
+                        <template>
+                            <h3 data-field="title">Award Title</h3>
+                            <p class="date" data-field="date">2021</p>
+                            <p data-field="summary">Award description</p>
+                        </template>
+                        <!-- Fallback content -->
+                        <h3 data-field="awards.0.title">Google Developer Expert</h3>
+                        <p class="date" data-field="awards.0.date">2021</p>
+                        <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                     </div>
                     <div class="honor-item">
-                        <h3>Hackathon Winner</h3>
-                        <p class="date">2021</p>
-                        <p>First place for "Most Fluid User Experience"</p>
+                        <h3 data-field="awards.1.title">Hackathon Winner</h3>
+                        <p class="date" data-field="awards.1.date">2019</p>
+                        <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                     </div>
                 </div>
             </section>
@@ -600,15 +633,21 @@
             <section class="section">
                 <div class="fluid-card">
                     <h2>Extracurricular Activities</h2>
-                    <div class="extracurricular-item">
-                        <h3>Creative Coding Club</h3>
+                    <div class="extracurricular-item" data-repeat="extracurricular">
+                        <template>
+                            <h3 data-field="name">Activity Name</h3>
+                            <p class="date" data-field="date">2019 - 2022</p>
+                            <p data-field="description">Activity description</p>
+                        </template>
+                        <!-- Fallback content -->
+                        <h3 data-field="extracurricular.0.name">Tech Blog Writer</h3>
                         <p class="date">2019 - 2022</p>
-                        <p>Organized workshops on generative art and fluid animations</p>
+                        <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                     </div>
                     <div class="extracurricular-item">
-                        <h3>Motion Design Mentor</h3>
+                        <h3 data-field="extracurricular.1.name">Coding Mentor</h3>
                         <p class="date">2020 - 2021</p>
-                        <p>Taught animation principles to design students</p>
+                        <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
                     </div>
                 </div>
             </section>

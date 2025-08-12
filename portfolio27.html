@@ -562,24 +562,24 @@
     <header class="rough-edge">
         <div class="container">
             <div class="header-content">
-                <h1>Alex Sketchwell</h1>
-                <p>Digital Artist & Creative Developer</p>
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p data-field="basics.label">Full Stack Developer</p>
                 
                 <div class="contact-info">
                     <div class="contact-item hand-drawn">
                         <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4567</span>
+                        <span data-field="basics.phone">+1 (555) 123-4567</span>
                     </div>
                     <div class="contact-item hand-drawn">
                         <i class="fab fa-github"></i>
-                        <a href="https://github.com/sketchdev" target="_blank">github.com/sketchdev</a>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                         <button class="info-button" onclick="openModal('github-modal')">
                             <i class="fas fa-info-circle"></i>
                         </button>
                     </div>
                     <div class="contact-item hand-drawn">
                         <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/sketchdev" target="_blank">linkedin.com/in/sketchdev</a>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                         <button class="info-button" onclick="openModal('linkedin-modal')">
                             <i class="fas fa-info-circle"></i>
                         </button>
@@ -595,25 +595,34 @@
                 <h2>Education</h2>
             </div>
             
-            <div class="card hand-drawn">
-                <h3>Bachelor of Fine Arts in Animation</h3>
-                <p class="date">2016 - 2020</p>
-                <p>School of Visual Arts, New York</p>
-                <ul>
-                    <li>Specialized in 2D animation and motion graphics</li>
-                    <li>Graduated with honors</li>
-                    <li>Thesis project: "Frame by Frame: A Digital Homage"</li>
-                </ul>
-            </div>
-            
-            <div class="card hand-drawn">
-                <h3>Digital Arts Certificate</h3>
-                <p class="date">2014 - 2016</p>
-                <p>Creative Arts Institute</p>
-                <ul>
-                    <li>Focus on traditional drawing techniques</li>
-                    <li>Storyboarding and character design</li>
-                </ul>
+            <div class="row" data-repeat="education">
+                <template>
+                    <div class="card hand-drawn">
+                        <h3 data-field="studyType">Master of Computer Science</h3>
+                        <p class="date" data-field="year">2018 - 2020</p>
+                        <p data-field="institution">Stanford University</p>
+                        <ul>
+                            <li data-field="area">Specialized in Artificial Intelligence and Machine Learning</li>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card hand-drawn">
+                    <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                    <p class="date" data-field="education.0.year">2018 - 2020</p>
+                    <p data-field="education.0.institution">Stanford University</p>
+                    <ul>
+                        <li data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning</li>
+                    </ul>
+                </div>
+                <div class="card hand-drawn">
+                    <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                    <p class="date" data-field="education.1.year">2014 - 2018</p>
+                    <p data-field="education.1.institution">MIT</p>
+                    <ul>
+                        <li data-field="education.1.area">Computer Science with minor in Mathematics</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -624,26 +633,44 @@
                 <h2>Experience</h2>
             </div>
             
-            <div class="card hand-drawn">
-                <h3>Lead Animator</h3>
-                <p class="date">2021 - Present</p>
-                <p>FrameCraft Studios</p>
-                <ul>
-                    <li>Created hand-drawn animation sequences for feature films</li>
-                    <li>Developed a hybrid digital/traditional animation pipeline</li>
-                    <li>Mentored junior animators in frame-by-frame techniques</li>
-                </ul>
-            </div>
-            
-            <div class="card hand-drawn">
-                <h3>Motion Graphics Designer</h3>
-                <p class="date">2018 - 2021</p>
-                <p>DoodleMotion Agency</p>
-                <ul>
-                    <li>Designed animated explainer videos</li>
-                    <li>Created hand-drawn style animations for commercial projects</li>
-                    <li>Collaborated with illustrators to maintain artistic consistency</li>
-                </ul>
+            <div class="row" data-repeat="work">
+                <template>
+                    <div class="card hand-drawn">
+                        <div class="d-flex justify-content-between">
+                            <h3 data-field="position">Senior Software Engineer</h3>
+                            <span class="date" data-field="duration">2020 - Present</span>
+                        </div>
+                        <p data-field="name">Google</p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card hand-drawn">
+                    <div class="d-flex justify-content-between">
+                        <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                        <span class="date" data-field="work.0.duration">2020 - Present</span>
+                    </div>
+                    <p data-field="work.0.name">Google</p>
+                    <ul>
+                        <li>Led development of new features for Google Search</li>
+                        <li>Optimized algorithms improving search speed by 15%</li>
+                        <li>Mentored junior developers</li>
+                    </ul>
+                </div>
+                <div class="card hand-drawn">
+                    <div class="d-flex justify-content-between">
+                        <h3 data-field="work.1.position">Software Developer</h3>
+                        <span class="date" data-field="work.1.duration">2018 - 2020</span>
+                    </div>
+                    <p data-field="work.1.name">Amazon</p>
+                    <ul>
+                        <li>Developed backend services for AWS</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Reduced server costs by 20% through optimization</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -651,34 +678,43 @@
     <section id="projects">
         <div class="container">
             <div class="section-title">
-                <h2>Animation Projects</h2>
+                <h2>Projects</h2>
             </div>
             
-            <div class="projects-grid">
+            <div class="projects-grid" data-repeat="projects">
+                <template>
+                    <div class="project-card hand-drawn">
+                        <img src="https://via.placeholder.com/400x300" alt="Project" data-field="image" data-attr="src">
+                        <div class="project-info">
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="project-card hand-drawn">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <img src="https://via.placeholder.com/400x300" alt="Project" data-field="projects.0.image" data-attr="src">
                     <div class="project-info">
-                        <h3>Celestial Dreams</h3>
-                        <p>Hand-drawn short film about space exploration</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.0.name">E-commerce Platform</h3>
+                        <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
-                
                 <div class="project-card hand-drawn">
-                    <img src="https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <img src="https://via.placeholder.com/400x300" alt="Project" data-field="projects.1.image" data-attr="src">
                     <div class="project-info">
-                        <h3>Ink & Motion</h3>
-                        <p>Experimental frame-by-frame animation series</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.1.name">AI Chatbot</h3>
+                        <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
-                
                 <div class="project-card hand-drawn">
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animation Project">
+                    <img src="https://via.placeholder.com/400x300" alt="Project" data-field="projects.2.image" data-attr="src">
                     <div class="project-info">
-                        <h3>Sketchbook Tales</h3>
-                        <p>Interactive digital sketchbook with animations</p>
-                        <a href="#" class="project-link">Project Link</a>
+                        <h3 data-field="projects.2.name">Portfolio Website</h3>
+                        <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                     </div>
                 </div>
             </div>
@@ -691,19 +727,17 @@
                 <h2>Technical Skills</h2>
             </div>
             
-            <div class="skills-container">
-                <span class="skill-tag hand-drawn">Adobe Animate</span>
-                <span class="skill-tag hand-drawn">Toon Boom Harmony</span>
-                <span class="skill-tag hand-drawn">Procreate</span>
-                <span class="skill-tag hand-drawn">After Effects</span>
-                <span class="skill-tag hand-drawn">Photoshop</span>
-                <span class="skill-tag hand-drawn">Illustrator</span>
-                <span class="skill-tag hand-drawn">Blender</span>
-                <span class="skill-tag hand-drawn">HTML/CSS</span>
-                <span class="skill-tag hand-drawn">JavaScript</span>
-                <span class="skill-tag hand-drawn">Storyboarding</span>
-                <span class="skill-tag hand-drawn">Character Design</span>
-                <span class="skill-tag hand-drawn">Frame-by-Frame</span>
+            <div class="skills-container" data-repeat="skills">
+                <template>
+                    <span class="skill-tag hand-drawn" data-field="name">Skill Name</span>
+                </template>
+                <!-- Fallback content -->
+                <span class="skill-tag hand-drawn" data-field="skills.0.name">JavaScript</span>
+                <span class="skill-tag hand-drawn" data-field="skills.1.name">Python</span>
+                <span class="skill-tag hand-drawn" data-field="skills.2.name">Java</span>
+                <span class="skill-tag hand-drawn" data-field="skills.3.name">React</span>
+                <span class="skill-tag hand-drawn" data-field="skills.4.name">Node.js</span>
+                <span class="skill-tag hand-drawn" data-field="skills.5.name">TensorFlow</span>
             </div>
         </div>
     </section>
@@ -714,14 +748,15 @@
                 <h2>Areas of Interest</h2>
             </div>
             
-            <div class="card hand-drawn">
-                <ul>
-                    <li>Traditional animation techniques</li>
-                    <li>Experimental motion graphics</li>
-                    <li>Interactive storytelling</li>
-                    <li>Character animation</li>
-                    <li>Educational animation</li>
-                </ul>
+            <div class="skills-container" data-repeat="interests">
+                <template>
+                    <span class="skill-tag hand-drawn" data-field="name">Interest Name</span>
+                </template>
+                <!-- Fallback content -->
+                <span class="skill-tag hand-drawn" data-field="interests.0.name">Artificial Intelligence</span>
+                <span class="skill-tag hand-drawn" data-field="interests.1.name">Mobile Development</span>
+                <span class="skill-tag hand-drawn" data-field="interests.2.name">Cyber Security</span>
+                <span class="skill-tag hand-drawn" data-field="interests.3.name">Cloud Computing</span>
             </div>
         </div>
     </section>
@@ -732,18 +767,25 @@
                 <h2>Honors & Awards</h2>
             </div>
             
-            <div class="card hand-drawn">
-                <h3>Best Animated Short</h3>
-                <p class="date">2022</p>
-                <p>International Animation Festival</p>
-                <p>Awarded for "Celestial Dreams"</p>
-            </div>
-            
-            <div class="card hand-drawn">
-                <h3>Innovation in Animation</h3>
-                <p class="date">2021</p>
-                <p>Digital Arts Foundation</p>
-                <p>Recognized for hybrid animation techniques</p>
+            <div class="row" data-repeat="awards">
+                <template>
+                    <div class="card hand-drawn">
+                        <h3 data-field="title">Award Title</h3>
+                        <p class="date" data-field="date">2021</p>
+                        <p data-field="summary">Award description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card hand-drawn">
+                    <h3 data-field="awards.0.title">Google Developer Expert</h3>
+                    <p class="date" data-field="awards.0.date">2021</p>
+                    <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
+                </div>
+                <div class="card hand-drawn">
+                    <h3 data-field="awards.1.title">Hackathon Winner</h3>
+                    <p class="date" data-field="awards.1.date">2019</p>
+                    <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
+                </div>
             </div>
         </div>
     </section>
@@ -754,36 +796,38 @@
                 <h2>Extracurriculars</h2>
             </div>
             
-            <div class="card hand-drawn">
-                <h3>Animation Workshop Instructor</h3>
-                <p class="date">2020 - Present</p>
-                <p>Community Arts Center</p>
-                <ul>
-                    <li>Teach frame-by-frame animation to beginners</li>
-                    <li>Organize annual animation showcase</li>
-                </ul>
-            </div>
-            
-            <div class="card hand-drawn">
-                <h3>Sketch Club Founder</h3>
-                <p class="date">2018 - Present</p>
-                <p>Online Community</p>
-                <ul>
-                    <li>Weekly drawing challenges</li>
-                    <li>Collaborative animation projects</li>
-                </ul>
+            <div class="row" data-repeat="extracurricular">
+                <template>
+                    <div class="card hand-drawn">
+                        <h3 data-field="name">Activity Name</h3>
+                        <p data-field="description">Activity description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="card hand-drawn">
+                    <h3 data-field="extracurricular.0.name">Tech Blog Writer</h3>
+                    <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
+                </div>
+                <div class="card hand-drawn">
+                    <h3 data-field="extracurricular.1.name">Coding Mentor</h3>
+                    <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
+                </div>
+                <div class="card hand-drawn">
+                    <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                    <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
+                </div>
             </div>
         </div>
     </section>
 
     <footer class="rough-edge">
         <div class="container">
-            <p>&copy; 2023 Alex Sketchwell. All drawings are my own.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://github.com/sketchdev" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/sketchdev" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://instagram.com/sketchdev" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fas fa-film"></i></a>
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
@@ -797,12 +841,12 @@
                 <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
                 <li>Click on "Sign up" in the top right corner</li>
                 <li>Enter your email address, create a username and password</li>
-                <li>Complete the verification puzzle (it's fun!)</li>
-                <li>Choose the free plan (perfect for artists)</li>
-                <li>Upload your creative coding projects</li>
-                <li>Share your animation experiments with the world!</li>
+                <li>Complete the verification puzzle</li>
+                <li>Choose the free plan</li>
+                <li>Upload your coding projects</li>
+                <li>Share your work with the world!</li>
             </ol>
-            <p style="margin-top:1rem;text-align:center;">✨ GitHub is great for hosting creative coding projects ✨</p>
+            <p style="margin-top:1rem;text-align:center;">GitHub is essential for developers to showcase projects and collaborate</p>
         </div>
     </div>
 
@@ -814,12 +858,12 @@
                 <li>Visit <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
                 <li>Click "Join now" to begin</li>
                 <li>Enter your email and create a password</li>
-                <li>Fill in your name (your artist name works too!)</li>
-                <li>Add your animation/art experience</li>
-                <li>Upload a professional profile picture (a sketch is fine!)</li>
-                <li>Connect with other animators and studios</li>
+                <li>Fill in your name and professional details</li>
+                <li>Add your work experience and education</li>
+                <li>Upload a professional profile picture</li>
+                <li>Connect with colleagues and professionals</li>
             </ol>
-            <p style="margin-top:1rem;text-align:center;">🎨 LinkedIn helps you connect with creative professionals 🎨</p>
+            <p style="margin-top:1rem;text-align:center;">LinkedIn helps you connect with professionals and find job opportunities</p>
         </div>
     </div>
 

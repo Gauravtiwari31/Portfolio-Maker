@@ -304,18 +304,18 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-                <h1>Laado Kumari</h1>
-                <p>Web Developer & Designer</p>
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img" data-field="basics.picture" data-attr="src">
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p data-field="basics.label">Full Stack Developer</p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4567</span>
+                        <span data-field="basics.phone">+1 (555) 123-4567</span>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
-                        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
                         <div class="info-tooltip">
                             <i class="fas fa-info-circle"></i>
                             <span class="tooltip-text">Create a GitHub account at github.com/signup to showcase your projects and collaborate with others.</span>
@@ -323,7 +323,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
                         <div class="info-tooltip">
                             <i class="fas fa-info-circle"></i>
                             <span class="tooltip-text">Create a LinkedIn account at linkedin.com/signup to build your professional network and showcase your career.</span>
@@ -337,43 +337,63 @@
     <div class="container">
         <section id="education">
             <h2>Education</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="education">
+                <template>
+                    <div class="education-item">
+                        <h3 data-field="studyType">Bachelor of Science in Computer Science</h3>
+                        <p class="date" data-field="year">2018 - 2022</p>
+                        <p data-field="institution">University of Technology, Springfield</p>
+                        <p data-field="area">GPA: 3.8/4.0</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="education-item">
-                    <h3>Bachelor of Science in Computer Science</h3>
-                    <p class="date">2018 - 2022</p>
-                    <p>University of Technology, Springfield</p>
-                    <p>GPA: 3.8/4.0</p>
+                    <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                    <p class="date" data-field="education.0.year">2018 - 2020</p>
+                    <p data-field="education.0.institution">Stanford University</p>
+                    <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                 </div>
                 <div class="education-item">
-                    <h3>Web Development Bootcamp</h3>
-                    <p class="date">Summer 2021</p>
-                    <p>Code Masters Academy</p>
-                    <p>Completed intensive 12-week program focusing on full-stack development</p>
+                    <h3 data-field="education.1.studyType">Bachelor of Technology</h3>
+                    <p class="date" data-field="education.1.year">2014 - 2018</p>
+                    <p data-field="education.1.institution">MIT</p>
+                    <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                 </div>
             </div>
         </section>
         
         <section id="experience">
             <h2>Experience</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="work">
+                <template>
+                    <div class="experience-item">
+                        <h3 data-field="position">Frontend Developer</h3>
+                        <p class="date" data-field="duration">2022 - Present</p>
+                        <p data-field="name">Digital Solutions Inc.</p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="experience-item">
-                    <h3>Frontend Developer</h3>
-                    <p class="date">2022 - Present</p>
-                    <p>Digital Solutions Inc.</p>
+                    <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                    <p class="date" data-field="work.0.duration">2020 - Present</p>
+                    <p data-field="work.0.name">Google</p>
                     <ul>
-                        <li>Develop responsive web applications using React.js and TypeScript</li>
-                        <li>Collaborate with UX designers to implement intuitive user interfaces</li>
-                        <li>Optimize application performance and accessibility</li>
+                        <li>Led development of new features for Google Search</li>
+                        <li>Optimized algorithms improving search speed by 15%</li>
+                        <li>Mentored junior developers</li>
                     </ul>
                 </div>
                 <div class="experience-item">
-                    <h3>Web Development Intern</h3>
-                    <p class="date">Summer 2021</p>
-                    <p>TechStart Ventures</p>
+                    <h3 data-field="work.1.position">Software Developer</h3>
+                    <p class="date" data-field="work.1.duration">2018 - 2020</p>
+                    <p data-field="work.1.name">Amazon</p>
                     <ul>
-                        <li>Assisted in building and maintaining client websites</li>
-                        <li>Implemented new features using JavaScript and CSS</li>
-                        <li>Participated in code reviews and team meetings</li>
+                        <li>Developed backend services for AWS</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Reduced server costs by 20% through optimization</li>
                     </ul>
                 </div>
             </div>
@@ -381,27 +401,33 @@
         
         <section id="projects">
             <h2>Projects</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="projects">
+                <template>
+                    <div class="project-item">
+                        <h3 data-field="name">Project Name</h3>
+                        <p class="date">2023</p>
+                        <p data-field="description">Project description</p>
+                        <a href="#" class="project-link" target="_blank" data-field="url" data-attr="href">Project Link</a>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="project-item">
-                    <h3>Cabin Booking Platform</h3>
+                    <h3 data-field="projects.0.name">E-commerce Platform</h3>
                     <p class="date">2023</p>
-                    <p>A full-stack application for booking cozy cabins, featuring real-time availability, user reviews, and secure payments.</p>
-                    <p><strong>Technologies:</strong> React, Node.js, MongoDB, Firebase</p>
-                    <a href="https://github.com/yourusername/cabin-booking" class="project-link" target="_blank">Project Link</a>
+                    <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.0.url" data-attr="href">Project Link</a>
                 </div>
                 <div class="project-item">
-                    <h3>Personal Finance Tracker</h3>
+                    <h3 data-field="projects.1.name">AI Chatbot</h3>
                     <p class="date">2022</p>
-                    <p>Web application to track expenses, income, and financial goals with visualization tools.</p>
-                    <p><strong>Technologies:</strong> Vue.js, Express, PostgreSQL</p>
-                    <a href="https://github.com/yourusername/finance-tracker" class="project-link" target="_blank">Project Link</a>
+                    <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.1.url" data-attr="href">Project Link</a>
                 </div>
                 <div class="project-item">
-                    <h3>Recipe Sharing Community</h3>
+                    <h3 data-field="projects.2.name">Portfolio Website</h3>
                     <p class="date">2021</p>
-                    <p>Platform for users to share, rate, and discover recipes with advanced filtering options.</p>
-                    <p><strong>Technologies:</strong> Django, Python, SQLite</p>
-                    <a href="https://github.com/yourusername/recipe-share" class="project-link" target="_blank">Project Link</a>
+                    <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                    <a href="#" class="project-link" target="_blank" data-field="projects.2.url" data-attr="href">Project Link</a>
                 </div>
             </div>
         </section>
@@ -409,72 +435,84 @@
         <section id="skills">
             <h2>Technical Skills</h2>
             <div class="section-content">
-                <div class="skills-container">
-                    <div class="skill-item">HTML5</div>
-                    <div class="skill-item">CSS3</div>
-                    <div class="skill-item">JavaScript</div>
-                    <div class="skill-item">TypeScript</div>
-                    <div class="skill-item">React</div>
-                    <div class="skill-item">Vue.js</div>
-                    <div class="skill-item">Node.js</div>
-                    <div class="skill-item">Express</div>
-                    <div class="skill-item">Python</div>
-                    <div class="skill-item">Django</div>
-                    <div class="skill-item">SQL</div>
-                    <div class="skill-item">MongoDB</div>
-                    <div class="skill-item">Git</div>
-                    <div class="skill-item">RESTful APIs</div>
-                    <div class="skill-item">Responsive Design</div>
+                <div class="skills-container" data-repeat="skills">
+                    <template>
+                        <div class="skill-item" data-field="name">Skill Name</div>
+                    </template>
+                    <!-- Fallback content -->
+                    <div class="skill-item" data-field="skills.0.name">JavaScript</div>
+                    <div class="skill-item" data-field="skills.1.name">Python</div>
+                    <div class="skill-item" data-field="skills.2.name">Java</div>
+                    <div class="skill-item" data-field="skills.3.name">React</div>
+                    <div class="skill-item" data-field="skills.4.name">Node.js</div>
+                    <div class="skill-item" data-field="skills.5.name">TensorFlow</div>
                 </div>
             </div>
         </section>
         
         <section id="interests">
             <h2>Areas of Interest</h2>
-            <div class="section-content">
-                <div class="interests-container">
-                    <div class="interest-item">Frontend Development</div>
-                    <div class="interest-item">UI/UX Design</div>
-                    <div class="interest-item">Web Accessibility</div>
-                    <div class="interest-item">Sustainable Web Design</div>
-                    <div class="interest-item">Outdoor Activities</div>
-                    <div class="interest-item">Photography</div>
-                </div>
+            <div class="section-content" data-repeat="interests">
+                <template>
+                    <div class="interest-item" data-field="name">Interest Name</div>
+                </template>
+                <!-- Fallback content -->
+                <div class="interest-item" data-field="interests.0.name">Artificial Intelligence</div>
+                <div class="interest-item" data-field="interests.1.name">Mobile Development</div>
+                <div class="interest-item" data-field="interests.2.name">Cyber Security</div>
+                <div class="interest-item" data-field="interests.3.name">Cloud Computing</div>
             </div>
         </section>
         
         <section id="honors">
             <h2>Honors & Awards</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="awards">
+                <template>
+                    <div class="honor-item">
+                        <h3 data-field="title">Award Title</h3>
+                        <p class="date" data-field="date">2021</p>
+                        <p data-field="summary">Award description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="honor-item">
-                    <h3>Dean's List</h3>
-                    <p class="date">2019 - 2022</p>
-                    <p>University of Technology, Springfield</p>
-                    <p>Awarded for academic excellence in 6 consecutive semesters</p>
+                    <h3 data-field="awards.0.title">Google Developer Expert</h3>
+                    <p class="date" data-field="awards.0.date">2021</p>
+                    <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                 </div>
                 <div class="honor-item">
-                    <h3>Best Hackathon Project</h3>
-                    <p class="date">2021</p>
-                    <p>CodeFest 2021</p>
-                    <p>Won first place for developing an accessibility-focused browser extension</p>
+                    <h3 data-field="awards.1.title">Hackathon Winner</h3>
+                    <p class="date" data-field="awards.1.date">2019</p>
+                    <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                 </div>
             </div>
         </section>
         
         <section id="extracurriculars">
             <h2>Extracurricular Activities</h2>
-            <div class="section-content">
+            <div class="section-content" data-repeat="extracurricular">
+                <template>
+                    <div class="extracurricular-item">
+                        <h3 data-field="name">Activity Name</h3>
+                        <p class="date">2020 - 2022</p>
+                        <p data-field="description">Activity description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="extracurricular-item">
-                    <h3>Tech Club President</h3>
+                    <h3 data-field="extracurricular.0.name">Tech Blog Writer</h3>
                     <p class="date">2020 - 2022</p>
-                    <p>University of Technology</p>
-                    <p>Organized workshops, hackathons, and tech talks for 200+ members</p>
+                    <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                 </div>
                 <div class="extracurricular-item">
-                    <h3>Volunteer Web Developer</h3>
+                    <h3 data-field="extracurricular.1.name">Coding Mentor</h3>
                     <p class="date">2019 - Present</p>
-                    <p>Nonprofit Organization</p>
-                    <p>Develop and maintain website for local community center</p>
+                    <p data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
+                </div>
+                <div class="extracurricular-item">
+                    <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                    <p class="date">2019 - Present</p>
+                    <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
                 </div>
             </div>
         </section>
@@ -482,7 +520,7 @@
     
     <footer>
         <div class="container">
-            <p>&copy; 2023 Laado Kumari. All rights reserved.</p>
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
             <p>Designed with warmth and care.</p>
         </div>
     </footer>

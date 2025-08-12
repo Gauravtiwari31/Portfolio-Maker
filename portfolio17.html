@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Your Name</title>
+    <title>Portfolio | Ram Manohar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -311,28 +311,28 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <h1>Your Name</h1>
+                <h1 data-field="basics.name">Ram Manohar</h1>
                 <div class="typewriter">
-                    <h2 id="typewriter-text"></h2>
+                    <h2 id="typewriter-text" data-field="basics.label">Full Stack Developer</h2>
                 </div>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+1 (123) 456-7890</span>
+                        <span data-field="basics.phone">+1 (555) 123-4567</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>your.email@example.com</span>
+                        <span data-field="basics.email">john.doe@example.com</span>
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
                         <div class="info-icon">i</div>
                         <div class="info-tooltip">How to create GitHub account</div>
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                         <div class="info-icon">i</div>
@@ -346,25 +346,38 @@
     <main class="container">
         <section id="education">
             <h3>Education</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="education">
+                <template>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div class="item-title" data-field="studyType">Master of Computer Science</div>
+                            <div class="item-date" data-field="year">2018 - 2020</div>
+                        </div>
+                        <div class="item-subtitle" data-field="institution">Stanford University</div>
+                        <div class="item-description">
+                            <p data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="education-item">
                     <div class="item-header">
-                        <div class="item-title">University Name</div>
-                        <div class="item-date">2018 - 2022</div>
+                        <div class="item-title" data-field="education.0.studyType">Master of Computer Science</div>
+                        <div class="item-date" data-field="education.0.year">2018 - 2020</div>
                     </div>
-                    <div class="item-subtitle">Bachelor of Science in Computer Science</div>
+                    <div class="item-subtitle" data-field="education.0.institution">Stanford University</div>
                     <div class="item-description">
-                        <p>Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                        <p data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
                     </div>
                 </div>
                 <div class="education-item">
                     <div class="item-header">
-                        <div class="item-title">College Name</div>
-                        <div class="item-date">2016 - 2018</div>
+                        <div class="item-title" data-field="education.1.studyType">Bachelor of Technology</div>
+                        <div class="item-date" data-field="education.1.year">2014 - 2018</div>
                     </div>
-                    <div class="item-subtitle">Higher Secondary Education</div>
+                    <div class="item-subtitle" data-field="education.1.institution">MIT</div>
                     <div class="item-description">
-                        <p>Major in Science with Computer Science as elective subject.</p>
+                        <p data-field="education.1.area">Computer Science with minor in Mathematics.</p>
                     </div>
                 </div>
             </div>
@@ -372,26 +385,51 @@
         
         <section id="experience">
             <h3>Experience</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="work">
+                <template>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title" data-field="position">Senior Software Engineer</div>
+                            <div class="item-date" data-field="duration">2020 - Present</div>
+                        </div>
+                        <div class="item-subtitle" data-field="name">Google</div>
+                        <div class="item-description">
+                            <p data-field="summary">Led development of scalable applications.</p>
+                            <ul data-repeat-inner="highlights">
+                                <template><li data-field=".">Achievement item</li></template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="experience-item">
                     <div class="item-header">
-                        <div class="item-title">Software Developer</div>
-                        <div class="item-date">2022 - Present</div>
+                        <div class="item-title" data-field="work.0.position">Senior Software Engineer</div>
+                        <div class="item-date" data-field="work.0.duration">2020 - Present</div>
                     </div>
-                    <div class="item-subtitle">Tech Company Inc.</div>
+                    <div class="item-subtitle" data-field="work.0.name">Google</div>
                     <div class="item-description">
-                        <p>Develop and maintain web applications using modern JavaScript frameworks. Collaborate with cross-functional teams to deliver high-quality software solutions.</p>
-                        <p>Key achievements: Led the development of a customer portal that increased user engagement by 40%.</p>
+                        <p data-field="work.0.summary">Led development of new features for Google Search</p>
+                        <ul>
+                            <li>Led development of new features for Google Search</li>
+                            <li>Optimized algorithms improving search speed by 15%</li>
+                            <li>Mentored junior developers</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="experience-item">
                     <div class="item-header">
-                        <div class="item-title">Intern</div>
-                        <div class="item-date">Summer 2021</div>
+                        <div class="item-title" data-field="work.1.position">Software Developer</div>
+                        <div class="item-date" data-field="work.1.duration">2018 - 2020</div>
                     </div>
-                    <div class="item-subtitle">Startup Solutions</div>
+                    <div class="item-subtitle" data-field="work.1.name">Amazon</div>
                     <div class="item-description">
-                        <p>Assisted in developing mobile applications and participated in agile development processes. Gained experience in React Native and Firebase.</p>
+                        <p data-field="work.1.summary">Developed backend services for AWS</p>
+                        <ul>
+                            <li>Developed backend services for AWS</li>
+                            <li>Implemented CI/CD pipelines</li>
+                            <li>Reduced server costs by 20% through optimization</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -399,35 +437,48 @@
         
         <section id="projects">
             <h3>Projects</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="projects">
+                <template>
+                    <div class="project-item">
+                        <div class="item-header">
+                            <div class="item-title" data-field="name">Project Name</div>
+                            <div class="item-date">2023</div>
+                        </div>
+                        <div class="item-description">
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" data-field="url" data-attr="href">Project Link →</a>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="project-item">
                     <div class="item-header">
-                        <div class="item-title">E-commerce Platform</div>
+                        <div class="item-title" data-field="projects.0.name">E-commerce Platform</div>
                         <div class="item-date">2023</div>
                     </div>
                     <div class="item-description">
-                        <p>A full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database. Implemented payment gateway integration and inventory management.</p>
-                        <a href="#" class="project-link">Project Link →</a>
+                        <p data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                        <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link →</a>
                     </div>
                 </div>
                 <div class="project-item">
                     <div class="item-header">
-                        <div class="item-title">Task Management App</div>
+                        <div class="item-title" data-field="projects.1.name">AI Chatbot</div>
                         <div class="item-date">2022</div>
                     </div>
                     <div class="item-description">
-                        <p>A productivity application built with Flutter that helps users organize their tasks with priority levels and deadlines. Features include cloud sync and team collaboration.</p>
-                        <a href="#" class="project-link">Project Link →</a>
+                        <p data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                        <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link →</a>
                     </div>
                 </div>
                 <div class="project-item">
                     <div class="item-header">
-                        <div class="item-title">Weather Forecast Dashboard</div>
+                        <div class="item-title" data-field="projects.2.name">Portfolio Website</div>
                         <div class="item-date">2021</div>
                     </div>
                     <div class="item-description">
-                        <p>Interactive dashboard that displays weather data from multiple APIs with visualization charts. Built with JavaScript and D3.js.</p>
-                        <a href="#" class="project-link">Project Link →</a>
+                        <p data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                        <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link →</a>
                     </div>
                 </div>
             </div>
@@ -436,31 +487,42 @@
         <section id="skills">
             <h3>Technical Skills</h3>
             <div class="section-content">
-                <div class="skills-container">
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Python</span>
+                <div class="skills-container" data-repeat="skills">
+                    <template>
+                        <span class="skill-tag" data-field="name">Skill Name</span>
+                    </template>
+                    <!-- Fallback content -->
+                    <span class="skill-tag" data-field="skills.0.name">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.1.name">Python</span>
+                    <span class="skill-tag" data-field="skills.2.name">Java</span>
+                    <span class="skill-tag" data-field="skills.3.name">React</span>
+                    <span class="skill-tag" data-field="skills.4.name">Node.js</span>
+                    <span class="skill-tag" data-field="skills.5.name">TensorFlow</span>
                     <span class="skill-tag">HTML/CSS</span>
                     <span class="skill-tag">SQL</span>
                     <span class="skill-tag">MongoDB</span>
                     <span class="skill-tag">Git</span>
                     <span class="skill-tag">Docker</span>
                     <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Flutter</span>
-                    <span class="skill-tag">Machine Learning</span>
                 </div>
             </div>
         </section>
         
         <section id="interests">
             <h3>Area of Interest</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="interests">
+                <template>
+                    <ul class="interests-list">
+                        <li data-field="name">Interest Name</li>
+                    </ul>
+                </template>
+                <!-- Fallback content -->
                 <ul class="interests-list">
-                    <li>Artificial Intelligence and Machine Learning</li>
-                    <li>Web Development and Progressive Web Apps</li>
+                    <li data-field="interests.0.name">Artificial Intelligence</li>
+                    <li data-field="interests.1.name">Mobile Development</li>
+                    <li data-field="interests.2.name">Cyber Security</li>
+                    <li data-field="interests.3.name">Cloud Computing</li>
                     <li>User Experience Design</li>
-                    <li>Cloud Computing</li>
                     <li>Open Source Contribution</li>
                 </ul>
             </div>
@@ -468,25 +530,38 @@
         
         <section id="honors">
             <h3>Honors</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="awards">
+                <template>
+                    <div class="honor-item">
+                        <div class="item-header">
+                            <div class="item-title" data-field="title">Award Title</div>
+                            <div class="item-date" data-field="date">2021</div>
+                        </div>
+                        <div class="item-subtitle">Organization</div>
+                        <div class="item-description">
+                            <p data-field="summary">Award description</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="honor-item">
                     <div class="item-header">
-                        <div class="item-title">Dean's List</div>
-                        <div class="item-date">2019 - 2022</div>
+                        <div class="item-title" data-field="awards.0.title">Google Developer Expert</div>
+                        <div class="item-date" data-field="awards.0.date">2021</div>
                     </div>
-                    <div class="item-subtitle">University Name</div>
+                    <div class="item-subtitle">Google</div>
                     <div class="item-description">
-                        <p>Awarded for academic excellence in all semesters.</p>
+                        <p data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
                     </div>
                 </div>
                 <div class="honor-item">
                     <div class="item-header">
-                        <div class="item-title">Best Project Award</div>
-                        <div class="item-date">2021</div>
+                        <div class="item-title" data-field="awards.1.title">Hackathon Winner</div>
+                        <div class="item-date" data-field="awards.1.date">2019</div>
                     </div>
                     <div class="item-subtitle">Tech Conference 2021</div>
                     <div class="item-description">
-                        <p>Won first prize for innovative use of machine learning in healthcare applications.</p>
+                        <p data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
                     </div>
                 </div>
             </div>
@@ -494,25 +569,48 @@
         
         <section id="extracurriculars">
             <h3>Extracurriculars</h3>
-            <div class="section-content">
+            <div class="section-content" data-repeat="extracurricular">
+                <template>
+                    <div class="extracurricular-item">
+                        <div class="item-header">
+                            <div class="item-title" data-field="name">Activity Name</div>
+                            <div class="item-date">2019 - Present</div>
+                        </div>
+                        <div class="item-subtitle">Organization</div>
+                        <div class="item-description">
+                            <p data-field="description">Activity description</p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Fallback content -->
                 <div class="extracurricular-item">
                     <div class="item-header">
-                        <div class="item-title">Coding Club President</div>
+                        <div class="item-title" data-field="extracurricular.0.name">Tech Blog Writer</div>
                         <div class="item-date">2020 - 2022</div>
                     </div>
-                    <div class="item-subtitle">University Coding Club</div>
+                    <div class="item-subtitle">Personal Blog</div>
                     <div class="item-description">
-                        <p>Organized hackathons and coding competitions. Conducted workshops on web development and data structures.</p>
+                        <p data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
                     </div>
                 </div>
                 <div class="extracurricular-item">
                     <div class="item-header">
-                        <div class="item-title">Volunteer</div>
+                        <div class="item-title" data-field="extracurricular.1.name">Coding Mentor</div>
                         <div class="item-date">2019 - Present</div>
                     </div>
                     <div class="item-subtitle">Tech for Good Initiative</div>
                     <div class="item-description">
-                        <p>Teaching coding to underprivileged children and developing software solutions for non-profit organizations.</p>
+                        <p data-field="extracurricular.1.description">Teaching coding to underprivileged children</p>
+                    </div>
+                </div>
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <div class="item-title" data-field="extracurricular.2.name">Open Source Contributor</div>
+                        <div class="item-date">2018 - Present</div>
+                    </div>
+                    <div class="item-subtitle">Various Projects</div>
+                    <div class="item-description">
+                        <p data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
                     </div>
                 </div>
             </div>
@@ -522,8 +620,8 @@
     <script>
         // Typewriter effect
         const phrases = [
-            "Software Developer",
-            "Web Designer",
+            "Full Stack Developer",
+            "Software Engineer",
             "Tech Enthusiast",
             "Problem Solver"
         ];

@@ -363,6 +363,7 @@
         <div class="nav-container">
             <a href="#hero" class="logo">PORTFOLIO</a>
             <div class="nav-links">
+                <a href="#about">About</a>
                 <a href="#education">Education</a>
                 <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
@@ -377,20 +378,21 @@
         <!-- Hero Section -->
         <section id="hero">
             <div class="hero-content">
-                <h1>Your Name</h1>
-                <p class="hero-subtitle">Professional Title or Brief Introduction</p>
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p class="hero-subtitle" data-field="basics.label">Full Stack Developer</p>
+                <p class="item-description" data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
                 
                 <div class="contact-info">
-                    <p><strong>Email:</strong> your.email@example.com</p>
-                    <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+                    <p><strong>Email:</strong> <span data-field="basics.email">john.doe@example.com</span></p>
+                    <p><strong>Phone:</strong> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                         GitHub
                         <span class="info-icon" data-tooltip="To create a GitHub account: 1. Go to github.com 2. Click 'Sign up' 3. Enter your details 4. Verify your email">i</span>
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                         LinkedIn
                         <span class="info-icon" data-tooltip="To create a LinkedIn account: 1. Visit linkedin.com 2. Click 'Join now' 3. Enter your details 4. Complete your profile">i</span>
                     </a>
@@ -402,22 +404,32 @@
         <section id="education">
             <h2>Education</h2>
             
-            <div class="item">
+            <div class="item" data-repeat="education">
+                <template>
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="studyType">Master of Computer Science</h3>
+                        <span class="item-date" data-field="year">2018 - 2020</span>
+                    </div>
+                    <p class="item-subtitle" data-field="institution">Stanford University</p>
+                    <p class="item-description" data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="item-header">
-                    <h3 class="item-title">University Name</h3>
-                    <span class="item-date">Expected Graduation: Month Year</span>
+                    <h3 class="item-title" data-field="education.0.studyType">Master of Computer Science</h3>
+                    <span class="item-date" data-field="education.0.year">2018 - 2020</span>
                 </div>
-                <p class="item-subtitle">Degree Name, Major</p>
-                <p class="item-description">Relevant coursework, honors, or achievements. GPA: X.XX/4.0 if notable.</p>
+                <p class="item-subtitle" data-field="education.0.institution">Stanford University</p>
+                <p class="item-description" data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
             </div>
             
             <div class="item">
                 <div class="item-header">
-                    <h3 class="item-title">Previous Institution</h3>
-                    <span class="item-date">Month Year - Month Year</span>
+                    <h3 class="item-title" data-field="education.1.studyType">Bachelor of Technology</h3>
+                    <span class="item-date" data-field="education.1.year">2014 - 2018</span>
                 </div>
-                <p class="item-subtitle">Degree or Program Name</p>
-                <p class="item-description">Key achievements or relevant information.</p>
+                <p class="item-subtitle" data-field="education.1.institution">MIT</p>
+                <p class="item-description" data-field="education.1.area">Computer Science with minor in Mathematics.</p>
             </div>
         </section>
         
@@ -425,23 +437,45 @@
         <section id="experience">
             <h2>Experience</h2>
             
-            <div class="item">
+            <div class="item" data-repeat="work">
+                <template>
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="position">Senior Software Engineer</h3>
+                        <span class="item-date" data-field="duration">2020 - Present</span>
+                    </div>
+                    <p class="item-subtitle" data-field="name">Google</p>
+                    <p class="item-description" data-field="summary">Led development of scalable applications.</p>
+                    <ul data-repeat-inner="highlights">
+                        <template><li data-field=".">Achievement item</li></template>
+                    </ul>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="item-header">
-                    <h3 class="item-title">Job Position</h3>
-                    <span class="item-date">Month Year - Present</span>
+                    <h3 class="item-title" data-field="work.0.position">Senior Software Engineer</h3>
+                    <span class="item-date" data-field="work.0.duration">2020 - Present</span>
                 </div>
-                <p class="item-subtitle">Company Name, Location</p>
-                <p class="item-description">Concise description of your role and responsibilities. Focus on achievements and impact rather than duties.</p>
-                <p class="item-description">Another paragraph if needed to highlight specific projects or accomplishments.</p>
+                <p class="item-subtitle" data-field="work.0.name">Google</p>
+                <p class="item-description" data-field="work.0.summary">Led development of new features for Google Search</p>
+                <ul>
+                    <li>Led development of new features for Google Search</li>
+                    <li>Optimized algorithms improving search speed by 15%</li>
+                    <li>Mentored junior developers</li>
+                </ul>
             </div>
             
             <div class="item">
                 <div class="item-header">
-                    <h3 class="item-title">Previous Position</h3>
-                    <span class="item-date">Month Year - Month Year</span>
+                    <h3 class="item-title" data-field="work.1.position">Software Developer</h3>
+                    <span class="item-date" data-field="work.1.duration">2018 - 2020</span>
                 </div>
-                <p class="item-subtitle">Company Name, Location</p>
-                <p class="item-description">Description of your role and contributions. Quantify achievements when possible.</p>
+                <p class="item-subtitle" data-field="work.1.name">Amazon</p>
+                <p class="item-description" data-field="work.1.summary">Developed backend services for AWS</p>
+                <ul>
+                    <li>Developed backend services for AWS</li>
+                    <li>Implemented CI/CD pipelines</li>
+                    <li>Reduced server costs by 20% through optimization</li>
+                </ul>
             </div>
         </section>
         
@@ -449,26 +483,32 @@
         <section id="projects">
             <h2>Projects</h2>
             
-            <div class="projects-grid">
+            <div class="projects-grid" data-repeat="projects">
+                <template>
+                    <div class="project-card">
+                        <h3 class="item-title" data-field="name">Project Name</h3>
+                        <p class="item-description" data-field="description">Project description</p>
+                        <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                    </div>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="project-card">
-                    <h3 class="item-title">Project Name</h3>
-                    <p class="item-subtitle">Technologies Used: HTML, CSS, JavaScript, etc.</p>
-                    <p class="item-description">Project description highlighting the purpose, your role, and key features. Explain what problem it solves or what value it provides.</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 class="item-title" data-field="projects.0.name">E-commerce Platform</h3>
+                    <p class="item-description" data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
                 </div>
                 
                 <div class="project-card">
-                    <h3 class="item-title">Another Project</h3>
-                    <p class="item-subtitle">Technologies Used: Python, Django, PostgreSQL</p>
-                    <p class="item-description">Detailed description of the project including challenges faced and how you overcame them. Mention any notable results or feedback.</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 class="item-title" data-field="projects.1.name">AI Chatbot</h3>
+                    <p class="item-description" data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                    <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
                 </div>
                 
                 <div class="project-card">
-                    <h3 class="item-title">Mobile Application</h3>
-                    <p class="item-subtitle">Technologies Used: React Native, Firebase</p>
-                    <p class="item-description">Description of mobile application with user statistics if available. Highlight unique features or challenges.</p>
-                    <a href="#" class="project-link">Project Link</a>
+                    <h3 class="item-title" data-field="projects.2.name">Portfolio Website</h3>
+                    <p class="item-description" data-field="projects.2.description">Responsive portfolio website using HTML, CSS, and JavaScript</p>
+                    <a href="#" class="project-link" data-field="projects.2.url" data-attr="href">Project Link</a>
                 </div>
             </div>
         </section>
@@ -479,29 +519,16 @@
             
             <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Programming Languages</h3>
             <div class="skills-container">
-                <span class="skill">Python</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">Java</span>
-                <span class="skill">C++</span>
-                <span class="skill">SQL</span>
+                <span class="skill" data-field="skills.0.name">JavaScript</span>
+                <span class="skill" data-field="skills.1.name">Python</span>
+                <span class="skill" data-field="skills.2.name">Java</span>
             </div>
             
-            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Web Development</h3>
+            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Frameworks & Technologies</h3>
             <div class="skills-container">
-                <span class="skill">HTML5</span>
-                <span class="skill">CSS3</span>
-                <span class="skill">React</span>
-                <span class="skill">Node.js</span>
-                <span class="skill">Django</span>
-            </div>
-            
-            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.1rem;">Tools & Technologies</h3>
-            <div class="skills-container">
-                <span class="skill">Git</span>
-                <span class="skill">Docker</span>
-                <span class="skill">AWS</span>
-                <span class="skill">Linux</span>
-                <span class="skill">VS Code</span>
+                <span class="skill" data-field="skills.3.name">React</span>
+                <span class="skill" data-field="skills.4.name">Node.js</span>
+                <span class="skill" data-field="skills.5.name">TensorFlow</span>
             </div>
         </section>
         
@@ -509,15 +536,16 @@
         <section id="interests">
             <h2>Area of Interest</h2>
             
-            <ul class="interests-list">
-                <li>Artificial Intelligence and Machine Learning</li>
-                <li>Web Development and User Experience</li>
-                <li>Data Science and Analytics</li>
-                <li>Cloud Computing and Distributed Systems</li>
-                <li>Cybersecurity and Ethical Hacking</li>
-                <li>Human-Computer Interaction</li>
-                <li>Internet of Things (IoT)</li>
-                <li>Blockchain Technology</li>
+            <ul class="interests-list" data-repeat="interests">
+                <template>
+                    <li data-field="name">Interest Name</li>
+                </template>
+                
+                <!-- Fallback content -->
+                <li data-field="interests.0.name">Artificial Intelligence</li>
+                <li data-field="interests.1.name">Mobile Development</li>
+                <li data-field="interests.2.name">Cyber Security</li>
+                <li data-field="interests.3.name">Cloud Computing</li>
             </ul>
         </section>
         
@@ -525,22 +553,32 @@
         <section id="honors">
             <h2>Honors & Awards</h2>
             
-            <div class="item">
+            <div class="item" data-repeat="awards">
+                <template>
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="title">Award Title</h3>
+                        <span class="item-date" data-field="date">2021</span>
+                    </div>
+                    <p class="item-subtitle">Organization</p>
+                    <p class="item-description" data-field="summary">Award description</p>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="item-header">
-                    <h3 class="item-title">Award Name</h3>
-                    <span class="item-date">Year</span>
+                    <h3 class="item-title" data-field="awards.0.title">Google Developer Expert</h3>
+                    <span class="item-date" data-field="awards.0.date">2021</span>
                 </div>
-                <p class="item-subtitle">Organization</p>
-                <p class="item-description">Description of the award and why it was received.</p>
+                <p class="item-subtitle">Google</p>
+                <p class="item-description" data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
             </div>
             
             <div class="item">
                 <div class="item-header">
-                    <h3 class="item-title">Scholarship Name</h3>
-                    <span class="item-date">Year</span>
+                    <h3 class="item-title" data-field="awards.1.title">Hackathon Winner</h3>
+                    <span class="item-date" data-field="awards.1.date">2019</span>
                 </div>
-                <p class="item-subtitle">Institution</p>
-                <p class="item-description">Details about the scholarship and selection criteria.</p>
+                <p class="item-subtitle">National Coding Competition</p>
+                <p class="item-description" data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
             </div>
         </section>
         
@@ -548,22 +586,33 @@
         <section id="extracurriculars">
             <h2>Extracurricular Activities</h2>
             
-            <div class="item">
+            <div class="item" data-repeat="extracurricular">
+                <template>
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="name">Activity Name</h3>
+                    </div>
+                    <p class="item-description" data-field="description">Activity description</p>
+                </template>
+                
+                <!-- Fallback content -->
                 <div class="item-header">
-                    <h3 class="item-title">Club or Organization Name</h3>
-                    <span class="item-date">Month Year - Month Year</span>
+                    <h3 class="item-title" data-field="extracurricular.0.name">Tech Blog Writer</h3>
                 </div>
-                <p class="item-subtitle">Position Held</p>
-                <p class="item-description">Description of your involvement, responsibilities, and any achievements.</p>
+                <p class="item-description" data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
             </div>
             
             <div class="item">
                 <div class="item-header">
-                    <h3 class="item-title">Volunteer Work</h3>
-                    <span class="item-date">Month Year - Month Year</span>
+                    <h3 class="item-title" data-field="extracurricular.1.name">Coding Mentor</h3>
                 </div>
-                <p class="item-subtitle">Organization Name</p>
-                <p class="item-description">Description of your volunteer activities and impact made.</p>
+                <p class="item-description" data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3 class="item-title" data-field="extracurricular.2.name">Open Source Contributor</h3>
+                </div>
+                <p class="item-description" data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
             </div>
         </section>
         
@@ -573,16 +622,16 @@
             <p style="margin-bottom: 1.5rem;">Feel free to reach out for opportunities or collaborations.</p>
             
             <div class="contact-info">
-                <p><strong>Email:</strong> your.email@example.com</p>
-                <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+                <p><strong>Email:</strong> <span data-field="basics.email">john.doe@example.com</span></p>
+                <p><strong>Phone:</strong> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
             </div>
             
             <div class="social-links" style="margin-top: 1.5rem;">
-                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
                     GitHub
                     <span class="info-icon" data-tooltip="Visit my GitHub profile">i</span>
                 </a>
-                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
                     LinkedIn
                     <span class="info-icon" data-tooltip="Connect with me on LinkedIn">i</span>
                 </a>
@@ -592,7 +641,7 @@
     
     <!-- Footer -->
     <footer>
-        <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
     </footer>
     
     <script>
