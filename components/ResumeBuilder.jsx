@@ -17,17 +17,13 @@ function ResumeBuilder({ onClose, darkMode }) {
   useEffect(()=>{ try{ const raw = localStorage.getItem('pxf:form'); if(raw) setFormData(JSON.parse(raw)); }catch{} }, []);
   useEffect(()=>{ localStorage.setItem('pxf:form', JSON.stringify(formData)); }, [formData]);
 
-  // Updated templates to use portfolio files instead of modular templates
-  const templates = [
-    { id: 1, name: 'Dark Portfolio', file: 'portfolio1.html', image: 'imgs/portfolio1.gif' },
-    { id: 2, name: 'Professional Portfolio', file: 'portfolio2.html', image: 'imgs/portfolio2.gif' },
-    { id: 3, name: 'Monochrome Portfolio', file: 'portfolio3.html', image: 'imgs/portfolio3.gif' },
-    { id: 4, name: 'Classic Portfolio', file: 'portfolio4.html', image: 'imgs/portfolio4.gif' },
-    { id: 5, name: 'Neon Portfolio', file: 'portfolio5.html', image: 'imgs/portfolio5.gif' },
-    { id: 6, name: 'Minimalist Portfolio', file: 'portfolio6.html', image: 'imgs/portfolio6.gif' },
-    { id: 7, name: 'Standard Portfolio', file: 'portfolio7.html', image: 'imgs/portfolio7.gif' },
-    { id: 8, name: 'Professional Business', file: 'portfolio8.html', image: 'imgs/portfolio8.gif' },
-  ];
+	// Use all 45 templates from global portfolio data
+	const templates = (window.PORTFOLIO_DATA || []).map(p => ({
+		id: p.id,
+		name: p.title,
+		file: p.link,
+		image: p.image
+	}));
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -261,15 +257,17 @@ function ResumeBuilder({ onClose, darkMode }) {
             {/* Template + Preview */}
             <div className="preview-container my-6">
               <div>
-                <h3 className="font-semibold mb-3">Choose a template</h3>
-                <div className="grid grid-cols-2 gap-3">
+				<h3 className="font-semibold mb-3">Choose a template</h3>
+				<div className="max-h-[50vh] overflow-y-auto pr-2">
+					<div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {templates.map(t => (
                     <button key={t.id} type="button" onClick={()=>{ setSelectedTemplate(t); setShowPreview(true); }} className={`template-option rounded-lg overflow-hidden border ${selectedTemplate?.id===t.id ? 'selected' : ''}`} title={t.name}>
                       <img src={t.image} alt={t.name} className="w-full h-36 object-cover" loading="lazy" decoding="async" />
                       <div className="p-2 text-left text-sm">{t.name}</div>
                     </button>
                   ))}
-                </div>
+					</div>
+				</div>
               </div>
               <div>
                 <h3 className="font-semibold mb-3">Live preview</h3>
