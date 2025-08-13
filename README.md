@@ -269,3 +269,116 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ for developers, designers, and job seekers everywhere.
 
 **Start building your portfolio today!** 🚀
+
+---
+
+### Architecture Map and Portfolio Index (Modular Index)
+
+This project has been refactored to replace a very large monolithic `index.html` with a clean modular structure. This section maps every area that used to live in `index.html` to its new files, and documents where all portfolio properties and assets reside.
+
+#### Where each UI section lives now
+
+- Navigation, Hero, Filters, Grid, Footer, Modals, Cursor effects, Dark mode
+  - App logic and layout: `App.jsx`
+  - Cursor trailer + particles: `App.jsx` (effect hooks) and styles in `styles.css` (`.cursor-trailer`, `.trail`, `.particle`)
+  - Dark mode toggle and persistence: `App.jsx` (uses `localStorage` key `pxf:dark`)
+  - Easter egg sparkle/star icon linking to the video editor: `App.jsx` (navigation) and styles in `styles.css` (`.sparkle-button`, `.spark-*`)
+
+- Portfolio grid cards
+  - Card component: `components/PortfolioCard.jsx`
+  - Data source for all cards (45 entries): `data/portfolios.js` (exported on `window.PORTFOLIO_DATA`)
+  - Preview thumbnails: `imgs/portfolio{1..45}.gif`
+
+- Auth and Builder modals
+  - Auth modal: `components/AuthModal.jsx`
+  - Portfolio Builder (form, template chooser, live preview, deploy/download): `components/ResumeBuilder.jsx`
+  - DOM patching for preview + deploy (injects data into static HTML templates): `utils/domPatcher.js` (exposed as `window.DomPatcher`)
+
+- Entry point and shell
+  - Minimal HTML shell: `index.html` (links Tailwind CDN, Google Fonts, styles, data, utils, components, app, and entry)
+  - Global styles: `styles.css`
+  - App bootstrap: `main.jsx` (mounts `window.App` into `#root`)
+
+- Hidden video editor (easter egg)
+  - `easter_egg.html`
+
+#### How preview and deploy work now
+
+- The Builder (`components/ResumeBuilder.jsx`) collects form data and calls `window.DomPatcher.patchTemplate(templateFile, formData)`.
+- The patcher (`utils/domPatcher.js`) loads the chosen static HTML (e.g. `portfolio1.html`), adds a `<base>` tag for relative assets, populates all `data-field`, `data-attr`, and `data-repeat` hooks, then returns the final HTML.
+- Live preview uses an `<iframe srcdoc="...">` set to the patched markup.
+- Deploy as Website opens the same final HTML in a new tab (Blob URL) or can be downloaded as a single `.html` file.
+
+#### Portfolio properties – where they live
+
+- Canonical source for all 45 portfolio cards (grid data): `data/portfolios.js`
+  - Properties per portfolio: `id`, `title`, `author`, `category`, `views`, `likes`, `image` (preview GIF), `isFeatured`, `isLive`, `tags` (array), `link` (HTML template file, e.g., `portfolio13.html`).
+- Preview images: `imgs/portfolioX.gif` (X ∈ 1..45)
+- Static HTML templates: `portfolioX.html` in the repository root
+
+> Note: The card component (`components/PortfolioCard.jsx`) consumes the above properties to render each card and open `portfolio.link` on click.
+
+#### Template selection in the Builder
+
+- The Builder ships with a `templates` list inside `components/ResumeBuilder.jsx`. Each entry maps to a portfolio HTML file and a preview image. You can expand this list to include all 45 templates or a curated subset.
+
+#### Full index of all 45 portfolios (files and assets)
+
+| ID | Title                     | Template File       | Preview Image            | Category     |
+|----|---------------------------|---------------------|--------------------------|--------------|
+| 1  | Dark Portfolio            | `portfolio1.html`   | `imgs/portfolio1.gif`    | Development  |
+| 2  | Professional Portfolio    | `portfolio2.html`   | `imgs/portfolio2.gif`    | Development  |
+| 3  | Monochrome Portfolio      | `portfolio3.html`   | `imgs/portfolio3.gif`    | Design       |
+| 4  | Classic Portfolio         | `portfolio4.html`   | `imgs/portfolio4.gif`    | Development  |
+| 5  | Neon Portfolio            | `portfolio5.html`   | `imgs/portfolio5.gif`    | Art          |
+| 6  | Minimalist Portfolio      | `portfolio6.html`   | `imgs/portfolio6.gif`    | Design       |
+| 7  | Standard Portfolio        | `portfolio7.html`   | `imgs/portfolio7.gif`    | Development  |
+| 8  | Professional Business     | `portfolio8.html`   | `imgs/portfolio8.gif`    | Development  |
+| 9  | Dynamic Portfolio         | `portfolio9.html`   | `imgs/portfolio9.gif`    | Development  |
+| 10 | Timeline Portfolio        | `portfolio10.html`  | `imgs/portfolio10.gif`   | Design       |
+| 11 | Modern Portfolio          | `portfolio11.html`  | `imgs/portfolio11.gif`   | Development  |
+| 12 | Creative Dark             | `portfolio12.html`  | `imgs/portfolio12.gif`   | Art          |
+| 13 | Tech Focus                | `portfolio13.html`  | `imgs/portfolio13.gif`   | Development  |
+| 14 | Elegant Classic           | `portfolio14.html`  | `imgs/portfolio14.gif`   | Design       |
+| 15 | Portfolio Showcase        | `portfolio15.html`  | `imgs/portfolio15.gif`   | Art          |
+| 16 | Business Card             | `portfolio16.html`  | `imgs/portfolio16.gif`   | Design       |
+| 17 | Developer Hub             | `portfolio17.html`  | `imgs/portfolio17.gif`   | Development  |
+| 18 | Designer Showcase         | `portfolio18.html`  | `imgs/portfolio18.gif`   | Design       |
+| 19 | Photography               | `portfolio19.html`  | `imgs/portfolio19.gif`   | Photography  |
+| 20 | Writer's Corner           | `portfolio20.html`  | `imgs/portfolio20.gif`   | Writing      |
+| 21 | Marketing Pro             | `portfolio21.html`  | `imgs/portfolio21.gif`   | Marketing    |
+| 22 | 3D Artist                 | `portfolio22.html`  | `imgs/portfolio22.gif`   | 3D           |
+| 23 | UX Designer               | `portfolio23.html`  | `imgs/portfolio23.gif`   | UX/UI        |
+| 24 | Mobile Developer          | `portfolio24.html`  | `imgs/portfolio24.gif`   | Development  |
+| 25 | Data Scientist            | `portfolio25.html`  | `imgs/portfolio25.gif`   | Development  |
+| 26 | Game Developer            | `portfolio26.html`  | `imgs/portfolio26.gif`   | Development  |
+| 27 | Frontend Specialist       | `portfolio27.html`  | `imgs/portfolio27.gif`   | Development  |
+| 28 | Backend Engineer          | `portfolio28.html`  | `imgs/portfolio28.gif`   | Development  |
+| 29 | DevOps Engineer           | `portfolio29.html`  | `imgs/portfolio29.gif`   | Development  |
+| 30 | AI Researcher             | `portfolio30.html`  | `imgs/portfolio30.gif`   | Development  |
+| 31 | Blockchain Developer      | `portfolio31.html`  | `imgs/portfolio31.gif`   | Development  |
+| 32 | Cybersecurity Expert      | `portfolio32.html`  | `imgs/portfolio32.gif`   | Development  |
+| 33 | QA Engineer               | `portfolio33.html`  | `imgs/portfolio33.gif`   | Development  |
+| 34 | Product Manager           | `portfolio34.html`  | `imgs/portfolio34.gif`   | Marketing    |
+| 35 | UI Specialist             | `portfolio35.html`  | `imgs/portfolio35.gif`   | UX/UI        |
+| 36 | Motion Graphics           | `portfolio36.html`  | `imgs/portfolio36.gif`   | Art          |
+| 37 | Digital Artist            | `portfolio37.html`  | `imgs/portfolio37.gif`   | Art          |
+| 38 | Brand Designer            | `portfolio38.html`  | `imgs/portfolio38.gif`   | Design       |
+| 39 | Web Designer              | `portfolio39.html`  | `imgs/portfolio39.gif`   | Design       |
+| 40 | Freelancer                | `portfolio40.html`  | `imgs/portfolio40.gif`   | Development  |
+| 41 | Terminal Portfolio        | `portfolio41.html`  | `imgs/portfolio41.gif`   | Development  |
+| 42 | Startup Founder           | `portfolio42.html`  | `imgs/portfolio42.gif`   | Marketing    |
+| 43 | Content Creator           | `portfolio43.html`  | `imgs/portfolio43.gif`   | Writing      |
+| 44 | E-commerce                | `portfolio44.html`  | `imgs/portfolio44.gif`   | Development  |
+| 45 | SaaS Developer            | `portfolio45.html`  | `imgs/portfolio45.gif`   | Development  |
+
+Additional properties for each portfolio card (title, author, tags, etc.) are defined centrally in `data/portfolios.js`.
+
+#### Quick reference: editing guide
+
+- Change card text, tags, categories, or links: `data/portfolios.js`
+- Change card visuals or behavior: `components/PortfolioCard.jsx`
+- Change the list of selectable templates in the Builder: `components/ResumeBuilder.jsx` (the `templates` array)
+- Change how user data is injected into templates: `utils/domPatcher.js`
+- Change navigation, hero, filters, grid, footer, or global app behavior: `App.jsx`
+- Change global styles, sparkle effect, cursor trail, or preview frame look: `styles.css`
