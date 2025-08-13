@@ -157,7 +157,7 @@ function App(){
         <div className="mb-8 flex flex-wrap gap-2">
           <select value={selectedCategory} onChange={(e)=>setSelectedCategory(e.target.value)} className="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-800">
             <option value="all">All Categories</option>
-            {['Design','Development','Photography','Writing','Marketing','Art','3D','UX/UI'].map(c => <option key={c} value={c}>{c}</option>)}
+            {['Color Scheme','Layout Styles','Navigation Styles','Typography-Focused','Special Effects',' Animation Styles','Navigation Effects','Content Presentation',' Mood & Atmosphere','Editor\'s choice'].map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
 
