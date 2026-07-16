@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Port X Folio | Professional Portfolio Showcase</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Rubik+Mono+One&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+</head>
+<body class="relative">
+  <div id="root"></div>
+  <div id="cursor" class="cursor-trailer"></div>
+
+  <!-- Data and utilities -->
+  <script type="text/javascript" src="data/portfolios.js"></script>
+  <script type="text/javascript" src="utils/domPatcher.js"></script>
+
+  <!-- Components (JSX) -->
+  <script type="text/babel" data-presets="env,react" src="components/PortfolioCard.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="components/AuthModal.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="components/ResumeBuilder.jsx"></script>
+
+  <!-- App + entry -->
+  <script type="text/babel" data-presets="env,react" src="App.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="main.jsx"></script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Infinite Exploration</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --dark: #0a1128;
+            --light: #f8f9fa;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            transform-style: preserve-3d;
+        }
+        
+        .zoom-stage {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card.active {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 0.3rem;
+            transition: transform 0.3s;
+        }
+        
+        .icon-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            background: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="zoom-stage">
+            <!-- Main Profile Card -->
+            <div class="card active" data-zoom="main">
+                <h1 data-field="basics.name">Ram Manohar</h1>
+                <p data-field="basics.label">Full Stack Developer | UI/UX Enthusiast</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📱: <span data-field="basics.phone">+1 (555) 123-4567</span></span>
+                    </div>
+                    <div class="contact-item">
+                        <span>GitHub: </span>
+                        <a href="https://github.com/username" target="_blank" data-field="basics.profiles.0.url" data-attr="href">github.com/username</a>
+                        <button class="icon-btn" onclick="openModal('github-modal')">ℹ️</button>
+                    </div>
+                    <div class="contact-item">
+                        <span>LinkedIn: </span>
+                        <a href="https://linkedin.com/in/username" target="_blank" data-field="basics.profiles.1.url" data-attr="href">linkedin.com/in/username</a>
+                        <button class="icon-btn" onclick="openModal('linkedin-modal')">ℹ️</button>
+                    </div>
+                </div>
+                
+                <p data-field="basics.summary">Welcome to my interactive portfolio! Click on any section below to explore more details.</p>
+                
+                <div class="navigation">
+                    <h2>Explore My Portfolio</h2>
+                    <ul>
+                        <li><a href="#" onclick="zoomTo('education')">Education</a></li>
+                        <li><a href="#" onclick="zoomTo('experience')">Experience</a></li>
+                        <li><a href="#" onclick="zoomTo('projects')">Projects</a></li>
+                        <li><a href="#" onclick="zoomTo('skills')">Technical Skills</a></li>
+                        <li><a href="#" onclick="zoomTo('interests')">Areas of Interest</a></li>
+                        <li><a href="#" onclick="zoomTo('honors')">Honors & Awards</a></li>
+                        <li><a href="#" onclick="zoomTo('extracurriculars')">Extracurricular Activities</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Education Card (hidden by default) -->
+            <div class="card" data-zoom="education">
+                <h2>Education</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="education">
+                    <template>
+                        <h3 data-field="studyType">Master of Computer Science</h3>
+                        <p data-field="institution">Stanford University | <span data-field="year">2018 - 2020</span></p>
+                        <p data-field="area">Specialization in Artificial Intelligence</p>
+                        <p>GPA: 3.9/4.0</p>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="education.0.studyType">Master of Computer Science</h3>
+                <p data-field="education.0.institution">Stanford University | <span data-field="education.0.year">2018 - 2020</span></p>
+                <p data-field="education.0.area">Specialization in Artificial Intelligence</p>
+                <p>GPA: 3.9/4.0</p>
+                
+                <h3 data-field="education.1.studyType">Bachelor of Science in Computer Engineering</h3>
+                <p data-field="education.1.institution">MIT | <span data-field="education.1.year">2014 - 2018</span></p>
+                <p data-field="education.1.area">Minor in Mathematics</p>
+                <p>GPA: 3.8/4.0</p>
+            </div>
+            
+            <!-- Experience Card -->
+            <div class="card" data-zoom="experience">
+                <h2>Professional Experience</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="work">
+                    <template>
+                        <h3 data-field="position">Senior Software Engineer</h3>
+                        <p data-field="name">Google | <span data-field="duration">2020 - Present</span></p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="work.0.position">Senior Software Engineer</h3>
+                <p data-field="work.0.name">Google | <span data-field="work.0.duration">2020 - Present</span></p>
+                <ul>
+                    <li data-field="work.0.highlights.0">Led development of customer-facing web applications</li>
+                    <li data-field="work.0.highlights.1">Implemented CI/CD pipelines reducing deployment time by 40%</li>
+                    <li data-field="work.0.highlights.2">Mentored junior developers and conducted code reviews</li>
+                </ul>
+                
+                <h3 data-field="work.1.position">Software Developer Intern</h3>
+                <p data-field="work.1.name">Amazon | <span data-field="work.1.duration">Summer 2021</span></p>
+                <ul>
+                    <li data-field="work.1.highlights.0">Worked on improving search algorithm efficiency</li>
+                    <li data-field="work.1.highlights.1">Developed internal tools for data visualization</li>
+                    <li data-field="work.1.highlights.2">Collaborated with cross-functional teams on UX improvements</li>
+                </ul>
+            </div>
+            
+            <!-- Projects Card -->
+            <div class="card" data-zoom="projects">
+                <h2>Projects</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div class="project-grid" data-repeat="projects">
+                    <template>
+                        <div class="project-card">
+                            <h3 data-field="name">Project Name</h3>
+                            <p data-field="description">Project description</p>
+                            <a href="#" class="project-link" target="_blank" data-field="url" data-attr="href">Project Link</a>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3 data-field="projects.0.name">Infinite Zoom UI Framework</h3>
+                        <p data-field="projects.0.description">A JavaScript library for creating zoomable user interfaces with smooth transitions and animations.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.0.url" data-attr="href">Project Link</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3 data-field="projects.1.name">AI-Powered Portfolio Analyzer</h3>
+                        <p data-field="projects.1.description">Machine learning tool that analyzes investment portfolios and provides optimization suggestions.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.1.url" data-attr="href">Project Link</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3 data-field="projects.2.name">EcoTrack Carbon Footprint App</h3>
+                        <p data-field="projects.2.description">Mobile application that tracks daily carbon footprint with gamification elements.</p>
+                        <a href="#" class="project-link" target="_blank" data-field="projects.2.url" data-attr="href">Project Link</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Card -->
+            <div class="card" data-zoom="skills">
+                <h2>Technical Skills</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="skills">
+                    <template>
+                        <h3 data-field="category">Programming Languages</h3>
+                        <div class="skill-tags" data-repeat-inner="items">
+                            <template><span class="skill-tag" data-field=".">Skill</span></template>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="skills.0.category">Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-field="skills.0.items.0">JavaScript</span>
+                    <span class="skill-tag" data-field="skills.0.items.1">Python</span>
+                    <span class="skill-tag" data-field="skills.0.items.2">Java</span>
+                    <span class="skill-tag" data-field="skills.0.items.3">C++</span>
+                    <span class="skill-tag" data-field="skills.0.items.4">TypeScript</span>
+                </div>
+                
+                <h3 data-field="skills.1.category">Web Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-field="skills.1.items.0">React</span>
+                    <span class="skill-tag" data-field="skills.1.items.1">Node.js</span>
+                    <span class="skill-tag" data-field="skills.1.items.2">Express</span>
+                    <span class="skill-tag" data-field="skills.1.items.3">HTML5</span>
+                    <span class="skill-tag" data-field="skills.1.items.4">CSS3</span>
+                    <span class="skill-tag" data-field="skills.1.items.5">SASS</span>
+                </div>
+                
+                <h3 data-field="skills.2.category">Database & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-field="skills.2.items.0">MongoDB</span>
+                    <span class="skill-tag" data-field="skills.2.items.1">PostgreSQL</span>
+                    <span class="skill-tag" data-field="skills.2.items.2">AWS</span>
+                    <span class="skill-tag" data-field="skills.2.items.3">Firebase</span>
+                </div>
+            </div>
+            
+            <!-- Interests Card -->
+            <div class="card" data-zoom="interests">
+                <h2>Areas of Interest</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="interests">
+                    <template>
+                        <ul>
+                            <li data-field="name">Interest Name</li>
+                        </ul>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <ul>
+                    <li data-field="interests.0.name">Artificial Intelligence & Machine Learning</li>
+                    <li data-field="interests.1.name">Human-Computer Interaction</li>
+                    <li data-field="interests.2.name">Data Visualization</li>
+                    <li data-field="interests.3.name">Responsive Web Design</li>
+                    <li data-field="interests.4.name">Sustainable Technology</li>
+                </ul>
+            </div>
+            
+            <!-- Honors Card -->
+            <div class="card" data-zoom="honors">
+                <h2>Honors & Awards</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="awards">
+                    <template>
+                        <h3 data-field="title">Award Title</h3>
+                        <p data-field="awarder">Organization | <span data-field="date">Year</span></p>
+                        <p data-field="summary">Award description</p>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="awards.0.title">Dean's List</h3>
+                <p data-field="awards.0.awarder">MIT | <span data-field="awards.0.date">2017-2020</span></p>
+                
+                <h3 data-field="awards.1.title">Best Capstone Project Award</h3>
+                <p data-field="awards.1.awarder">Computer Engineering Department | <span data-field="awards.1.date">2020</span></p>
+                
+                <h3 data-field="awards.2.title">Google Code Jam Finalist</h3>
+                <p data-field="awards.2.awarder">2019 Edition | <span data-field="awards.2.date">2019</span></p>
+                <p data-field="awards.2.summary">Top 100 out of 10,000+ participants</p>
+            </div>
+            
+            <!-- Extracurriculars Card -->
+            <div class="card" data-zoom="extracurriculars">
+                <h2>Extracurricular Activities</h2>
+                <button class="icon-btn" onclick="zoomOut()" style="position: absolute; top: 1rem; right: 1rem;">⬅️ Back</button>
+                
+                <div data-repeat="extracurricular">
+                    <template>
+                        <h3 data-field="name">Activity Name</h3>
+                        <p data-field="organization">Organization | <span data-field="date">Duration</span></p>
+                        <p data-field="description">Activity description</p>
+                    </template>
+                </div>
+                
+                <!-- Fallback content -->
+                <h3 data-field="extracurricular.0.name">President, Computer Science Club</h3>
+                <p data-field="extracurricular.0.organization">MIT | <span data-field="extracurricular.0.date">2018-2020</span></p>
+                <p data-field="extracurricular.0.description">Organized hackathons and tech talks with industry professionals</p>
+                
+                <h3 data-field="extracurricular.1.name">Volunteer Coding Instructor</h3>
+                <p data-field="extracurricular.1.organization">Code for All Non-profit | <span data-field="extracurricular.1.date">2019-Present</span></p>
+                <p data-field="extracurricular.1.description">Teach programming fundamentals to underprivileged youth</p>
+                
+                <h3 data-field="extracurricular.2.name">Open Source Contributor</h3>
+                <p data-field="extracurricular.2.organization">Various projects on GitHub | <span data-field="extracurricular.2.date">2017-Present</span></p>
+                <p data-field="extracurricular.2.description">Regular contributor to several popular open source projects</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="github-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('github-modal')">×</span>
+            <h2>How to Create a GitHub Account</h2>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click on "Sign up" in the top right corner</li>
+                <li>Enter your email address, create a username and password</li>
+                <li>Complete the verification process</li>
+                <li>Choose your plan (Free is sufficient for most users)</li>
+                <li>Complete your profile by adding a profile picture and bio</li>
+                <li>Start creating repositories to showcase your projects</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="modal" id="linkedin-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('linkedin-modal')">×</span>
+            <h2>How to Create a LinkedIn Account</h2>
+            <ol>
+                <li>Go to <a href="https://linkedin.com" target="_blank">linkedin.com</a></li>
+                <li>Click on "Join now"</li>
+                <li>Enter your email address and create a password</li>
+                <li>Fill in your first and last name</li>
+                <li>Complete the verification process</li>
+                <li>Fill out your profile with:
+                    <ul>
+                        <li>Professional headline</li>
+                        <li>Work experience</li>
+                        <li>Education</li>
+                        <li>Skills</li>
+                        <li>Profile photo</li>
+                    </ul>
+                </li>
+                <li>Start connecting with professionals in your field</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Zoom functionality
+        function zoomTo(section) {
+            document.querySelector('.card.active').classList.remove('active');
+            document.querySelector(`.card[data-zoom="${section}"]`).classList.add('active');
+        }
+        
+        function zoomOut() {
+            document.querySelector('.card.active').classList.remove('active');
+            document.querySelector('.card[data-zoom="main"]').classList.add('active');
+        }
+        
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

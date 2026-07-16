@@ -1,0 +1,68 @@
+[
+  {
+    "id": "modern-minimal",
+    "title": "Modern Minimal",
+    "description": "Clean, modern design with minimal elements and elegant typography",
+    "tags": ["minimal", "modern", "professional", "clean"],
+    "category": "professional",
+    "demoUrl": "/templates/modern-minimal/demo.html",
+    "previewUrl": "/templates/modern-minimal/preview.jpg",
+    "complexity": "simple",
+    "color": "blue"
+  },
+  {
+    "id": "creative-dark",
+    "title": "Creative Dark",
+    "description": "Bold dark theme perfect for creative professionals and designers",
+    "tags": ["dark", "creative", "bold", "designer"],
+    "category": "creative",
+    "demoUrl": "/templates/creative-dark/demo.html",
+    "previewUrl": "/templates/creative-dark/preview.jpg",
+    "complexity": "medium",
+    "color": "purple"
+  },
+  {
+    "id": "tech-focused",
+    "title": "Tech Focused",
+    "description": "Perfect for developers and tech professionals with code highlighting",
+    "tags": ["tech", "developer", "coding", "minimal"],
+    "category": "tech",
+    "demoUrl": "/templates/tech-focused/demo.html",
+    "previewUrl": "/templates/tech-focused/preview.jpg",
+    "complexity": "simple",
+    "color": "green"
+  },
+  {
+    "id": "elegant-classic",
+    "title": "Elegant Classic",
+    "description": "Timeless design with elegant typography and traditional layout",
+    "tags": ["classic", "elegant", "traditional", "professional"],
+    "category": "professional",
+    "demoUrl": "/templates/elegant-classic/demo.html",
+    "previewUrl": "/templates/elegant-classic/preview.jpg",
+    "complexity": "simple",
+    "color": "gray"
+  },
+  {
+    "id": "portfolio-showcase",
+    "title": "Portfolio Showcase",
+    "description": "Gallery-style layout perfect for showcasing projects and artwork",
+    "tags": ["gallery", "showcase", "creative", "visual"],
+    "category": "creative",
+    "demoUrl": "/templates/portfolio-showcase/demo.html",
+    "previewUrl": "/templates/portfolio-showcase/preview.jpg",
+    "complexity": "complex",
+    "color": "orange"
+  },
+  {
+    "id": "business-card",
+    "title": "Business Card",
+    "description": "Compact, card-like design perfect for quick introductions",
+    "tags": ["compact", "simple", "business", "minimal"],
+    "category": "professional",
+    "demoUrl": "/templates/business-card/demo.html",
+    "previewUrl": "/templates/business-card/preview.jpg",
+    "complexity": "simple",
+    "color": "blue"
+  }
+]

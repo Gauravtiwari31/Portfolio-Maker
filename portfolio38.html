@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ram Manohar - Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .social-link:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .info-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .info-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark-color) transparent transparent transparent;
+        }
+        
+        .social-link:hover .info-tooltip {
+            opacity: 1;
+            visibility: visible;
+            top: -50px;
+        }
+        
+        section {
+            padding: 3rem 0;
+            background-color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto 0;
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .education-item, .experience-item, .project-item, .honor-item, .extracurricular-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .education-item:last-child, .experience-item:last-child, .project-item:last-child, 
+        .honor-item:last-child, .extracurricular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .item-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .item-subtitle {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-description {
+            margin-bottom: 0.5rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-list li:before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .project-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .interest-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 150px;
+            transition: all 0.3s ease;
+        }
+        
+        .interest-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .interest-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .demo-container {
+            margin: 2rem 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-header {
+            background-color: #f0f0f0;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+        
+        .demo-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .demo-button.red {
+            background-color: #ff5f56;
+        }
+        
+        .demo-button.yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .demo-button.green {
+            background-color: #27c93f;
+        }
+        
+        .demo-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .demo-content {
+            padding: 1.5rem;
+            background-color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .item-header {
+                flex-direction: column;
+            }
+            
+            .item-date {
+                margin-top: 0.3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://via.placeholder.com/400x400" alt="Profile Picture" class="profile-img" data-field="basics.picture" data-attr="src">
+            <h1 data-field="basics.name">Ram Manohar</h1>
+            <p class="tagline" data-field="basics.label">Full Stack Developer</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span data-field="basics.phone">+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span data-field="basics.email">john.doe@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>San Francisco, CA</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/username" class="social-link" target="_blank" data-field="basics.profiles.0.url" data-attr="href">
+                    <i class="fab fa-github"></i>
+                    <span class="info-tooltip">Visit my GitHub profile</span>
+                </a>
+                <a href="#" class="social-link" id="github-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="info-tooltip">GitHub is a platform for version control and collaboration. Sign up at github.com to create your own account and showcase your projects.</span>
+                </a>
+                <a href="https://linkedin.com/in/username" class="social-link" target="_blank" data-field="basics.profiles.1.url" data-attr="href">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span class="info-tooltip">Visit my LinkedIn profile</span>
+                </a>
+                <a href="#" class="social-link" id="linkedin-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="info-tooltip">LinkedIn is a professional networking platform. Create an account at linkedin.com to connect with professionals and showcase your career.</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="section-content">
+                <p class="item-description" data-field="basics.summary">I build exceptional digital experiences with clean code and innovative design.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="section-content" data-repeat="education">
+                <template>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <h3 class="item-title" data-field="institution">Stanford University</h3>
+                            <span class="item-date" data-field="year">2018 - 2020</span>
+                        </div>
+                        <h4 class="item-subtitle" data-field="studyType">Master of Computer Science</h4>
+                        <p class="item-description" data-field="area">Specialized in Artificial Intelligence and Machine Learning. Graduated with honors.</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="education-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="education.0.institution">Stanford University</h3>
+                        <span class="item-date" data-field="education.0.year">2018 - 2020</span>
+                    </div>
+                    <h4 class="item-subtitle" data-field="education.0.studyType">Master of Computer Science</h4>
+                    <p class="item-description" data-field="education.0.area">Specialized in Artificial Intelligence and Machine Learning.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="education.1.institution">MIT</h3>
+                        <span class="item-date" data-field="education.1.year">2014 - 2018</span>
+                    </div>
+                    <h4 class="item-subtitle" data-field="education.1.studyType">Bachelor of Technology</h4>
+                    <p class="item-description" data-field="education.1.area">Computer Science with minor in Mathematics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="section-content" data-repeat="work">
+                <template>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <h3 class="item-title" data-field="position">Senior Software Engineer</h3>
+                            <span class="item-date" data-field="duration">2020 - Present</span>
+                        </div>
+                        <h4 class="item-subtitle" data-field="name">Google</h4>
+                        <p class="item-description" data-field="summary">Led development of scalable applications.</p>
+                        <ul data-repeat-inner="highlights">
+                            <template><li data-field=".">Achievement item</li></template>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="experience-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="work.0.position">Senior Software Engineer</h3>
+                        <span class="item-date" data-field="work.0.duration">2020 - Present</span>
+                    </div>
+                    <h4 class="item-subtitle" data-field="work.0.name">Google</h4>
+                    <p class="item-description" data-field="work.0.summary">Led development of new features for Google Search</p>
+                    <ul>
+                        <li>Led development of new features for Google Search</li>
+                        <li>Optimized algorithms improving search speed by 15%</li>
+                        <li>Mentored junior developers</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="work.1.position">Software Developer</h3>
+                        <span class="item-date" data-field="work.1.duration">2018 - 2020</span>
+                    </div>
+                    <h4 class="item-subtitle" data-field="work.1.name">Amazon</h4>
+                    <p class="item-description" data-field="work.1.summary">Developed backend services for AWS</p>
+                    <ul>
+                        <li>Developed backend services for AWS</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Reduced server costs by 20% through optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="section-content" data-repeat="projects">
+                <template>
+                    <div class="project-item">
+                        <div class="item-header">
+                            <h3 class="item-title" data-field="name">Project Name</h3>
+                            <span class="item-date">2023</span>
+                        </div>
+                        <p class="item-description" data-field="description">Project description</p>
+                        <a href="#" class="project-link" data-field="url" data-attr="href">Project Link</a>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="project-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="projects.0.name">E-commerce Platform</h3>
+                        <span class="item-date">2023</span>
+                    </div>
+                    <p class="item-description" data-field="projects.0.description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <a href="#" class="project-link" data-field="projects.0.url" data-attr="href">Project Link</a>
+                </div>
+                
+                <div class="project-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="projects.1.name">AI Chatbot</h3>
+                        <span class="item-date">2022</span>
+                    </div>
+                    <p class="item-description" data-field="projects.1.description">Natural language processing chatbot using Python and TensorFlow</p>
+                    <a href="#" class="project-link" data-field="projects.1.url" data-attr="href">Project Link</a>
+                </div>
+                
+                <div class="demo-container">
+                    <div class="demo-header">
+                        <div class="demo-buttons">
+                            <div class="demo-button red"></div>
+                            <div class="demo-button yellow"></div>
+                            <div class="demo-button green"></div>
+                        </div>
+                        <div class="demo-title">Interactive Prototype Demo</div>
+                    </div>
+                    <div class="demo-content">
+                        <p>This is where you would embed your interactive prototype or provide a link to it. You can use platforms like Figma, CodePen, or your own hosted demo.</p>
+                        <!-- Embed your prototype here or provide a link -->
+                        <div style="background: #f0f0f0; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px; margin-top: 1rem;">
+                            <p>[Embedded Interactive Prototype Would Appear Here]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container" data-repeat="skills">
+                <template>
+                    <div class="skill-category">
+                        <h3>Skill Category</h3>
+                        <ul class="skill-list">
+                            <li data-field="name">Skill Name</li>
+                        </ul>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li data-field="skills.0.name">JavaScript</li>
+                        <li data-field="skills.1.name">Python</li>
+                        <li data-field="skills.2.name">Java</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Frameworks & Technologies</h3>
+                    <ul class="skill-list">
+                        <li data-field="skills.3.name">React</li>
+                        <li data-field="skills.4.name">Node.js</li>
+                        <li data-field="skills.5.name">TensorFlow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="interests">
+        <div class="container">
+            <h2 class="section-title">Area of Interest</h2>
+            <div class="interests-container" data-repeat="interests">
+                <template>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4 data-field="name">Interest Name</h4>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="interest-item">
+                    <div class="interest-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4 data-field="interests.0.name">Artificial Intelligence</h4>
+                </div>
+                
+                <div class="interest-item">
+                    <div class="interest-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4 data-field="interests.1.name">Mobile Development</h4>
+                </div>
+                
+                <div class="interest-item">
+                    <div class="interest-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 data-field="interests.2.name">Cyber Security</h4>
+                </div>
+                
+                <div class="interest-item">
+                    <div class="interest-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h4 data-field="interests.3.name">Cloud Computing</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="honors">
+        <div class="container">
+            <h2 class="section-title">Honors & Awards</h2>
+            <div class="section-content" data-repeat="awards">
+                <template>
+                    <div class="honor-item">
+                        <div class="item-header">
+                            <h3 class="item-title" data-field="title">Award Title</h3>
+                            <span class="item-date" data-field="date">2021</span>
+                        </div>
+                        <h4 class="item-subtitle">Organization</h4>
+                        <p class="item-description" data-field="summary">Award description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="honor-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="awards.0.title">Google Developer Expert</h3>
+                        <span class="item-date" data-field="awards.0.date">2021</span>
+                    </div>
+                    <h4 class="item-subtitle">Google</h4>
+                    <p class="item-description" data-field="awards.0.summary">Recognized by Google for exceptional contributions to developer community</p>
+                </div>
+                
+                <div class="honor-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="awards.1.title">Hackathon Winner</h3>
+                        <span class="item-date" data-field="awards.1.date">2019</span>
+                    </div>
+                    <h4 class="item-subtitle">National Coding Competition</h4>
+                    <p class="item-description" data-field="awards.1.summary">First place in National Coding Competition with AI-powered solution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="extracurriculars">
+        <div class="container">
+            <h2 class="section-title">Extracurricular Activities</h2>
+            <div class="section-content" data-repeat="extracurricular">
+                <template>
+                    <div class="extracurricular-item">
+                        <div class="item-header">
+                            <h3 class="item-title" data-field="name">Activity Name</h3>
+                            <span class="item-date">2020 - Present</span>
+                        </div>
+                        <p class="item-description" data-field="description">Activity description</p>
+                    </div>
+                </template>
+                <!-- Fallback content -->
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="extracurricular.0.name">Tech Blog Writer</h3>
+                        <span class="item-date">2020 - Present</span>
+                    </div>
+                    <p class="item-description" data-field="extracurricular.0.description">Regularly publish articles on Medium about modern web development</p>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="extracurricular.1.name">Coding Mentor</h3>
+                        <span class="item-date">2019 - Present</span>
+                    </div>
+                    <p class="item-description" data-field="extracurricular.1.description">Volunteer mentor at local coding bootcamp</p>
+                </div>
+                
+                <div class="extracurricular-item">
+                    <div class="item-header">
+                        <h3 class="item-title" data-field="extracurricular.2.name">Open Source Contributor</h3>
+                        <span class="item-date">2018 - Present</span>
+                    </div>
+                    <p class="item-description" data-field="extracurricular.2.description">Active contributor to several popular open source projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control bg-dark text-light" placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Subject">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control bg-dark text-light" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="mb-4">Contact Information</h4>
+                            <p><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</p>
+                            <p><i class="fas fa-phone me-2"></i> <span data-field="basics.phone">+1 (555) 123-4567</span></p>
+                            <p><i class="fas fa-envelope me-2"></i> <span data-field="basics.email">john.doe@example.com</span></p>
+                            <div class="mt-4">
+                                <a href="#" class="social-icon" data-field="basics.profiles.0.url" data-attr="href"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-icon" data-field="basics.profiles.1.url" data-attr="href"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 <span data-field="basics.name">Ram Manohar</span>. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add interactive functionality here
+            // For example, smooth scrolling for navigation
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Tooltip functionality for info buttons
+            const githubInfo = document.getElementById('github-info');
+            const linkedinInfo = document.getElementById('linkedin-info');
+            
+            githubInfo.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("GitHub is a platform for version control and collaboration. It allows developers to host and review code, manage projects, and build software alongside millions of other developers. To create an account:\n\n1. Go to github.com\n2. Click 'Sign up'\n3. Enter your details\n4. Choose your plan (free is fine for most users)\n5. Verify your email address\n\nOnce created, you can start creating repositories for your projects!");
+            });
+            
+            linkedinInfo.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("LinkedIn is the world's largest professional network. To create an account:\n\n1. Go to linkedin.com\n2. Click 'Join now'\n3. Enter your details\n4. Confirm your email address\n5. Complete your profile with:\n   - A professional photo\n   - Your work experience\n   - Your education\n   - Your skills\n\nA complete profile helps you connect with professionals and opportunities in your field!");
+            });
+        });
+    </script>
+</body>
+</html>
